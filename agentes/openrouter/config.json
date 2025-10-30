@@ -1,0 +1,19 @@
+{
+  "api_key": "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",
+  "api_endpoint": "https://openrouter.ai/api/v1/chat/completions",
+  "default_model": "anthropic/claude-haiku-4.5",
+  "site_url": "https://github.com/felipemdepaula",
+  "site_name": "Claude Code Workspace",
+  "favorite_models": [
+    "anthropic/claude-haiku-4.5",
+    "anthropic/claude-sonnet-4.5",
+    "openai/gpt-4o",
+    "openai/gpt-4.1-mini",
+    "openai/gpt-5",
+    "openai/gpt-5-mini",
+    "google/gemini-2.5-pro",
+    "x-ai/grok-4-fast",
+    "z-ai/glm-4.6",
+    "deepseek/deepseek-chat-v3.1"
+  ]
+}

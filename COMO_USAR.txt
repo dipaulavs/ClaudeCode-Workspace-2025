@@ -1,0 +1,53 @@
+═══════════════════════════════════════════════════════
+  🤖 CLAUDE CODE WORKSPACE - GUIA RÁPIDO
+═══════════════════════════════════════════════════════
+
+📍 COMO ABRIR O WORKSPACE
+
+Opção 1 (Recomendada):
+  1. Clique com botão direito na pasta "ClaudeCode-Workspace"
+  2. Selecione "Novo Terminal na Pasta"
+  3. Pronto! Tudo já está configurado
+
+Opção 2:
+  1. Abra o Terminal
+  2. Digite: cd ~/Desktop/ClaudeCode-Workspace
+  3. Pronto!
+
+═══════════════════════════════════════════════════════
+
+🎨 GERAR IMAGENS
+
+GPT-4o Image (múltiplas variações):
+  python3 tools/generate_image.py "sua descrição aqui"
+  python3 tools/generate_image.py "descrição" --variants 4 --enhance
+
+Nano Banana 🍌 (hiper-realista):
+  python3 tools/generate_image_nanobanana.py "sua descrição aqui"
+  python3 tools/generate_image_nanobanana.py "descrição" --format JPEG
+
+As imagens são salvas em: ~/Downloads
+
+═══════════════════════════════════════════════════════
+
+💡 EXEMPLOS
+
+GPT-4o Image:
+  python3 tools/generate_image.py "Um gato fofo"
+  python3 tools/generate_image.py "Paisagem cyberpunk" --variants 4
+  python3 tools/generate_image.py "Retrato fotorrealista" --enhance
+  python3 tools/generate_image.py "Dragão épico" --variants 2 --enhance
+
+Nano Banana 🍌:
+  python3 tools/generate_image_nanobanana.py "Gato laranja realista"
+  python3 tools/generate_image_nanobanana.py "Cachoeira cristalina"
+  python3 tools/generate_image_nanobanana.py "Relógio de luxo" --format JPEG
+
+═══════════════════════════════════════════════════════
+
+📚 DOCUMENTAÇÃO COMPLETA
+
+Para ver todas as instruções:
+  cat README.md
+
+═══════════════════════════════════════════════════════
