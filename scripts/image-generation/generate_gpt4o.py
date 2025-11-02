@@ -76,6 +76,11 @@ Características:
         # Baixa as imagens
         print(f"\n🖼️  {len(image_urls)} imagem(ns) gerada(s)")
 
+        # Mostra URLs públicas (podem ser usadas diretamente no WhatsApp)
+        print("\n🔗 URLs públicas:")
+        for i, url in enumerate(image_urls, 1):
+            print(f"   {i}. {url}")
+
         for i, url in enumerate(image_urls, 1):
             print(f"\n📥 Baixando imagem {i}/{len(image_urls)}...")
             download_image(url, prompt=args.prompt)

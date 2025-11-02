@@ -89,34 +89,41 @@ Envia imagens, vídeos, documentos e áudios via WhatsApp.
 
 **Status:** ✅ Funcional
 
+🚨 **IMPORTANTE:** Evolution API aceita APENAS URLs públicas. A opção `--file` foi removida.
+
+✨ **NOVO:** Detecção automática do tipo de mídia pela extensão da URL (--type é opcional).
+
 #### Uso:
 ```bash
-# Enviar imagem via URL
+# Enviar imagem via URL (tipo detectado automaticamente)
 python3 scripts/whatsapp/send_media.py \
   --phone 5531980160822 \
   --url "https://exemplo.com/imagem.jpg" \
-  --type image \
   --caption "Veja isso!"
 
-# Enviar arquivo local
+# Enviar vídeo (tipo detectado automaticamente)
 python3 scripts/whatsapp/send_media.py \
   --phone 5531980160822 \
-  --file "/path/to/video.mp4" \
-  --type video \
+  --url "https://tempfile.aiquickdraw.com/workers/video_xxx.mp4" \
   --caption "Novo vídeo!"
 
-# Enviar documento
+# Enviar documento com nome customizado
 python3 scripts/whatsapp/send_media.py \
   --phone 5531980160822 \
-  --file "relatorio.pdf" \
-  --type document \
+  --url "https://exemplo.com/relatorio.pdf" \
   --filename "Relatório 2025.pdf"
+
+# Especificar tipo manualmente (opcional)
+python3 scripts/whatsapp/send_media.py \
+  --phone 5531980160822 \
+  --url "https://exemplo.com/arquivo_sem_extensao" \
+  --type image
 ```
 
 #### Parâmetros:
 - `--phone`, `-p` (obrigatório): Número com DDI
-- `--url` OU `--file` (obrigatório): URL da mídia ou caminho do arquivo local
-- `--type`, `-t` (obrigatório): Tipo de mídia (`image`, `video`, `document`, `audio`)
+- `--url`, `-u` (obrigatório): URL PÚBLICA da mídia (http:// ou https://)
+- `--type`, `-t` (opcional): Tipo de mídia (`image`, `video`, `document`, `audio`) - detectado automaticamente pela extensão
 - `--caption`, `-c` (opcional): Legenda da mídia
 - `--filename`, `-f` (opcional): Nome do arquivo (para documentos)
 
@@ -789,7 +796,7 @@ python3 scripts/whatsapp/send_message.py \
 ```bash
 python3 scripts/whatsapp/send_media.py \
   --phone 5531980160822 \
-  --file "comprovante_pagamento.pdf" \
+  --url "https://exemplo.com/comprovante_pagamento.pdf" \
   --type document \
   --caption "Segue o comprovante do pagamento" \
   --filename "Comprovante.pdf"

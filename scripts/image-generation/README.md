@@ -4,9 +4,11 @@ Scripts prontos para geração e edição de imagens com múltiplas APIs de IA.
 
 **Status:** ✅ **Todos funcionais e testados**
 
+**URLs Públicas:** ✅ Todas as imagens geradas retornam URLs públicas que podem ser usadas diretamente (ex: WhatsApp)
+
 ---
 
-## 📋 Templates Disponíveis
+## 📋 Templates Disponíveis (4 templates)
 
 ### 1. generate_gpt4o.py - Gerar Imagem com GPT-4o
 
@@ -70,41 +72,7 @@ python3 scripts/image-generation/generate_nanobanana.py "arte abstrata colorida 
 
 ---
 
-### 3. generate_dalle3.py - Gerar Imagem com DALL-E 3
-
-Gera imagens usando DALL-E 3 via OpenAI API.
-
-#### Uso:
-```bash
-# Gerar imagem quadrada
-python3 scripts/image-generation/generate_dalle3.py "astronauta surfando na lua"
-
-# Gerar em landscape
-python3 scripts/image-generation/generate_dalle3.py "paisagem futurista" --size 1792x1024
-
-# Gerar em portrait
-python3 scripts/image-generation/generate_dalle3.py "retrato elegante" --size 1024x1792
-
-# Gerar em alta qualidade
-python3 scripts/image-generation/generate_dalle3.py "arte detalhada premium" --quality hd
-```
-
-#### Parâmetros:
-- `prompt` (obrigatório): Descrição da imagem a ser gerada
-- `--size`, `-s` (opcional): Tamanho [1024x1024|1792x1024|1024x1792] (padrão: 1024x1024)
-- `--quality`, `-q` (opcional): Qualidade [standard|hd] (padrão: standard)
-
-#### Características:
-- Modelo: DALL-E 3 (OpenAI)
-- Formatos: Quadrado, Landscape, Portrait
-- Qualidades: Standard ou HD
-- Prompt revisado automaticamente pela API
-- Salvamento: Automático em ~/Downloads
-- Requer: OPENAI_API_KEY configurada
-
----
-
-### 4. batch_generate.py - Geração em Lote
+### 3. batch_generate.py - Geração em Lote
 
 Gera múltiplas imagens de uma vez usando diferentes APIs.
 
@@ -137,7 +105,7 @@ python3 scripts/image-generation/batch_generate.py --api nanobanana "foto 1" "fo
 
 ---
 
-### 5. edit_nanobanana.py - Editar Imagem
+### 4. edit_nanobanana.py - Editar Imagem
 
 Edita imagens existentes usando Nano Banana Edit (Gemini 2.5 Flash).
 
@@ -192,13 +160,7 @@ python3 scripts/image-generation/generate_gpt4o.py "logo minimalista para startu
 python3 scripts/image-generation/edit_nanobanana.py logo.png "mudar cor para verde, manter design" --size 1:1
 ```
 
-### 3. Banners para Web (Landscape)
-```bash
-# DALL-E 3 em landscape
-python3 scripts/image-generation/generate_dalle3.py "banner de site moderno com espaço para texto" --size 1792x1024 --quality hd
-```
-
-### 4. Conteúdo em Massa para Blog
+### 3. Conteúdo em Massa para Blog
 ```bash
 # Gerar múltiplas imagens de uma vez
 python3 scripts/image-generation/batch_generate.py \
@@ -209,7 +171,7 @@ python3 scripts/image-generation/batch_generate.py \
   --api nanobanana
 ```
 
-### 5. Edição de Fotos de Produtos
+### 4. Edição de Fotos de Produtos
 ```bash
 # Remover fundo
 python3 scripts/image-generation/edit_nanobanana.py produto.jpg "remover fundo, manter apenas o produto" --format PNG
@@ -222,16 +184,17 @@ python3 scripts/image-generation/edit_nanobanana.py tenis.jpg "colocar tênis em
 
 ## 📊 Comparação de APIs
 
-| Característica | GPT-4o | Nano Banana | DALL-E 3 |
-|----------------|--------|-------------|----------|
-| **Latência** | ~20-30s | ~15-25s | ~20-30s |
-| **Custo** | Médio | Baixo | Alto |
-| **Qualidade** | Alta | Alta | Muito Alta |
-| **Variações** | 1, 2 ou 4 | 1 | 1 |
-| **Formato** | Portrait (2:3) | Portrait (2:3) | Quadrado, Landscape, Portrait |
-| **Refinamento** | Sim (opcional) | Não | Sim (automático) |
-| **Edição** | Não | Sim | Não |
-| **Melhor para** | Posts rápidos | Volume/Custo | Arte premium |
+| Característica | GPT-4o | Nano Banana |
+|----------------|--------|-------------|
+| **Latência** | ~20-30s | ~15-25s |
+| **Custo** | Médio | Baixo |
+| **Qualidade** | Alta | Alta |
+| **Variações** | 1, 2 ou 4 | 1 |
+| **Formato** | Portrait (2:3) | Portrait (2:3) |
+| **Refinamento** | Sim (opcional) | Não |
+| **Edição** | Não | Sim |
+| **URL Pública** | ✅ Sim | ✅ Sim |
+| **Melhor para** | Posts versáteis | Volume/Custo |
 
 ---
 
@@ -255,12 +218,6 @@ python3 scripts/image-generation/edit_nanobanana.py tenis.jpg "colocar tênis em
    - API Key já configurada em `tools/generate_image.py` e `tools/generate_image_nanobanana.py`
    - Não requer configuração adicional
 
-   **DALL-E 3 (OpenAI):**
-   ```bash
-   export OPENAI_API_KEY='sua-chave-aqui'
-   # ou adicione ao ~/.zshrc ou ~/.bashrc
-   ```
-
 ### Verificar instalação:
 ```bash
 # Testar GPT-4o
@@ -268,9 +225,6 @@ python3 scripts/image-generation/generate_gpt4o.py "teste rápido" --variants 1
 
 # Testar Nano Banana
 python3 scripts/image-generation/generate_nanobanana.py "teste rápido"
-
-# Testar DALL-E 3 (requer API key)
-python3 scripts/image-generation/generate_dalle3.py "teste rápido"
 ```
 
 ---
@@ -301,20 +255,17 @@ Agente: python3 scripts/image-generation/generate_gpt4o.py "gato astronauta no e
 |-------------------|-----------------|
 | "Gerar imagem" / "Criar imagem" | `generate_gpt4o.py` (padrão) |
 | "Gerar imagem rápida/barata" | `generate_nanobanana.py` |
-| "Gerar com DALL-E" | `generate_dalle3.py` |
 | "Gerar várias imagens" | `batch_generate.py` |
 | "Editar imagem" / "Modificar foto" | `edit_nanobanana.py` |
 | "Gerar múltiplas variações" | `generate_gpt4o.py --variants N` |
-| "Gerar logo/banner" (quadrado) | `generate_dalle3.py --size 1024x1024` |
-| "Banner horizontal" | `generate_dalle3.py --size 1792x1024` |
 
 #### Escolha da API por contexto:
 
-- **Qualidade máxima:** DALL-E 3 com `--quality hd`
-- **Velocidade/Custo:** Nano Banana
 - **Versátil (padrão):** GPT-4o
+- **Velocidade/Custo:** Nano Banana
 - **Volume:** `batch_generate.py` com Nano Banana
 - **Edição:** Sempre `edit_nanobanana.py`
+- **URL Pública:** Todas as APIs retornam URLs diretas
 
 ---
 
@@ -327,19 +278,8 @@ cd /Users/felipemdepaula/Desktop/ClaudeCode-Workspace
 python3 scripts/image-generation/generate_gpt4o.py "teste"
 ```
 
-### Erro: "OPENAI_API_KEY não encontrada" (DALL-E 3)
-```bash
-# Configure a variável de ambiente
-export OPENAI_API_KEY='sua-chave-openai'
-
-# Para tornar permanente (macOS/Linux)
-echo 'export OPENAI_API_KEY="sua-chave-openai"' >> ~/.zshrc
-source ~/.zshrc
-```
-
 ### Erro: "Task failed" ou "Timeout"
 - **GPT-4o/Nano Banana:** Verifique conexão com internet
-- **DALL-E 3:** Verifique créditos da API OpenAI
 - Tente novamente após alguns segundos
 - Simplifique o prompt se muito complexo
 
@@ -386,14 +326,13 @@ Todos os scripts exibem output em tempo real com emojis:
 
 ### 2. Escolha da API:
 - **Teste rápido:** Nano Banana (mais rápido e barato)
-- **Produção:** GPT-4o ou DALL-E 3 (melhor qualidade)
+- **Produção:** GPT-4o (melhor qualidade e variações)
 - **Múltiplas opções:** GPT-4o com `--variants 4`
+- **URL Pública:** Ambas retornam URLs diretas para uso em WhatsApp/outros
 
 ### 3. Formatos e tamanhos:
 - **Instagram Post:** Portrait (2:3) - GPT-4o ou Nano Banana
-- **Instagram Story:** Portrait (9:16) - DALL-E 3 `--size 1024x1792`
-- **Banner Web:** Landscape (16:9) - DALL-E 3 `--size 1792x1024`
-- **Logo/Avatar:** Quadrado (1:1) - DALL-E 3 `--size 1024x1024`
+- **Stories/Reels:** Portrait (2:3) - GPT-4o ou Nano Banana
 
 ### 4. Edição de imagens:
 - **Fundo:** "remover fundo", "trocar fundo para [descrição]"
@@ -422,12 +361,12 @@ Todos os scripts exibem output em tempo real com emojis:
 | GPT-4o (1 imagem) | ~20-30s | ~$0.08 |
 | GPT-4o (4 variações) | ~30-40s | ~$0.32 |
 | Nano Banana (1 imagem) | ~15-25s | ~$0.04 |
-| DALL-E 3 standard | ~20-30s | ~$0.04 |
-| DALL-E 3 HD | ~30-40s | ~$0.08 |
 | Edição Nano Banana | ~20-30s | ~$0.05 |
 | Batch (10 imagens Nano) | ~2-3min | ~$0.40 |
 
 *Custos aproximados, podem variar conforme plano da API*
+
+**Vantagem URLs Públicas:** Imagens podem ser usadas diretamente sem upload adicional para Nextcloud/outros serviços
 
 ---
 
@@ -441,7 +380,6 @@ Todos os scripts exibem output em tempo real com emojis:
 **Ferramentas base (em `tools/`):**
 - `generate_image.py` (GPT-4o)
 - `generate_image_nanobanana.py` (Nano Banana)
-- `generate_image_ai.py` (DALL-E 3)
 - `edit_image_nanobanana.py` (Edição)
 - `generate_image_batch.py` (Batch Nano Banana)
 - `generate_image_batch_gpt.py` (Batch GPT-4o)
@@ -455,6 +393,7 @@ Todos os scripts exibem output em tempo real com emojis:
 
 ---
 
-**Última atualização:** 2025-11-01
-**Versão:** 1.0
-**APIs:** Kie.ai (GPT-4o, Nano Banana) + OpenAI (DALL-E 3)
+**Última atualização:** 2025-11-02
+**Versão:** 1.1
+**APIs:** Kie.ai (GPT-4o, Nano Banana)
+**Templates:** 4 (GPT-4o, Nano Banana, Batch, Edit)

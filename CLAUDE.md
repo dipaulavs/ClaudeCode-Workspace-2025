@@ -4,6 +4,60 @@
 
 ---
 
+## 📝 REGRAS DE EDIÇÃO DESTE ARQUIVO (OBRIGATÓRIO)
+
+### ⚠️ ANTES DE ADICIONAR/EDITAR CONTEÚDO NO CLAUDE.md
+
+**PRINCÍPIO:** CLAUDE.md é um **índice navegável**, NÃO uma documentação completa.
+
+### ✅ O QUE INCLUIR (permitido):
+
+1. **MAPA DE AÇÕES** → Linha única por ação (template path + doc)
+2. **Regras de comportamento** → Instruções críticas de como Claude Code deve agir
+3. **Regras de decisão** → Fluxogramas simples (3-5 linhas por regra)
+4. **Skills tabela** → Nome + quando usar + descrição (1 linha por skill)
+5. **Quick Actions** → Comandos essenciais (formato resumido)
+6. **Tabelas de referência** → Formato compacto (sem detalhes inline)
+
+### ❌ O QUE NÃO INCLUIR (proibido):
+
+1. ❌ **Documentação inline detalhada** → Vai para README específico
+2. ❌ **Exemplos de código longos** → Vai para EXAMPLES.md da skill/template
+3. ❌ **Seções duplicadas** → Se está no MAPA, não repetir em "Categorias"
+4. ❌ **Tutoriais passo a passo** → Vai para docs/ ou script README
+5. ❌ **Descrições longas** → Máximo 1-2 linhas, linkar para doc completa
+6. ❌ **Comandos git detalhados** → Linkar para .claude/commands/
+
+### 🎯 FORMATO OBRIGATÓRIO ao adicionar novo recurso:
+
+```markdown
+## 📍 MAPA DE AÇÕES
+| **[Ação]** | `caminho/template.py` | `caminho/README.md` |
+```
+
+**Se precisar mais detalhes:**
+- Criar/atualizar README na pasta do recurso
+- Criar EXAMPLES.md se for skill
+- NUNCA escrever mais de 3 linhas no CLAUDE.md
+
+### 📏 LIMITES RÍGIDOS:
+
+- **MAPA DE AÇÕES:** 1 linha por entrada (template | doc)
+- **Regras comportamento:** Máx 10 linhas por regra
+- **Skills:** Só tabela (sem exemplos inline)
+- **Backup/Docs:** Máx 5 linhas + link para arquivo
+- **Arquivo total:** Máx 600 linhas
+
+### 🔍 CHECKLIST antes de salvar edições:
+
+- [ ] Removi duplicações?
+- [ ] Usei links para docs detalhadas?
+- [ ] Mantive formato tabela compacto?
+- [ ] Informação cabe em 1-2 linhas?
+- [ ] Se não cabe → criei README separado?
+
+---
+
 ## 🚨 REGRAS DE COMPORTAMENTO (PRIORIDADE MÁXIMA)
 
 ### 0️⃣ Modo Conciso (Comunicação)
@@ -58,15 +112,15 @@
 
 **SEMPRE verificar se existe template antes de criar código novo:**
 
-| Categoria | Localização | Verificar em |
-|-----------|-------------|--------------|
+| Categoria | Localização | Total |
+|-----------|-------------|-------|
 | WhatsApp | `scripts/whatsapp/` | 22 templates |
 | Instagram Publicação | `scripts/instagram/` | 6 templates |
 | Instagram Scraper | `scripts/instagram-scraper/` | 5 templates |
 | Meta Ads | `scripts/meta-ads/` | 4 templates |
 | Nextcloud | `scripts/nextcloud/` | 2 templates |
 | Obsidian | `scripts/obsidian/` | 6 templates |
-| Imagens | `scripts/image-generation/` | 5 templates |
+| Imagens | `scripts/image-generation/` | 4 templates |
 | Vídeos | `scripts/video-generation/` | 2 templates |
 | Áudio | `scripts/audio-generation/` | 2 templates |
 | Extração | `scripts/extraction/` | 4 templates |
@@ -74,6 +128,8 @@
 | Twitter/X | `scripts/twitter/` | 5 templates |
 | TikTok | `scripts/tiktok/` | 5 templates |
 | Google Maps | `scripts/scraping/` | 3 templates |
+| Canva MCP | `scripts/canva/` | 1 script + MCP |
+| Orshot Design | `scripts/orshot/` | 3 templates |
 
 **NUNCA:**
 - ❌ Criar scripts descartáveis/temporários
@@ -123,36 +179,13 @@ scripts/whatsapp/README.md
 #### ✅ Passo 2: Registrar no CLAUDE.md
 
 **Localização neste arquivo:**
-- **Templates (scripts/)** → Adicionar em `📍 MAPA DE AÇÕES` + `🗂️ CATEGORIAS`
-- **Ferramentas (tools/)** → Adicionar em `🛠️ FERRAMENTAS DISPONÍVEIS`
-- **Novos projetos** → Adicionar em `📁 ESTRUTURA DO WORKSPACE`
+- **Templates (scripts/)** → Adicionar em `📍 MAPA DE AÇÕES` (1 linha)
+- **Ferramentas (tools/)** → Adicionar em `🛠️ FERRAMENTAS DISPONÍVEIS` (1 linha)
+- **Novos projetos** → Adicionar em `📁 ESTRUTURA DO WORKSPACE` (1 linha)
 
 **Formato de registro:**
-
-**A) Para Templates (scripts/):**
 ```markdown
-## 📍 MAPA DE AÇÕES
-[...]
 | **[NOVA AÇÃO]** | `scripts/[categoria]/[nome].py` | `scripts/[categoria]/README.md` |
-
-## 🗂️ CATEGORIAS DE TEMPLATES
-### [Categoria] (X templates) ← ATUALIZAR CONTADOR
-- **[Subcategoria]:** [...], [NOVO_TEMPLATE] ← ADICIONAR AQUI
-```
-
-**B) Para Ferramentas (tools/):**
-```markdown
-## 🛠️ FERRAMENTAS DISPONÍVEIS
-| **[Categoria]** | [...], [NOVA_FERRAMENTA] | `docs/tools/[nome].md` |
-```
-
-**C) Para Regras de Decisão (se aplicável):**
-```markdown
-## 🔍 REGRAS DE DECISÃO
-### [Categoria]
-[Nova condição]?
-├─ [Caso 1] → [template]
-└─ [Caso 2] → [template]
 ```
 
 #### ✅ Passo 3: Manter Organização
@@ -173,11 +206,7 @@ scripts/whatsapp/README.md
 📂 Arquivos:
   • scripts/[categoria]/[arquivo].py (novo template)
   • scripts/[categoria]/README.md (atualizado)
-  • CLAUDE.md (registrado em 2 locais)
-
-📍 Registrado no CLAUDE.md:
-  • Seção "MAPA DE AÇÕES" (linha ~XX)
-  • Seção "[CATEGORIA]" (linha ~YY)
+  • CLAUDE.md (registrado no MAPA DE AÇÕES)
 
 🎯 Como usar:
   python3 scripts/[categoria]/[arquivo].py [exemplo]
@@ -205,29 +234,52 @@ scripts/whatsapp/README.md
 
 **MÉTODO:** Claude Code Skill `estudar-video` (model-invoked, totalmente automática)
 
-**WORKFLOW (3 Etapas Automáticas):**
+**WORKFLOW:** Transcrever (Whisper) → Analisar (Claude) → Classificar tipo → Salvar Obsidian
 
-1. **Transcrever:** `scripts/extraction/transcribe_video.py` (Whisper)
-2. **Analisar:** Claude lê transcrição completa e faz:
-   - Classifica tipo (Tutorial, Metodologia, Aula, Notícia, Review, Outros)
-   - Extrai resumo executivo + key takeaways
-   - Análise personalizada por tipo (passo a passo se tutorial, conceitos se aula, etc)
-   - Código/recursos mencionados
-   - Aplicações práticas e insights profundos
-3. **Salvar:** `add_youtube_video.py` com análise completa no Obsidian
+**Custo:** ~$0.006/vídeo | **Tempo:** ~3min | **Regras:** ❌ Sem confirmação
+**Skill:** `.claude/skills/estudar-video/SKILL.md` | **Doc:** `09 - YouTube Knowledge/README.md`
 
-**Estrutura:** `09 - YouTube Knowledge/Videos/[Tipo]/[data] - [titulo].md`
-**Tipos:** Tutoriais | Metodologias | Aulas | Noticias | Reviews | Outros
+---
 
-**Custo:** ~$0.006/vídeo (só transcrição) | **Tempo:** ~3min
-**Regras:** ❌ Sem confirmação | ✅ Claude faz análise profunda automática
-**Skill:** `.claude/skills/estudar-video/SKILL.md` (ver seção 🧠 CLAUDE SKILLS)
+### 7️⃣ WhatsApp Mídia: SEMPRE URL Pública
+
+**REGRA ABSOLUTA:** Evolution API aceita APENAS URLs públicas.
+
+**SEMPRE:**
+- ✅ Usar `--url` com link público (http:// ou https://)
+- ✅ URLs vêm nas respostas das APIs (Nano Banana, GPT-4o, Sora)
+
+**NUNCA:**
+- ❌ `--file` foi REMOVIDO do script (não existe mais)
+- ❌ Arquivos locais não funcionam
+- ❌ Base64 não funciona
+
+**Workflow correto:** Gerar mídia → Pegar URL da resposta → `send_media.py --url [URL]`
+
+---
+
+### 8️⃣ Auto-Correção de Scripts (OBRIGATÓRIO)
+
+**GATILHO:** Script executado retorna erro → Corrijo o erro → Script funciona
+
+**SEMPRE após corrigir erro:**
+1. ✅ **Atualizar o script** para prevenir o erro no futuro
+2. ✅ **Melhorar validação** (adicionar checks, avisos)
+3. ✅ **Remover informações confusas** (código obsoleto, docs enganosas, exemplos errados)
+4. ✅ **Atualizar documentação** (README, docstrings, comentários)
+
+**Objetivo:** Erro só acontece UMA vez. Scripts melhoram continuamente.
+
+**Exemplo send_media.py:**
+- ❌ Problema: Script tinha `--file` mas Evolution API rejeita arquivos locais
+- ✅ Fix: Removi `--file` do código + removi exemplos de `--file` do README + atualizei docstring
+- 🎯 Resultado: IA nunca mais tenta usar `--file`
 
 ---
 
 ## 📍 MAPA DE AÇÕES (Índice Rápido)
 
-### Quando usuário pedir... | Use isto | Doc completa
+| Quando usuário pedir... | Use isto | Doc completa |
 |---------------------------|----------|--------------|
 | **Enviar WhatsApp** | `scripts/whatsapp/send_message.py` | `scripts/whatsapp/README.md` |
 | **Mídia WhatsApp** | `scripts/whatsapp/send_media.py` | `scripts/whatsapp/README.md` |
@@ -264,86 +316,6 @@ scripts/whatsapp/README.md
 | **Canva via MCP** | Claude.ai web (OAuth) | `scripts/canva/README.md` |
 | **Gerar design/imagem** | `scripts/orshot/generate_image.py` | `scripts/orshot/README.md` |
 | **Designs em lote** | `scripts/orshot/batch_generate.py` | `scripts/orshot/README.md` |
-
----
-
-## 🗂️ CATEGORIAS DE TEMPLATES
-
-### WhatsApp (22 templates)
-- **Envio:** send_message, send_media, send_audio, send_location, send_contact, send_poll
-- **Interação:** send_reaction, send_reply, send_mention, send_status, message_actions
-- **Grupos:** list_groups, create_group, update_group, manage_participants, leave_group
-- **Sistema:** instance_info, check_number, manage_webhooks, get_contacts, manage_profile, get_profile
-- **Doc:** `scripts/whatsapp/README.md`
-
-### Instagram Publicação (6 templates)
-- **Templates:** publish_post, publish_carousel, publish_reel, publish_story, get_insights, manage_comments
-- **Doc:** `scripts/instagram/README.md`
-
-### Instagram Scraper (5 templates)
-- **Templates:** scrape_user_posts, scrape_hashtag_posts, scrape_post_comments, scrape_user_profile, scrape_place_posts
-- **Doc:** `scripts/instagram-scraper/README.md`
-
-### Meta Ads (4 templates)
-- **Templates:** create_campaign, create_adset, create_ad, get_insights
-- **Doc:** `scripts/meta-ads/README.md`
-
-### Nextcloud (2 templates)
-- **Templates:** upload_to_nextcloud, upload_from_downloads
-- **Doc:** `scripts/nextcloud/README.md`
-
-### Obsidian (6 templates)
-- **Templates:** quick_note, capture_idea, create_daily, new_project, add_youtube_video, youtube_classifier, obsidian_client (API)
-- **IA:** Análise completa de vídeos YouTube (Claude Terminal: classificação + resumo + insights)
-- **Doc:** `scripts/obsidian/README.md`
-
-### Imagens (5 templates)
-- **Templates:** generate_nanobanana (padrão), generate_gpt4o, generate_dalle3, batch_generate, edit_nanobanana
-- **Doc:** `scripts/image-generation/README.md`
-
-### Vídeos (2 templates)
-- **Templates:** generate_sora, batch_generate
-- **Doc:** `scripts/video-generation/README.md`
-
-### Áudio (2 templates)
-- **Templates:** generate_elevenlabs, batch_generate
-- **Doc:** `scripts/audio-generation/README.md`
-
-### Extração (4 templates)
-- **Templates:** transcribe_video, extract_instagram, scrape_website, scrape_batch
-- **Doc:** `scripts/extraction/README.md`
-
-### Busca xAI (3 templates)
-- **Templates:** xai_web, xai_twitter, xai_news
-- **Requer:** Python 3.11+
-- **Doc:** `scripts/search/README.md`
-
-### Twitter/X (5 templates)
-- **Templates:** search_twitter, scrape_profile, scrape_tweets, scrape_replies, batch_twitter
-- **Doc:** `scripts/twitter/README.md`
-
-### TikTok (5 templates)
-- **Templates:** get_user_info, get_video_info, search_content, get_trending, analyze_hashtag
-- **Doc:** `scripts/tiktok/README.md`
-
-### Google Maps (3 templates)
-- **Templates:** google_maps_basic, google_maps_advanced, google_maps_batch
-- **Doc:** `scripts/scraping/README.md`
-
-### Canva MCP (1 script + MCP)
-- **MCP:** Via Claude.ai web (OAuth autenticado)
-- **Script:** list_designs.py (requer OAuth)
-- **Funcionalidades:** Criar designs, autofill templates, buscar, exportar
-- **Doc:** `scripts/canva/README.md`
-
-### Orshot Design (3 templates) ⭐ NOVO
-- **Templates:** generate_image, batch_generate, list_templates
-- **Skill:** orshot-design (model-invoked - ativação automática)
-- **Formatos:** PNG, JPG, WEBP, PDF
-- **Uso:** Automação de designs em escala (posts, certificados, OG images)
-- **Preço:** $30/mês = 3.000 renders ($0.01/render) | 100 grátis teste
-- **Vantagem:** 3x mais barato que Canva API | Importa templates do Canva/Figma
-- **Doc:** `scripts/orshot/README.md`
 
 ---
 
@@ -397,10 +369,9 @@ Buscar onde?
 
 ## 🧠 CLAUDE SKILLS (Model-Invoked AI Capabilities)
 
-**Localização:** `.claude/skills/` (compartilhadas via git)
+**Localização:** `.claude/skills/` | **Doc oficial:** https://docs.claude.com/en/docs/claude-code/skills.md
 
-### O Que São Skills?
-Skills são **capacidades modulares** que estendem Claude Code. Diferente de comandos slash (user-invoked), as Skills são **model-invoked**: Claude decide automaticamente quando usá-las baseado no contexto da conversa.
+Skills são capacidades modulares model-invoked (Claude decide quando usar automaticamente).
 
 ### Skills Disponíveis (8 Skills)
 
@@ -411,224 +382,75 @@ Skills são **capacidades modulares** que estendem Claude Code. Diferente de com
 | **product-designer** | Design de UI/UX | Elimina o "visual de IA" (gradientes azul/roxo). Cria interfaces profissionais com Tailwind + shadcn/ui. |
 | **marketing-writer** | Criar conteúdo de marketing | Escreve landing pages, tweets, Product Hunt, emails de lançamento. Tom claro e focado em benefícios. |
 | **roadmap-builder** | Priorizar features | Atua como PM: decide o que construir (e o que NÃO construir). Previne feature creep. |
-| **estudar-video** | Estudar vídeos do YouTube | Workflow automático: transcreve (Whisper) → analisa com IA → classifica tipo → extrai insights → salva no Obsidian. Totalmente automático sem confirmação. |
-| **orshot-design** ⭐ | Gerar designs/imagens | Automação de designs profissionais usando Orshot API. Gera posts sociais, certificados, OG images em escala. $0.01/render - 3x mais barato que Canva API. |
-| **skill-creator** 🛠️ | Criar novas Skills | Meta-skill que cria outras Skills automaticamente. Gera estrutura multi-arquivo usando Progressive Disclosure. Script auxiliar também disponível. |
+| **estudar-video** | Estudar vídeos do YouTube | Workflow automático: transcreve (Whisper) → analisa com IA → classifica tipo → extrai insights → salva no Obsidian. |
+| **orshot-design** | Gerar designs/imagens | Automação de designs profissionais usando Orshot API. Posts sociais, certificados, OG images. $0.01/render. |
+| **skill-creator** | Criar novas Skills | Meta-skill que cria outras Skills automaticamente. Gera estrutura multi-arquivo Progressive Disclosure. |
 
-### Como Funcionam
-1. ✅ **Ativação automática** - Claude detecta quando usar baseado na descrição da Skill
-2. ✅ **Context-aware** - Analisa código existente automaticamente
-3. ✅ **Tool restrictions** - Cada Skill limita ferramentas permitidas (segurança/foco)
-4. ✅ **Compartilháveis** - Time todo recebe via `git pull`
-
-### Estrutura de uma Skill (Progressive Disclosure) 📐
-
-**Padrão obrigatório:** Todas as novas Skills devem usar **Progressive Disclosure** (multi-arquivo).
+### Estrutura de uma Skill (Progressive Disclosure)
 
 ```
-.claude/skills/
-└── nome-da-skill/
-    ├── SKILL.md               # Instruções principais (30-60 linhas, máx 80)
-    ├── REFERENCE.md           # Documentação técnica detalhada
-    ├── EXAMPLES.md            # Casos de uso reais (mínimo 2)
-    └── TROUBLESHOOTING.md     # Guia de erros comuns (mínimo 2)
+.claude/skills/nome-da-skill/
+├── SKILL.md               # Instruções principais (30-60 linhas, máx 80)
+├── REFERENCE.md           # Documentação técnica detalhada
+├── EXAMPLES.md            # Casos de uso reais (mínimo 2)
+└── TROUBLESHOOTING.md     # Guia de erros comuns (mínimo 2)
 ```
 
-**Como funciona:**
-- ✅ **SKILL.md** → Sempre carregado (focado, limpo)
-- ⏱️ **Outros .md** → Carregados sob demanda quando Claude referencia
-- 💡 **Benefício** → Economiza tokens, carrega só o necessário
-
-**YAML frontmatter obrigatório (SKILL.md):**
-```yaml
----
-name: nome-da-skill          # lowercase, hífens, max 64 chars
-description: O que faz e quando usar (max 1024 chars)
-allowed-tools: Read, Write   # (opcional) limita ferramentas
----
-```
-
-**Criar nova Skill:**
-
-Opção 1 (Recomendado): "Crie uma skill para [propósito]" → Claude usa skill-creator automaticamente
-
-Opção 2 (Manual): `python3 scripts/claude-skills/create_skill.py nome-da-skill`
-
-### Exemplos de Uso
-
-**Validar Ideia:**
-```
-Usuário: "Valide esta ideia: app store para apps vibe coded"
-Claude: [Automaticamente usa idea-validator skill]
-```
-
-**Planejar MVP:**
-```
-Usuário: "Ajude-me a planejar o lançamento de [app]"
-Claude: [Automaticamente usa launch-planner skill]
-```
-
-**Design de Componente:**
-```
-Usuário: "Crie uma landing page moderna"
-Claude: [Automaticamente usa product-designer skill]
-```
-
-**Marketing:**
-```
-Usuário: "Escreva um tweet de lançamento"
-Claude: [Automaticamente usa marketing-writer skill]
-```
-
-**Roadmap:**
-```
-Usuário: "Quais features devo adicionar?"
-Claude: [Automaticamente usa roadmap-builder skill]
-```
-
-**Estudar Vídeo YouTube:**
-```
-Usuário: "Estuda esse vídeo: https://youtube.com/watch?v=ABC123"
-Claude: [Automaticamente usa estudar-video skill]
-        → Transcreve com Whisper
-        → Analisa conteúdo completo
-        → Classifica tipo (Tutorial/Aula/etc)
-        → Salva no Obsidian com insights
-```
-
-**Criar Nova Skill:**
-```
-Usuário: "Crie uma skill para validar código SQL"
-Claude: [Automaticamente usa skill-creator]
-        → Coleta informações (triggers, ferramentas)
-        → Gera estrutura multi-arquivo (Progressive Disclosure)
-        → Cria SKILL.md + REFERENCE.md + EXAMPLES.md + TROUBLESHOOTING.md
-        → Mostra próximos passos
-```
-
-### Sistema de Criação de Skills 🛠️
-
-**2 maneiras de criar:**
-
-**Via Claude (Recomendado):**
-```
-"Crie uma skill para [propósito]"
-```
-
-**Via Script:**
-```bash
-python3 scripts/claude-skills/create_skill.py nome-da-skill
-```
-
-**O que é gerado:**
-- ✅ Estrutura multi-arquivo (Progressive Disclosure)
-- ✅ 4 arquivos .md prontos para preencher
-- ✅ Templates completos
-- ✅ Validações automáticas
-
-**Documentação completa:** `scripts/claude-skills/README.md`
-
-### Documentação Oficial
-- 📚 Skills Guide: https://docs.claude.com/en/docs/claude-code/skills.md
+**Criar nova Skill:** "Crie uma skill para [propósito]" ou `python3 scripts/claude-skills/create_skill.py nome-da-skill`
+**Doc:** `scripts/claude-skills/README.md` | **Exemplos:** Ver `.claude/skills/*/EXAMPLES.md`
 
 ---
 
-## ⚡ Quick Actions (Comandos Mais Usados)
+## ⚡ Quick Actions
 
 ### Chatbot WhatsApp
 ```bash
-bot         # Iniciar (alias)
-botstop     # Parar (alias)
+bot         # Iniciar
+botstop     # Parar
 # Logs: whatsapp-chatbot/logs/chatbot_v4.log
 ```
 
-### Backup Git (Sistema Automático)
+### Backup Git
 ```bash
-# Fazer backup automático (add + commit + push)
-/bk
-
-# Listar e restaurar backups anteriores
-/cbk
-
-# Comandos manuais alternativos:
-git add . && git commit -m "Backup manual" && git push origin main
-
-# Ver histórico de backups
-git log --oneline -10
-
-# Restaurar arquivo específico de versão antiga
-git checkout HASH -- caminho/arquivo.py
-
-# Repositório: https://github.com/dipaulavs/ClaudeCode-Workspace-2025
-# Status: PRIVADO (inclui .env)
+/bk         # Backup automático (add + commit + push)
+/cbk        # Listar e restaurar backups
 ```
-
-### Agendamento WhatsApp
-```bash
-# Agendar mensagem única
-python3 scheduling-system/schedule_whatsapp.py --phone 5531980160822 --message "Texto" --time 17:00
-
-# Agendar recorrente (diário)
-python3 scheduling-system/schedule_whatsapp.py --phone 5531980160822 --message "Bom dia!" --time 09:00 --daily
-
-# Listar agendamentos
-python3 scheduling-system/schedule_whatsapp.py --list
-```
+**Repo:** https://github.com/dipaulavs/ClaudeCode-Workspace-2025 (PRIVADO)
+**Doc completa:** `.claude/commands/bk.md` e `.claude/commands/cbk.md`
 
 ### Geração de Conteúdo
 ```bash
-# Imagem (padrão: Nano Banana)
+# Imagem (Nano Banana)
 python3 scripts/image-generation/generate_nanobanana.py "prompt"
 
 # Múltiplas imagens (BATCH obrigatório)
-python3 scripts/image-generation/batch_generate.py --api nanobanana "prompt1" "prompt2" "prompt3"
+python3 scripts/image-generation/batch_generate.py --api nanobanana "prompt1" "prompt2"
 
-# Vídeo (padrão: portrait Stories/Reels)
+# Vídeo (Sora portrait)
 python3 scripts/video-generation/generate_sora.py "prompt"
 
-# Áudio (padrão: voz Michele)
+# Áudio (ElevenLabs voz Michele)
 python3 scripts/audio-generation/generate_elevenlabs.py "texto"
 ```
 
-### WhatsApp Templates
+### WhatsApp/Instagram
 ```bash
-# Enviar mensagem
+# WhatsApp
 python3 scripts/whatsapp/send_message.py --phone 5531980160822 --message "Olá!"
 
-# Enviar mídia
-python3 scripts/whatsapp/send_media.py --phone 5531980160822 --file "foto.jpg" --type image
-
-# Criar grupo
-python3 scripts/whatsapp/create_group.py --name "Grupo" --phones 5531980160822,5511999999999
-```
-
-### Instagram
-```bash
-# Publicar post
+# Instagram
 python3 scripts/instagram/publish_post.py --image "foto.jpg" --caption "Legenda"
-
-# Scrape posts
-python3 scripts/instagram-scraper/scrape_user_posts.py "natgeo" --limit 50
-```
-
-### Busca/Extração
-```bash
-# Transcrever vídeo
-python3 scripts/extraction/transcribe_video.py "https://youtu.be/VIDEO_ID"
-
-# Buscar na web (Python 3.11)
-python3.11 scripts/search/xai_web.py "Python best practices 2025"
 ```
 
 ---
 
 ## 🛠️ FERRAMENTAS DISPONÍVEIS
 
-**📚 Índice completo:** `docs/tools/INDEX.md`
+**📚 Índice completo:** `docs/tools/INDEX.md` | **Total:** 65+ templates | 40+ ferramentas
 
 | Categoria | Ferramentas | Docs |
 |-----------|-------------|------|
-| **Geração Imagem** | GPT-4o, Nano Banana, DALL-E 3, Batch, Edição | `scripts/image-generation/README.md` |
+| **Geração Imagem** | GPT-4o, Nano Banana, Batch, Edição (URLs públicas) | `scripts/image-generation/README.md` |
 | **Geração Vídeo** | Sora 2 (único, batch), 3 proporções | `scripts/video-generation/README.md` |
 | **Geração Áudio** | ElevenLabs TTS (único, batch), Vozes clonadas | `scripts/audio-generation/README.md` |
 | **Instagram API** | Post, Carrossel, Reel, Story, Insights, Comments | `scripts/instagram/README.md` |
@@ -644,60 +466,34 @@ python3.11 scripts/search/xai_web.py "Python best practices 2025"
 | **Obsidian PKM** | Notes, Ideas, Daily, Projects, Search | `docs/tools/obsidian_integration.md` |
 | **Agendamento** | Sistema WhatsApp (único/recorrente) | `scheduling-system/README.md` |
 
-**Total:** 65+ templates | 40+ ferramentas
-
 ---
 
 ## 📁 ESTRUTURA DO WORKSPACE
 
 ```
 ClaudeCode-Workspace/
-├── 📄 README.md                 # Índice geral
 ├── 📄 CLAUDE.md                 # Config auto-load (este arquivo)
+├── 📄 README.md                 # Índice geral
 ├── 📄 requirements.txt          # Dependências Python
 │
-├── 📁 .claude/                  # Configuração Claude Code
-│   ├── commands/                # Comandos slash (/bk, /cbk)
-│   └── skills/                  # 🧠 6 Claude Skills (model-invoked)
-│       ├── idea-validator/      # Valida ideias antes de construir
-│       ├── launch-planner/      # Planeja MVPs e roadmaps
-│       ├── product-designer/    # Design profissional de UI
-│       ├── marketing-writer/    # Conteúdo de marketing
-│       ├── roadmap-builder/     # Priorização de features (PM)
-│       └── estudar-video/       # Estuda vídeos YouTube (automático)
+├── 📁 .claude/
+│   ├── commands/                # /bk, /cbk
+│   └── skills/                  # 8 Claude Skills (model-invoked)
 │
 ├── 📁 scripts/                  # 65+ Templates prontos
-│   ├── whatsapp/                # 22 templates WhatsApp
-│   ├── instagram/               # 6 templates publicação IG
-│   ├── instagram-scraper/       # 5 templates scraping IG
-│   ├── meta-ads/                # 4 templates Meta Ads
-│   ├── nextcloud/               # 2 templates upload
-│   ├── obsidian/                # 5 templates Obsidian PKM
-│   ├── image-generation/        # 5 templates imagens
-│   ├── video-generation/        # 2 templates vídeos
-│   ├── audio-generation/        # 2 templates áudio
-│   ├── extraction/              # 4 templates extração
-│   ├── search/                  # 3 templates busca xAI
-│   ├── twitter/                 # 5 templates Twitter/X
-│   ├── tiktok/                  # 5 templates TikTok
-│   ├── scraping/                # 3 templates Google Maps
-│   └── common/                  # template_base.py
+│   ├── whatsapp/                # 22 templates
+│   ├── instagram/               # 6 templates
+│   ├── image-generation/        # 5 templates
+│   ├── video-generation/        # 2 templates
+│   ├── audio-generation/        # 2 templates
+│   └── [outras categorias]/
 │
 ├── 📁 tools/                    # 40+ Ferramentas low-level
 ├── 📁 config/                   # Configurações APIs
-│
 ├── 📁 docs/                     # Documentação organizada
-│   ├── tools/                   # 40+ docs ferramentas
-│   ├── guides/                  # Guias gerais
-│   ├── workflows/               # Workflows
-│   ├── meta-ads-api/            # Docs Meta Ads API
-│   └── instagram-api/           # Docs Instagram API
-│
 ├── 📁 whatsapp-chatbot/         # Bot V4 (produção)
 ├── 📁 scheduling-system/        # Agendamento WhatsApp
-├── 📁 n8n-mcp-project/          # n8n-MCP (automação)
-├── 📁 crewai/                   # Multi-agentes
-└── 📁 evolution-api-integration/# WhatsApp Helper
+└── [outros projetos]/
 ```
 
 ---
@@ -709,28 +505,17 @@ ClaudeCode-Workspace/
 - Imagens: `batch_generate.py --api nanobanana`
 - Vídeos: `batch_generate.py`
 - Áudios: `batch_generate.py`
-- **NUNCA** executar múltiplos individuais em sequência
 
 ### Modelos Padrão
-- **Imagens:** Nano Banana (rápido/econômico)
+- **Imagens:** Nano Banana (Gemini 2.5 Flash)
 - **Vídeos:** Sora 2 portrait (Stories/Reels)
 - **Áudio:** ElevenLabs voz Michele
 
-### Busca xAI
-⚠️ **IMPORTANTE:** Requer Python 3.11+ (sempre usar `python3.11`)
-
-### WhatsApp
-- Formato números: DDI+DDD+Número (ex: 5531980160822)
-- Sem espaços, hífens ou parênteses
-
-### Instagram Scraping
-- Sempre usar `--limit` para controlar custos
-- Pricing: $2.30/1000 itens
-
-### Obsidian - Formato de Datas
-- **Formato brasileiro:** DD/MM/YYYY (padrão configurado)
-- Scripts já configurados para usar formato brasileiro automaticamente
-- Daily notes mantêm nome do arquivo compatível (YYYY-MM-DD) mas exibem datas em formato BR
+### Outros
+- **Busca xAI:** Requer Python 3.11+ (usar `python3.11`)
+- **WhatsApp:** Formato DDI+DDD+Número (ex: 5531980160822)
+- **Instagram Scraping:** Usar `--limit` ($2.30/1000 itens)
+- **Obsidian:** Datas em formato brasileiro DD/MM/YYYY
 
 ---
 
@@ -740,14 +525,11 @@ ClaudeCode-Workspace/
 |---------|-------------|
 | **README Principal** | `README.md` |
 | **Ferramentas (40+)** | `docs/tools/INDEX.md` |
-| **Templates (65+)** | `scripts/README.md` |
-| **Obsidian Integration** | `docs/tools/obsidian_integration.md` |
-| **Chatbot WhatsApp V4** | `whatsapp-chatbot/README.md` |
-| **Agendamento WhatsApp** | `scheduling-system/README.md` |
-| **n8n-MCP** | `n8n-mcp-project/README.md` |
+| **Templates (65+)** | Ver README em `scripts/[categoria]/` |
+| **Obsidian** | `docs/tools/obsidian_integration.md` |
+| **Chatbot WhatsApp** | `whatsapp-chatbot/README.md` |
 | **Meta Ads API** | `docs/meta-ads-api/META_ADS_API_DOCUMENTATION.md` |
 | **Instagram API** | `docs/instagram-api/INSTAGRAM_API_DOCUMENTATION.md` |
-| **CrewAI** | `crewai/README.md` |
 
 ---
 
@@ -769,169 +551,5 @@ ClaudeCode-Workspace/
 
 ---
 
-## 💾 SISTEMA DE BACKUP AUTOMÁTICO
-
-### 📦 Repositório GitHub
-
-- **URL:** https://github.com/dipaulavs/ClaudeCode-Workspace-2025
-- **Tipo:** Repositório PRIVADO
-- **Conteúdo:** Código completo + configs + .env (chaves API incluídas)
-- **Branch principal:** main
-
-### ⚡ Comandos Slash Personalizados
-
-#### `/bk` - Backup Automático
-**Função:** Fazer backup completo instantâneo para GitHub
-
-**O que faz:**
-1. `git add .` (adiciona todas mudanças)
-2. `git commit -m "🔄 Backup automático - [DATA/HORA]"` (cria commit)
-3. `git push origin main` (envia para GitHub)
-
-**Uso:**
-```
-Digite: /bk
-[ENTER]
-Pronto! Backup feito automaticamente.
-```
-
-**Quando usar:**
-- ✅ Antes de testar código novo/arriscado
-- ✅ Após implementar funcionalidade importante
-- ✅ Final do dia de trabalho
-- ✅ Antes de fazer mudanças estruturais
-
-#### `/cbk` - Consultar Backups (Check Backup)
-**Função:** Listar histórico e restaurar versões antigas
-
-**O que mostra:**
-- 📊 Total de backups (commits)
-- 🕐 Últimos 20 backups com data/hora
-- 📝 Arquivos modificados em cada backup
-- 🔧 Opções de restauração
-
-**Opções disponíveis:**
-1. **Ver detalhes** de commit específico
-2. **Comparar** duas versões
-3. **Restaurar arquivo** específico
-4. **Restaurar projeto inteiro** (cria branch segura)
-5. **Apenas visualizar** (sem ação)
-
-**Uso:**
-```
-Digite: /cbk
-[Veja lista de backups]
-[Escolha opção desejada]
-[Siga instruções]
-```
-
-### 🔄 Como Funciona a Restauração
-
-#### Restaurar Arquivo Específico
-```bash
-# Via /cbk (automático):
-1. Digite /cbk
-2. Escolha "Restaurar arquivo específico"
-3. Informe hash do commit (ex: 6ba7dd2)
-4. Informe caminho do arquivo
-5. Arquivo é restaurado NA SUA PASTA LOCAL
-
-# Manual (se preferir):
-git checkout HASH -- caminho/do/arquivo.py
-```
-
-**Exemplo prático:**
-```bash
-# Restaurar send_message.py de 2 horas atrás
-git checkout 6ba7dd2 -- scripts/whatsapp/send_message.py
-```
-
-#### Restaurar Projeto Inteiro (Seguro)
-```bash
-# Via /cbk (recomendado - cria branch):
-1. Digite /cbk
-2. Escolha "Restaurar projeto inteiro"
-3. Sistema faz backup atual automaticamente
-4. Cria branch: backup-restore-TIMESTAMP
-5. Todos arquivos voltam para aquela versão
-6. Para voltar: git checkout main
-
-# Manual (avançado):
-git checkout -b backup-restore-20251102 HASH
-# Testar...
-# Se OK: git checkout main && git merge backup-restore-20251102
-# Se não: git checkout main
-```
-
-### 📍 Localização dos Arquivos
-
-```
-.claude/commands/
-├── bk.md        # Comando /bk (backup automático)
-└── cbk.md       # Comando /cbk (check backups)
-```
-
-### ⚠️ SEGURANÇA
-
-**Repositório PRIVADO:**
-- ✅ Arquivo `.env` está INCLUÍDO no backup
-- ✅ Todas chaves API estão salvas
-- ⚠️ NUNCA tornar repositório público
-- ⚠️ Se tornar público: deletar repo e revogar TODAS as chaves
-
-**Boas práticas:**
-1. Usar `/bk` frequentemente (não custa nada)
-2. Testar `/cbk` antes de precisar (conhecer o sistema)
-3. Sempre fazer `/bk` ANTES de restaurar versão antiga
-4. Git mantém TUDO - nada é perdido permanentemente
-
-### 🎯 Workflow Recomendado
-
-```bash
-# 1. Começar o dia - verificar status
-git status
-
-# 2. Trabalhar normalmente
-# ... editar código ...
-
-# 3. Backup frequente (a cada funcionalidade)
-/bk
-
-# 4. Antes de testar algo arriscado
-/bk  # Backup de segurança
-
-# 5. Se algo der errado
-/cbk  # Ver backups e restaurar
-
-# 6. Fim do dia
-/bk  # Backup final
-```
-
-### 📊 Comandos Git Úteis
-
-```bash
-# Ver histórico
-git log --oneline -10
-git log --graph --oneline --all
-
-# Ver mudanças
-git status
-git diff
-git show HASH
-
-# Comparar versões
-git diff HASH1 HASH2
-git diff HASH1 HASH2 --name-only  # Só nomes
-
-# Ver arquivo sem restaurar
-git show HASH:caminho/arquivo.py
-
-# Informações do repo
-git remote -v
-git branch -a
-```
-
----
-
-**Última atualização:** 2025-11-02 (Sistema de backup automático adicionado)
-**Versão:** 3.2 (65 templates + Sistema de backup /bk e /cbk)
+**Última atualização:** 2025-11-02 (Otimização estrutural - 600 linhas)
+**Versão:** 4.0 (Otimizado com regras de edição absolutas)
