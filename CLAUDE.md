@@ -327,6 +327,90 @@ Buscar onde?
 
 ---
 
+## 🧠 CLAUDE SKILLS (Model-Invoked AI Capabilities)
+
+**Localização:** `.claude/skills/` (compartilhadas via git)
+
+### O Que São Skills?
+Skills são **capacidades modulares** que estendem Claude Code. Diferente de comandos slash (user-invoked), as Skills são **model-invoked**: Claude decide automaticamente quando usá-las baseado no contexto da conversa.
+
+### Skills Disponíveis (5 Skills)
+
+| Skill | Quando Usar | Descrição |
+|-------|-------------|-----------|
+| **idea-validator** | Validar ideias antes de construir | Analisa saturação de mercado, viabilidade, demanda real, monetização. Dá feedback brutalmente honesto. |
+| **launch-planner** | Planejar lançamento de MVP | Transforma ideias validadas em PRDs completos com roadmap, schema de DB, e escopo MVP (2-4 semanas). |
+| **product-designer** | Design de UI/UX | Elimina o "visual de IA" (gradientes azul/roxo). Cria interfaces profissionais com Tailwind + shadcn/ui. |
+| **marketing-writer** | Criar conteúdo de marketing | Escreve landing pages, tweets, Product Hunt, emails de lançamento. Tom claro e focado em benefícios. |
+| **roadmap-builder** | Priorizar features | Atua como PM: decide o que construir (e o que NÃO construir). Previne feature creep. |
+
+### Como Funcionam
+1. ✅ **Ativação automática** - Claude detecta quando usar baseado na descrição da Skill
+2. ✅ **Context-aware** - Analisa código existente automaticamente
+3. ✅ **Tool restrictions** - Cada Skill limita ferramentas permitidas (segurança/foco)
+4. ✅ **Compartilháveis** - Time todo recebe via `git pull`
+
+### Estrutura de uma Skill
+
+```
+.claude/skills/
+└── nome-da-skill/
+    └── SKILL.md              # YAML frontmatter + instruções
+```
+
+**YAML frontmatter obrigatório:**
+```yaml
+---
+name: nome-da-skill          # lowercase, hífens, max 64 chars
+description: O que faz e quando usar (max 1024 chars)
+allowed-tools: Read, Write   # (opcional) limita ferramentas
+---
+```
+
+### Exemplos de Uso
+
+**Validar Ideia:**
+```
+Usuário: "Valide esta ideia: app store para apps vibe coded"
+Claude: [Automaticamente usa idea-validator skill]
+```
+
+**Planejar MVP:**
+```
+Usuário: "Ajude-me a planejar o lançamento de [app]"
+Claude: [Automaticamente usa launch-planner skill]
+```
+
+**Design de Componente:**
+```
+Usuário: "Crie uma landing page moderna"
+Claude: [Automaticamente usa product-designer skill]
+```
+
+**Marketing:**
+```
+Usuário: "Escreva um tweet de lançamento"
+Claude: [Automaticamente usa marketing-writer skill]
+```
+
+**Roadmap:**
+```
+Usuário: "Quais features devo adicionar?"
+Claude: [Automaticamente usa roadmap-builder skill]
+```
+
+### Criar Nova Skill
+
+1. Criar pasta: `.claude/skills/minha-skill/`
+2. Criar arquivo: `SKILL.md` com YAML frontmatter
+3. Commitar no git (time todo recebe)
+4. Claude detecta automaticamente
+
+### Documentação Oficial
+- 📚 Skills Guide: https://docs.claude.com/en/docs/claude-code/skills.md
+
+---
+
 ## ⚡ Quick Actions (Comandos Mais Usados)
 
 ### Chatbot WhatsApp
@@ -449,6 +533,15 @@ ClaudeCode-Workspace/
 ├── 📄 README.md                 # Índice geral
 ├── 📄 CLAUDE.md                 # Config auto-load (este arquivo)
 ├── 📄 requirements.txt          # Dependências Python
+│
+├── 📁 .claude/                  # Configuração Claude Code
+│   ├── commands/                # Comandos slash (/bk, /cbk)
+│   └── skills/                  # 🧠 5 Claude Skills (model-invoked)
+│       ├── idea-validator/      # Valida ideias antes de construir
+│       ├── launch-planner/      # Planeja MVPs e roadmaps
+│       ├── product-designer/    # Design profissional de UI
+│       ├── marketing-writer/    # Conteúdo de marketing
+│       └── roadmap-builder/     # Priorização de features (PM)
 │
 ├── 📁 scripts/                  # 65+ Templates prontos
 │   ├── whatsapp/                # 22 templates WhatsApp
