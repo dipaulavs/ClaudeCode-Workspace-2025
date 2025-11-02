@@ -1,0 +1,115 @@
+---
+name: {{SKILL_NAME}}
+description: {{DESCRIPTION}}
+allowed-tools: Read, Write, Edit, Bash  # (opcional - remover se não restringir)
+---
+
+# {{SKILL_TITLE}}
+
+## Quando Usar
+
+Use esta skill automaticamente quando o usuário:
+- Pedir para **{{ACTION_1}}**: "{{EXAMPLE_1}}"
+- Pedir para **{{ACTION_2}}**: "{{EXAMPLE_2}}"
+- Mencionar **{{CONTEXT}}**
+
+**IMPORTANTE:** {{CRITICAL_RULE}}
+
+---
+
+## Workflow Principal ({{N_STEPS}} Etapas)
+
+### Etapa 1: {{STEP_1_NAME}} 📋
+
+**O que fazer:**
+{{STEP_1_DESCRIPTION}}
+
+**Ferramentas:**
+- {{TOOL_1}}
+- {{TOOL_2}}
+
+Para detalhes técnicos, veja [REFERENCE.md](REFERENCE.md).
+
+---
+
+### Etapa 2: {{STEP_2_NAME}} 🔍
+
+**O que fazer:**
+{{STEP_2_DESCRIPTION}}
+
+---
+
+### Etapa 3: {{STEP_3_NAME}} ✅
+
+**O que fazer:**
+{{STEP_3_DESCRIPTION}}
+
+---
+
+## Exemplos de Uso
+
+Veja [EXAMPLES.md](EXAMPLES.md) para casos reais completos.
+
+**Quick example:**
+```
+Usuário: "{{QUICK_EXAMPLE_INPUT}}"
+Claude: {{QUICK_EXAMPLE_OUTPUT}}
+```
+
+---
+
+## Output Final para o Usuário
+
+Após completar workflow, mostrar:
+
+```
+✅ {{TASK_NAME}} concluída!
+
+{{OUTPUT_SECTION_1}}
+
+{{OUTPUT_SECTION_2}}
+
+💡 Próximo passo sugerido: {{NEXT_STEP}}
+```
+
+---
+
+## Troubleshooting
+
+Veja [TROUBLESHOOTING.md](TROUBLESHOOTING.md) para guia completo de erros.
+
+**Erros comuns:**
+- **{{ERROR_1}}:** {{SOLUTION_1}}
+- **{{ERROR_2}}:** {{SOLUTION_2}}
+
+---
+
+## Regras Importantes
+
+### ✅ FAZER:
+
+- **Sempre** {{RULE_1}}
+- **Sempre** {{RULE_2}}
+- **Sempre** {{RULE_3}}
+
+### ❌ NÃO FAZER:
+
+- **NÃO** {{ANTI_PATTERN_1}}
+- **NÃO** {{ANTI_PATTERN_2}}
+- **NÃO** {{ANTI_PATTERN_3}}
+
+---
+
+## Referência Técnica
+
+Veja [REFERENCE.md](REFERENCE.md) para:
+- Framework detalhado
+- Configurações completas
+- Parâmetros e opções
+- APIs e integrações
+
+---
+
+**Criado em:** {{DATE}}
+**Framework usado:** {{FRAMEWORK}}
+**Status:** ✅ {{STATUS}}

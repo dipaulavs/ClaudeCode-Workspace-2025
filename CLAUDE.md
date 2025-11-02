@@ -27,6 +27,7 @@
 - Busca/pesquisa
 - Comandos informativos (ls, git status)
 - Templates únicos e diretos (ex: enviar mensagem WhatsApp)
+- **Estudo de vídeos YouTube** (workflow automático - ver seção 6️⃣)
 
 **Por quê:** Garante alinhamento com raciocínio do usuário e evita retrabalho.
 
@@ -43,7 +44,7 @@
 | Instagram Scraper | `scripts/instagram-scraper/` | 5 templates |
 | Meta Ads | `scripts/meta-ads/` | 4 templates |
 | Nextcloud | `scripts/nextcloud/` | 2 templates |
-| Obsidian | `scripts/obsidian/` | 5 templates |
+| Obsidian | `scripts/obsidian/` | 6 templates |
 | Imagens | `scripts/image-generation/` | 5 templates |
 | Vídeos | `scripts/video-generation/` | 2 templates |
 | Áudio | `scripts/audio-generation/` | 2 templates |
@@ -177,6 +178,32 @@ scripts/whatsapp/README.md
 
 ---
 
+### 6️⃣ Workflow Automático: Estudar Vídeo YouTube
+
+**GATILHO:** Usuário diz "Estuda esse vídeo: [URL]" ou fornece URL YouTube
+
+**MÉTODO:** Claude Code Skill `estudar-video` (model-invoked, totalmente automática)
+
+**WORKFLOW (3 Etapas Automáticas):**
+
+1. **Transcrever:** `scripts/extraction/transcribe_video.py` (Whisper)
+2. **Analisar:** Claude lê transcrição completa e faz:
+   - Classifica tipo (Tutorial, Metodologia, Aula, Notícia, Review, Outros)
+   - Extrai resumo executivo + key takeaways
+   - Análise personalizada por tipo (passo a passo se tutorial, conceitos se aula, etc)
+   - Código/recursos mencionados
+   - Aplicações práticas e insights profundos
+3. **Salvar:** `add_youtube_video.py` com análise completa no Obsidian
+
+**Estrutura:** `09 - YouTube Knowledge/Videos/[Tipo]/[data] - [titulo].md`
+**Tipos:** Tutoriais | Metodologias | Aulas | Noticias | Reviews | Outros
+
+**Custo:** ~$0.006/vídeo (só transcrição) | **Tempo:** ~3min
+**Regras:** ❌ Sem confirmação | ✅ Claude faz análise profunda automática
+**Skill:** `.claude/skills/estudar-video/SKILL.md` (ver seção 🧠 CLAUDE SKILLS)
+
+---
+
 ## 📍 MAPA DE AÇÕES (Índice Rápido)
 
 ### Quando usuário pedir... | Use isto | Doc completa
@@ -212,6 +239,10 @@ scripts/whatsapp/README.md
 | **Capturar ideia Obsidian** | `scripts/obsidian/capture_idea.py` | `scripts/obsidian/README.md` |
 | **Daily note Obsidian** | `scripts/obsidian/create_daily.py` | `scripts/obsidian/README.md` |
 | **Projeto Obsidian** | `scripts/obsidian/new_project.py` | `scripts/obsidian/README.md` |
+| **Estudar vídeo YouTube** | WORKFLOW AUTOMÁTICO (ver seção 6️⃣) | `09 - YouTube Knowledge/README.md` |
+| **Canva via MCP** | Claude.ai web (OAuth) | `scripts/canva/README.md` |
+| **Gerar design/imagem** | `scripts/orshot/generate_image.py` | `scripts/orshot/README.md` |
+| **Designs em lote** | `scripts/orshot/batch_generate.py` | `scripts/orshot/README.md` |
 
 ---
 
@@ -240,8 +271,9 @@ scripts/whatsapp/README.md
 - **Templates:** upload_to_nextcloud, upload_from_downloads
 - **Doc:** `scripts/nextcloud/README.md`
 
-### Obsidian (5 templates)
-- **Templates:** quick_note, capture_idea, create_daily, new_project, obsidian_client (API)
+### Obsidian (6 templates)
+- **Templates:** quick_note, capture_idea, create_daily, new_project, add_youtube_video, youtube_classifier, obsidian_client (API)
+- **IA:** Análise completa de vídeos YouTube (Claude Terminal: classificação + resumo + insights)
 - **Doc:** `scripts/obsidian/README.md`
 
 ### Imagens (5 templates)
@@ -276,6 +308,21 @@ scripts/whatsapp/README.md
 ### Google Maps (3 templates)
 - **Templates:** google_maps_basic, google_maps_advanced, google_maps_batch
 - **Doc:** `scripts/scraping/README.md`
+
+### Canva MCP (1 script + MCP)
+- **MCP:** Via Claude.ai web (OAuth autenticado)
+- **Script:** list_designs.py (requer OAuth)
+- **Funcionalidades:** Criar designs, autofill templates, buscar, exportar
+- **Doc:** `scripts/canva/README.md`
+
+### Orshot Design (3 templates) ⭐ NOVO
+- **Templates:** generate_image, batch_generate, list_templates
+- **Skill:** orshot-design (model-invoked - ativação automática)
+- **Formatos:** PNG, JPG, WEBP, PDF
+- **Uso:** Automação de designs em escala (posts, certificados, OG images)
+- **Preço:** $30/mês = 3.000 renders ($0.01/render) | 100 grátis teste
+- **Vantagem:** 3x mais barato que Canva API | Importa templates do Canva/Figma
+- **Doc:** `scripts/orshot/README.md`
 
 ---
 
@@ -334,7 +381,7 @@ Buscar onde?
 ### O Que São Skills?
 Skills são **capacidades modulares** que estendem Claude Code. Diferente de comandos slash (user-invoked), as Skills são **model-invoked**: Claude decide automaticamente quando usá-las baseado no contexto da conversa.
 
-### Skills Disponíveis (5 Skills)
+### Skills Disponíveis (8 Skills)
 
 | Skill | Quando Usar | Descrição |
 |-------|-------------|-----------|
@@ -343,6 +390,9 @@ Skills são **capacidades modulares** que estendem Claude Code. Diferente de com
 | **product-designer** | Design de UI/UX | Elimina o "visual de IA" (gradientes azul/roxo). Cria interfaces profissionais com Tailwind + shadcn/ui. |
 | **marketing-writer** | Criar conteúdo de marketing | Escreve landing pages, tweets, Product Hunt, emails de lançamento. Tom claro e focado em benefícios. |
 | **roadmap-builder** | Priorizar features | Atua como PM: decide o que construir (e o que NÃO construir). Previne feature creep. |
+| **estudar-video** | Estudar vídeos do YouTube | Workflow automático: transcreve (Whisper) → analisa com IA → classifica tipo → extrai insights → salva no Obsidian. Totalmente automático sem confirmação. |
+| **orshot-design** ⭐ | Gerar designs/imagens | Automação de designs profissionais usando Orshot API. Gera posts sociais, certificados, OG images em escala. $0.01/render - 3x mais barato que Canva API. |
+| **skill-creator** 🛠️ | Criar novas Skills | Meta-skill que cria outras Skills automaticamente. Gera estrutura multi-arquivo usando Progressive Disclosure. Script auxiliar também disponível. |
 
 ### Como Funcionam
 1. ✅ **Ativação automática** - Claude detecta quando usar baseado na descrição da Skill
@@ -350,15 +400,25 @@ Skills são **capacidades modulares** que estendem Claude Code. Diferente de com
 3. ✅ **Tool restrictions** - Cada Skill limita ferramentas permitidas (segurança/foco)
 4. ✅ **Compartilháveis** - Time todo recebe via `git pull`
 
-### Estrutura de uma Skill
+### Estrutura de uma Skill (Progressive Disclosure) 📐
+
+**Padrão obrigatório:** Todas as novas Skills devem usar **Progressive Disclosure** (multi-arquivo).
 
 ```
 .claude/skills/
 └── nome-da-skill/
-    └── SKILL.md              # YAML frontmatter + instruções
+    ├── SKILL.md               # Instruções principais (30-60 linhas, máx 80)
+    ├── REFERENCE.md           # Documentação técnica detalhada
+    ├── EXAMPLES.md            # Casos de uso reais (mínimo 2)
+    └── TROUBLESHOOTING.md     # Guia de erros comuns (mínimo 2)
 ```
 
-**YAML frontmatter obrigatório:**
+**Como funciona:**
+- ✅ **SKILL.md** → Sempre carregado (focado, limpo)
+- ⏱️ **Outros .md** → Carregados sob demanda quando Claude referencia
+- 💡 **Benefício** → Economiza tokens, carrega só o necessário
+
+**YAML frontmatter obrigatório (SKILL.md):**
 ```yaml
 ---
 name: nome-da-skill          # lowercase, hífens, max 64 chars
@@ -366,6 +426,12 @@ description: O que faz e quando usar (max 1024 chars)
 allowed-tools: Read, Write   # (opcional) limita ferramentas
 ---
 ```
+
+**Criar nova Skill:**
+
+Opção 1 (Recomendado): "Crie uma skill para [propósito]" → Claude usa skill-creator automaticamente
+
+Opção 2 (Manual): `python3 scripts/claude-skills/create_skill.py nome-da-skill`
 
 ### Exemplos de Uso
 
@@ -399,12 +465,47 @@ Usuário: "Quais features devo adicionar?"
 Claude: [Automaticamente usa roadmap-builder skill]
 ```
 
-### Criar Nova Skill
+**Estudar Vídeo YouTube:**
+```
+Usuário: "Estuda esse vídeo: https://youtube.com/watch?v=ABC123"
+Claude: [Automaticamente usa estudar-video skill]
+        → Transcreve com Whisper
+        → Analisa conteúdo completo
+        → Classifica tipo (Tutorial/Aula/etc)
+        → Salva no Obsidian com insights
+```
 
-1. Criar pasta: `.claude/skills/minha-skill/`
-2. Criar arquivo: `SKILL.md` com YAML frontmatter
-3. Commitar no git (time todo recebe)
-4. Claude detecta automaticamente
+**Criar Nova Skill:**
+```
+Usuário: "Crie uma skill para validar código SQL"
+Claude: [Automaticamente usa skill-creator]
+        → Coleta informações (triggers, ferramentas)
+        → Gera estrutura multi-arquivo (Progressive Disclosure)
+        → Cria SKILL.md + REFERENCE.md + EXAMPLES.md + TROUBLESHOOTING.md
+        → Mostra próximos passos
+```
+
+### Sistema de Criação de Skills 🛠️
+
+**2 maneiras de criar:**
+
+**Via Claude (Recomendado):**
+```
+"Crie uma skill para [propósito]"
+```
+
+**Via Script:**
+```bash
+python3 scripts/claude-skills/create_skill.py nome-da-skill
+```
+
+**O que é gerado:**
+- ✅ Estrutura multi-arquivo (Progressive Disclosure)
+- ✅ 4 arquivos .md prontos para preencher
+- ✅ Templates completos
+- ✅ Validações automáticas
+
+**Documentação completa:** `scripts/claude-skills/README.md`
 
 ### Documentação Oficial
 - 📚 Skills Guide: https://docs.claude.com/en/docs/claude-code/skills.md
@@ -536,12 +637,13 @@ ClaudeCode-Workspace/
 │
 ├── 📁 .claude/                  # Configuração Claude Code
 │   ├── commands/                # Comandos slash (/bk, /cbk)
-│   └── skills/                  # 🧠 5 Claude Skills (model-invoked)
+│   └── skills/                  # 🧠 6 Claude Skills (model-invoked)
 │       ├── idea-validator/      # Valida ideias antes de construir
 │       ├── launch-planner/      # Planeja MVPs e roadmaps
 │       ├── product-designer/    # Design profissional de UI
 │       ├── marketing-writer/    # Conteúdo de marketing
-│       └── roadmap-builder/     # Priorização de features (PM)
+│       ├── roadmap-builder/     # Priorização de features (PM)
+│       └── estudar-video/       # Estuda vídeos YouTube (automático)
 │
 ├── 📁 scripts/                  # 65+ Templates prontos
 │   ├── whatsapp/                # 22 templates WhatsApp
@@ -603,6 +705,11 @@ ClaudeCode-Workspace/
 ### Instagram Scraping
 - Sempre usar `--limit` para controlar custos
 - Pricing: $2.30/1000 itens
+
+### Obsidian - Formato de Datas
+- **Formato brasileiro:** DD/MM/YYYY (padrão configurado)
+- Scripts já configurados para usar formato brasileiro automaticamente
+- Daily notes mantêm nome do arquivo compatível (YYYY-MM-DD) mas exibem datas em formato BR
 
 ---
 
