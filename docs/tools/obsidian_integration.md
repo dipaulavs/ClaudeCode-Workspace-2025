@@ -594,5 +594,5 @@ python3 scripts/obsidian/quick_note.py "Teste de integração"
 **Última atualização:** 2025-11-02
 **Criado por:** Claude Code
 **Versão:** 1.0
-**Vault:** claude-code (iCloud)
-**Localização:** `/Users/felipemdepaula/Library/Mobile Documents/com~apple~CloudDocs/Obsidian [meu cerebro]/dipaula/claude-code/`
+**Vault:** Claude-code-ios (iCloud)
+**Localização:** `/Users/felipemdepaula/Library/Mobile Documents/iCloud~md~obsidian/Documents/Claude-code-ios/`

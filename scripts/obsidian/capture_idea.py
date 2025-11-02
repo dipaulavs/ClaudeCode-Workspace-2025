@@ -8,7 +8,7 @@ Uso:
 """
 
 import argparse
-from obsidian_client import ObsidianClient, FOLDERS
+from obsidian_client import ObsidianClient, FOLDERS, DISPLAY_DATE_FORMAT
 from datetime import datetime
 
 
@@ -30,7 +30,7 @@ def main():
         tags_str = " ".join([f"#{tag}" for tag in tags_list])
 
         # Criar conteúdo
-        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M")
+        timestamp = datetime.now().strftime(f"{DISPLAY_DATE_FORMAT} %H:%M")
 
         content = f"""# {args.title}
 

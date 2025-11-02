@@ -8,7 +8,7 @@ Uso:
 """
 
 import argparse
-from obsidian_client import ObsidianClient, FOLDERS
+from obsidian_client import ObsidianClient, FOLDERS, DISPLAY_DATE_FORMAT
 from datetime import datetime
 import os
 
@@ -27,7 +27,7 @@ def main():
         # Criar pasta do projeto
         project_folder = f"{FOLDERS['projects']}/{args.name}"
 
-        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M")
+        timestamp = datetime.now().strftime(f"{DISPLAY_DATE_FORMAT} %H:%M")
 
         # 1. README do Projeto
         readme_content = f"""# {args.name}

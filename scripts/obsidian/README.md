@@ -37,6 +37,36 @@ pip3 install requests urllib3
 
 ## 🚀 Scripts Disponíveis
 
+### 📋 Manage Tasks - Gerenciar Sistema de Tarefas
+
+Gerencia o sistema completo de tarefas (Projetos, Áreas, Estudos, Workflows).
+
+```bash
+# Criar nova tarefa
+python3 scripts/obsidian/manage_tasks.py create-task "Implementar feature X" \
+  --projeto "App ChatLoop9" \
+  --prioridade urgente \
+  --due 2025-11-05
+
+# Atualizar progresso de projeto
+python3 scripts/obsidian/manage_tasks.py update-progress "Canal YouTube" 75
+
+# Listar tarefas urgentes
+python3 scripts/obsidian/manage_tasks.py list-urgent
+
+# Listar projetos ativos
+python3 scripts/obsidian/manage_tasks.py list-projects
+```
+
+**Opções de prioridade:**
+- `urgente` - 🔥 Fazer hoje
+- `importante` - ⭐ Esta semana
+- `normal` - 💡 Backlog
+
+**Sistema completo em:** `📖 README - Sistema de Tarefas.md`
+
+---
+
 ### 📝 Quick Note - Captura Rápida
 
 Cria nota rápida no Inbox ou outra pasta.
@@ -143,6 +173,40 @@ python3 scripts/obsidian/new_project.py "E-commerce" \
 
 ---
 
+### 🎬 Estudar Vídeo YouTube - Sistema Otimizado com Análise Completa
+
+**Workflow simplificado:** Diga "Estuda esse vídeo: [URL]" e Claude faz toda a análise.
+
+**Como funciona:**
+1. Claude transcreve o vídeo (Whisper via RapidAPI)
+2. Lê transcrição completa e analisa
+3. Classifica tipo: Tutorial, Metodologia, Aula, Notícia, Review, Outros
+4. Extrai resumo + key takeaways + insights personalizados
+5. Salva nota completa no Obsidian na pasta correta
+
+**Estrutura de pastas:**
+```
+09 - YouTube Knowledge/Videos/
+  ├── Tutoriais/     # Passo a passo + código
+  ├── Metodologias/  # Frameworks + princípios
+  ├── Aulas/         # Conceitos + teoria
+  ├── Noticias/      # Impacto + contexto
+  ├── Reviews/       # Prós/contras + recomendação
+  └── Outros/        # Conteúdo geral
+```
+
+**Análise personalizada por tipo:**
+- **Tutorial:** Passo a passo detalhado, código extraído, checklist
+- **Metodologia:** Princípios, como aplicar, vantagens/desvantagens
+- **Aula:** Conceitos explicados, exercícios sugeridos
+- **Notícia:** Impacto, contexto, o que muda
+- **Review:** Prós/contras, vale a pena?, alternativas
+
+**Custo:** ~$0.006/vídeo (só transcrição) | **Tempo:** ~3min
+**Qualidade:** Análise profunda por Claude Sonnet 4.5
+
+---
+
 ## 🔧 Configuração
 
 ### Arquivo: `config/obsidian_config.py`
@@ -155,7 +219,7 @@ OBSIDIAN_API_URL = "https://127.0.0.1:27124"
 OBSIDIAN_API_KEY = os.getenv("OBSIDIAN_API_KEY", "")
 
 # Caminho do vault
-OBSIDIAN_VAULT_PATH = "/Users/.../Obsidian [meu cerebro]/dipaula/claude-code"
+OBSIDIAN_VAULT_PATH = "/Users/felipemdepaula/Library/Mobile Documents/iCloud~md~obsidian/Documents/Claude-code-ios"
 ```
 
 ### Variáveis de Ambiente (.env)
@@ -178,7 +242,16 @@ claude-code/
 ├── 04 - Automações/         # Docs de automações
 ├── 05 - Templates/          # Templates reutilizáveis
 ├── 06 - Daily Notes/        # Diário diário
-└── 07 - Recursos/           # Arquivos e referências
+├── 07 - Recursos/           # Arquivos e referências
+└── 09 - YouTube Knowledge/  # 🎬 Vídeos classificados por IA
+    ├── Videos/
+    │   ├── Tutoriais/       # Passo a passo práticos
+    │   ├── Metodologias/    # Frameworks, processos
+    │   ├── Aulas/           # Conteúdo educacional
+    │   ├── Noticias/        # Novidades
+    │   ├── Reviews/         # Análises
+    │   └── Outros/          # Não classificável
+    └── Transcricoes/        # Transcrições completas
 ```
 
 Cada pasta tem um `README.md` explicativo.
@@ -325,6 +398,7 @@ client.log_to_daily("✅ Campanha Meta Ads criada com sucesso")
 
 ## ✨ Próximas Funcionalidades
 
+- [x] **Classificação IA de vídeos YouTube** (✅ Implementado 2025-11-02)
 - [ ] Transcrição de áudio → Nota
 - [ ] Extração de conhecimento de URLs
 - [ ] Geração de mapas mentais
@@ -335,6 +409,18 @@ client.log_to_daily("✅ Campanha Meta Ads criada com sucesso")
 
 ---
 
-**Última atualização:** 2025-11-02
+## 🎉 Novidades (v2.1)
+
+**🤖 Sistema Otimizado de Análise de Vídeos YouTube**
+- Claude Sonnet 4.5 faz análise completa da transcrição
+- Classificação + Resumo + Insights personalizados por tipo
+- Workflow simplificado: "Estuda esse vídeo: [URL]"
+- Custo reduzido: $0.006/vídeo (25% mais barato)
+- Análise profunda com contexto completo (200k tokens)
+- Organização automática em 6 tipos de pastas
+
+---
+
+**Última atualização:** 2025-11-02 (v2.1 - Sistema Otimizado com Claude)
 **Criado por:** Claude Code
 **Vault:** claude-code (iCloud)

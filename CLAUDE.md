@@ -6,6 +6,27 @@
 
 ## 🚨 REGRAS DE COMPORTAMENTO (PRIORIDADE MÁXIMA)
 
+### 0️⃣ Modo Conciso (Comunicação)
+
+**SEMPRE usar Modo Conciso nas respostas:**
+
+**Estrutura:**
+1. O que vou fazer (1 linha)
+2. Executo
+3. Resultado (1-2 linhas)
+
+**Proibido:**
+- ❌ Repetir o que usuário pediu
+- ❌ Explicações longas desnecessárias
+- ❌ Contexto óbvio
+
+**Exceções:**
+- ✅ Erros críticos (explicar o problema)
+- ✅ Usuário pede detalhes explicitamente
+- ✅ Decisões complexas que precisam clarificação
+
+---
+
 ### 1️⃣ Confirmação Obrigatória
 
 **SEMPRE que usuário pedir qualquer ação que crie/modifique arquivos:**

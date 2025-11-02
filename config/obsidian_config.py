@@ -34,7 +34,7 @@ OBSIDIAN_API_URL = os.getenv("OBSIDIAN_API_URL", "https://127.0.0.1:27124")
 OBSIDIAN_API_KEY = os.getenv("OBSIDIAN_API_KEY", "")
 
 # Caminho do vault
-OBSIDIAN_VAULT_PATH = "/Users/felipemdepaula/Library/Mobile Documents/com~apple~CloudDocs/Obsidian [meu cerebro]/dipaula/claude-code"
+OBSIDIAN_VAULT_PATH = "/Users/felipemdepaula/Library/Mobile Documents/iCloud~md~obsidian/Documents/Claude-code-ios"
 
 # ============================================
 # ESTRUTURA DE PASTAS
@@ -48,7 +48,20 @@ FOLDERS = {
     "automations": "04 - Automações",
     "templates": "05 - Templates",
     "daily": "06 - Daily Notes",
-    "resources": "07 - Recursos"
+    "resources": "07 - Recursos",
+    "youtube": "09 - YouTube Knowledge",
+    "youtube_videos": "09 - YouTube Knowledge/Videos",
+    "youtube_transcricoes": "09 - YouTube Knowledge/Transcricoes"
+}
+
+# Estrutura de tipos de vídeos (classificação automática por IA)
+VIDEO_TYPES = {
+    "tutorial": "Tutoriais",          # Passo a passo prático
+    "metodologia": "Metodologias",    # Frameworks, processos
+    "aula": "Aulas",                  # Conteúdo educacional teórico
+    "noticia": "Noticias",            # Novidades, lançamentos
+    "review": "Reviews",              # Análises de ferramentas/produtos
+    "outros": "Outros"                # Não se encaixa nas categorias
 }
 
 # ============================================
@@ -65,8 +78,11 @@ TEMPLATES_FOLDER = FOLDERS["templates"]
 # CONFIGURAÇÕES DE DAILY NOTES
 # ============================================
 
-# Formato de data para daily notes
+# Formato de data para daily notes (nome do arquivo - compatibilidade Obsidian)
 DAILY_NOTE_FORMAT = "%Y-%m-%d"  # Ex: 2025-11-02
+
+# Formato de data para exibição (padrão brasileiro)
+DISPLAY_DATE_FORMAT = "%d/%m/%Y"  # Ex: 02/11/2025
 
 # Criar daily note automaticamente
 AUTO_CREATE_DAILY = True

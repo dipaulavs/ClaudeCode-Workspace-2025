@@ -72,7 +72,7 @@ python3 scripts/obsidian/obsidian_client.py
 🔍 Testando conexão com Obsidian...
 ✅ Conexão estabelecida!
 
-📊 Vault: /Users/felipemdepaula/Library/Mobile Documents/com~apple~CloudDocs/Obsidian [meu cerebro]/dipaula/claude-code
+📊 Vault: /Users/felipemdepaula/Library/Mobile Documents/iCloud~md~obsidian/Documents/Claude-code-ios
 ```
 
 **Se deu erro:**

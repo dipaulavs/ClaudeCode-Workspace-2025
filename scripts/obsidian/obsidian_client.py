@@ -185,6 +185,7 @@ class ObsidianClient:
             date = datetime.now()
 
         date_str = date.strftime(DAILY_NOTE_FORMAT)
+        date_display = date.strftime(DISPLAY_DATE_FORMAT)
         weekday = date.strftime("%A")  # Nome do dia da semana
 
         # Traduzir dia da semana
@@ -201,7 +202,7 @@ class ObsidianClient:
 
         filename = f"{date_str} - {weekday_pt}"
 
-        content = f"""# {date_str} - {weekday_pt}
+        content = f"""# {date_display} - {weekday_pt}
 
 ## ✅ Tarefas
 - [ ]
@@ -226,7 +227,7 @@ class ObsidianClient:
 
 ---
 Tags: #daily-note
-Criado: {datetime.now().strftime("%Y-%m-%d %H:%M")}
+Criado: {datetime.now().strftime(f"{DISPLAY_DATE_FORMAT} %H:%M")}
 """
 
         return self.create_note(filename, content, folder="daily")
