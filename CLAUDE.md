@@ -336,6 +336,27 @@ botstop     # Parar (alias)
 # Logs: whatsapp-chatbot/logs/chatbot_v4.log
 ```
 
+### Backup Git (Sistema Automático)
+```bash
+# Fazer backup automático (add + commit + push)
+/bk
+
+# Listar e restaurar backups anteriores
+/cbk
+
+# Comandos manuais alternativos:
+git add . && git commit -m "Backup manual" && git push origin main
+
+# Ver histórico de backups
+git log --oneline -10
+
+# Restaurar arquivo específico de versão antiga
+git checkout HASH -- caminho/arquivo.py
+
+# Repositório: https://github.com/dipaulavs/ClaudeCode-Workspace-2025
+# Status: PRIVADO (inclui .env)
+```
+
 ### Agendamento WhatsApp
 ```bash
 # Agendar mensagem única
@@ -527,5 +548,169 @@ ClaudeCode-Workspace/
 
 ---
 
-**Última atualização:** 2025-11-02 (Obsidian PKM adicionado)
-**Versão:** 3.1 (65 templates - Obsidian integrado)
+## 💾 SISTEMA DE BACKUP AUTOMÁTICO
+
+### 📦 Repositório GitHub
+
+- **URL:** https://github.com/dipaulavs/ClaudeCode-Workspace-2025
+- **Tipo:** Repositório PRIVADO
+- **Conteúdo:** Código completo + configs + .env (chaves API incluídas)
+- **Branch principal:** main
+
+### ⚡ Comandos Slash Personalizados
+
+#### `/bk` - Backup Automático
+**Função:** Fazer backup completo instantâneo para GitHub
+
+**O que faz:**
+1. `git add .` (adiciona todas mudanças)
+2. `git commit -m "🔄 Backup automático - [DATA/HORA]"` (cria commit)
+3. `git push origin main` (envia para GitHub)
+
+**Uso:**
+```
+Digite: /bk
+[ENTER]
+Pronto! Backup feito automaticamente.
+```
+
+**Quando usar:**
+- ✅ Antes de testar código novo/arriscado
+- ✅ Após implementar funcionalidade importante
+- ✅ Final do dia de trabalho
+- ✅ Antes de fazer mudanças estruturais
+
+#### `/cbk` - Consultar Backups (Check Backup)
+**Função:** Listar histórico e restaurar versões antigas
+
+**O que mostra:**
+- 📊 Total de backups (commits)
+- 🕐 Últimos 20 backups com data/hora
+- 📝 Arquivos modificados em cada backup
+- 🔧 Opções de restauração
+
+**Opções disponíveis:**
+1. **Ver detalhes** de commit específico
+2. **Comparar** duas versões
+3. **Restaurar arquivo** específico
+4. **Restaurar projeto inteiro** (cria branch segura)
+5. **Apenas visualizar** (sem ação)
+
+**Uso:**
+```
+Digite: /cbk
+[Veja lista de backups]
+[Escolha opção desejada]
+[Siga instruções]
+```
+
+### 🔄 Como Funciona a Restauração
+
+#### Restaurar Arquivo Específico
+```bash
+# Via /cbk (automático):
+1. Digite /cbk
+2. Escolha "Restaurar arquivo específico"
+3. Informe hash do commit (ex: 6ba7dd2)
+4. Informe caminho do arquivo
+5. Arquivo é restaurado NA SUA PASTA LOCAL
+
+# Manual (se preferir):
+git checkout HASH -- caminho/do/arquivo.py
+```
+
+**Exemplo prático:**
+```bash
+# Restaurar send_message.py de 2 horas atrás
+git checkout 6ba7dd2 -- scripts/whatsapp/send_message.py
+```
+
+#### Restaurar Projeto Inteiro (Seguro)
+```bash
+# Via /cbk (recomendado - cria branch):
+1. Digite /cbk
+2. Escolha "Restaurar projeto inteiro"
+3. Sistema faz backup atual automaticamente
+4. Cria branch: backup-restore-TIMESTAMP
+5. Todos arquivos voltam para aquela versão
+6. Para voltar: git checkout main
+
+# Manual (avançado):
+git checkout -b backup-restore-20251102 HASH
+# Testar...
+# Se OK: git checkout main && git merge backup-restore-20251102
+# Se não: git checkout main
+```
+
+### 📍 Localização dos Arquivos
+
+```
+.claude/commands/
+├── bk.md        # Comando /bk (backup automático)
+└── cbk.md       # Comando /cbk (check backups)
+```
+
+### ⚠️ SEGURANÇA
+
+**Repositório PRIVADO:**
+- ✅ Arquivo `.env` está INCLUÍDO no backup
+- ✅ Todas chaves API estão salvas
+- ⚠️ NUNCA tornar repositório público
+- ⚠️ Se tornar público: deletar repo e revogar TODAS as chaves
+
+**Boas práticas:**
+1. Usar `/bk` frequentemente (não custa nada)
+2. Testar `/cbk` antes de precisar (conhecer o sistema)
+3. Sempre fazer `/bk` ANTES de restaurar versão antiga
+4. Git mantém TUDO - nada é perdido permanentemente
+
+### 🎯 Workflow Recomendado
+
+```bash
+# 1. Começar o dia - verificar status
+git status
+
+# 2. Trabalhar normalmente
+# ... editar código ...
+
+# 3. Backup frequente (a cada funcionalidade)
+/bk
+
+# 4. Antes de testar algo arriscado
+/bk  # Backup de segurança
+
+# 5. Se algo der errado
+/cbk  # Ver backups e restaurar
+
+# 6. Fim do dia
+/bk  # Backup final
+```
+
+### 📊 Comandos Git Úteis
+
+```bash
+# Ver histórico
+git log --oneline -10
+git log --graph --oneline --all
+
+# Ver mudanças
+git status
+git diff
+git show HASH
+
+# Comparar versões
+git diff HASH1 HASH2
+git diff HASH1 HASH2 --name-only  # Só nomes
+
+# Ver arquivo sem restaurar
+git show HASH:caminho/arquivo.py
+
+# Informações do repo
+git remote -v
+git branch -a
+```
+
+---
+
+**Última atualização:** 2025-11-02 (Sistema de backup automático adicionado)
+**Versão:** 3.2 (65 templates + Sistema de backup /bk e /cbk)
