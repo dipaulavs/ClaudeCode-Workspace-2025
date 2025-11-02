@@ -1,0 +1,19 @@
+# DESCRIÇÃO DO IMÓVEL: exemplo-001
+
+Apartamento moderno e espaçoso de 2 quartos no coração de Belo Horizonte.
+
+Características:
+- 2 quartos (1 suíte)
+- 2 banheiros
+- Sala ampla com varanda gourmet
+- Cozinha planejada
+- 1 vaga de garagem coberta
+- 75m² de área útil
+- Condomínio com piscina, academia e salão de festas
+- Portaria 24h
+- Andar alto com vista panorâmica
+
+Estado: Pronto para morar
+Mobiliado: Não
+IPTU: R$ 180/mês
+Condomínio: R$ 450/mês

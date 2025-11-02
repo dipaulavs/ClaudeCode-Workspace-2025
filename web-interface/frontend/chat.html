@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Claude Code Chat</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .terminal-container {
+            height: calc(100vh - 120px);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .chat-header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+        }
+        .actions-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.5rem;
+        }
+
+        /* Mobile optimizations */
+        @media (max-width: 768px) {
+            .terminal-container {
+                height: calc(100vh - 280px);
+                border-radius: 12px;
+            }
+            .actions-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.5rem;
+            }
+            .btn-action {
+                padding: 0.625rem 0.75rem;
+                font-size: 0.75rem;
+                white-space: nowrap;
+            }
+            .btn-action i {
+                font-size: 0.875rem;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .actions-grid {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0.75rem;
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen p-2 md:p-4 lg:p-8">
+    <div class="max-w-6xl mx-auto">
+        <!-- Header -->
+        <div class="chat-header rounded-xl md:rounded-2xl p-3 md:p-6 shadow-2xl mb-3 md:mb-6">
+            <div class="flex items-center justify-between flex-wrap gap-2">
+                <div class="flex items-center space-x-2 md:space-x-4 flex-1 min-w-0">
+                    <div class="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg md:rounded-xl flex items-center justify-center flex-shrink-0">
+                        <i class="fas fa-robot text-white text-xl md:text-2xl"></i>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <h1 class="text-base md:text-2xl font-bold gradient-text truncate">Claude Code Terminal</h1>
+                        <p class="text-gray-600 text-xs md:text-sm truncate">Chat interativo no terminal do seu Mac</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2 md:gap-3">
+                    <a href="/" class="px-3 py-1.5 md:px-4 md:py-2 bg-gray-100 hover:bg-gray-200 rounded-lg font-semibold text-gray-700 transition-all text-xs md:text-sm">
+                        <i class="fas fa-tools mr-1 md:mr-2"></i><span class="hidden sm:inline">Ferramentas</span>
+                    </a>
+                    <div class="flex items-center space-x-1.5 md:space-x-2">
+                        <div class="w-2 h-2 md:w-3 md:h-3 bg-green-500 rounded-full animate-pulse"></div>
+                        <span class="text-xs md:text-sm text-gray-600 font-semibold">Online</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="bg-white/90 backdrop-filter backdrop-blur-lg rounded-xl p-3 md:p-4 shadow-lg mb-3 md:mb-4">
+            <div class="mb-2 md:mb-3">
+                <span class="text-xs md:text-sm font-bold text-gray-700">⚡ Ações Rápidas</span>
+            </div>
+
+            <div class="actions-grid items-center">
+                <button onclick="quickCopy('cd /Users/felipemdepaula/Desktop/ClaudeCode-Workspace && bash iniciar.sh && cat README.md', 'Setup')"
+                        class="btn-action px-3 py-2 md:px-4 md:py-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg hover:shadow-lg transition-all text-xs md:text-sm font-semibold">
+                    <i class="fas fa-play mr-1 md:mr-2"></i>Iniciar Setup
+                </button>
+
+                <button onclick="quickCopy('/new', 'Nova conversa')"
+                        class="btn-action px-3 py-2 md:px-4 md:py-2 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-lg hover:shadow-lg transition-all text-xs md:text-sm font-semibold">
+                    <i class="fas fa-plus mr-1 md:mr-2"></i>Nova Conversa
+                </button>
+
+                <button onclick="quickCopy('/clear', 'Limpar histórico')"
+                        class="btn-action px-3 py-2 md:px-4 md:py-2 bg-gradient-to-r from-purple-500 to-purple-600 text-white rounded-lg hover:shadow-lg transition-all text-xs md:text-sm font-semibold">
+                    <i class="fas fa-broom mr-1 md:mr-2"></i>Limpar Histórico
+                </button>
+
+                <button onclick="quickCopy('/context', 'Ver contexto')"
+                        class="btn-action px-3 py-2 md:px-4 md:py-2 bg-gradient-to-r from-indigo-500 to-indigo-600 text-white rounded-lg hover:shadow-lg transition-all text-xs md:text-sm font-semibold">
+                    <i class="fas fa-chart-bar mr-1 md:mr-2"></i>Ver Contexto
+                </button>
+
+                <button onclick="quickCopy('/usage', 'Ver uso')"
+                        class="btn-action px-3 py-2 md:px-4 md:py-2 bg-gradient-to-r from-yellow-500 to-orange-500 text-white rounded-lg hover:shadow-lg transition-all text-xs md:text-sm font-semibold">
+                    <i class="fas fa-chart-line mr-1 md:mr-2"></i>Ver Uso
+                </button>
+
+                <button onclick="quickCopy('ls tools/', 'Listar ferramentas')"
+                        class="btn-action px-3 py-2 md:px-4 md:py-2 bg-purple-100 hover:bg-purple-200 text-purple-700 rounded-lg transition-all text-xs md:text-sm font-semibold">
+                    <i class="fas fa-tools mr-1"></i>Ver Ferramentas
+                </button>
+
+                <button onclick="quickCopy('ls -lt ~/Downloads | head -10', 'Últimos arquivos')"
+                        class="btn-action px-3 py-2 md:px-4 md:py-2 bg-purple-100 hover:bg-purple-200 text-purple-700 rounded-lg transition-all text-xs md:text-sm font-semibold">
+                    <i class="fas fa-folder mr-1"></i>Últimos Arquivos
+                </button>
+
+                <button onclick="quickCopy('cd /Users/felipemdepaula/Desktop/ClaudeCode-Workspace/web-interface && bash start-cloudflare-fixed.sh', 'Acesso remoto')"
+                        class="btn-action px-3 py-2 md:px-4 md:py-2 bg-gradient-to-r from-orange-500 to-pink-500 text-white rounded-lg hover:shadow-lg transition-all text-xs md:text-sm font-semibold col-span-2 md:col-span-1">
+                    <i class="fas fa-globe mr-1 md:mr-2"></i>Acesso Remoto (Fixo)
+                </button>
+            </div>
+        </div>
+
+        <!-- Terminal Container -->
+        <div class="terminal-container" id="terminal-container">
+            <div class="flex items-center justify-center h-full px-4">
+                <div class="text-center max-w-md">
+                    <i class="fas fa-terminal text-4xl md:text-6xl text-purple-300 mb-3 md:mb-4"></i>
+                    <h3 class="text-xl md:text-2xl font-bold text-white mb-2 md:mb-4">Terminal Web</h3>
+                    <p class="text-gray-300 text-sm md:text-base mb-4 md:mb-6 px-2">Clique no botão abaixo para abrir o terminal em uma nova aba</p>
+                    <a href="https://terminal.loop9.com.br" target="_blank" rel="noopener noreferrer"
+                       class="inline-block px-6 md:px-8 py-3 md:py-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-lg hover:shadow-2xl transition-all text-base md:text-lg font-semibold">
+                        <i class="fas fa-external-link-alt mr-2"></i>Abrir Terminal
+                    </a>
+                    <p class="text-gray-400 text-xs md:text-sm mt-3 md:mt-4 px-2">
+                        💡 <strong>Dica:</strong> Use localhost:7681 se estiver no mesmo computador
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Info Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4 mt-3 md:mt-6">
+            <div class="bg-white/90 backdrop-filter backdrop-blur-lg rounded-lg md:rounded-xl p-3 md:p-4 shadow-lg">
+                <div class="flex items-center space-x-2 md:space-x-3">
+                    <div class="w-9 h-9 md:w-10 md:h-10 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                        <i class="fas fa-keyboard text-blue-600 text-base md:text-lg"></i>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <p class="font-semibold text-gray-700 text-sm md:text-base">Terminal Interativo</p>
+                        <p class="text-xs text-gray-500 truncate">Digite comandos normalmente</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white/90 backdrop-filter backdrop-blur-lg rounded-lg md:rounded-xl p-3 md:p-4 shadow-lg">
+                <div class="flex items-center space-x-2 md:space-x-3">
+                    <div class="w-9 h-9 md:w-10 md:h-10 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                        <i class="fas fa-desktop text-green-600 text-base md:text-lg"></i>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <p class="font-semibold text-gray-700 text-sm md:text-base">Execução no Mac</p>
+                        <p class="text-xs text-gray-500 truncate">Tudo roda localmente</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white/90 backdrop-filter backdrop-blur-lg rounded-lg md:rounded-xl p-3 md:p-4 shadow-lg">
+                <div class="flex items-center space-x-2 md:space-x-3">
+                    <div class="w-9 h-9 md:w-10 md:h-10 bg-purple-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                        <i class="fas fa-shield-alt text-purple-600 text-base md:text-lg"></i>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <p class="font-semibold text-gray-700 text-sm md:text-base">Sessão Segura</p>
+                        <p class="text-xs text-gray-500 truncate">Mesma conta logada</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tips -->
+        <div class="bg-white/90 backdrop-filter backdrop-blur-lg rounded-lg md:rounded-xl p-4 md:p-6 shadow-lg mt-3 md:mt-6">
+            <h3 class="font-bold text-gray-800 mb-2 md:mb-3 flex items-center text-sm md:text-base">
+                <i class="fas fa-lightbulb text-yellow-500 mr-2"></i>
+                Dicas de Uso
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4 text-xs md:text-sm text-gray-600">
+                <div class="flex items-start space-x-2">
+                    <i class="fas fa-check text-green-500 mt-0.5 md:mt-1 flex-shrink-0"></i>
+                    <p><strong>Botões:</strong> Clique → Comando copiado → Cole (Cmd+V) + Enter</p>
+                </div>
+                <div class="flex items-start space-x-2">
+                    <i class="fas fa-check text-green-500 mt-0.5 md:mt-1 flex-shrink-0"></i>
+                    <p><strong>Comandos:</strong> <code class="bg-gray-100 px-1 rounded text-xs">/new</code> nova conversa • <code class="bg-gray-100 px-1 rounded text-xs">/clear</code> limpar</p>
+                </div>
+                <div class="flex items-start space-x-2">
+                    <i class="fas fa-check text-green-500 mt-0.5 md:mt-1 flex-shrink-0"></i>
+                    <p><strong>Atalhos:</strong> Ctrl+N (new), Ctrl+K (clear), Ctrl+I (setup)</p>
+                </div>
+                <div class="flex items-start space-x-2">
+                    <i class="fas fa-check text-green-500 mt-0.5 md:mt-1 flex-shrink-0"></i>
+                    <p><strong>Monitoramento:</strong> <code class="bg-gray-100 px-1 rounded text-xs">/context</code> visualização • <code class="bg-gray-100 px-1 rounded text-xs">/usage</code> uso</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Configurar botão do terminal baseado no hostname
+        const terminalContainer = document.getElementById('terminal-container');
+        const terminalLink = terminalContainer.querySelector('a');
+
+        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+            // Acesso local - usar localhost
+            terminalLink.href = 'http://localhost:7681';
+            const tipElement = terminalContainer.querySelector('p.text-gray-400');
+            if (tipElement) {
+                tipElement.innerHTML = '💡 <strong>Dica:</strong> Terminal rodando localmente na porta 7681';
+            }
+        } else {
+            // Acesso remoto - usar subdomínio
+            terminalLink.href = 'https://terminal.loop9.com.br';
+        }
+
+        // Função de cópia rápida
+        async function quickCopy(command, message) {
+            try {
+                await navigator.clipboard.writeText(command);
+                showNotification(message + ' → Copiado! Cole no terminal', 'success');
+            } catch (err) {
+                // Fallback para navegadores antigos
+                const textArea = document.createElement('textarea');
+                textArea.value = command;
+                textArea.style.position = 'fixed';
+                textArea.style.opacity = '0';
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                showNotification(message + ' → Copiado!', 'success');
+            }
+        }
+
+        // Sistema de notificações
+        function showNotification(message, type = 'info') {
+            const colors = {
+                success: 'bg-green-500',
+                error: 'bg-red-500',
+                info: 'bg-blue-500'
+            };
+
+            const notification = document.createElement('div');
+            notification.className = `fixed top-4 left-1/2 transform -translate-x-1/2 ${colors[type]} text-white px-4 py-2 md:px-6 md:py-3 rounded-lg shadow-2xl z-50 transition-all duration-300 text-sm md:text-base max-w-[90vw] md:max-w-none`;
+            notification.innerHTML = `
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
+                    <span class="font-semibold truncate">${message}</span>
+                </div>
+            `;
+
+            document.body.appendChild(notification);
+
+            // Animar entrada
+            setTimeout(() => {
+                notification.style.opacity = '1';
+            }, 10);
+
+            // Remover após 3 segundos
+            setTimeout(() => {
+                notification.style.opacity = '0';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+
+        // Atalhos de teclado
+        document.addEventListener('keydown', (e) => {
+            // Ctrl/Cmd + K = Limpar histórico
+            if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+                e.preventDefault();
+                quickCopy('/clear', 'Limpar histórico');
+            }
+
+            // Ctrl/Cmd + N = Nova conversa
+            if ((e.ctrlKey || e.metaKey) && e.key === 'n') {
+                e.preventDefault();
+                quickCopy('/new', 'Nova conversa');
+            }
+
+            // Ctrl/Cmd + I = Iniciar setup
+            if ((e.ctrlKey || e.metaKey) && e.key === 'i') {
+                e.preventDefault();
+                quickCopy('cd /Users/felipemdepaula/Desktop/ClaudeCode-Workspace && bash iniciar.sh && cat README.md', 'Setup');
+            }
+
+            // Ctrl/Cmd + Shift + C = Ver contexto
+            if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'C') {
+                e.preventDefault();
+                quickCopy('/context', 'Ver contexto');
+            }
+
+            // Ctrl/Cmd + Shift + U = Ver uso
+            if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'U') {
+                e.preventDefault();
+                quickCopy('/usage', 'Ver uso');
+            }
+        });
+    </script>
+</body>
+</html>

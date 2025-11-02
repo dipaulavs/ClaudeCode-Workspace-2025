@@ -1,0 +1,531 @@
+# 🤖 Claude Code - Workspace Configuration
+
+**Auto-load:** Este arquivo é carregado automaticamente e SOBRESCREVE comportamentos padrão do Claude Code.
+
+---
+
+## 🚨 REGRAS DE COMPORTAMENTO (PRIORIDADE MÁXIMA)
+
+### 1️⃣ Confirmação Obrigatória
+
+**SEMPRE que usuário pedir qualquer ação que crie/modifique arquivos:**
+
+**Passo 1 - PLANEJAR:**
+- Apresentar plano objetivo (3-5 itens)
+- Mostrar quais arquivos serão criados/modificados
+- Indicar comandos que serão executados
+
+**Passo 2 - AGUARDAR:**
+- Não executar até usuário confirmar
+- Aceitar ajustes no plano
+
+**Passo 3 - EXECUTAR:**
+- Só após confirmação explícita
+
+**Exceções** (executar direto sem plano):
+- Leitura de arquivos (Read, Grep, Glob)
+- Busca/pesquisa
+- Comandos informativos (ls, git status)
+- Templates únicos e diretos (ex: enviar mensagem WhatsApp)
+
+**Por quê:** Garante alinhamento com raciocínio do usuário e evita retrabalho.
+
+---
+
+### 2️⃣ Preferência por Templates
+
+**SEMPRE verificar se existe template antes de criar código novo:**
+
+| Categoria | Localização | Verificar em |
+|-----------|-------------|--------------|
+| WhatsApp | `scripts/whatsapp/` | 22 templates |
+| Instagram Publicação | `scripts/instagram/` | 6 templates |
+| Instagram Scraper | `scripts/instagram-scraper/` | 5 templates |
+| Meta Ads | `scripts/meta-ads/` | 4 templates |
+| Nextcloud | `scripts/nextcloud/` | 2 templates |
+| Obsidian | `scripts/obsidian/` | 5 templates |
+| Imagens | `scripts/image-generation/` | 5 templates |
+| Vídeos | `scripts/video-generation/` | 2 templates |
+| Áudio | `scripts/audio-generation/` | 2 templates |
+| Extração | `scripts/extraction/` | 4 templates |
+| Busca (xAI) | `scripts/search/` | 3 templates |
+| Twitter/X | `scripts/twitter/` | 5 templates |
+| TikTok | `scripts/tiktok/` | 5 templates |
+| Google Maps | `scripts/scraping/` | 3 templates |
+
+**NUNCA:**
+- ❌ Criar scripts descartáveis/temporários
+- ❌ Criar arquivos `test_*.py` quando existe template
+- ❌ Usar ferramentas de `tools/` diretamente (usar templates de `scripts/`)
+
+---
+
+### 3️⃣ Organização de Arquivos
+
+**Ao criar QUALQUER novo recurso:**
+
+1. ✅ **Nunca criar arquivos soltos na raiz**
+2. ✅ **Usar estrutura existente:**
+   - Scripts Python → `tools/` (ferramenta low-level) ou `scripts/` (template)
+   - Documentação → `docs/` (na subpasta apropriada)
+   - Configs → `config/` (com nome descritivo)
+   - Projetos completos → Pasta própria na raiz
+
+3. ✅ **Estrutura para NOVOS projetos:**
+   ```
+   nome-projeto/
+   ├── README.md          (obrigatório)
+   ├── src/               (código)
+   ├── config/            (configurações)
+   └── docs/              (docs detalhadas)
+   ```
+
+---
+
+### 4️⃣ Auto-Documentação de Novos Recursos (OBRIGATÓRIO)
+
+**Gatilho:** Quando criar nova ferramenta/template/funcionalidade
+
+**Após criar o recurso, SEMPRE executar 4 passos:**
+
+#### ✅ Passo 1: Documentar no README da Categoria
+
+```bash
+# Exemplo: Criou template WhatsApp
+scripts/whatsapp/README.md
+  ↳ Adicionar na seção apropriada
+  ↳ Incluir exemplo de uso
+  ↳ Parâmetros principais
+```
+
+#### ✅ Passo 2: Registrar no CLAUDE.md
+
+**Localização neste arquivo:**
+- **Templates (scripts/)** → Adicionar em `📍 MAPA DE AÇÕES` + `🗂️ CATEGORIAS`
+- **Ferramentas (tools/)** → Adicionar em `🛠️ FERRAMENTAS DISPONÍVEIS`
+- **Novos projetos** → Adicionar em `📁 ESTRUTURA DO WORKSPACE`
+
+**Formato de registro:**
+
+**A) Para Templates (scripts/):**
+```markdown
+## 📍 MAPA DE AÇÕES
+[...]
+| **[NOVA AÇÃO]** | `scripts/[categoria]/[nome].py` | `scripts/[categoria]/README.md` |
+
+## 🗂️ CATEGORIAS DE TEMPLATES
+### [Categoria] (X templates) ← ATUALIZAR CONTADOR
+- **[Subcategoria]:** [...], [NOVO_TEMPLATE] ← ADICIONAR AQUI
+```
+
+**B) Para Ferramentas (tools/):**
+```markdown
+## 🛠️ FERRAMENTAS DISPONÍVEIS
+| **[Categoria]** | [...], [NOVA_FERRAMENTA] | `docs/tools/[nome].md` |
+```
+
+**C) Para Regras de Decisão (se aplicável):**
+```markdown
+## 🔍 REGRAS DE DECISÃO
+### [Categoria]
+[Nova condição]?
+├─ [Caso 1] → [template]
+└─ [Caso 2] → [template]
+```
+
+#### ✅ Passo 3: Manter Organização
+
+**Princípios:**
+1. Não quebrar estrutura existente
+2. Atualizar contadores (X templates) → (X+1 templates)
+3. Manter ordem alfabética (quando aplicável)
+4. Formato consistente com entradas existentes
+5. Não duplicar (verificar antes)
+
+#### ✅ Passo 4: Resumo Final ao Usuário
+
+**SEMPRE mostrar:**
+```
+✅ Recurso criado e documentado:
+
+📂 Arquivos:
+  • scripts/[categoria]/[arquivo].py (novo template)
+  • scripts/[categoria]/README.md (atualizado)
+  • CLAUDE.md (registrado em 2 locais)
+
+📍 Registrado no CLAUDE.md:
+  • Seção "MAPA DE AÇÕES" (linha ~XX)
+  • Seção "[CATEGORIA]" (linha ~YY)
+
+🎯 Como usar:
+  python3 scripts/[categoria]/[arquivo].py [exemplo]
+```
+
+---
+
+### 5️⃣ TodoWrite Obrigatório
+
+**Usar quando:**
+- Tarefa com 3+ etapas
+- Múltiplos arquivos envolvidos
+- Usuário lista múltiplas ações
+
+**Não usar quando:**
+- Ação única trivial
+- Leitura simples
+- Template direto
+
+---
+
+## 📍 MAPA DE AÇÕES (Índice Rápido)
+
+### Quando usuário pedir... | Use isto | Doc completa
+|---------------------------|----------|--------------|
+| **Enviar WhatsApp** | `scripts/whatsapp/send_message.py` | `scripts/whatsapp/README.md` |
+| **Mídia WhatsApp** | `scripts/whatsapp/send_media.py` | `scripts/whatsapp/README.md` |
+| **Criar grupo WhatsApp** | `scripts/whatsapp/create_group.py` | `scripts/whatsapp/README.md` |
+| **Agendar WhatsApp** | `scheduling-system/schedule_whatsapp.py` | `scheduling-system/README.md` |
+| **Publicar Instagram** | `scripts/instagram/publish_post.py` | `scripts/instagram/README.md` |
+| **Carrossel Instagram** | `scripts/instagram/publish_carousel.py` | `scripts/instagram/README.md` |
+| **Reel Instagram** | `scripts/instagram/publish_reel.py` | `scripts/instagram/README.md` |
+| **Story Instagram** | `scripts/instagram/publish_story.py` | `scripts/instagram/README.md` |
+| **Scrape Instagram** | `scripts/instagram-scraper/scrape_*.py` | `scripts/instagram-scraper/README.md` |
+| **Campanha Meta Ads** | `scripts/meta-ads/create_campaign.py` | `scripts/meta-ads/README.md` |
+| **Anúncio Meta Ads** | `scripts/meta-ads/create_ad.py` | `scripts/meta-ads/README.md` |
+| **Upload Nextcloud** | `scripts/nextcloud/upload_from_downloads.py` | `scripts/nextcloud/README.md` |
+| **1 imagem** | `scripts/image-generation/generate_nanobanana.py` | `scripts/image-generation/README.md` |
+| **2+ imagens** | `scripts/image-generation/batch_generate.py --api nanobanana` | `scripts/image-generation/README.md` |
+| **Editar imagem** | `scripts/image-generation/edit_nanobanana.py` | `scripts/image-generation/README.md` |
+| **1 vídeo** | `scripts/video-generation/generate_sora.py` | `scripts/video-generation/README.md` |
+| **2+ vídeos** | `scripts/video-generation/batch_generate.py` | `scripts/video-generation/README.md` |
+| **1 áudio** | `scripts/audio-generation/generate_elevenlabs.py` | `scripts/audio-generation/README.md` |
+| **2+ áudios** | `scripts/audio-generation/batch_generate.py` | `scripts/audio-generation/README.md` |
+| **Transcrever vídeo** | `scripts/extraction/transcribe_video.py` | `scripts/extraction/README.md` |
+| **Web scraping** | `scripts/extraction/scrape_website.py` | `scripts/extraction/README.md` |
+| **Buscar web** | `scripts/search/xai_web.py` (Python 3.11) | `scripts/search/README.md` |
+| **Buscar Twitter/X** | `scripts/search/xai_twitter.py` (Python 3.11) | `scripts/search/README.md` |
+| **Buscar notícias** | `scripts/search/xai_news.py` (Python 3.11) | `scripts/search/README.md` |
+| **Scrape Twitter/X** | `scripts/twitter/search_twitter.py` | `scripts/twitter/README.md` |
+| **Scrape TikTok** | `scripts/tiktok/*.py` | `scripts/tiktok/README.md` |
+| **Scrape Google Maps** | `scripts/scraping/google_maps_*.py` | `scripts/scraping/README.md` |
+| **Nota rápida Obsidian** | `scripts/obsidian/quick_note.py` | `scripts/obsidian/README.md` |
+| **Capturar ideia Obsidian** | `scripts/obsidian/capture_idea.py` | `scripts/obsidian/README.md` |
+| **Daily note Obsidian** | `scripts/obsidian/create_daily.py` | `scripts/obsidian/README.md` |
+| **Projeto Obsidian** | `scripts/obsidian/new_project.py` | `scripts/obsidian/README.md` |
+
+---
+
+## 🗂️ CATEGORIAS DE TEMPLATES
+
+### WhatsApp (22 templates)
+- **Envio:** send_message, send_media, send_audio, send_location, send_contact, send_poll
+- **Interação:** send_reaction, send_reply, send_mention, send_status, message_actions
+- **Grupos:** list_groups, create_group, update_group, manage_participants, leave_group
+- **Sistema:** instance_info, check_number, manage_webhooks, get_contacts, manage_profile, get_profile
+- **Doc:** `scripts/whatsapp/README.md`
+
+### Instagram Publicação (6 templates)
+- **Templates:** publish_post, publish_carousel, publish_reel, publish_story, get_insights, manage_comments
+- **Doc:** `scripts/instagram/README.md`
+
+### Instagram Scraper (5 templates)
+- **Templates:** scrape_user_posts, scrape_hashtag_posts, scrape_post_comments, scrape_user_profile, scrape_place_posts
+- **Doc:** `scripts/instagram-scraper/README.md`
+
+### Meta Ads (4 templates)
+- **Templates:** create_campaign, create_adset, create_ad, get_insights
+- **Doc:** `scripts/meta-ads/README.md`
+
+### Nextcloud (2 templates)
+- **Templates:** upload_to_nextcloud, upload_from_downloads
+- **Doc:** `scripts/nextcloud/README.md`
+
+### Obsidian (5 templates)
+- **Templates:** quick_note, capture_idea, create_daily, new_project, obsidian_client (API)
+- **Doc:** `scripts/obsidian/README.md`
+
+### Imagens (5 templates)
+- **Templates:** generate_nanobanana (padrão), generate_gpt4o, generate_dalle3, batch_generate, edit_nanobanana
+- **Doc:** `scripts/image-generation/README.md`
+
+### Vídeos (2 templates)
+- **Templates:** generate_sora, batch_generate
+- **Doc:** `scripts/video-generation/README.md`
+
+### Áudio (2 templates)
+- **Templates:** generate_elevenlabs, batch_generate
+- **Doc:** `scripts/audio-generation/README.md`
+
+### Extração (4 templates)
+- **Templates:** transcribe_video, extract_instagram, scrape_website, scrape_batch
+- **Doc:** `scripts/extraction/README.md`
+
+### Busca xAI (3 templates)
+- **Templates:** xai_web, xai_twitter, xai_news
+- **Requer:** Python 3.11+
+- **Doc:** `scripts/search/README.md`
+
+### Twitter/X (5 templates)
+- **Templates:** search_twitter, scrape_profile, scrape_tweets, scrape_replies, batch_twitter
+- **Doc:** `scripts/twitter/README.md`
+
+### TikTok (5 templates)
+- **Templates:** get_user_info, get_video_info, search_content, get_trending, analyze_hashtag
+- **Doc:** `scripts/tiktok/README.md`
+
+### Google Maps (3 templates)
+- **Templates:** google_maps_basic, google_maps_advanced, google_maps_batch
+- **Doc:** `scripts/scraping/README.md`
+
+---
+
+## 🔍 REGRAS DE DECISÃO (Fluxogramas)
+
+### Imagens
+```
+Usuário pede quantas imagens?
+├─ 1 imagem → generate_nanobanana.py
+└─ 2+ imagens → batch_generate.py --api nanobanana (OBRIGATÓRIO)
+```
+
+### Vídeos
+```
+Usuário pede quantos vídeos?
+├─ 1 vídeo → generate_sora.py
+└─ 2+ vídeos → batch_generate.py (OBRIGATÓRIO)
+```
+
+### Áudio
+```
+Usuário pede quantos áudios?
+├─ 1 áudio → generate_elevenlabs.py
+└─ 2+ áudios → batch_generate.py (OBRIGATÓRIO)
+```
+
+### Instagram
+```
+Usuário quer publicar ou extrair?
+├─ Publicar → scripts/instagram/publish_*.py
+└─ Extrair/Scrape → scripts/instagram-scraper/scrape_*.py
+```
+
+### Google Maps
+```
+Quantas buscas?
+├─ 1 busca simples → google_maps_basic.py
+├─ 1 busca com filtros → google_maps_advanced.py
+└─ 2+ buscas → google_maps_batch.py (OBRIGATÓRIO)
+```
+
+### Busca (xAI Search)
+```
+Buscar onde?
+├─ Web/Documentação → xai_web.py (Python 3.11)
+├─ Twitter/X → xai_twitter.py (Python 3.11)
+└─ Notícias → xai_news.py (Python 3.11)
+```
+
+---
+
+## ⚡ Quick Actions (Comandos Mais Usados)
+
+### Chatbot WhatsApp
+```bash
+bot         # Iniciar (alias)
+botstop     # Parar (alias)
+# Logs: whatsapp-chatbot/logs/chatbot_v4.log
+```
+
+### Agendamento WhatsApp
+```bash
+# Agendar mensagem única
+python3 scheduling-system/schedule_whatsapp.py --phone 5531980160822 --message "Texto" --time 17:00
+
+# Agendar recorrente (diário)
+python3 scheduling-system/schedule_whatsapp.py --phone 5531980160822 --message "Bom dia!" --time 09:00 --daily
+
+# Listar agendamentos
+python3 scheduling-system/schedule_whatsapp.py --list
+```
+
+### Geração de Conteúdo
+```bash
+# Imagem (padrão: Nano Banana)
+python3 scripts/image-generation/generate_nanobanana.py "prompt"
+
+# Múltiplas imagens (BATCH obrigatório)
+python3 scripts/image-generation/batch_generate.py --api nanobanana "prompt1" "prompt2" "prompt3"
+
+# Vídeo (padrão: portrait Stories/Reels)
+python3 scripts/video-generation/generate_sora.py "prompt"
+
+# Áudio (padrão: voz Michele)
+python3 scripts/audio-generation/generate_elevenlabs.py "texto"
+```
+
+### WhatsApp Templates
+```bash
+# Enviar mensagem
+python3 scripts/whatsapp/send_message.py --phone 5531980160822 --message "Olá!"
+
+# Enviar mídia
+python3 scripts/whatsapp/send_media.py --phone 5531980160822 --file "foto.jpg" --type image
+
+# Criar grupo
+python3 scripts/whatsapp/create_group.py --name "Grupo" --phones 5531980160822,5511999999999
+```
+
+### Instagram
+```bash
+# Publicar post
+python3 scripts/instagram/publish_post.py --image "foto.jpg" --caption "Legenda"
+
+# Scrape posts
+python3 scripts/instagram-scraper/scrape_user_posts.py "natgeo" --limit 50
+```
+
+### Busca/Extração
+```bash
+# Transcrever vídeo
+python3 scripts/extraction/transcribe_video.py "https://youtu.be/VIDEO_ID"
+
+# Buscar na web (Python 3.11)
+python3.11 scripts/search/xai_web.py "Python best practices 2025"
+```
+
+---
+
+## 🛠️ FERRAMENTAS DISPONÍVEIS
+
+**📚 Índice completo:** `docs/tools/INDEX.md`
+
+| Categoria | Ferramentas | Docs |
+|-----------|-------------|------|
+| **Geração Imagem** | GPT-4o, Nano Banana, DALL-E 3, Batch, Edição | `scripts/image-generation/README.md` |
+| **Geração Vídeo** | Sora 2 (único, batch), 3 proporções | `scripts/video-generation/README.md` |
+| **Geração Áudio** | ElevenLabs TTS (único, batch), Vozes clonadas | `scripts/audio-generation/README.md` |
+| **Instagram API** | Post, Carrossel, Reel, Story, Insights, Comments | `scripts/instagram/README.md` |
+| **Instagram Scraper** | Posts, Hashtags, Comentários, Perfis (Apify) | `scripts/instagram-scraper/README.md` |
+| **WhatsApp** | 22 templates (mensagens, grupos, mídia, etc) | `scripts/whatsapp/README.md` |
+| **Meta Ads** | Campanhas, Ad Sets, Anúncios, Insights | `scripts/meta-ads/README.md` |
+| **Extração** | Transcrição vídeos, IG posts, Web scraping | `scripts/extraction/README.md` |
+| **Busca xAI** | Web, Twitter/X, Notícias (tempo real) | `scripts/search/README.md` |
+| **Twitter Scraper** | Tweets, Perfis, Replies (Apify) | `scripts/twitter/README.md` |
+| **TikTok Scraper** | Usuários, Vídeos, Trending, Hashtags | `scripts/tiktok/README.md` |
+| **Google Maps** | Locais, Reviews, Dados de negócios (Apify) | `scripts/scraping/README.md` |
+| **Nextcloud** | Upload manual, Upload rápido Downloads | `scripts/nextcloud/README.md` |
+| **Obsidian PKM** | Notes, Ideas, Daily, Projects, Search | `docs/tools/obsidian_integration.md` |
+| **Agendamento** | Sistema WhatsApp (único/recorrente) | `scheduling-system/README.md` |
+
+**Total:** 65+ templates | 40+ ferramentas
+
+---
+
+## 📁 ESTRUTURA DO WORKSPACE
+
+```
+ClaudeCode-Workspace/
+├── 📄 README.md                 # Índice geral
+├── 📄 CLAUDE.md                 # Config auto-load (este arquivo)
+├── 📄 requirements.txt          # Dependências Python
+│
+├── 📁 scripts/                  # 65+ Templates prontos
+│   ├── whatsapp/                # 22 templates WhatsApp
+│   ├── instagram/               # 6 templates publicação IG
+│   ├── instagram-scraper/       # 5 templates scraping IG
+│   ├── meta-ads/                # 4 templates Meta Ads
+│   ├── nextcloud/               # 2 templates upload
+│   ├── obsidian/                # 5 templates Obsidian PKM
+│   ├── image-generation/        # 5 templates imagens
+│   ├── video-generation/        # 2 templates vídeos
+│   ├── audio-generation/        # 2 templates áudio
+│   ├── extraction/              # 4 templates extração
+│   ├── search/                  # 3 templates busca xAI
+│   ├── twitter/                 # 5 templates Twitter/X
+│   ├── tiktok/                  # 5 templates TikTok
+│   ├── scraping/                # 3 templates Google Maps
+│   └── common/                  # template_base.py
+│
+├── 📁 tools/                    # 40+ Ferramentas low-level
+├── 📁 config/                   # Configurações APIs
+│
+├── 📁 docs/                     # Documentação organizada
+│   ├── tools/                   # 40+ docs ferramentas
+│   ├── guides/                  # Guias gerais
+│   ├── workflows/               # Workflows
+│   ├── meta-ads-api/            # Docs Meta Ads API
+│   └── instagram-api/           # Docs Instagram API
+│
+├── 📁 whatsapp-chatbot/         # Bot V4 (produção)
+├── 📁 scheduling-system/        # Agendamento WhatsApp
+├── 📁 n8n-mcp-project/          # n8n-MCP (automação)
+├── 📁 crewai/                   # Multi-agentes
+└── 📁 evolution-api-integration/# WhatsApp Helper
+```
+
+---
+
+## 💡 DICAS IMPORTANTES
+
+### Geração de Múltiplos Itens
+🚨 **REGRA CRÍTICA:** 2+ itens = SEMPRE usar batch
+- Imagens: `batch_generate.py --api nanobanana`
+- Vídeos: `batch_generate.py`
+- Áudios: `batch_generate.py`
+- **NUNCA** executar múltiplos individuais em sequência
+
+### Modelos Padrão
+- **Imagens:** Nano Banana (rápido/econômico)
+- **Vídeos:** Sora 2 portrait (Stories/Reels)
+- **Áudio:** ElevenLabs voz Michele
+
+### Busca xAI
+⚠️ **IMPORTANTE:** Requer Python 3.11+ (sempre usar `python3.11`)
+
+### WhatsApp
+- Formato números: DDI+DDD+Número (ex: 5531980160822)
+- Sem espaços, hífens ou parênteses
+
+### Instagram Scraping
+- Sempre usar `--limit` para controlar custos
+- Pricing: $2.30/1000 itens
+
+---
+
+## 📖 DOCUMENTAÇÕES COMPLETAS
+
+| Recurso | Localização |
+|---------|-------------|
+| **README Principal** | `README.md` |
+| **Ferramentas (40+)** | `docs/tools/INDEX.md` |
+| **Templates (65+)** | `scripts/README.md` |
+| **Obsidian Integration** | `docs/tools/obsidian_integration.md` |
+| **Chatbot WhatsApp V4** | `whatsapp-chatbot/README.md` |
+| **Agendamento WhatsApp** | `scheduling-system/README.md` |
+| **n8n-MCP** | `n8n-mcp-project/README.md` |
+| **Meta Ads API** | `docs/meta-ads-api/META_ADS_API_DOCUMENTATION.md` |
+| **Instagram API** | `docs/instagram-api/INSTAGRAM_API_DOCUMENTATION.md` |
+| **CrewAI** | `crewai/README.md` |
+
+---
+
+## ⚙️ APIs CONFIGURADAS
+
+- ✅ OpenRouter (Claude Haiku/Sonnet 4.5)
+- ✅ OpenAI (GPT-4o, Whisper)
+- ✅ Gemini 2.5 Flash (Nano Banana)
+- ✅ Instagram API (v24.0)
+- ✅ Meta Ads API (v24.0)
+- ✅ Evolution API (WhatsApp - instância lfimoveis)
+- ✅ xAI (Grok)
+- ✅ ElevenLabs (TTS)
+- ✅ Kie.ai (GPT-4o Image, Sora)
+- ✅ Apify (Scraping)
+- ✅ RapidAPI (Transcrição)
+- ✅ Nextcloud (Upload)
+- ✅ Upstash Redis (Memória chatbot)
+
+---
+
+**Última atualização:** 2025-11-02 (Obsidian PKM adicionado)
+**Versão:** 3.1 (65 templates - Obsidian integrado)

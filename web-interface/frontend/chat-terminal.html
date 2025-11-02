@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Terminal Chat - Claude Code</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            overflow: hidden;
+        }
+
+        .chat-container {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .messages-area {
+            flex: 1;
+            overflow-y: auto;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .message-bubble {
+            max-width: 85%;
+            word-wrap: break-word;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .user-message {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin-left: auto;
+        }
+
+        .bot-message {
+            background: white;
+            margin-right: auto;
+        }
+
+        .typing-indicator {
+            display: flex;
+            gap: 4px;
+            padding: 12px;
+        }
+
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            background: #9CA3AF;
+            border-radius: 50%;
+            animation: typing 1.4s infinite;
+        }
+
+        .typing-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes typing {
+            0%, 60%, 100% {
+                transform: translateY(0);
+                opacity: 0.7;
+            }
+            30% {
+                transform: translateY(-10px);
+                opacity: 1;
+            }
+        }
+
+        .input-area {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .quick-command {
+            transition: all 0.2s;
+        }
+
+        .quick-command:active {
+            transform: scale(0.95);
+        }
+
+        /* Custom scrollbar */
+        .messages-area::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .messages-area::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .messages-area::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 3px;
+        }
+
+        .code-output {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 12px;
+            padding: 12px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin-top: 8px;
+            white-space: pre-wrap;
+        }
+
+        .success-badge {
+            background: #10B981;
+        }
+
+        .error-badge {
+            background: #EF4444;
+        }
+
+        .command-badge {
+            background: #667eea;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <!-- Header -->
+        <div class="bg-white/95 backdrop-filter backdrop-blur-lg shadow-lg px-4 py-3">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
+                        <i class="fas fa-terminal text-white"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-lg font-bold text-gray-800">Terminal Chat</h1>
+                        <p class="text-xs text-gray-500" id="status">
+                            <span class="inline-block w-2 h-2 bg-green-500 rounded-full animate-pulse mr-1"></span>
+                            Online
+                        </p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <button onclick="clearHistory()" class="p-2 hover:bg-gray-100 rounded-lg transition-colors" title="Limpar histórico">
+                        <i class="fas fa-trash text-gray-600"></i>
+                    </button>
+                    <a href="/" class="p-2 hover:bg-gray-100 rounded-lg transition-colors" title="Voltar">
+                        <i class="fas fa-home text-gray-600"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Commands Bar -->
+        <div class="bg-white/90 backdrop-filter backdrop-blur-lg px-3 py-2 overflow-x-auto">
+            <div class="flex space-x-2 pb-1" id="quick-commands">
+                <button onclick="sendQuickCommand('/new')" class="quick-command px-3 py-1.5 bg-blue-100 text-blue-700 rounded-full text-xs font-semibold whitespace-nowrap">
+                    <i class="fas fa-plus mr-1"></i>/new
+                </button>
+                <button onclick="sendQuickCommand('/context')" class="quick-command px-3 py-1.5 bg-purple-100 text-purple-700 rounded-full text-xs font-semibold whitespace-nowrap">
+                    <i class="fas fa-chart-bar mr-1"></i>/context
+                </button>
+                <button onclick="sendQuickCommand('/usage')" class="quick-command px-3 py-1.5 bg-green-100 text-green-700 rounded-full text-xs font-semibold whitespace-nowrap">
+                    <i class="fas fa-chart-line mr-1"></i>/usage
+                </button>
+                <button onclick="sendQuickCommand('ls tools/')" class="quick-command px-3 py-1.5 bg-orange-100 text-orange-700 rounded-full text-xs font-semibold whitespace-nowrap">
+                    <i class="fas fa-tools mr-1"></i>tools
+                </button>
+                <button onclick="sendQuickCommand('cat README.md')" class="quick-command px-3 py-1.5 bg-pink-100 text-pink-700 rounded-full text-xs font-semibold whitespace-nowrap">
+                    <i class="fas fa-book mr-1"></i>README
+                </button>
+            </div>
+        </div>
+
+        <!-- Messages Area -->
+        <div class="messages-area flex-1 px-4 py-4" id="messages-area">
+            <!-- Welcome message -->
+            <div class="text-center mb-6 mt-4">
+                <div class="w-16 h-16 bg-white/20 backdrop-filter backdrop-blur-lg rounded-full flex items-center justify-center mx-auto mb-3">
+                    <i class="fas fa-robot text-white text-2xl"></i>
+                </div>
+                <h2 class="text-white text-xl font-bold mb-2">Bem-vindo ao Terminal Chat!</h2>
+                <p class="text-white/80 text-sm">Digite comandos como se estivesse no terminal do Mac</p>
+            </div>
+        </div>
+
+        <!-- Typing Indicator (hidden by default) -->
+        <div id="typing-indicator" class="hidden px-4 pb-2">
+            <div class="message-bubble bot-message rounded-2xl shadow-lg inline-block">
+                <div class="typing-indicator">
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Input Area -->
+        <div class="input-area px-4 py-3">
+            <form onsubmit="sendMessage(event)" class="flex items-end space-x-2">
+                <div class="flex-1">
+                    <textarea
+                        id="message-input"
+                        placeholder="Digite um comando... (ex: ls, pwd, /new)"
+                        class="w-full px-4 py-3 rounded-2xl border-2 border-gray-200 focus:border-purple-500 focus:outline-none resize-none"
+                        rows="1"
+                        style="max-height: 120px;"
+                    ></textarea>
+                </div>
+                <button
+                    type="submit"
+                    class="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full flex items-center justify-center hover:shadow-lg transition-all flex-shrink-0"
+                    id="send-button"
+                >
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </form>
+            <div class="text-center mt-2">
+                <p class="text-xs text-gray-500">
+                    <i class="fas fa-info-circle mr-1"></i>
+                    Comandos executam no seu Mac • Use Cmd+Slash para atalhos
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Configuration
+        const API_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+            ? 'http://localhost:8000'
+            : window.location.origin.replace('3000', '8000');
+
+        let messageHistory = [];
+        let isProcessing = false;
+
+        // Load history from localStorage
+        function loadHistory() {
+            const saved = localStorage.getItem('terminal-chat-history');
+            if (saved) {
+                messageHistory = JSON.parse(saved);
+                renderHistory();
+            }
+        }
+
+        // Save history to localStorage
+        function saveHistory() {
+            localStorage.setItem('terminal-chat-history', JSON.stringify(messageHistory));
+        }
+
+        // Render message history
+        function renderHistory() {
+            const messagesArea = document.getElementById('messages-area');
+            // Keep welcome message, clear rest
+            const welcomeMsg = messagesArea.querySelector('.text-center');
+            messagesArea.innerHTML = '';
+            if (messageHistory.length === 0 && welcomeMsg) {
+                messagesArea.appendChild(welcomeMsg);
+            }
+
+            messageHistory.forEach(msg => {
+                addMessageToDOM(msg.type, msg.content, msg.timestamp, false);
+            });
+
+            scrollToBottom();
+        }
+
+        // Add message to DOM
+        function addMessageToDOM(type, content, timestamp, animate = true) {
+            const messagesArea = document.getElementById('messages-area');
+
+            // Remove welcome message on first real message
+            const welcomeMsg = messagesArea.querySelector('.text-center');
+            if (welcomeMsg) {
+                welcomeMsg.remove();
+            }
+
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `mb-4 ${animate ? 'animate-slide' : ''}`;
+
+            if (type === 'user') {
+                messageDiv.innerHTML = `
+                    <div class="flex justify-end">
+                        <div class="message-bubble user-message rounded-2xl px-4 py-3 shadow-lg">
+                            <div class="flex items-start space-x-2">
+                                <i class="fas fa-terminal text-white/80 text-sm mt-0.5"></i>
+                                <div>
+                                    <p class="text-white font-mono text-sm">${escapeHtml(content)}</p>
+                                    <p class="text-white/60 text-xs mt-1">${formatTime(timestamp)}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } else if (type === 'bot') {
+                const isCommand = content.command;
+                const output = content.output || content.message || '';
+                const success = content.success !== false;
+
+                messageDiv.innerHTML = `
+                    <div class="flex justify-start">
+                        <div class="message-bubble bot-message rounded-2xl px-4 py-3 shadow-lg">
+                            <div class="flex items-start space-x-2">
+                                <i class="fas fa-robot text-purple-600 text-sm mt-0.5"></i>
+                                <div class="flex-1 min-w-0">
+                                    ${isCommand ? `
+                                        <div class="flex items-center space-x-2 mb-2">
+                                            <span class="${success ? 'success-badge' : 'error-badge'} text-white text-xs px-2 py-0.5 rounded-full">
+                                                <i class="fas fa-${success ? 'check' : 'times'} mr-1"></i>
+                                                ${success ? 'Executado' : 'Erro'}
+                                            </span>
+                                            <span class="text-gray-500 text-xs">${formatTime(timestamp)}</span>
+                                        </div>
+                                    ` : ''}
+                                    ${output ? `<div class="code-output">${escapeHtml(output)}</div>` : ''}
+                                    ${!isCommand ? `<p class="text-gray-600 text-sm">${escapeHtml(output)}</p>` : ''}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } else if (type === 'error') {
+                messageDiv.innerHTML = `
+                    <div class="flex justify-start">
+                        <div class="message-bubble bot-message rounded-2xl px-4 py-3 shadow-lg border-2 border-red-200">
+                            <div class="flex items-start space-x-2">
+                                <i class="fas fa-exclamation-triangle text-red-600 text-sm mt-0.5"></i>
+                                <div class="flex-1">
+                                    <div class="flex items-center space-x-2 mb-1">
+                                        <span class="error-badge text-white text-xs px-2 py-0.5 rounded-full">
+                                            <i class="fas fa-times mr-1"></i>Erro
+                                        </span>
+                                        <span class="text-gray-500 text-xs">${formatTime(timestamp)}</span>
+                                    </div>
+                                    <p class="text-red-700 text-sm">${escapeHtml(content)}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            messagesArea.appendChild(messageDiv);
+            scrollToBottom();
+        }
+
+        // Send message with streaming
+        async function sendMessage(event) {
+            if (event) event.preventDefault();
+
+            const input = document.getElementById('message-input');
+            const command = input.value.trim();
+
+            if (!command || isProcessing) return;
+
+            // Add user message
+            const userMessage = {
+                type: 'user',
+                content: command,
+                timestamp: new Date().toISOString()
+            };
+            messageHistory.push(userMessage);
+            addMessageToDOM('user', command, userMessage.timestamp);
+
+            // Clear input
+            input.value = '';
+            input.style.height = 'auto';
+
+            // Show typing indicator
+            showTyping(true);
+            isProcessing = true;
+
+            try {
+                // Execute command with streaming
+                await executeCommandWithStreaming(command);
+
+            } catch (error) {
+                showTyping(false);
+                const errorMessage = {
+                    type: 'error',
+                    content: error.message || 'Erro ao conectar com o backend. Verifique se está rodando.',
+                    timestamp: new Date().toISOString()
+                };
+                messageHistory.push(errorMessage);
+                addMessageToDOM('error', errorMessage.content, errorMessage.timestamp);
+            } finally {
+                isProcessing = false;
+                saveHistory();
+                input.focus();
+            }
+        }
+
+        // Execute command with real-time streaming
+        async function executeCommandWithStreaming(command) {
+            return new Promise((resolve, reject) => {
+                // Hide typing indicator
+                showTyping(false);
+
+                // Create bot message bubble that will be updated in real-time
+                const messagesArea = document.getElementById('messages-area');
+                const messageDiv = document.createElement('div');
+                messageDiv.className = 'mb-4';
+                messageDiv.innerHTML = `
+                    <div class="flex justify-start">
+                        <div class="message-bubble bot-message rounded-2xl px-4 py-3 shadow-lg">
+                            <div class="flex items-start space-x-2">
+                                <i class="fas fa-robot text-purple-600 text-sm mt-0.5"></i>
+                                <div class="flex-1 min-w-0">
+                                    <div class="flex items-center space-x-2 mb-2">
+                                        <span class="command-badge text-white text-xs px-2 py-0.5 rounded-full">
+                                            <i class="fas fa-circle-notch fa-spin mr-1"></i>
+                                            Executando...
+                                        </span>
+                                        <span class="text-gray-500 text-xs">${formatTime(new Date().toISOString())}</span>
+                                    </div>
+                                    <div class="code-output" id="streaming-output"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                messagesArea.appendChild(messageDiv);
+                scrollToBottom();
+
+                const outputDiv = document.getElementById('streaming-output');
+                let accumulatedOutput = '';
+                let hasError = false;
+
+                // Use fetch with streaming response
+                fetch(`${API_URL}/api/terminal/stream`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ command })
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Erro ao conectar com o backend');
+                    }
+
+                    const reader = response.body.getReader();
+                    const decoder = new TextDecoder();
+
+                    function readChunk() {
+                        reader.read().then(({ done, value }) => {
+                            if (done) {
+                                // Finished streaming
+                                finishStreaming();
+                                resolve();
+                                return;
+                            }
+
+                            // Decode chunk
+                            const chunk = decoder.decode(value, { stream: true });
+
+                            // Parse SSE messages
+                            const lines = chunk.split('\n');
+                            for (const line of lines) {
+                                if (line.startsWith('data: ')) {
+                                    try {
+                                        const data = JSON.parse(line.substring(6));
+
+                                        if (data.type === 'output') {
+                                            // Append output in real-time
+                                            accumulatedOutput += data.content;
+                                            outputDiv.textContent = accumulatedOutput;
+                                            scrollToBottom();
+                                        } else if (data.type === 'error') {
+                                            hasError = true;
+                                            accumulatedOutput += `\n❌ ERRO: ${data.content}`;
+                                            outputDiv.textContent = accumulatedOutput;
+                                            scrollToBottom();
+                                        } else if (data.type === 'done') {
+                                            // Command finished successfully
+                                            finishStreaming();
+                                        }
+                                    } catch (e) {
+                                        console.warn('Failed to parse SSE message:', line);
+                                    }
+                                }
+                            }
+
+                            // Read next chunk
+                            readChunk();
+                        });
+                    }
+
+                    readChunk();
+                })
+                .catch(error => {
+                    hasError = true;
+                    outputDiv.textContent = `❌ Erro: ${error.message}`;
+                    finishStreaming();
+                    reject(error);
+                });
+
+                function finishStreaming() {
+                    // Update badge to show completion
+                    const badge = messageDiv.querySelector('.command-badge');
+                    if (badge) {
+                        if (hasError) {
+                            badge.className = 'error-badge text-white text-xs px-2 py-0.5 rounded-full';
+                            badge.innerHTML = '<i class="fas fa-times mr-1"></i>Erro';
+                        } else {
+                            badge.className = 'success-badge text-white text-xs px-2 py-0.5 rounded-full';
+                            badge.innerHTML = '<i class="fas fa-check mr-1"></i>Concluído';
+                        }
+                    }
+
+                    // Save to history
+                    const botMessage = {
+                        type: 'bot',
+                        content: {
+                            command: command,
+                            output: accumulatedOutput || 'Comando executado.',
+                            success: !hasError
+                        },
+                        timestamp: new Date().toISOString()
+                    };
+                    messageHistory.push(botMessage);
+                    saveHistory();
+                }
+            });
+        }
+
+        // Quick command
+        function sendQuickCommand(command) {
+            const input = document.getElementById('message-input');
+            input.value = command;
+            input.focus();
+            sendMessage();
+        }
+
+        // Show/hide typing indicator
+        function showTyping(show) {
+            const indicator = document.getElementById('typing-indicator');
+            if (show) {
+                indicator.classList.remove('hidden');
+            } else {
+                indicator.classList.add('hidden');
+            }
+            scrollToBottom();
+        }
+
+        // Scroll to bottom
+        function scrollToBottom() {
+            const messagesArea = document.getElementById('messages-area');
+            setTimeout(() => {
+                messagesArea.scrollTop = messagesArea.scrollHeight;
+            }, 100);
+        }
+
+        // Clear history
+        function clearHistory() {
+            if (confirm('Deseja limpar todo o histórico de mensagens?')) {
+                messageHistory = [];
+                localStorage.removeItem('terminal-chat-history');
+                location.reload();
+            }
+        }
+
+        // Utility functions
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        function formatTime(timestamp) {
+            const date = new Date(timestamp);
+            return date.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+        }
+
+        // Auto-resize textarea
+        const textarea = document.getElementById('message-input');
+        textarea.addEventListener('input', function() {
+            this.style.height = 'auto';
+            this.style.height = Math.min(this.scrollHeight, 120) + 'px';
+        });
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            // Cmd/Ctrl + K = Clear history
+            if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+                e.preventDefault();
+                clearHistory();
+            }
+
+            // Cmd/Ctrl + / = Focus input
+            if ((e.metaKey || e.ctrlKey) && e.key === '/') {
+                e.preventDefault();
+                document.getElementById('message-input').focus();
+            }
+        });
+
+        // Initialize
+        loadHistory();
+        document.getElementById('message-input').focus();
+
+        // Check API health on load
+        fetch(`${API_URL}/api/health`)
+            .then(res => res.json())
+            .then(data => {
+                console.log('✅ Backend conectado:', data);
+            })
+            .catch(err => {
+                console.warn('⚠️ Backend offline:', err);
+                document.getElementById('status').innerHTML = '<span class="inline-block w-2 h-2 bg-red-500 rounded-full mr-1"></span>Backend offline';
+            });
+    </script>
+</body>
+</html>

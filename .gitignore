@@ -1,0 +1,100 @@
+# ========================================
+# ARQUIVOS SENSÍVEIS
+# ========================================
+# NOTA: .env está INCLUÍDO no backup (repositório privado de uso pessoal)
+# Se tornar público, REMOVA .env imediatamente e revogue todas as chaves!
+
+# .env  # COMENTADO - incluído no backup
+.env.local
+.env.*.local
+*.key
+*.pem
+*.p12
+config/*_secrets.py
+credentials.json
+
+# ========================================
+# PYTHON
+# ========================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+venv/
+ENV/
+env/
+
+# ========================================
+# LOGS E TEMPORÁRIOS
+# ========================================
+*.log
+logs/
+*.tmp
+*.temp
+*.cache
+
+# ========================================
+# SISTEMA OPERACIONAL
+# ========================================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# ========================================
+# IDEs
+# ========================================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ========================================
+# NODE (caso use n8n ou outras ferramentas)
+# ========================================
+node_modules/
+package-lock.json
+
+# ========================================
+# OUTPUTS E DOWNLOADS
+# ========================================
+downloads/
+outputs/
+media/
+temp/
+*.mp4
+*.mp3
+*.wav
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.pdf
+# (exceto se quiser versionar alguns)
+
+# ========================================
+# DATABASES
+# ========================================
+*.db
+*.sqlite
+*.sqlite3

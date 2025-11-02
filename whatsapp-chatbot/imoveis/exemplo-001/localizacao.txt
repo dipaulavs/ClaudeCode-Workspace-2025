@@ -1,0 +1,13 @@
+# LOCALIZAÇÃO: exemplo-001
+
+Endereço: Rua dos Exemplos, 123 - Apto 1001
+Bairro: Savassi
+Cidade: Belo Horizonte
+Estado: MG
+CEP: 30140-000
+
+Proximidades:
+- 5 min da Praça da Savassi
+- 10 min do Mercado Central
+- Próximo ao metrô
+- Supermercados, farmácias e restaurantes na região

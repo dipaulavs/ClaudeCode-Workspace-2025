@@ -7,235 +7,228 @@ Workspace com ferramentas de IA pré-configuradas.
 ```
 ClaudeCode-Workspace/
 ├── agentes/            # Agentes especializados
-│   ├── especificidade33/       # Conteúdos virais Instagram
-│   └── openrouter/             # Agentes via OpenRouter API
+├── crewai/             # Sistema multi-agentes colaborativos
+├── docs/               # Documentação (APIs + Tools)
+├── evolution-api-integration/  # Automação WhatsApp
+├── n8n-mcp-project/    # n8n + Chatbot Corretor V4
 ├── tools/              # Scripts Python de IA
-├── config/             # Configurações
-├── logs/               # Logs
-├── requirements.txt    # Dependências (requests já instalado)
-├── setup.sh           # Instalação
-└── iniciar.sh         # Boas-vindas
+└── config/             # Configurações
 ```
+
+---
+
+## ⚡ Quick Start
+
+### Chatbot WhatsApp Corretor V4
+```bash
+cd n8n-mcp-project
+./INICIAR_BOT_V4.sh    # Iniciar
+./PARAR_BOT_V4.sh      # Parar
+```
+**Recursos:** Bot IA (Claude Haiku 4.5) + Transcrição áudios (Whisper) + Visão imagens (GPT-4o) + Chatwoot
+
+📖 **Docs:** `n8n-mcp-project/CHATBOT_V4_README.md`
+
+---
+
+## 🛠️ Ferramentas
+
+**📚 ÍNDICE COMPLETO:** [`docs/tools/INDEX.md`](docs/tools/INDEX.md)
+
+### 🎨 Geração de Imagens
+
+| Ferramenta | Função | Docs |
+|------------|--------|------|
+| GPT-4o Image | Gera imagens com GPT-4o (portrait 2:3, variações, refinamento) | [`docs/tools/generate_image.md`](docs/tools/generate_image.md) |
+| GPT-4o Batch | Geração em lote (paralelo) | Ver README atual |
+| Nano Banana | Gemini 2.5 Flash (hiper-realismo, portrait 2:3) | [`docs/tools/generate_image_nanobanana.md`](docs/tools/generate_image_nanobanana.md) |
+| Nano Banana Batch | Geração em lote (paralelo) | Ver README atual |
+| Editor Nano Banana | Edita imagens com IA (múltiplas proporções) | Ver README atual |
+
+---
+
+### 🎤 Geração de Áudio
+
+| Ferramenta | Função | Docs |
+|------------|--------|------|
+| ElevenLabs TTS | Text-to-Speech (70+ idiomas, 4 modelos) | Ver README atual |
+| ElevenLabs Batch | Geração em lote (sequencial) | Ver README atual |
+
+---
+
+### 🎬 Geração de Vídeos
+
+| Ferramenta | Função | Docs |
+|------------|--------|------|
+| Sora 2 | Gera vídeos ~15s (OpenAI via Kie.ai) | Ver README atual |
+| Sora Batch | Geração em lote (paralelo, 2-5min) | Ver README atual |
+
+---
+
+### 📥 Extração de Conteúdo
+
+| Ferramenta | Função | Docs |
+|------------|--------|------|
+| Transcrição Universal | YouTube, TikTok, Instagram, LinkedIn, X, Vimeo | [`docs/tools/transcribe_universal.md`](docs/tools/transcribe_universal.md) |
+| Instagram Posts | Extrai imagens, legendas, metadados | Ver README atual |
+| Instagram Reels | Transcreve áudio de Reels (Whisper) | Ver README atual |
+| TikTok Transcrição | Transcreve áudio de vídeos (Whisper) | Ver README atual |
+| Web Scraping | Extrai sites completos em Markdown | Ver README atual |
+| Scraping Batch | Múltiplas URLs em sequência | Ver README atual |
+
+---
+
+### 🎵 TikTok (Scraping)
+
+**Config:** `config/tiktok_config.py` | **Docs:** `docs/tools/tiktok_api23.md` | **Scripts:** `scripts/tiktok/README.md`
+
+| Ação | Função | Script |
+|------|--------|--------|
+| Info de Usuário | Perfil completo (seguidores, bio, posts populares) | `scripts/tiktok/get_user_info.py` |
+| Info de Vídeo | Detalhes de vídeo (views, likes, comentários) | `scripts/tiktok/get_video_info.py` |
+| Buscar Conteúdo | Busca vídeos, usuários, conteúdo geral | `scripts/tiktok/search_content.py` |
+| Trending | Vídeos, hashtags, músicas, criadores em alta | `scripts/tiktok/get_trending.py` |
+| Analisar Hashtag | Info, posts e engajamento médio | `scripts/tiktok/analyze_hashtag.py` |
+
+**Recursos:** 5 templates prontos | Filtros por país/período | Dados completos de engajamento
+
+---
+
+### 📱 Instagram (API)
+
+**Config:** `config/instagram_config.py` | **Docs API:** `docs/instagram-api/INSTAGRAM_API_DOCUMENTATION.md`
+
+| Ação | Função | Docs |
+|------|--------|------|
+| Post | Publica posts (imagem + legenda, auto-upload, PNG→JPEG) | [`docs/tools/publish_instagram_post.md`](docs/tools/publish_instagram_post.md) |
+| Carrossel | Publica carrosséis (2-10 imagens) | Ver README atual |
+| Reel | Publica Reels (vídeos até 90s, capa opcional) | [`docs/tools/publish_instagram_reel.md`](docs/tools/publish_instagram_reel.md) |
+| Story | Publica Stories (imagem/vídeo, 24h) | Ver README atual |
+| Comentários | Gerencia comentários (list, reply, hide, delete) | Ver README atual |
+| Insights | Métricas de conta e mídia | Ver README atual |
+| DMs | Gerencia mensagens diretas | Ver README atual |
+
+**Recursos:** Auto-upload (Catbox.moe) | PNG→JPEG | Rate limit: 100 posts/24h
+
+---
+
+### 📢 Meta Ads (Marketing API)
+
+**Config:** `config/meta_ads_config.py` | **Docs API:** `docs/meta-ads-api/META_ADS_API_DOCUMENTATION.md`
+
+| Ação | Função | Docs |
+|------|--------|------|
+| Campanhas | Criar, listar, atualizar, deletar | [`docs/tools/meta_ads_campaigns.md`](docs/tools/meta_ads_campaigns.md) |
+| Ad Sets | Gerenciar conjuntos de anúncios (targeting, budget) | Ver README atual |
+| Anúncios | Gerenciar anúncios (criativos, status) | Ver README atual |
+| Criativos | Criar criativos (imagem/vídeo/texto, CTAs) | Ver README atual |
+| Insights | Métricas e relatórios (CPC, CPM, CTR, conversões) | Ver README atual |
+| Upload Imagem | Upload de imagens para criativos | Ver README atual |
+| Regional (Raio) | Campanha com targeting geográfico (lat/long + raio km) | [`docs/tools/meta_ads_regional_campaign.md`](docs/tools/meta_ads_regional_campaign.md) |
+
+**Recursos:** Targeting por raio | Budgets (diário/total) | Otimizações | Breakdowns
+
+---
+
+### 💬 WhatsApp (Evolution API)
+
+| Ferramenta | Função | Docs |
+|------------|--------|------|
+| WhatsApp Helper | Controle programático completo (mensagens, grupos, enquetes, localização) | [`docs/tools/whatsapp_helper.md`](docs/tools/whatsapp_helper.md) |
+
+**Recursos:** Mensagens (texto, imagem, vídeo, doc, áudio) | Grupos (criar, membros, admins) | Enquetes | Localização | Status
+
+**Docs:** `evolution-api-integration/README.md` | `evolution-api-integration/GUIA_RAPIDO.md`
+
+---
+
+### 🔍 Busca e Upload
+
+| Ferramenta | Função | Docs |
+|------------|--------|------|
+| xAI Live Search | Busca em tempo real (Web/Twitter/News) via Grok-4-fast | [`docs/tools/xai_search.md`](docs/tools/xai_search.md) |
+| Upload Nextcloud | Upload de arquivos com links públicos (exp. 24h) | Ver README atual |
+
+**xAI:** 5 fontes max | ~$0.125/busca | Citações com links
+
+**Docs:** `XAI_QUICK_START.md` | `tools/XAI_SEARCH_README.md`
+
+---
 
 ## 🤖 Sistema de Agentes
 
-Agentes especializados com frameworks específicos em arquivos `.md`.
+| Tipo | Comando | Descrição |
+|------|---------|-----------|
+| **Agentes MD** | `"Ative o agente [nome] para [tarefa]"` | especificidade33 (conteúdos virais IG) |
+| **OpenRouter** | `python3 tools/agent_openrouter.py <agente> "input" [--model MODEL]` | copywriter-vendas, analista-negocios |
 
-### Uso:
-```
-"Ative o agente [nome] para [tarefa]"
-```
+**Modelos:** Claude Haiku/Sonnet 4.5, GPT-4o/5, Gemini 2.5 Pro, Grok 4, DeepSeek, GLM 4.6
 
-### Agentes Disponíveis:
-- **especificidade33** (`agentes/especificidade33/`) - Conteúdos virais Instagram com 33 formatos
-
-### Criar Novo Agente:
-1. `mkdir agentes/meu-agente`
-2. Adicione arquivos `.md` com instruções/frameworks
-3. Ative: "Ative o agente meu-agente para [tarefa]"
+📖 **Docs:** `agentes/openrouter/README.md`
 
 ---
 
-## 🔌 Agentes via OpenRouter
+## 🤝 CrewAI (Multi-Agentes)
 
-Subagentes especializados que economizam tokens do Claude Code. Instruções ficam armazenadas localmente e são enviadas apenas para a API da OpenRouter.
-
-**Uso:**
 ```bash
-python3 tools/agent_openrouter.py <agente> "seu input" [--model MODEL] [--temp 0-1]
+cd crewai
+python3.11 crews/copywriter_crew.py
 ```
 
-**Agentes:**
-- `copywriter-vendas` - Copy persuasivo e textos de vendas
-- `analista-negocios` - Análise estratégica e business intelligence
+**Recursos:** Hierarchical + Manager automático + Context + OpenRouter
 
-**Modelos disponíveis:** Claude Haiku/Sonnet 4.5 (padrão), GPT-4o/5, Gemini 2.5 Pro, Grok 4, DeepSeek, GLM 4.6
-
-**Exemplos:**
-```bash
-# Usa Claude Haiku 4.5 (padrão)
-python3 tools/agent_openrouter.py copywriter-vendas "Crie headline para curso de Python"
-
-# Escolher modelo específico
-python3 tools/agent_openrouter.py analista-negocios "Analise viabilidade" --model openai/gpt-4o
-
-# Listar agentes
-python3 tools/agent_openrouter.py --list
-```
-
-**Docs completa:** `agentes/openrouter/README.md`
+📖 **Docs:** `crewai/README.md` | `crewai/INICIO-RAPIDO.md`
 
 ---
 
-## 🔄 Workflows
+## 🔄 n8n-MCP (Automação)
 
-Automações completas que executam múltiplas etapas sequencialmente, combinando agentes e ferramentas.
+**Instância:** https://n8n.loop9.com.br
 
-**Uso:**
+```bash
+cd n8n-mcp-project && claude-code
 ```
-Ative o workflow [nome] para [input]
-```
 
-**Workflows disponíveis:**
-- `headline-to-image` - Gera imagens com headlines virais automaticamente (nicho → headlines → imagens)
+**Recursos:** 3000+ templates | Integração APIs/webhooks/DBs | Segurança (nunca deleta sem confirmação)
 
-**Criar workflow:**
-1. Crie arquivo `.md` em `workflows/`
-2. Defina: objetivo, inputs, etapas (ferramenta, ação, output)
-3. Ative: "Ative o workflow nome para [input]"
-
-**Docs completa:** `workflows/README.md`
+📖 **Docs:** `n8n-mcp-project/README.md` | `n8n-mcp-project/CLAUDE.md`
 
 ---
 
-## 🚀 Setup Inicial
+## ⏰ Agendamento (Cron)
 
 ```bash
-bash setup.sh  # Apenas primeira vez
+crontab -e  # Configurar
+crontab -l  # Ver agendamentos
 ```
 
-## 🛠️ Ferramentas (tools/)
+**Formato:** `MIN HORA DIA MÊS DIA_SEMANA comando`
 
-Todas salvam em `~/Downloads` com timestamp automático.
-
-### Geração de Imagens
-
-**GPT-4o Image** (Kie.ai):
+**Exemplo:**
 ```bash
-python3 tools/generate_image.py "prompt" [--variants 1|2|4] [--enhance]
-python3 tools/generate_image_batch_gpt.py "p1" "p2" [--variants N] [--enhance]
-```
-- Portrait 2:3, variações, refinamento de prompt
-- Batch: processamento paralelo
-
-**Nano Banana** (Gemini 2.5 Flash):
-```bash
-python3 tools/generate_image_nanobanana.py "prompt" [--format PNG|JPEG]
-python3 tools/generate_image_batch.py "p1" "p2" [--format PNG|JPEG]
-```
-- Portrait 2:3, hiper-realismo, física consciente
-- Batch: processamento paralelo
-
-**Editor Nano Banana**:
-```bash
-python3 tools/edit_image_nanobanana.py --url "URL" "edit prompt" [--format PNG|JPEG] [--size RATIO] [--expire-days N]
-python3 tools/edit_image_nanobanana.py arquivo.jpg "edit prompt"  # Upload automático Nextcloud
-```
-- Proporções: 1:1, 9:16, 16:9, 3:4, 4:3, 3:2, 2:3, 5:4, 4:5, 21:9, auto
-- Arquivo local: upload automático para Nextcloud com link temporário
-
-### Geração de Áudio
-
-**ElevenLabs TTS**:
-```bash
-python3 tools/generate_audio_elevenlabs.py "texto" [--voice ID|felipe] [--model ID] [--format mp3_low|medium|high|ultra|pcm] [--stability 0-1] [--similarity 0-1] [--output arquivo.mp3] [--list-voices]
-python3 tools/generate_audio_batch_elevenlabs.py "t1" "t2" [--voice ID] [--model ID] [--delay SECS]
-```
-- Vozes padrão: Michele (QQFzOTqaZ9W1XGSTWyBw), felipe (3QlvO7Xt2e9OCfetPOd8)
-- Modelos: eleven_v3 (padrão, 70+ idiomas), eleven_turbo_v2_5, eleven_multilingual_v2, eleven_flash_v2_5
-- Batch: processamento sequencial com numeração automática
-
-### Geração de Vídeos
-
-**Sora 2** (OpenAI via Kie.ai):
-```bash
-python3 tools/generate_video_sora.py "prompt" [--aspect portrait|landscape|square] [--watermark]
-python3 tools/generate_video_batch_sora.py "v1" "v2" [--aspect RATIO] [--watermark]
-```
-- ~15s, portrait padrão, marca d'água removida por padrão
-- Batch: processamento paralelo (2-5min para todos)
-- Tempo individual: 2-5min/vídeo
-
-### Extração de Conteúdo
-
-**Transcrição Universal** (via RapidAPI):
-```bash
-python3 tools/transcribe_universal.py "URL" [--lang IDIOMA] [--task transcribe|translate]
-```
-- Transcreve vídeos de YouTube, TikTok, Instagram, LinkedIn, X/Twitter, Vimeo
-- Suporta URLs diretas de áudio/vídeo
-- Idiomas: pt (português), en (inglês), es (espanhol), etc.
-- Salva transcrição em TXT e JSON, exibe no terminal
-
-**Como usar:**
-
-*Para vídeos online (YouTube, TikTok, etc.):*
-```bash
-# Cole a URL diretamente
-python3 tools/transcribe_universal.py "https://www.youtube.com/watch?v=VIDEO_ID" --lang pt
+# Todo dia 9h - Instagram post
+0 9 * * * cd ~/Desktop/ClaudeCode-Workspace && python3 workflow_instagram.py
 ```
 
-*Para arquivos de áudio/vídeo locais (sempre em ~/Downloads):*
-```bash
-# 1. Upload para Nextcloud (gera URL pública)
-python3 tools/upload_to_nextcloud.py "~/Downloads/seu_audio.m4a" --days 7
+**Compatível:** Imagens, áudio, vídeo, social media, scraping, Meta Ads, agentes IA
 
-# 2. Transcrever usando a URL gerada
-python3 tools/transcribe_universal.py "URL_DO_NEXTCLOUD" --lang pt
-```
-
-**Atalho para YouTube:** Cole o link do vídeo para transcrever e resumir automaticamente
-
-**Instagram - Posts/Carrosséis** (via Apify):
-```bash
-python3 tools/extract_instagram.py "URL" [--limit N]
-```
-- Extrai imagens e legendas de posts/carrosséis
-- Suporta URLs de posts ou perfis
-- Salva imagens, legendas, metadados (likes, comentários)
-- Cria pasta com timestamp em ~/Downloads
-
-**Instagram - Reels Transcrição** (via Apify + OpenAI):
-```bash
-python3 tools/transcribe_instagram_reels.py "URL_REELS" [--model MODEL]
-```
-- Transcreve automaticamente áudio de Reels
-- Modelos: gpt-4o-mini-transcribe (padrão), gpt-4o-transcribe
-- Salva transcrição em TXT e JSON completo
-- Exibe transcrição no terminal
-
-**TikTok - Transcrição** (via Apify + OpenAI):
-```bash
-python3 tools/transcribe_tiktok.py "URL_TIKTOK" [--model MODEL]
-```
-- Transcreve automaticamente áudio de vídeos do TikTok
-- Modelos: whisper-1 (padrão), gpt-4o-mini-transcribe
-- Salva transcrição em TXT e JSON completo
-- Exibe transcrição no terminal
-
-### Upload de Imagens
-
-**Nextcloud** (media.loop9.com.br):
-```bash
-python3 tools/upload_to_nextcloud.py imagem.jpg [--days N] [--permanent] [--folder PASTA]
-```
-- Gera links públicos diretos (terminam em .jpg)
-- Expiração padrão: 24 horas
-- Servidor: media.loop9.com.br, usuário: dipaula, pasta: claude-code
-
----
-
-## 🎨 Dicas Rápidas
-
-**Imagens**: Seja específico (detalhes, estilo, iluminação, cores). Use `--enhance` para complexidade.
-- Arquivos são nomeados automaticamente em **português** com base no prompt
-- Formato: `descricao_do_conteudo_xyz1.png` (código aleatório de 4 chars)
-- Exemplo: `mulher_cyberpunk_oculos_a7f2.png`, `por_do_sol_montanhas_k9x3.png`
-
-**Áudio**: Use pontuação para pausas, escreva números por extenso, mp3_ultra para máxima qualidade.
-
-**Vídeos**: Descreva movimento, câmera, atmosfera e iluminação.
+📖 **Docs:** `n8n-mcp-project/AGENDAMENTO_WHATSAPP.md`
 
 ---
 
 ## 🔧 Manutenção
 
-**Adicionar script**: Coloque em `tools/`, adicione dependências em `requirements.txt`, rode `bash setup.sh`.
+**Setup:** `bash setup.sh` (primeira vez)
 
-**Troubleshooting**:
+**Adicionar ferramenta:**
+1. Coloque em `tools/`
+2. Adicione dependências em `requirements.txt`
+3. Rode `bash setup.sh`
+
+**Troubleshooting:**
 - Module not found: `pip3 install --user requests`
 - Script não executa: `chmod +x tools/*.py *.sh`
 
 ---
 
-**Docs**: [Kie.ai](https://docs.kie.ai) | [Claude Code](https://claude.com/claude-code)
+**Docs externas:** [Kie.ai](https://docs.kie.ai) | [Claude Code](https://claude.com/claude-code)

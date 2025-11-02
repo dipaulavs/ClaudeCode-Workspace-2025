@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claude Code Workspace</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .card {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.95);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .loading {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .file-item:hover {
+            transform: translateX(5px);
+            transition: all 0.2s;
+        }
+        .tool-card {
+            transition: all 0.3s;
+        }
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        /* Mobile optimizations */
+        @media (max-width: 768px) {
+            .tabs-container {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+            }
+            .tabs-container::-webkit-scrollbar {
+                display: none;
+            }
+            .tab-btn {
+                white-space: nowrap;
+                font-size: 14px;
+                padding: 0.625rem 1rem;
+            }
+            .mobile-heading {
+                font-size: 1.5rem;
+            }
+            .mobile-subheading {
+                font-size: 1rem;
+            }
+            input, textarea, select {
+                font-size: 16px !important; /* Prevents zoom on iOS */
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen p-4 md:p-8">
+    <div class="max-w-7xl mx-auto">
+        <!-- Header -->
+        <div class="text-center mb-6 md:mb-8">
+            <h1 class="text-2xl md:text-4xl lg:text-5xl font-bold text-white mb-2">
+                🤖 Claude Code Workspace
+            </h1>
+            <p class="text-white/80 text-sm md:text-base lg:text-lg px-2">
+                Ferramentas de IA no seu Mac, acessíveis de qualquer lugar
+            </p>
+        </div>
+
+        <!-- Chat CTA -->
+        <a href="/chat.html" class="block mb-4 md:mb-6">
+            <div class="card rounded-xl md:rounded-2xl p-4 md:p-6 shadow-2xl hover:shadow-3xl transition-all transform hover:scale-105 cursor-pointer">
+                <div class="flex items-center justify-between flex-wrap gap-3">
+                    <div class="flex items-center space-x-3 md:space-x-4 flex-1">
+                        <div class="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl md:rounded-2xl flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-comments text-white text-2xl md:text-3xl"></i>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <h2 class="text-lg md:text-2xl font-bold gradient-text truncate">💬 Chat com Claude Code</h2>
+                            <p class="text-gray-600 text-xs md:text-sm">Terminal interativo pelo navegador</p>
+                        </div>
+                    </div>
+                    <div class="flex md:hidden items-center space-x-2 bg-green-50 px-3 py-1.5 rounded-lg text-xs">
+                        <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                        <span class="text-green-700 font-semibold">Online</span>
+                    </div>
+                    <div class="hidden md:flex items-center space-x-2 bg-green-50 px-4 py-2 rounded-lg">
+                        <div class="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+                        <span class="text-green-700 font-semibold">Online</span>
+                    </div>
+                </div>
+            </div>
+        </a>
+
+        <!-- Terminal Chat CTA -->
+        <a href="/chat-terminal.html" class="block mb-4 md:mb-6">
+            <div class="card rounded-xl md:rounded-2xl p-4 md:p-6 shadow-2xl hover:shadow-3xl transition-all transform hover:scale-105 cursor-pointer border-2 border-purple-200">
+                <div class="flex items-center justify-between flex-wrap gap-3">
+                    <div class="flex items-center space-x-3 md:space-x-4 flex-1">
+                        <div class="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-r from-blue-500 to-purple-500 rounded-xl md:rounded-2xl flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-terminal text-white text-2xl md:text-3xl"></i>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <h2 class="text-lg md:text-2xl font-bold gradient-text truncate">⚡ Terminal Chat</h2>
+                            <p class="text-gray-600 text-xs md:text-sm">Execute comandos em tempo real - Interface tipo WhatsApp</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-2 bg-blue-50 px-3 py-1.5 md:px-4 md:py-2 rounded-lg">
+                        <i class="fas fa-mobile-alt text-blue-600"></i>
+                        <span class="text-blue-700 font-semibold text-xs md:text-sm">Mobile First</span>
+                    </div>
+                </div>
+            </div>
+        </a>
+
+        <!-- Tabs -->
+        <div class="tabs-container flex gap-2 mb-4 md:mb-6 overflow-x-auto pb-2 md:justify-center px-1">
+            <button onclick="showTab('image')" class="tab-btn px-4 md:px-6 py-2 md:py-3 rounded-lg bg-white/90 hover:bg-white font-semibold transition-all text-sm md:text-base flex-shrink-0" id="tab-image">
+                <i class="fas fa-image mr-1 md:mr-2"></i>Gerar Imagem
+            </button>
+            <button onclick="showTab('audio')" class="tab-btn px-4 md:px-6 py-2 md:py-3 rounded-lg bg-white/70 hover:bg-white font-semibold transition-all text-sm md:text-base flex-shrink-0" id="tab-audio">
+                <i class="fas fa-microphone mr-1 md:mr-2"></i>Gerar Áudio
+            </button>
+            <button onclick="showTab('video')" class="tab-btn px-4 md:px-6 py-2 md:py-3 rounded-lg bg-white/70 hover:bg-white font-semibold transition-all text-sm md:text-base flex-shrink-0" id="tab-video">
+                <i class="fas fa-video mr-1 md:mr-2"></i>Gerar Vídeo
+            </button>
+            <button onclick="showTab('transcribe')" class="tab-btn px-4 md:px-6 py-2 md:py-3 rounded-lg bg-white/70 hover:bg-white font-semibold transition-all text-sm md:text-base flex-shrink-0" id="tab-transcribe">
+                <i class="fas fa-closed-captioning mr-1 md:mr-2"></i>Transcrever
+            </button>
+            <button onclick="showTab('files')" class="tab-btn px-4 md:px-6 py-2 md:py-3 rounded-lg bg-white/70 hover:bg-white font-semibold transition-all text-sm md:text-base flex-shrink-0" id="tab-files">
+                <i class="fas fa-folder mr-1 md:mr-2"></i>Arquivos
+            </button>
+            <a href="/chat.html" class="px-4 md:px-6 py-2 md:py-3 rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold hover:shadow-lg transition-all text-sm md:text-base flex-shrink-0 inline-flex items-center">
+                <i class="fas fa-comments mr-1 md:mr-2"></i>Abrir Chat
+            </a>
+        </div>
+
+        <!-- Content Cards -->
+        <div class="space-y-4 md:space-y-6">
+            <!-- Image Generation -->
+            <div id="content-image" class="tab-content card rounded-xl md:rounded-2xl p-4 md:p-6 lg:p-8 shadow-2xl">
+                <h2 class="text-xl md:text-2xl font-bold gradient-text mb-3 md:mb-4">
+                    <i class="fas fa-image mr-2"></i>Gerador de Imagens
+                </h2>
+                <div class="grid md:grid-cols-2 gap-4 md:gap-6">
+                    <div>
+                        <label class="block text-gray-700 font-semibold mb-2 text-sm md:text-base">Prompt da Imagem</label>
+                        <textarea
+                            id="image-prompt"
+                            rows="4"
+                            class="w-full px-3 md:px-4 py-2 md:py-3 border-2 border-gray-200 rounded-lg focus:border-purple-500 focus:outline-none text-sm md:text-base"
+                            placeholder="Descreva a imagem que você quer gerar..."></textarea>
+
+                        <div class="mt-3 md:mt-4 space-y-3 md:space-y-4">
+                            <div>
+                                <label class="block text-gray-700 font-semibold mb-2 text-sm md:text-base">Ferramenta</label>
+                                <select id="image-tool" class="w-full px-3 md:px-4 py-2 md:py-3 border-2 border-gray-200 rounded-lg focus:border-purple-500 focus:outline-none text-sm md:text-base">
+                                    <option value="nanobanana">Nano Banana (Gemini 2.5 Flash)</option>
+                                    <option value="gpt">GPT-4o (Kie.ai)</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-gray-700 font-semibold mb-2 text-sm md:text-base">Formato</label>
+                                <select id="image-format" class="w-full px-3 md:px-4 py-2 md:py-3 border-2 border-gray-200 rounded-lg focus:border-purple-500 focus:outline-none text-sm md:text-base">
+                                    <option value="PNG">PNG</option>
+                                    <option value="JPEG">JPEG</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <button
+                            onclick="generateImage()"
+                            class="mt-4 md:mt-6 w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold py-3 md:py-4 px-4 md:px-6 rounded-lg hover:shadow-xl transition-all transform hover:scale-105 text-sm md:text-base">
+                            <i class="fas fa-magic mr-2"></i>Gerar Imagem
+                        </button>
+                    </div>
+
+                    <div>
+                        <div id="image-loading" class="hidden flex flex-col items-center justify-center h-full">
+                            <div class="loading mb-4"></div>
+                            <p class="text-gray-600">Gerando imagem...</p>
+                        </div>
+                        <div id="image-result" class="hidden">
+                            <h3 class="font-semibold text-gray-700 mb-3">Resultado:</h3>
+                            <div id="image-output" class="bg-gray-50 p-4 rounded-lg border-2 border-gray-200 max-h-96 overflow-auto text-sm"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Audio Generation -->
+            <div id="content-audio" class="tab-content hidden card rounded-xl md:rounded-2xl p-4 md:p-6 lg:p-8 shadow-2xl">
+                <h2 class="text-xl md:text-2xl font-bold gradient-text mb-3 md:mb-4">
+                    <i class="fas fa-microphone mr-2"></i>Gerador de Áudio
+                </h2>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-gray-700 font-semibold mb-2">Texto para Áudio</label>
+                        <textarea
+                            id="audio-text"
+                            rows="6"
+                            class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-purple-500 focus:outline-none"
+                            placeholder="Digite o texto que você quer converter em áudio..."></textarea>
+
+                        <div class="mt-4 grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-gray-700 font-semibold mb-2">Voz</label>
+                                <select id="audio-voice" class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-purple-500 focus:outline-none">
+                                    <option value="felipe">Felipe (Masculina)</option>
+                                    <option value="QQFzOTqaZ9W1XGSTWyBw">Michele (Feminina)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 font-semibold mb-2">Qualidade</label>
+                                <select id="audio-format" class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-purple-500 focus:outline-none">
+                                    <option value="mp3_high">Alta</option>
+                                    <option value="mp3_ultra">Ultra</option>
+                                    <option value="mp3_medium">Média</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <button
+                            onclick="generateAudio()"
+                            class="mt-6 w-full bg-gradient-to-r from-green-500 to-teal-500 text-white font-bold py-4 px-6 rounded-lg hover:shadow-xl transition-all transform hover:scale-105">
+                            <i class="fas fa-play mr-2"></i>Gerar Áudio
+                        </button>
+                    </div>
+
+                    <div>
+                        <div id="audio-loading" class="hidden flex flex-col items-center justify-center h-full">
+                            <div class="loading mb-4"></div>
+                            <p class="text-gray-600">Gerando áudio...</p>
+                        </div>
+                        <div id="audio-result" class="hidden">
+                            <h3 class="font-semibold text-gray-700 mb-3">Resultado:</h3>
+                            <div id="audio-output" class="bg-gray-50 p-4 rounded-lg border-2 border-gray-200 max-h-96 overflow-auto text-sm"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video Generation -->
+            <div id="content-video" class="tab-content hidden card rounded-xl md:rounded-2xl p-4 md:p-6 lg:p-8 shadow-2xl">
+                <h2 class="text-xl md:text-2xl font-bold gradient-text mb-3 md:mb-4">
+                    <i class="fas fa-video mr-2"></i>Gerador de Vídeos
+                </h2>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-gray-700 font-semibold mb-2">Prompt do Vídeo</label>
+                        <textarea
+                            id="video-prompt"
+                            rows="6"
+                            class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-purple-500 focus:outline-none"
+                            placeholder="Descreva o vídeo que você quer gerar..."></textarea>
+
+                        <div class="mt-4">
+                            <label class="block text-gray-700 font-semibold mb-2">Formato</label>
+                            <select id="video-aspect" class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-purple-500 focus:outline-none">
+                                <option value="portrait">Portrait (9:16)</option>
+                                <option value="landscape">Landscape (16:9)</option>
+                                <option value="square">Square (1:1)</option>
+                            </select>
+                        </div>
+
+                        <button
+                            onclick="generateVideo()"
+                            class="mt-6 w-full bg-gradient-to-r from-red-500 to-orange-500 text-white font-bold py-4 px-6 rounded-lg hover:shadow-xl transition-all transform hover:scale-105">
+                            <i class="fas fa-film mr-2"></i>Gerar Vídeo (2-5min)
+                        </button>
+                        <p class="text-sm text-gray-500 mt-2 text-center">
+                            <i class="fas fa-info-circle mr-1"></i>A geração pode levar de 2 a 5 minutos
+                        </p>
+                    </div>
+
+                    <div>
+                        <div id="video-loading" class="hidden flex flex-col items-center justify-center h-full">
+                            <div class="loading mb-4"></div>
+                            <p class="text-gray-600">Gerando vídeo...</p>
+                            <p class="text-sm text-gray-500 mt-2">Isso pode levar alguns minutos</p>
+                        </div>
+                        <div id="video-result" class="hidden">
+                            <h3 class="font-semibold text-gray-700 mb-3">Resultado:</h3>
+                            <div id="video-output" class="bg-gray-50 p-4 rounded-lg border-2 border-gray-200 max-h-96 overflow-auto text-sm"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Transcribe -->
+            <div id="content-transcribe" class="tab-content hidden card rounded-xl md:rounded-2xl p-4 md:p-6 lg:p-8 shadow-2xl">
+                <h2 class="text-xl md:text-2xl font-bold gradient-text mb-3 md:mb-4">
+                    <i class="fas fa-closed-captioning mr-2"></i>Transcrever Vídeo/Áudio
+                </h2>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-gray-700 font-semibold mb-2">URL do Vídeo/Áudio</label>
+                        <input
+                            type="text"
+                            id="transcribe-url"
+                            class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-purple-500 focus:outline-none"
+                            placeholder="https://youtube.com/watch?v=...">
+
+                        <div class="mt-4">
+                            <label class="block text-gray-700 font-semibold mb-2">Idioma</label>
+                            <select id="transcribe-lang" class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-purple-500 focus:outline-none">
+                                <option value="pt">Português</option>
+                                <option value="en">Inglês</option>
+                                <option value="es">Espanhol</option>
+                            </select>
+                        </div>
+
+                        <button
+                            onclick="transcribe()"
+                            class="mt-6 w-full bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-bold py-4 px-6 rounded-lg hover:shadow-xl transition-all transform hover:scale-105">
+                            <i class="fas fa-language mr-2"></i>Transcrever
+                        </button>
+                    </div>
+
+                    <div>
+                        <div id="transcribe-loading" class="hidden flex flex-col items-center justify-center h-full">
+                            <div class="loading mb-4"></div>
+                            <p class="text-gray-600">Transcrevendo...</p>
+                        </div>
+                        <div id="transcribe-result" class="hidden">
+                            <h3 class="font-semibold text-gray-700 mb-3">Transcrição:</h3>
+                            <div id="transcribe-output" class="bg-gray-50 p-4 rounded-lg border-2 border-gray-200 max-h-96 overflow-auto text-sm"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Files -->
+            <div id="content-files" class="tab-content hidden card rounded-xl md:rounded-2xl p-4 md:p-6 lg:p-8 shadow-2xl">
+                <h2 class="text-xl md:text-2xl font-bold gradient-text mb-3 md:mb-4">
+                    <i class="fas fa-folder mr-2"></i>Arquivos Gerados
+                </h2>
+                <button
+                    onclick="loadFiles()"
+                    class="mb-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold py-2 px-4 rounded-lg hover:shadow-lg transition-all">
+                    <i class="fas fa-sync mr-2"></i>Atualizar Lista
+                </button>
+                <div id="files-list" class="space-y-2">
+                    <p class="text-gray-500 text-center py-8">Clique em "Atualizar Lista" para ver os arquivos</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:8000';
+
+        function showTab(tab) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('bg-white/90'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.add('bg-white/70'));
+
+            // Show selected tab
+            document.getElementById(`content-${tab}`).classList.remove('hidden');
+            document.getElementById(`tab-${tab}`).classList.remove('bg-white/70');
+            document.getElementById(`tab-${tab}`).classList.add('bg-white/90');
+        }
+
+        async function generateImage() {
+            const prompt = document.getElementById('image-prompt').value;
+            if (!prompt) {
+                alert('Por favor, digite um prompt');
+                return;
+            }
+
+            const tool = document.getElementById('image-tool').value;
+            const format = document.getElementById('image-format').value;
+
+            document.getElementById('image-loading').classList.remove('hidden');
+            document.getElementById('image-result').classList.add('hidden');
+
+            try {
+                const response = await fetch(`${API_BASE}/api/generate/image`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ prompt, tool, format })
+                });
+
+                const data = await response.json();
+
+                document.getElementById('image-loading').classList.add('hidden');
+                document.getElementById('image-result').classList.remove('hidden');
+                document.getElementById('image-output').innerHTML = `
+                    <pre class="whitespace-pre-wrap">${data.output}</pre>
+                    ${data.file_path ? `<div class="mt-4 p-3 bg-green-50 border-2 border-green-200 rounded-lg">
+                        <strong class="text-green-700">✓ Arquivo salvo:</strong><br>
+                        <code class="text-sm">${data.file_path}</code>
+                    </div>` : ''}
+                `;
+            } catch (error) {
+                document.getElementById('image-loading').classList.add('hidden');
+                alert('Erro ao gerar imagem: ' + error.message);
+            }
+        }
+
+        async function generateAudio() {
+            const text = document.getElementById('audio-text').value;
+            if (!text) {
+                alert('Por favor, digite um texto');
+                return;
+            }
+
+            const voice = document.getElementById('audio-voice').value;
+            const format = document.getElementById('audio-format').value;
+
+            document.getElementById('audio-loading').classList.remove('hidden');
+            document.getElementById('audio-result').classList.add('hidden');
+
+            try {
+                const response = await fetch(`${API_BASE}/api/generate/audio`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ text, voice, format, model: 'eleven_v3' })
+                });
+
+                const data = await response.json();
+
+                document.getElementById('audio-loading').classList.add('hidden');
+                document.getElementById('audio-result').classList.remove('hidden');
+                document.getElementById('audio-output').innerHTML = `
+                    <pre class="whitespace-pre-wrap">${data.output}</pre>
+                    ${data.file_path ? `<div class="mt-4 p-3 bg-green-50 border-2 border-green-200 rounded-lg">
+                        <strong class="text-green-700">✓ Arquivo salvo:</strong><br>
+                        <code class="text-sm">${data.file_path}</code>
+                    </div>` : ''}
+                `;
+            } catch (error) {
+                document.getElementById('audio-loading').classList.add('hidden');
+                alert('Erro ao gerar áudio: ' + error.message);
+            }
+        }
+
+        async function generateVideo() {
+            const prompt = document.getElementById('video-prompt').value;
+            if (!prompt) {
+                alert('Por favor, digite um prompt');
+                return;
+            }
+
+            const aspect = document.getElementById('video-aspect').value;
+
+            document.getElementById('video-loading').classList.remove('hidden');
+            document.getElementById('video-result').classList.add('hidden');
+
+            try {
+                const response = await fetch(`${API_BASE}/api/generate/video`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ prompt, aspect, watermark: false })
+                });
+
+                const data = await response.json();
+
+                document.getElementById('video-loading').classList.add('hidden');
+                document.getElementById('video-result').classList.remove('hidden');
+                document.getElementById('video-output').innerHTML = `
+                    <pre class="whitespace-pre-wrap">${data.output}</pre>
+                    ${data.file_path ? `<div class="mt-4 p-3 bg-green-50 border-2 border-green-200 rounded-lg">
+                        <strong class="text-green-700">✓ Arquivo salvo:</strong><br>
+                        <code class="text-sm">${data.file_path}</code>
+                    </div>` : ''}
+                `;
+            } catch (error) {
+                document.getElementById('video-loading').classList.add('hidden');
+                alert('Erro ao gerar vídeo: ' + error.message);
+            }
+        }
+
+        async function transcribe() {
+            const url = document.getElementById('transcribe-url').value;
+            if (!url) {
+                alert('Por favor, digite uma URL');
+                return;
+            }
+
+            const lang = document.getElementById('transcribe-lang').value;
+
+            document.getElementById('transcribe-loading').classList.remove('hidden');
+            document.getElementById('transcribe-result').classList.add('hidden');
+
+            try {
+                const response = await fetch(`${API_BASE}/api/transcribe`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ url, lang, task: 'transcribe' })
+                });
+
+                const data = await response.json();
+
+                document.getElementById('transcribe-loading').classList.add('hidden');
+                document.getElementById('transcribe-result').classList.remove('hidden');
+                document.getElementById('transcribe-output').innerHTML = `
+                    <pre class="whitespace-pre-wrap">${data.output}</pre>
+                `;
+            } catch (error) {
+                document.getElementById('transcribe-loading').classList.add('hidden');
+                alert('Erro ao transcrever: ' + error.message);
+            }
+        }
+
+        async function loadFiles() {
+            const filesList = document.getElementById('files-list');
+            filesList.innerHTML = '<p class="text-gray-500 text-center py-4">Carregando...</p>';
+
+            try {
+                const response = await fetch(`${API_BASE}/api/files`);
+                const data = await response.json();
+
+                if (data.files.length === 0) {
+                    filesList.innerHTML = '<p class="text-gray-500 text-center py-8">Nenhum arquivo encontrado</p>';
+                    return;
+                }
+
+                filesList.innerHTML = data.files.map(file => {
+                    const icon = getFileIcon(file.type);
+                    const size = formatFileSize(file.size);
+                    const date = new Date(file.modified).toLocaleString('pt-BR');
+
+                    return `
+                        <div class="file-item flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 border-2 border-gray-200">
+                            <div class="flex items-center space-x-3">
+                                <i class="${icon} text-2xl"></i>
+                                <div>
+                                    <p class="font-semibold text-gray-800">${file.name}</p>
+                                    <p class="text-sm text-gray-500">${size} • ${date}</p>
+                                </div>
+                            </div>
+                            <a href="${API_BASE}/api/files/download/${file.name}"
+                               class="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-2 rounded-lg hover:shadow-lg transition-all"
+                               download>
+                                <i class="fas fa-download mr-1"></i>Download
+                            </a>
+                        </div>
+                    `;
+                }).join('');
+            } catch (error) {
+                filesList.innerHTML = '<p class="text-red-500 text-center py-4">Erro ao carregar arquivos</p>';
+            }
+        }
+
+        function getFileIcon(type) {
+            const icons = {
+                'png': 'fas fa-image text-blue-500',
+                'jpg': 'fas fa-image text-blue-500',
+                'jpeg': 'fas fa-image text-blue-500',
+                'mp3': 'fas fa-music text-green-500',
+                'm4a': 'fas fa-music text-green-500',
+                'mp4': 'fas fa-video text-red-500',
+                'txt': 'fas fa-file-alt text-gray-500'
+            };
+            return icons[type] || 'fas fa-file text-gray-400';
+        }
+
+        function formatFileSize(bytes) {
+            if (bytes < 1024) return bytes + ' B';
+            if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(2) + ' KB';
+            return (bytes / (1024 * 1024)).toFixed(2) + ' MB';
+        }
+    </script>
+</body>
+</html>
