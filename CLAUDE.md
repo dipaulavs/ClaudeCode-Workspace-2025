@@ -299,6 +299,22 @@ scripts/whatsapp/README.md
 
 ---
 
+### 🔟 Verificação Obrigatória Antes de Responder
+
+**GATILHO:** Qualquer solicitação do usuário (início de conversa ou durante)
+
+**ANTES de responder, executar checklist:**
+1. ✅ Existe Claude Skill? → Ver tabela `🧠 CLAUDE SKILLS`
+2. ✅ Existe template/script? → Ver `📍 MAPA DE AÇÕES`
+3. ✅ Onde se encaixa? → Ver `📁 ESTRUTURA DO WORKSPACE`
+4. ✅ Só então responder com base no que existe
+
+**Exceções:** Perguntas conceituais, leitura de arquivos, comandos informativos.
+
+**Por quê:** Evita retrabalho, garante uso de recursos existentes, e impede criação de código quando já existe solução pronta.
+
+---
+
 ## 📍 MAPA DE AÇÕES (Índice Rápido)
 
 | Quando usuário pedir... | Use isto | Doc completa |
@@ -339,6 +355,7 @@ scripts/whatsapp/README.md
 | **Canva via MCP** | Claude.ai web (OAuth) | `scripts/canva/README.md` |
 | **Gerar design/imagem** | `scripts/orshot/generate_image.py` | `scripts/orshot/README.md` |
 | **Designs em lote** | `scripts/orshot/batch_generate.py` | `scripts/orshot/README.md` |
+| **Apresentação visual** | `scripts/visual-explainer/generate.py` | `scripts/visual-explainer/README.md` |
 
 ---
 
@@ -398,7 +415,7 @@ Skills são capacidades modulares model-invoked (Claude decide quando usar autom
 
 **⚠️ PRIORIDADE:** `adaptive-mentor` é skill de **primeiro contato** para frases genéricas. Ver regra 9️⃣ acima.
 
-### Skills Disponíveis (10 Skills)
+### Skills Disponíveis (12 Skills)
 
 | Skill | Quando Usar | Descrição |
 |-------|-------------|-----------|
@@ -410,6 +427,8 @@ Skills são capacidades modulares model-invoked (Claude decide quando usar autom
 | **roadmap-builder** | Priorizar features | Atua como PM: decide o que construir (e o que NÃO construir). Previne feature creep. |
 | **adaptive-mentor** | Qualquer ideia/dúvida/implementação | Mentor que ativa PRIMEIRO e se adapta depois. Pergunta detalhes se necessário. Explica ELI5 + analogias + diagramas. Cria plano executável. |
 | **estudar-video** | Estudar vídeos do YouTube | Workflow automático: transcreve (Whisper) → analisa com IA → classifica tipo → extrai insights → salva no Obsidian. |
+| **visual-explainer** | Criar apresentações para vídeos | Gera apresentações HTML dark mode interativas (3 templates: Notion, Mapa Mental, Tech Futurista). Para gravação de vídeos educativos. |
+| **youtube-educator** | Criar vídeos educativos YouTube | Workflow completo: extrai conteúdo → roteiro → apresentação → headlines (hormozi) → thumbnails → nota Obsidian. FASE 1 (Pré-gravação). |
 | **orshot-design** | Gerar designs/imagens | Automação de designs profissionais usando Orshot API. Posts sociais, certificados, OG images. $0.01/render. |
 | **skill-creator** | Criar novas Skills | Meta-skill que cria outras Skills automaticamente. Gera estrutura multi-arquivo Progressive Disclosure. |
 
@@ -578,5 +597,5 @@ ClaudeCode-Workspace/
 
 ---
 
-**Última atualização:** 2025-11-02 (Otimização estrutural - 600 linhas)
-**Versão:** 4.0 (Otimizado com regras de edição absolutas)
+**Última atualização:** 2025-11-03 (+ Skill youtube-educator - produção completa de vídeos YouTube)
+**Versão:** 4.3 (12 Skills | 66+ templates)
