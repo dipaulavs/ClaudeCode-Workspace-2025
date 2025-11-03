@@ -1,0 +1,543 @@
+# 📚 Visual Explainer - Referência Técnica Completa
+
+## Especificações dos 3 Templates
+
+---
+
+## 1️⃣ Template: Notion Style (Minimalista/Profissional)
+
+### Quando Usar
+- Explicações estruturadas (conceitos + detalhes)
+- Tutoriais passo a passo
+- Conteúdo com hierarquia clara (tópicos/subtópicos)
+- Conteúdo teórico com exemplos
+
+### Estrutura Visual
+
+```
+┌────────────────────────────────────────────────────────┐
+│  ← Anterior        TÍTULO DA SEÇÃO        Próximo →    │
+├────────────────────────────────────────────────────────┤
+│                                                         │
+│    📌 Conceito Principal                                │
+│    ══════════════════════                               │
+│                                                         │
+│    Explicação ELI5 em 2-3 linhas bem diretas.          │
+│    Sem jargões técnicos desnecessários.                 │
+│                                                         │
+│    ┌──────────────────────────────────────┐            │
+│    │  💡 Analogia do Mundo Real           │            │
+│    │  Como é similar a [algo familiar]    │            │
+│    └──────────────────────────────────────┘            │
+│                                                         │
+│    ✓ Ponto-chave número 1                              │
+│    ✓ Ponto-chave número 2                              │
+│    ✓ Ponto-chave número 3                              │
+│                                                         │
+│    ▼ Clique para ver detalhes técnicos                 │
+│                                                         │
+├────────────────────────────────────────────────────────┤
+│  📝 Notas do Apresentador (visível só para você):      │
+│  • Mencionar que X é importante aqui                   │
+│  • Dar exemplo de Y antes de avançar                   │
+│                                                         │
+│                               ⏱️  05:32   ●●●○○○ 3/6   │
+└────────────────────────────────────────────────────────┘
+```
+
+### Características Técnicas
+
+**Layout:**
+- Grid central (max-width: 1200px)
+- Padding generoso (3rem)
+- Font: Inter ou system-ui
+- Tamanho base: 1.2rem (legível em vídeo)
+
+**Cores (Dark Mode):**
+- Background: `#0f0f0f`
+- Card/Container: `#1a1a1a`
+- Texto principal: `#e5e5e5`
+- Texto secundário: `#a0a0a0`
+- Acento: `#3b82f6` (azul profissional)
+- Border: `#2a2a2a`
+
+**Navegação:**
+- Botões laterais (← →) sempre visíveis
+- Setas do teclado
+- Espaço avança
+- Indicador de progresso no rodapé
+
+**Seções Expansíveis:**
+- Clique para expandir/colapsar
+- Ícone muda: ▼ (expandir) / ▲ (colapsar)
+- Animação suave (300ms)
+
+---
+
+## 2️⃣ Template: Mapa Mental Interativo (Exploratório)
+
+### Quando Usar
+- Arquiteturas de sistemas
+- Relações entre conceitos
+- Diagramas de componentes
+- Fluxos de dados/processos
+
+### Estrutura Visual
+
+```
+┌────────────────────────────────────────────────────────┐
+│  [Zoom +]  [Zoom -]  [Reset]  [Centralizar]       [?]  │
+├────────────────────────────────────────────────────────┤
+│                                                         │
+│                  ┌─────────────┐                        │
+│             ┌────│  Conceito   │────┐                   │
+│             │    │  Central    │    │                   │
+│             │    └─────────────┘    │                   │
+│             ↓                       ↓                   │
+│       ┌──────────┐            ┌──────────┐             │
+│       │ Ramo 1   │            │ Ramo 2   │             │
+│       │  [...]   │            │  [...]   │             │
+│       └────┬─────┘            └────┬─────┘             │
+│            ↓                       ↓                    │
+│       ┌──────────┐            ┌──────────┐             │
+│       │Sub-item A│            │Sub-item B│             │
+│       └──────────┘            └──────────┘             │
+│                                                         │
+│     [Clique nos nós para expandir detalhes]            │
+│                                                         │
+├────────────────────────────────────────────────────────┤
+│  📝 Notas: Explicar relação entre Ramo 1 e 2           │
+│                                                         │
+│                               ⏱️  03:15   ●●○○○○ 2/6   │
+└────────────────────────────────────────────────────────┘
+```
+
+### Características Técnicas
+
+**Layout:**
+- Canvas SVG responsivo
+- Centralizado automaticamente
+- Zoom: 0.5x a 2.0x
+- Pan: Arrastar com mouse/touch
+
+**Nós (Elementos):**
+- Formato: Retângulos arredondados (border-radius: 12px)
+- Padding: 1rem 1.5rem
+- Background: `#1e293b` (nós principais), `#334155` (sub-nós)
+- Border: `2px solid #475569`
+- Sombra: `0 4px 12px rgba(0,0,0,0.3)`
+
+**Conexões (Setas):**
+- Stroke: `#64748b`
+- Width: 2px
+- Estilo: Sólido para relações diretas, tracejado para indiretas
+- Arrow marker: Triângulo preenchido
+
+**Interatividade:**
+- Hover: Highlight do nó + conexões relacionadas
+- Clique: Modal com detalhes (popup centralizado)
+- Expandir/colapsar sub-árvores
+
+**Cores por Tipo:**
+- Conceito central: `#3b82f6` (azul)
+- Categorias: `#8b5cf6` (roxo)
+- Exemplos: `#10b981` (verde)
+- Warnings: `#f59e0b` (laranja)
+
+---
+
+## 3️⃣ Template: Tech Futurista (Impact/Announcements)
+
+### Quando Usar
+- Lançamentos de tecnologia
+- Novidades/breaking news
+- Impacto de mudanças
+- Comparações antes/depois
+
+### Estrutura Visual
+
+```
+┌────────────────────────────────────────────────────────┐
+│  ●●○○○○  Slide 2 de 6                            [⚙]  │
+├────────────────────────────────────────────────────────┤
+│                                                         │
+│                                                         │
+│              🚀 GEMINI 2.0 FLASH                        │
+│              A Revolução da IA                          │
+│                                                         │
+│                                                         │
+│        ┌────────────────────────────────┐              │
+│        │                                │              │
+│        │     [Ícone SVG grande]         │              │
+│        │     [ou imagem visual]         │              │
+│        │                                │              │
+│        └────────────────────────────────┘              │
+│                                                         │
+│                                                         │
+│        → Lançado em Dezembro 2024                      │
+│        → 2x mais rápido que GPT-4o                     │
+│        → Contexto de 2 milhões de tokens               │
+│                                                         │
+│                                                         │
+│                [Space para continuar]                   │
+│                                                         │
+├────────────────────────────────────────────────────────┤
+│  📝 Notas: Enfatizar o contexto massivo aqui           │
+│                                                         │
+│                               ⏱️  07:45   ●●○○○○ 2/6   │
+└────────────────────────────────────────────────────────┘
+```
+
+### Características Técnicas
+
+**Layout:**
+- Centralizado vertical + horizontal
+- Título gigante (3-5rem)
+- Muito espaço em branco (breathing room)
+- Alinhamento central
+
+**Tipografia:**
+- Font: 'Space Grotesk' ou 'JetBrains Mono'
+- Título: 3.5rem, weight: 800, letter-spacing: -0.02em
+- Subtítulo: 1.8rem, weight: 500, opacity: 0.8
+- Bullets: 1.3rem, weight: 400
+
+**Cores (Dark Mode):**
+- Background: `#0a0a0a` (quase preto puro)
+- Texto principal: `#ffffff`
+- Texto secundário: `#a3a3a3`
+- Acento primário: `#6366f1` (indigo vibrante)
+- Acento secundário: `#8b5cf6` (roxo)
+- Gradiente hero: `linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%)`
+
+**Animações:**
+- Entrada de slide: Fade in + slide up (500ms)
+- Transição entre slides: Cross-fade (400ms)
+- Bullets: Aparecem sequencialmente (delay: 100ms cada)
+- Hover em elementos: Scale 1.02 + glow effect
+
+**Elementos Visuais:**
+- Ícones SVG grandes (200-300px)
+- Ilustrações minimalistas (line art)
+- Glassmorphism nos cards (backdrop-filter: blur)
+- Sombras neon sutis em acentos
+
+---
+
+## Recursos Globais (Todos os Templates)
+
+### Modo Apresentador
+
+**Layout Split:**
+```
+┌─────────────────────────────┬─────────────────────┐
+│                             │                     │
+│   TELA PRINCIPAL            │   PAINEL CONTROLE   │
+│   (aparece no vídeo)        │   (só você vê)      │
+│                             │                     │
+│   [Slide atual]             │   📝 Notas          │
+│                             │   ⏱️  Timer         │
+│                             │   ●●●○○○ Progresso │
+│                             │   [Preview próximo] │
+│                             │                     │
+└─────────────────────────────┴─────────────────────┘
+```
+
+**Ativação:**
+- Tecla `P` → Abre nova janela com painel de controle
+- Ou: Modo inline (notas na parte inferior)
+
+### Atalhos de Teclado (Universais)
+
+| Tecla | Ação |
+|-------|------|
+| `→` ou `Space` | Próximo slide/seção |
+| `←` | Slide/seção anterior |
+| `F` ou `F11` | Toggle fullscreen |
+| `ESC` | Sair fullscreen |
+| `P` | Toggle modo apresentador |
+| `R` | Reset (volta ao início) |
+| `?` | Mostrar ajuda (overlay) |
+
+### Timer
+
+**Posicionamento:** Canto superior direito
+**Formato:** `MM:SS` (ex: `05:32`)
+**Estilo:**
+```css
+.timer {
+  position: fixed;
+  top: 2rem;
+  right: 2rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.5rem;
+  color: #64748b;
+  opacity: 0.6;
+  z-index: 1000;
+}
+```
+
+**Comportamento:**
+- Inicia automaticamente ao abrir
+- Pode pausar/resetar (tecla `T`)
+- Discreto (não distrai)
+
+### Barra de Progresso
+
+**Formato:** `●●●○○○ 3/6`
+**Posicionamento:** Canto inferior direito (junto com timer)
+**Estilo:**
+- Slides passados: `●` (filled, cor acento)
+- Slide atual: `●` (filled, cor acento + glow)
+- Slides futuros: `○` (outline, opacidade 0.3)
+
+### HTML Standalone
+
+**Requisitos:**
+- ✅ Sem dependências externas (CDN)
+- ✅ Fonts embeddedas (base64 ou system fallback)
+- ✅ CSS inline ou em `<style>` tag
+- ✅ JavaScript vanilla (sem frameworks)
+- ✅ Funciona offline 100%
+
+**Tamanho target:** < 500KB (incluindo assets)
+
+---
+
+## Estrutura de Dados do Roteiro
+
+**Formato JSON para injetar no template:**
+
+```json
+{
+  "titulo": "Título da Apresentação",
+  "tipo": "notion|mapa-mental|tech-futurista",
+  "slides": [
+    {
+      "id": 1,
+      "titulo": "Introdução",
+      "conteudo": {
+        "conceito": "Texto principal",
+        "analogia": "Analogia do mundo real",
+        "pontos": ["Ponto 1", "Ponto 2", "Ponto 3"],
+        "detalhes": "Conteúdo expansível (opcional)"
+      },
+      "notas_apresentador": "O que você deve falar aqui",
+      "duracao_estimada": 90
+    }
+  ],
+  "metadata": {
+    "total_slides": 6,
+    "duracao_total": 540,
+    "criado_em": "2025-01-03T10:30:00Z"
+  }
+}
+```
+
+---
+
+## Script Gerador
+
+**Localização:** `scripts/visual-explainer/generate.py`
+
+**Uso:**
+```bash
+python3 scripts/visual-explainer/generate.py \
+  --roteiro "caminho/roteiro.md" \
+  --output "apresentacao_tema.html" \
+  --template auto  # ou: notion, mapa-mental, tech-futurista
+```
+
+**Algoritmo de decisão automática:**
+```python
+def escolher_template(roteiro):
+    # Analisa o roteiro
+    if "arquitetura" in roteiro or "componentes" in roteiro:
+        return "mapa-mental"
+    elif "lançamento" in roteiro or "novidade" in roteiro:
+        return "tech-futurista"
+    else:
+        return "notion"  # padrão
+```
+
+---
+
+## Configurações Customizáveis
+
+**Arquivo:** `config/visual-explainer.json`
+
+```json
+{
+  "tema": {
+    "dark_mode": true,
+    "cor_acento": "#3b82f6",
+    "fonte_principal": "Inter",
+    "fonte_mono": "JetBrains Mono"
+  },
+  "apresentacao": {
+    "mostrar_timer": true,
+    "mostrar_progresso": true,
+    "auto_fullscreen": false,
+    "duracao_transicao_ms": 300
+  },
+  "notas_apresentador": {
+    "visivel": true,
+    "posicao": "inferior",
+    "altura_maxima": "25vh"
+  }
+}
+```
+
+---
+
+## Responsividade (OBRIGATÓRIO)
+
+### ⚠️ REGRA ABSOLUTA: 100% DOS CARDS VISÍVEIS
+
+**Todos os templates DEVEM garantir que NENHUM card fique cortado/escondido em QUALQUER resolução.**
+
+### ✅ CSS CORRETO (Grid Responsivo):
+
+```css
+/* Container de cards - USA ISTO */
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  grid-auto-rows: auto; /* NUNCA fixar altura */
+  width: 100%;
+  padding: 2rem;
+}
+
+/* Media queries para breakpoints */
+@media (max-width: 768px) {
+  .cards-container {
+    grid-template-columns: 1fr; /* 1 coluna mobile */
+    gap: 1rem;
+    padding: 1rem;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .cards-container {
+    grid-template-columns: repeat(2, 1fr); /* 2 colunas tablet */
+  }
+}
+
+@media (min-width: 1025px) {
+  .cards-container {
+    grid-template-columns: repeat(3, 1fr); /* 3+ colunas desktop */
+  }
+}
+
+/* Card individual */
+.card {
+  background: #1a1a1a;
+  border-radius: 12px;
+  padding: 1.5rem;
+  min-height: 120px; /* min-height OK, height NÃO */
+  height: auto; /* Altura automática sempre */
+}
+```
+
+### ✅ CSS CORRETO (Flexbox Responsivo):
+
+```css
+/* Container flex - USA ISTO */
+.flex-container {
+  display: flex;
+  flex-wrap: wrap; /* OBRIGATÓRIO para responsividade */
+  gap: 1.5rem;
+  width: 100%;
+  padding: 2rem;
+}
+
+.flex-card {
+  flex: 1 1 280px; /* Grow | Shrink | Base */
+  min-width: 280px;
+  max-width: 400px;
+  height: auto; /* NUNCA fixar */
+}
+
+@media (max-width: 768px) {
+  .flex-card {
+    flex: 1 1 100%; /* 100% largura mobile */
+    max-width: 100%;
+  }
+}
+```
+
+### ❌ CSS ERRADO (NÃO USAR):
+
+```css
+/* ❌ ERRADO - Overflow esconde conteúdo */
+.bad-container {
+  overflow: hidden; /* NUNCA fazer isso */
+  height: 100vh; /* NUNCA fixar altura do container */
+}
+
+/* ❌ ERRADO - Cards cortados */
+.bad-card {
+  height: 200px; /* NUNCA fixar altura */
+  white-space: nowrap; /* NUNCA impedir quebra */
+  overflow: hidden; /* NUNCA esconder overflow */
+}
+
+/* ❌ ERRADO - Grid sem wrap */
+.bad-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* Sem auto-fit/auto-fill */
+  /* Cards vão ficar minúsculos em mobile! */
+}
+```
+
+### Breakpoints Padrão:
+
+| Resolução | Layout | Colunas Cards |
+|-----------|--------|---------------|
+| < 768px (Mobile) | 1 coluna | 100% largura |
+| 768-1024px (Tablet) | 2 colunas | 50% cada |
+| 1025-1440px (Desktop) | 3 colunas | 33% cada |
+| > 1440px (Ultrawide) | 4 colunas | 25% cada |
+
+### Validação Visual (Checklist):
+
+Antes de salvar HTML, SEMPRE verificar:
+- [ ] Testado em 375px (mobile pequeno)
+- [ ] Testado em 768px (tablet)
+- [ ] Testado em 1920px (desktop)
+- [ ] Testado em 2560px (ultrawide)
+- [ ] Scroll vertical funciona (se necessário)
+- [ ] Nenhum card cortado
+- [ ] Nenhum texto escondido
+- [ ] Sem overflow:hidden em containers de conteúdo
+
+---
+
+## Performance e Otimizações
+
+### Checklist de Performance:
+- ✅ CSS minificado
+- ✅ JavaScript otimizado (< 50KB)
+- ✅ Imagens otimizadas (WebP quando possível)
+- ✅ Lazy loading de seções off-screen
+- ✅ Debounce em eventos de scroll/resize
+- ✅ RequestAnimationFrame para animações
+- ✅ **Responsividade TOTAL (todos os cards visíveis)**
+
+### Compatibilidade:
+- Chrome/Edge 90+
+- Firefox 88+
+- Safari 14+
+
+---
+
+## Extensibilidade Futura
+
+**Possíveis adições:**
+- [ ] Template Timeline/Narrativo
+- [ ] Template Dashboard/Comparação
+- [ ] Export para PDF (via print CSS)
+- [ ] Gravação de áudio sincronizada
+- [ ] Highlights/anotações ao vivo
+- [ ] Integração com OBS (browser source)

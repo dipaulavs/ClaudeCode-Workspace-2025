@@ -17,9 +17,11 @@ Use esta skill automaticamente quando o usuário:
 
 **IMPORTANTE:** Esta skill é **totalmente automática** - NÃO pedir confirmação ao usuário. Executar imediatamente.
 
+**INTEGRAÇÃO:** Segue sistema minimalista do [[obsidian-organizer]] - pasta `📺 Vídeos/`, formato limpo, data/hora BR.
+
 ---
 
-## Workflow Automático (3 Etapas)
+## Workflow Automático (2 Etapas)
 
 ### Etapa 1: Transcrever Vídeo 🎙️
 
@@ -39,71 +41,72 @@ python3 scripts/extraction/transcribe_video.py "URL_DO_VIDEO"
 
 ---
 
-### Etapa 2: Análise Completa com IA 🤖
+### Etapa 2: Análise e Salvamento no Obsidian 🤖💾
 
 **Você (Claude) deve fazer:**
 
 1. **Ler a transcrição completa** do arquivo gerado
-2. **Analisar profundamente** o conteúdo
-3. **Classificar o tipo** do vídeo:
-   - **Tutorial:** Passo a passo prático com código/comandos
-   - **Metodologia:** Frameworks, processos, sistemas
-   - **Aula:** Conteúdo educacional teórico
-   - **Noticia:** Novidades, lançamentos, updates
-   - **Review:** Análises de ferramentas/produtos
-   - **Outros:** Não se encaixa nas categorias acima
+2. **Analisar o conteúdo** e extrair:
+   - **Título descritivo** (extraído do contexto)
+   - **Categoria** (tutorial, notícia, curso, aula, review)
+   - **Resumo breve** (2-3 linhas)
+   - **Principais aprendizados** (3-5 pontos práticos)
+   - **Tags relevantes** (baseadas no conteúdo)
 
-4. **Extrair informações:**
-   - **Resumo executivo** (2-3 parágrafos)
-   - **Key takeaways** (5-7 pontos principais)
-   - **Análise personalizada** baseada no tipo:
-     - Tutorial → Passo a passo detalhado
-     - Metodologia → Frameworks e conceitos
-     - Aula → Conceitos e teoria
-     - Review → Prós, contras, alternativas
-   - **Recursos mencionados** (ferramentas, links, código)
-   - **Aplicações práticas**
+3. **Criar arquivo no Obsidian** manualmente (Write tool)
 
-**Diretrizes de análise:**
-- Seja **detalhado e completo**
-- Foque no **valor prático**
-- Organize de forma **escaneável**
-- Use **exemplos concretos**
-- Identifique **ações aplicáveis**
+**Local:**
+```
+📺 Vídeos/[TITULO_DESCRITIVO].md
+```
+
+**Template (formato obsidian-organizer):**
+```yaml
+---
+assistido: DD/MM/YYYY HH:mm
+categoria: [tutorial|noticia|curso|aula|review]
+link: [URL_DO_VIDEO]
+tags:
+  - youtube
+  - [tag1]
+  - [tag2]
+---
+
+# [Título Descritivo]
+
+## 🎬 Informações
+
+**Link:** [URL]
+**Categoria:** [categoria]
+**Assistido em:** DD/MM/YYYY HH:mm
 
 ---
 
-### Etapa 3: Salvar no Obsidian 💾
+## 📝 Resumo
 
-**Ferramenta:** `scripts/obsidian/add_youtube_video.py`
+[Resumo breve de 2-3 linhas]
 
-**Comando:**
-```bash
-python3 scripts/obsidian/add_youtube_video.py "URL" \
-  --titulo "TITULO_EXTRAIDO" \
-  --canal "NOME_DO_CANAL" \
-  --categoria "CATEGORIA_IDENTIFICADA" \
-  --duracao "XXmin" \
-  --rating 5 \
-  --tipo "TIPO_CLASSIFICADO" \
-  --transcricao "/caminho/para/transcription.txt"
+---
+
+## 💡 Principais Aprendizados
+
+- [Aprendizado 1]
+- [Aprendizado 2]
+- [Aprendizado 3]
+
+---
+
+> [!note]- 📄 Transcrição Completa (clique para expandir)
+> [Conteúdo completo da transcrição aqui]
 ```
 
-**Parâmetros importantes:**
-- `--tipo`: Use o tipo classificado na Etapa 2 (tutorial|metodologia|aula|noticia|review|outros)
-- `--categoria`: Tema principal (IA & Automação, Programação, Marketing, etc)
-- `--rating`: Sempre 5 (padrão para vídeos estudados)
-- `--transcricao`: Caminho do arquivo gerado na Etapa 1
-
-**Estrutura no Obsidian:**
-```
-09 - YouTube Knowledge/
-├── Videos/
-│   └── [TIPO]/
-│       └── 2025-11-02 - [TITULO].md
-└── Transcricoes/
-    └── [VIDEO_ID].txt
-```
+**Regras do template:**
+- **Data/hora:** Formato brasileiro DD/MM/YYYY HH:mm (usar hora atual)
+- **Categoria:** OBRIGATÓRIA (escolher a mais adequada)
+- **Resumo:** Conciso e direto (2-3 linhas máximo)
+- **Aprendizados:** Práticos e acionáveis (3-5 itens)
+- **Transcrição:** SEMPRE usar callout colapsável `> [!note]-`
+- **Tags:** Relevantes ao conteúdo (além de youtube)
 
 ---
 
@@ -115,40 +118,39 @@ python3 scripts/obsidian/add_youtube_video.py "URL" \
 2. VOCÊ (automaticamente):
    a) Transcrever com Whisper
    b) Ler transcrição completa
-   c) Analisar e classificar
-   d) Extrair insights
-   e) Salvar no Obsidian com análise completa
-   f) Atualizar dashboard automaticamente
+   c) Analisar conteúdo e classificar categoria
+   d) Extrair resumo e aprendizados práticos
+   e) Criar arquivo markdown no Obsidian (Write tool)
+   f) Confirmar criação ao usuário
 
-3. Informar ao usuário:
-   "✅ Vídeo estudado! Análise completa salva no Obsidian."
+3. Informar ao usuário (formato minimalista):
+   "✅ Vídeo estudado e salvo!"
 ```
 
 ---
 
 ## Output Final para o Usuário
 
-Após completar todas as etapas, mostrar:
+**Formato minimalista** (seguir obsidian-organizer):
 
 ```
-✅ Vídeo estudado e analisado completamente!
+✅ Vídeo estudado e salvo!
 
-📊 Resumo da Análise
-🎬 Vídeo: [TITULO]
-👤 Canal: [CANAL]
-⏱️ Duração: [DURACAO]
-📂 Tipo: [TIPO]
-⭐ Rating: 5/5
+📺 [Título do Vídeo]
+📍 Salvo em: 📺 Vídeos/
+⏰ Assistido: DD/MM/YYYY HH:mm
+🏷️ Categoria: [categoria]
 
-🎯 Principais Aprendizados
-[Listar 3-5 key takeaways principais]
+💡 Principais aprendizados: [resumo de 1 linha]
 
-📂 Localização no Obsidian
-- Dashboard: [[YouTube Dashboard]]
-- Resumo completo: [[TITULO_DO_VIDEO]]
-
-💡 Próximo passo sugerido: [sugestão relevante baseada no conteúdo]
+Ver em: [[📺 Vídeos]] ou [[Título do Vídeo]]
 ```
+
+**NÃO usar:**
+- ❌ Emojis excessivos
+- ❌ Textos longos explicativos
+- ❌ Dashboard/Rating (não existe mais)
+- ❌ Estrutura complexa
 
 ---
 
@@ -156,18 +158,22 @@ Após completar todas as etapas, mostrar:
 
 ### ✅ FAZER:
 - Executar **imediatamente sem confirmação**
-- Analisar a transcrição **completa** (não resumir)
-- Classificar **automaticamente** o tipo do vídeo
-- Extrair **insights profundos e práticos**
-- Salvar no **vault correto** do Obsidian
-- Atualizar **dashboard automaticamente**
+- Analisar a transcrição **completa**
+- Classificar **categoria** (obrigatória: tutorial|noticia|curso|aula|review)
+- Extrair **aprendizados práticos** (3-5 itens)
+- Criar em **📺 Vídeos/** (pasta raiz, sem subpastas)
+- Usar **data/hora brasileira** (DD/MM/YYYY HH:mm)
+- Transcrição **sempre colapsável** (`> [!note]-`)
+- Resposta **minimalista** ao usuário
 
 ### ❌ NÃO FAZER:
 - **NÃO** pedir confirmação ao usuário
 - **NÃO** pular a transcrição (sempre usar Whisper)
-- **NÃO** resumir superficialmente
-- **NÃO** esquecer de classificar o tipo
-- **NÃO** salvar no vault errado
+- **NÃO** usar estrutura antiga (09 - YouTube Knowledge/)
+- **NÃO** esquecer categoria obrigatória
+- **NÃO** criar subpastas por tipo
+- **NÃO** usar formato de data americano
+- **NÃO** deixar transcrição visível (sempre callout colapsável)
 
 ---
 
@@ -176,6 +182,11 @@ Após completar todas as etapas, mostrar:
 **Vault Obsidian:**
 ```
 /Users/felipemdepaula/Library/Mobile Documents/iCloud~md~obsidian/Documents/Claude-code-ios/
+```
+
+**Pasta destino:**
+```
+📺 Vídeos/
 ```
 
 **Transcrições temporárias:**
@@ -187,39 +198,55 @@ Após completar todas as etapas, mostrar:
 
 ---
 
+## Categorias Válidas
+
+Escolher a mais adequada (obrigatória):
+- `tutorial` - Passo a passo prático
+- `noticia` - Novidades, lançamentos, updates
+- `curso` - Aula de curso/formação
+- `aula` - Conteúdo educacional único
+- `review` - Análise de ferramenta/produto
+
+---
+
 ## Troubleshooting
 
 **Erro: Vault não encontrado**
-- Verificar caminho em `config/obsidian_config.py`
-- Garantir que Obsidian está aberto
+- Verificar caminho do vault
+- Garantir que pasta `📺 Vídeos/` existe
 
 **Erro: Transcrição falhou**
 - Verificar URL do vídeo
-- Checar se yt-dlp está instalado
 - Verificar conexão com API Whisper
+- Checar saldo da API
 
-**Erro: Classificação incorreta**
-- Na próxima iteração, corrigir com feedback
-- Atualizar skill (Etapa E - Enhance)
+**Erro: Categoria não definida**
+- SEMPRE escolher uma das 5 categorias válidas
+- Não criar categorias customizadas
+
+**Erro: Formato de data errado**
+- SEMPRE usar DD/MM/YYYY HH:mm (brasileiro)
+- Não usar MM/DD/YYYY (americano)
 
 ---
 
 ## Histórico de Iterações
 
-**v1.0 (2025-11-02):** Skill inicial criada
-- Workflow de 3 etapas definido
-- Classificação automática por tipo
-- Análise profunda com IA
-- Salvamento automático no Obsidian
+**v2.0 (2025-11-03):** Integração com obsidian-organizer
+- Migrado para sistema minimalista
+- Pasta única `📺 Vídeos/` (sem subpastas por tipo)
+- Template simplificado e limpo
+- Data/hora brasileira obrigatória
+- Transcrição colapsável com callout
+- Resposta minimalista ao usuário
 
-**Próximas melhorias (Etapa E):**
-- [ ] Testar com diferentes tipos de vídeo
-- [ ] Refinar classificação automática
-- [ ] Ajustar profundidade da análise
-- [ ] Adicionar edge cases encontrados
+**v1.0 (2025-11-02):** Skill inicial
+- Workflow de 3 etapas
+- Estrutura complexa (09 - YouTube Knowledge/)
+- Análise profunda com múltiplos campos
 
 ---
 
 **Criado em:** 02/11/2025
-**Framework usado:** MASTER (aplicado na prática!)
-**Status:** ✅ Pronto para uso e iteração
+**Atualizado em:** 03/11/2025
+**Status:** ✅ Ativo e alinhado com obsidian-organizer

@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1-Hour MVP Blueprint - SaaS From Zero to Deploy</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            overflow: hidden;
+        }
+
+        .presentation {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+        }
+
+        .slide {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            padding: 60px 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .slide h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            color: #fff;
+            line-height: 1.2;
+        }
+
+        .slide h2 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 40px;
+            color: #ffd700;
+            line-height: 1.3;
+        }
+
+        .slide p {
+            font-size: 1.5rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            color: #b0b0b0;
+        }
+
+        /* Progress Bar */
+        .progress {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 8px;
+            z-index: 1000;
+        }
+
+        .progress-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #333;
+            transition: all 0.3s ease;
+        }
+
+        .progress-dot.active {
+            background: #ffd700;
+            transform: scale(1.2);
+        }
+
+        /* Timeline Block */
+        .timeline-block {
+            background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
+            border-left: 4px solid #ffd700;
+            padding: 30px;
+            margin: 20px 0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-block:hover {
+            border-left-color: #00d4ff;
+            transform: translateX(10px);
+            background: linear-gradient(135deg, #252525 0%, #1a1a1a 100%);
+        }
+
+        .timeline-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 15px;
+        }
+
+        .time-badge {
+            background: #ffd700;
+            color: #0a0a0a;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .timeline-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .timeline-content {
+            font-size: 1.3rem;
+            color: #b0b0b0;
+            line-height: 1.6;
+        }
+
+        .timeline-tools {
+            margin-top: 15px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .tool-tag {
+            background: #00d4ff20;
+            color: #00d4ff;
+            padding: 6px 12px;
+            border-radius: 12px;
+            font-size: 1rem;
+            border: 1px solid #00d4ff40;
+        }
+
+        /* Stack Grid */
+        .stack-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .stack-card {
+            background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
+            border: 2px solid #333;
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .stack-card:hover {
+            border-color: #ffd700;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.2);
+        }
+
+        .stack-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .stack-name {
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        .stack-desc {
+            font-size: 1.1rem;
+            color: #888;
+            line-height: 1.4;
+        }
+
+        /* Cost Breakdown */
+        .cost-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .cost-card {
+            background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
+            border-left: 4px solid #00ff88;
+            padding: 30px;
+            border-radius: 8px;
+        }
+
+        .cost-label {
+            font-size: 1.3rem;
+            color: #888;
+            margin-bottom: 10px;
+        }
+
+        .cost-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #00ff88;
+            margin-bottom: 15px;
+        }
+
+        .cost-details {
+            font-size: 1.1rem;
+            color: #b0b0b0;
+            line-height: 1.6;
+        }
+
+        /* Key Insights */
+        .insight-list {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .insight-item {
+            display: flex;
+            align-items: start;
+            gap: 20px;
+            background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
+            padding: 25px;
+            border-radius: 8px;
+            border-left: 4px solid #ff6b6b;
+            transition: all 0.3s ease;
+        }
+
+        .insight-item:hover {
+            border-left-color: #ffd700;
+            transform: translateX(10px);
+        }
+
+        .insight-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #ffd700;
+            min-width: 60px;
+        }
+
+        .insight-content {
+            flex: 1;
+        }
+
+        .insight-title {
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+
+        .insight-desc {
+            font-size: 1.2rem;
+            color: #b0b0b0;
+            line-height: 1.5;
+        }
+
+        /* CTA Slide */
+        .cta-container {
+            text-align: center;
+        }
+
+        .cta-actions {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .cta-action {
+            text-align: center;
+        }
+
+        .cta-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+
+        .cta-text {
+            font-size: 1.8rem;
+            color: #fff;
+            font-weight: 500;
+        }
+
+        .social-handle {
+            font-size: 1.5rem;
+            color: #ffd700;
+            margin-top: 10px;
+        }
+
+        /* Summary Grid */
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .summary-column {
+            background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
+            border-top: 4px solid #ffd700;
+            padding: 30px;
+            border-radius: 8px;
+        }
+
+        .summary-column h3 {
+            font-size: 1.8rem;
+            color: #ffd700;
+            margin-bottom: 20px;
+        }
+
+        .summary-column ul {
+            list-style: none;
+        }
+
+        .summary-column li {
+            font-size: 1.2rem;
+            color: #b0b0b0;
+            margin-bottom: 12px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .summary-column li:before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: #ffd700;
+        }
+
+        /* Subtitle */
+        .subtitle {
+            font-size: 1.8rem;
+            color: #888;
+            margin-top: -20px;
+            margin-bottom: 30px;
+        }
+
+        /* Highlight Text */
+        .highlight {
+            color: #ffd700;
+            font-weight: 600;
+        }
+
+        .highlight-cyan {
+            color: #00d4ff;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="progress" id="progress"></div>
+
+    <div class="presentation">
+        <!-- Slide 1: Title -->
+        <div class="slide active">
+            <h1>1-Hour MVP Blueprint</h1>
+            <p class="subtitle">From Zero to Production-Ready SaaS</p>
+            <p style="font-size: 2rem; margin-top: 40px;">Um guia prático para construir e fazer deploy de um SaaS completo em <span class="highlight">60 minutos</span></p>
+            <p style="font-size: 1.3rem; margin-top: 30px; color: #666;">Baseado no workflow real de desenvolvimento usando Google AI Studio + Supabase + Stripe</p>
+        </div>
+
+        <!-- Slide 2: The Stack -->
+        <div class="slide">
+            <h2>The Modern MVP Stack</h2>
+            <p>Ferramentas que tornam o impossível possível</p>
+
+            <div class="stack-grid">
+                <div class="stack-card">
+                    <div class="stack-icon">🤖</div>
+                    <div class="stack-name">Google AI Studio</div>
+                    <div class="stack-desc">Prototipagem instantânea de UI com código HTML/CSS/JS</div>
+                </div>
+
+                <div class="stack-card">
+                    <div class="stack-icon">🗄️</div>
+                    <div class="stack-name">Supabase</div>
+                    <div class="stack-desc">Database PostgreSQL + Auth Magic Link zero config</div>
+                </div>
+
+                <div class="stack-card">
+                    <div class="stack-icon">💳</div>
+                    <div class="stack-name">Stripe</div>
+                    <div class="stack-desc">Pagamentos e gerenciamento de assinaturas</div>
+                </div>
+
+                <div class="stack-card">
+                    <div class="stack-icon">🚀</div>
+                    <div class="stack-name">DigitalOcean</div>
+                    <div class="stack-desc">Deploy via CLI em segundos</div>
+                </div>
+
+                <div class="stack-card">
+                    <div class="stack-icon">⚡</div>
+                    <div class="stack-name">Claude Code</div>
+                    <div class="stack-desc">Automação de tarefas repetitivas</div>
+                </div>
+
+                <div class="stack-card">
+                    <div class="stack-icon">🎨</div>
+                    <div class="stack-name">Nano Banana</div>
+                    <div class="stack-desc">Geração de imagens com Gemini 2.5 Flash</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Hour Breakdown -->
+        <div class="slide">
+            <h2>The 60-Minute Breakdown</h2>
+            <p>Cada minuto conta quando você está construindo rápido</p>
+
+            <div class="timeline-block">
+                <div class="timeline-header">
+                    <div class="time-badge">0-15 min</div>
+                    <div class="timeline-title">Setup & Frontend Prototype</div>
+                </div>
+                <div class="timeline-content">
+                    Use Google AI Studio para gerar o frontend inicial. Prompt: "Create a SaaS landing page with pricing tiers". Iterações rápidas até ter UI base.
+                </div>
+                <div class="timeline-tools">
+                    <span class="tool-tag">Google AI Studio</span>
+                    <span class="tool-tag">HTML/CSS/JS</span>
+                </div>
+            </div>
+
+            <div class="timeline-block">
+                <div class="timeline-header">
+                    <div class="time-badge">15-30 min</div>
+                    <div class="timeline-title">Database + Authentication</div>
+                </div>
+                <div class="timeline-content">
+                    Configure Supabase: crie projeto, tables (users, credits, transactions), ative Magic Link Auth. Zero código de backend.
+                </div>
+                <div class="timeline-tools">
+                    <span class="tool-tag">Supabase</span>
+                    <span class="tool-tag">PostgreSQL</span>
+                    <span class="tool-tag">Magic Link</span>
+                </div>
+            </div>
+
+            <div class="timeline-block">
+                <div class="timeline-header">
+                    <div class="time-badge">30-45 min</div>
+                    <div class="timeline-title">Payments Integration</div>
+                </div>
+                <div class="timeline-content">
+                    Stripe setup: crie produtos (Free 50 créditos, Pro $29.99 500 créditos), configure webhooks, integre checkout.
+                </div>
+                <div class="timeline-tools">
+                    <span class="tool-tag">Stripe API</span>
+                    <span class="tool-tag">Webhooks</span>
+                </div>
+            </div>
+
+            <div class="timeline-block">
+                <div class="timeline-header">
+                    <div class="time-badge">45-60 min</div>
+                    <div class="timeline-title">Deploy to Production</div>
+                </div>
+                <div class="timeline-content">
+                    Use DigitalOcean CLI para deploy. Configure env vars, teste payment flow, e você está live!
+                </div>
+                <div class="timeline-tools">
+                    <span class="tool-tag">DigitalOcean CLI</span>
+                    <span class="tool-tag">Environment Vars</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: The Credit System -->
+        <div class="slide">
+            <h2>Monetization Model: Credits System</h2>
+            <p>Como estruturar pricing que escala</p>
+
+            <div class="cost-grid">
+                <div class="cost-card" style="border-left-color: #888;">
+                    <div class="cost-label">Free Tier</div>
+                    <div class="cost-value">50 images</div>
+                    <div class="cost-details">
+                        • Magic Link signup<br>
+                        • 50 créditos mensais<br>
+                        • 1 imagem = 1 crédito<br>
+                        • Reset automático todo mês
+                    </div>
+                </div>
+
+                <div class="cost-card">
+                    <div class="cost-label">Pro Tier</div>
+                    <div class="cost-value">$29.99/mês</div>
+                    <div class="cost-details">
+                        • 500 imagens por mês (10x)<br>
+                        • API access (futuro)<br>
+                        • Priority generation<br>
+                        • Gerenciado via Stripe
+                    </div>
+                </div>
+
+                <div class="cost-card" style="border-left-color: #ff6b6b;">
+                    <div class="cost-label">Your Cost per Image</div>
+                    <div class="cost-value">$0.006</div>
+                    <div class="cost-details">
+                        • Gemini 2.5 Flash via Nano Banana<br>
+                        • Margem de ~99.98% no plano Pro<br>
+                        • 500 imagens custam ~$3 para você
+                    </div>
+                </div>
+
+                <div class="cost-card" style="border-left-color: #ffd700;">
+                    <div class="cost-label">Infrastructure</div>
+                    <div class="cost-value">~$10/mês</div>
+                    <div class="cost-details">
+                        • Supabase Free Tier (0-50k users)<br>
+                        • DigitalOcean App Platform ($5/mês)<br>
+                        • Stripe 2.9% + $0.30 por transação
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Key Automations -->
+        <div class="slide">
+            <h2>Claude Code Automations</h2>
+            <p>Tarefas que você automatiza uma vez e nunca mais faz manual</p>
+
+            <div class="insight-list">
+                <div class="insight-item">
+                    <div class="insight-number">01</div>
+                    <div class="insight-content">
+                        <div class="insight-title">Environment Setup</div>
+                        <div class="insight-desc">Script que configura .env com todas as API keys (Supabase, Stripe, Nano Banana) em um comando</div>
+                    </div>
+                </div>
+
+                <div class="insight-item">
+                    <div class="insight-number">02</div>
+                    <div class="insight-content">
+                        <div class="insight-title">Database Migrations</div>
+                        <div class="insight-desc">SQL scripts versionados que criam/atualizam schema do Supabase automaticamente</div>
+                    </div>
+                </div>
+
+                <div class="insight-item">
+                    <div class="insight-number">03</div>
+                    <div class="insight-content">
+                        <div class="insight-title">Stripe Product Sync</div>
+                        <div class="insight-desc">Cria produtos Free/Pro no Stripe e sincroniza IDs com database local</div>
+                    </div>
+                </div>
+
+                <div class="insight-item">
+                    <div class="insight-number">04</div>
+                    <div class="insight-content">
+                        <div class="insight-title">Deploy Pipeline</div>
+                        <div class="insight-desc">DigitalOcean CLI one-liner que faz build + deploy + health check</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Critical Learnings -->
+        <div class="slide">
+            <h2>What Makes This Work</h2>
+            <p>Os 5 princípios que separam MVPs que shippam de projetos que morrem</p>
+
+            <div class="insight-list">
+                <div class="insight-item">
+                    <div class="insight-number">01</div>
+                    <div class="insight-content">
+                        <div class="insight-title">Speed > Perfection</div>
+                        <div class="insight-desc">Google AI Studio gera UI "boa o suficiente" em minutos. Refine depois com usuários reais, não antes.</div>
+                    </div>
+                </div>
+
+                <div class="insight-item">
+                    <div class="insight-number">02</div>
+                    <div class="insight-content">
+                        <div class="insight-title">Managed Services = Menos Código</div>
+                        <div class="insight-desc">Supabase Auth elimina semanas de desenvolvimento. Stripe gerencia toda a lógica de billing. Você foca no produto.</div>
+                    </div>
+                </div>
+
+                <div class="insight-item">
+                    <div class="insight-number">03</div>
+                    <div class="insight-content">
+                        <div class="insight-title">Credits > Subscriptions (para começar)</div>
+                        <div class="insight-desc">Sistema de créditos é mais simples de implementar e entender para usuários do que tiers complexos.</div>
+                    </div>
+                </div>
+
+                <div class="insight-item">
+                    <div class="insight-number">04</div>
+                    <div class="insight-content">
+                        <div class="insight-title">CLI Tools Acceleram Deploy</div>
+                        <div class="insight-desc">DigitalOcean CLI transforma 20 minutos de clicks em UI em 30 segundos de terminal.</div>
+                    </div>
+                </div>
+
+                <div class="insight-item">
+                    <div class="insight-number">05</div>
+                    <div class="insight-content">
+                        <div class="insight-title">Automação Documenta Decisões</div>
+                        <div class="insight-desc">Scripts de setup forçam você a documentar cada configuração. 6 meses depois você agradece.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Summary -->
+        <div class="slide">
+            <h2>Resumo: 1-Hour MVP Framework</h2>
+
+            <div class="summary-grid">
+                <div class="summary-column">
+                    <h3>Stack Essencial</h3>
+                    <ul>
+                        <li>Google AI Studio (UI rápida)</li>
+                        <li>Supabase (DB + Auth)</li>
+                        <li>Stripe (Pagamentos)</li>
+                        <li>DigitalOcean (Deploy)</li>
+                        <li>Claude Code (Automação)</li>
+                    </ul>
+                </div>
+
+                <div class="summary-column">
+                    <h3>Timeline Crítica</h3>
+                    <ul>
+                        <li>0-15min: Frontend prototype</li>
+                        <li>15-30min: DB + Auth setup</li>
+                        <li>30-45min: Stripe integration</li>
+                        <li>45-60min: Deploy production</li>
+                    </ul>
+                </div>
+
+                <div class="summary-column">
+                    <h3>Monetização Simples</h3>
+                    <ul>
+                        <li>Free: 50 créditos/mês</li>
+                        <li>Pro: $29.99 = 500 créditos</li>
+                        <li>Custo: $0.006/imagem</li>
+                        <li>Margem: ~99% no Pro</li>
+                    </ul>
+                </div>
+            </div>
+
+            <p style="margin-top: 50px; font-size: 1.8rem; text-align: center;">
+                O segredo não é construir o SaaS perfeito.<br>
+                É construir <span class="highlight">rápido o suficiente</span> para validar com usuários reais.
+            </p>
+        </div>
+
+        <!-- Slide 8: CTA -->
+        <div class="slide">
+            <div class="cta-container">
+                <h1>Obrigado!</h1>
+                <p style="font-size: 1.8rem; margin-top: 20px; color: #888;">Se esse blueprint foi útil:</p>
+
+                <div class="cta-actions">
+                    <div class="cta-action">
+                        <div class="cta-icon">👍</div>
+                        <div class="cta-text">Deixe seu Like</div>
+                    </div>
+
+                    <div class="cta-action">
+                        <div class="cta-icon">🔔</div>
+                        <div class="cta-text">Inscreva-se no Canal</div>
+                    </div>
+
+                    <div class="cta-action">
+                        <div class="cta-icon">📸</div>
+                        <div class="cta-text">Instagram</div>
+                        <div class="social-handle">@eusoupromptus</div>
+                    </div>
+                </div>
+
+                <p style="font-size: 1.5rem; margin-top: 60px; color: #666;">
+                    Quer ver esse workflow completo em ação? Link na descrição.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        // Create progress dots
+        const progressContainer = document.getElementById('progress');
+        for (let i = 0; i < totalSlides; i++) {
+            const dot = document.createElement('div');
+            dot.className = 'progress-dot';
+            if (i === 0) dot.classList.add('active');
+            progressContainer.appendChild(dot);
+        }
+        const progressDots = document.querySelectorAll('.progress-dot');
+
+        function showSlide(n) {
+            slides[currentSlide].classList.remove('active');
+            progressDots[currentSlide].classList.remove('active');
+
+            currentSlide = (n + totalSlides) % totalSlides;
+
+            slides[currentSlide].classList.add('active');
+            progressDots[currentSlide].classList.add('active');
+        }
+
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+
+        function prevSlide() {
+            showSlide(currentSlide - 1);
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                e.preventDefault();
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                prevSlide();
+            } else if (e.key === 'f' || e.key === 'F') {
+                e.preventDefault();
+                if (!document.fullscreenElement) {
+                    document.documentElement.requestFullscreen();
+                } else {
+                    document.exitFullscreen();
+                }
+            } else if (e.key === 'Escape') {
+                if (document.fullscreenElement) {
+                    document.exitFullscreen();
+                }
+            }
+        });
+
+        // Click navigation (left/right sides)
+        document.addEventListener('click', (e) => {
+            const width = window.innerWidth;
+            if (e.clientX < width / 2) {
+                prevSlide();
+            } else {
+                nextSlide();
+            }
+        });
+
+        // Prevent click on interactive elements from triggering slide navigation
+        document.querySelectorAll('.timeline-block, .stack-card, .insight-item').forEach(el => {
+            el.addEventListener('click', (e) => {
+                e.stopPropagation();
+            });
+        });
+    </script>
+</body>
+</html>

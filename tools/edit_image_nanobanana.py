@@ -73,7 +73,7 @@ def upload_to_nextcloud(image_path, expire_days=1):
         raise
 
 
-def edit_image(prompt, image_url, output_format="PNG", image_size="auto"):
+def edit_image(prompt, image_url, output_format="PNG", image_size="auto", num_outputs=1):
     """
     Edita uma imagem usando o Nano Banana Edit API
 
@@ -82,6 +82,7 @@ def edit_image(prompt, image_url, output_format="PNG", image_size="auto"):
         image_url: URL da imagem de referência
         output_format: Formato da imagem (PNG ou JPEG)
         image_size: Proporção da imagem (1:1, 9:16, 16:9, 3:4, 4:3, 3:2, 2:3, 5:4, 4:5, 21:9, auto)
+        num_outputs: Número de variações a gerar (1-4)
 
     Returns:
         task_id se sucesso, None se erro
@@ -93,7 +94,8 @@ def edit_image(prompt, image_url, output_format="PNG", image_size="auto"):
             "prompt": prompt,
             "image_urls": [image_url],
             "image_size": image_size,
-            "output_format": output_format.lower()
+            "output_format": output_format.lower(),
+            "num_outputs": num_outputs
         }
     }
 

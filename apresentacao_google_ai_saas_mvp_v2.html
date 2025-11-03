@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Google AI Studio → SaaS MVP Workflow</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #0f0f0f;
+      color: #e5e5e5;
+      font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      overflow: hidden;
+      height: 100vh;
+    }
+
+    .toolbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: #0a0a0a;
+      border-bottom: 1px solid #2a2a2a;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+    }
+
+    .toolbar-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .toolbar-controls {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .btn {
+      background: #1a1a1a;
+      border: 1px solid #2a2a2a;
+      color: #a0a0a0;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: all 200ms ease;
+    }
+
+    .btn:hover {
+      background: #2a2a2a;
+      color: #e5e5e5;
+      border-color: #3b82f6;
+    }
+
+    .zoom-display {
+      font-family: 'JetBrains Mono', monospace;
+      color: #64748b;
+      font-size: 0.9rem;
+      min-width: 60px;
+      text-align: center;
+    }
+
+    .canvas-container {
+      position: absolute;
+      top: 70px;
+      left: 0;
+      right: 0;
+      bottom: 160px;
+      overflow: hidden;
+      cursor: grab;
+    }
+
+    .canvas-container.panning {
+      cursor: grabbing;
+    }
+
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .nodo {
+      cursor: pointer;
+      transition: all 200ms ease;
+    }
+
+    .nodo rect {
+      transition: all 200ms ease;
+    }
+
+    .nodo:hover rect {
+      filter: brightness(1.2);
+      stroke-width: 3;
+    }
+
+    .nodo.highlighted rect {
+      filter: brightness(1.4) drop-shadow(0 0 20px currentColor);
+      stroke-width: 3;
+    }
+
+    .nodo text {
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .conexao {
+      transition: all 200ms ease;
+    }
+
+    .conexao.highlighted {
+      stroke-width: 3;
+      filter: drop-shadow(0 0 8px currentColor);
+    }
+
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.85);
+      z-index: 150;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal-content {
+      background: #1a1a1a;
+      border: 1px solid #2a2a2a;
+      border-radius: 12px;
+      padding: 2rem;
+      max-width: 600px;
+      max-height: 70vh;
+      overflow-y: auto;
+    }
+
+    .modal-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: #fff;
+    }
+
+    .modal-descricao {
+      font-size: 1.2rem;
+      color: #c7c7c7;
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+
+    .modal-detalhes {
+      font-size: 1.1rem;
+      color: #a0a0a0;
+      line-height: 1.6;
+    }
+
+    .modal-close {
+      margin-top: 1.5rem;
+      width: 100%;
+    }
+
+    .apresentador-notas {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #0a0a0a;
+      border-top: 2px solid #2a2a2a;
+      padding: 1.5rem 2rem;
+      max-height: 25vh;
+      overflow-y: auto;
+      z-index: 100;
+    }
+
+    .apresentador-notas-label {
+      font-size: 0.9rem;
+      color: #64748b;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .apresentador-notas-texto {
+      font-size: 1.1rem;
+      color: #94a3b8;
+      line-height: 1.6;
+    }
+
+    .controles {
+      position: fixed;
+      bottom: calc(25vh + 2rem);
+      right: 2rem;
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+      z-index: 100;
+      background: rgba(10, 10, 10, 0.8);
+      padding: 1rem 1.5rem;
+      border-radius: 8px;
+      border: 1px solid #2a2a2a;
+    }
+
+    .timer {
+      font-family: 'JetBrains Mono', 'Courier New', monospace;
+      font-size: 1.5rem;
+      color: #64748b;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .nodo {
+      animation: fadeIn 400ms ease-out;
+    }
+  </style>
+</head>
+<body>
+  <div class="toolbar">
+    <div class="toolbar-title">Google AI Studio → SaaS MVP Workflow</div>
+    <div class="toolbar-controls">
+      <button class="btn" onclick="zoomIn()">Zoom +</button>
+      <span class="zoom-display" id="zoom-display">100%</span>
+      <button class="btn" onclick="zoomOut()">Zoom -</button>
+      <button class="btn" onclick="resetView()">Reset</button>
+      <button class="btn" onclick="centerView()">Centralizar</button>
+      <button class="btn" onclick="toggleHelp()">?</button>
+    </div>
+  </div>
+
+  <div class="canvas-container" id="canvas">
+    <svg id="mapa-svg" viewBox="0 0 1600 1200">
+      <defs>
+        <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+          <path d="M0,0 L0,6 L9,3 z" fill="#64748b" />
+        </marker>
+
+        <filter id="glow">
+          <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+          <feMerge>
+            <feMergeNode in="coloredBlur"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+      </defs>
+
+      <g id="conexoes">
+        
+                <path class="conexao" d="M 255.0 450 L 180.0 450"
+                      stroke="#64748b" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                
+                <path class="conexao" d="M 400.0 450 L 325.0 450"
+                      stroke="#64748b" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                
+                <path class="conexao" d="M 545.0 450 L 470.0 450"
+                      stroke="#64748b" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                
+                <path class="conexao" d="M 690.0 450 L 615.0 450"
+                      stroke="#64748b" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                
+                <path class="conexao" d="M 835.0 450 L 760.0 450"
+                      stroke="#64748b" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                
+                <path class="conexao" d="M 980.0 450 L 905.0 450"
+                      stroke="#64748b" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                
+                <path class="conexao" d="M 1125.0 450 L 1050.0 450"
+                      stroke="#64748b" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                
+                <path class="conexao" d="M 1270.0 450 L 1195.0 450"
+                      stroke="#64748b" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                
+                <path class="conexao" d="M 1415.0 450 L 1340.0 450"
+                      stroke="#64748b" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                
+      </g>
+
+      <g id="nodos">
+        
+            <g class="nodo" data-nodo-id="nodo-1" onclick="openNodeModal('nodo-1')">
+                <rect x="35.0" y="405.0"
+                      width="220" height="90"
+                      rx="12" fill="#3b82f6" stroke="#475569" stroke-width="2"/>
+                <text x="145" y="450" text-anchor="middle"
+                      dominant-baseline="middle" fill="#ffffff"
+                      font-size="14" font-weight="600">
+                    Introdução: O Desafio
+                </text>
+            </g>
+            <g class="nodo" data-nodo-id="nodo-2" onclick="openNodeModal('nodo-2')">
+                <rect x="180.0" y="405.0"
+                      width="220" height="90"
+                      rx="12" fill="#8b5cf6" stroke="#475569" stroke-width="2"/>
+                <text x="290" y="450" text-anchor="middle"
+                      dominant-baseline="middle" fill="#ffffff"
+                      font-size="14" font-weight="600">
+                    Stack Tecnológica
+                </text>
+            </g>
+            <g class="nodo" data-nodo-id="nodo-3" onclick="openNodeModal('nodo-3')">
+                <rect x="325.0" y="405.0"
+                      width="220" height="90"
+                      rx="12" fill="#8b5cf6" stroke="#475569" stroke-width="2"/>
+                <text x="435" y="440" text-anchor="middle"
+                      dominant-baseline="middle" fill="#ffffff"
+                      font-size="14" font-weight="600">
+                    Etapa 1: Criar o Protótip
+                </text>
+            
+                <text x="435" y="462" text-anchor="middle"
+                      dominant-baseline="middle" fill="#ffffff"
+                      font-size="14" font-weight="600">
+                    o AI (Google AI Studio)
+                </text>
+                </g>
+            <g class="nodo" data-nodo-id="nodo-4" onclick="openNodeModal('nodo-4')">
+                <rect x="470.0" y="405.0"
+                      width="220" height="90"
+                      rx="12" fill="#8b5cf6" stroke="#475569" stroke-width="2"/>
+                <text x="580" y="440" text-anchor="middle"
+                      dominant-baseline="middle" fill="#ffffff"
+                      font-size="14" font-weight="600">
+                    Etapa 2: Setup do Banco d
+                </text>
+            
+                <text x="580" y="462" text-anchor="middle"
+                      dominant-baseline="middle" fill="#ffffff"
+                      font-size="14" font-weight="600">
+                    e Dados (Supabase)
+                </text>
+                </g>
+            <g class="nodo" data-nodo-id="nodo-5" onclick="openNodeModal('nodo-5')">
+                <rect x="615.0" y="405.0"
+                      width="220" height="90"
+                      rx="12" fill="#8b5cf6" stroke="#475569" stroke-width="2"/>
+                <text x="725" y="440" text-anchor="middle"
+                      dominant-baseline="middle" fill="#ffffff"
+                      font-size="14" font-weight="600">
+                    Etapa 3: Autenticação Mag
+                </text>
+            
+                <text x="725" y="462" text-anchor="middle"
+                      dominant-baseline="middle" fill="#ffffff"
+                      font-size="14" font-weight="600">
+                    ic Link (Supabase Auth)
+                </text>
+                </g>
+            <g class="nodo" data-nodo-id="nodo-6" onclick="openNodeModal('nodo-6')">
+                <rect x="760.0" y="405.0"
+                      width="220" height="90"
+                      rx="12" fill="#8b5cf6" stroke="#475569" stroke-width="2"/>
+                <text x="870" y="440" text-anchor="middle"
+                      dominant-baseline="middle" fill="#ffffff"
+                      font-size="14" font-weight="600">
+                    Etapa 4: Integração Strip
+                </text>
+            
+                <text x="870" y="462" text-anchor="middle"
+                      dominant-baseline="middle" fill="#ffffff"
+                      font-size="14" font-weight="600">
+                    e (Pagamentos)
+                </text>
+                </g>
+            <g class="nodo" data-nodo-id="nodo-7" onclick="openNodeModal('nodo-7')">
+                <rect x="905.0" y="405.0"
+                      width="220" height="90"
+                      rx="12" fill="#8b5cf6" stroke="#475569" stroke-width="2"/>
+                <text x="1015" y="440" text-anchor="middle"
+                      dominant-baseline="middle" fill="#ffffff"
+                      font-size="14" font-weight="600">
+                    Etapa 5: Backend com Edge
+                </text>
+            
+                <text x="1015" y="462" text-anchor="middle"
+                      dominant-baseline="middle" fill="#ffffff"
+                      font-size="14" font-weight="600">
+                     Functions (Supabase)
+                </text>
+                </g>
+            <g class="nodo" data-nodo-id="nodo-8" onclick="openNodeModal('nodo-8')">
+                <rect x="1050.0" y="405.0"
+                      width="220" height="90"
+                      rx="12" fill="#8b5cf6" stroke="#475569" stroke-width="2"/>
+                <text x="1160" y="440" text-anchor="middle"
+                      dominant-baseline="middle" fill="#ffffff"
+                      font-size="14" font-weight="600">
+                    Etapa 6: Sistema de Crédi
+                </text>
+            
+                <text x="1160" y="462" text-anchor="middle"
+                      dominant-baseline="middle" fill="#ffffff"
+                      font-size="14" font-weight="600">
+                    tos
+                </text>
+                </g>
+            <g class="nodo" data-nodo-id="nodo-9" onclick="openNodeModal('nodo-9')">
+                <rect x="1195.0" y="405.0"
+                      width="220" height="90"
+                      rx="12" fill="#8b5cf6" stroke="#475569" stroke-width="2"/>
+                <text x="1305" y="440" text-anchor="middle"
+                      dominant-baseline="middle" fill="#ffffff"
+                      font-size="14" font-weight="600">
+                    Resumo Final: Resultado e
+                </text>
+            
+                <text x="1305" y="462" text-anchor="middle"
+                      dominant-baseline="middle" fill="#ffffff"
+                      font-size="14" font-weight="600">
+                    m 1h06min
+                </text>
+                </g>
+            <g class="nodo" data-nodo-id="nodo-10" onclick="openNodeModal('nodo-10')">
+                <rect x="1340.0" y="405.0"
+                      width="220" height="90"
+                      rx="12" fill="#8b5cf6" stroke="#475569" stroke-width="2"/>
+                <text x="1450" y="450" text-anchor="middle"
+                      dominant-baseline="middle" fill="#ffffff"
+                      font-size="14" font-weight="600">
+                    Call to Action
+                </text>
+            </g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="apresentador-notas">
+    <div class="apresentador-notas-label">📝 Notas do Apresentador</div>
+    <div class="apresentador-notas-texto" id="notas">Enfatizar que o processo é rápido (1h06min no total) e utiliza ferramentas modernas</div>
+  </div>
+
+  <div class="controles">
+    <div class="timer" id="timer">00:00</div>
+  </div>
+
+  <div class="modal-overlay" id="modal">
+    <div class="modal-content">
+      <h2 class="modal-title" id="modal-titulo"></h2>
+      <p class="modal-descricao" id="modal-descricao"></p>
+      <div class="modal-detalhes" id="modal-detalhes"></div>
+      <button class="btn modal-close" onclick="closeModal()">Fechar (ESC)</button>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="help-modal">
+    <div class="modal-content">
+      <h2 class="modal-title">⌨️ Atalhos de Teclado</h2>
+      <div style="display: grid; gap: 1rem; margin-top: 1.5rem;">
+        <div style="display: flex; justify-content: space-between;">
+          <span class="btn" style="cursor: default;">+</span>
+          <span style="flex: 1; margin-left: 1rem; color: #c7c7c7;">Zoom in</span>
+        </div>
+        <div style="display: flex; justify-content: space-between;">
+          <span class="btn" style="cursor: default;">-</span>
+          <span style="flex: 1; margin-left: 1rem; color: #c7c7c7;">Zoom out</span>
+        </div>
+        <div style="display: flex; justify-content: space-between;">
+          <span class="btn" style="cursor: default;">R</span>
+          <span style="flex: 1; margin-left: 1rem; color: #c7c7c7;">Reset view</span>
+        </div>
+        <div style="display: flex; justify-content: space-between;">
+          <span class="btn" style="cursor: default;">C</span>
+          <span style="flex: 1; margin-left: 1rem; color: #c7c7c7;">Centralizar</span>
+        </div>
+        <div style="display: flex; justify-content: space-between;">
+          <span class="btn" style="cursor: default;">F / F11</span>
+          <span style="flex: 1; margin-left: 1rem; color: #c7c7c7;">Fullscreen</span>
+        </div>
+        <div style="display: flex; justify-content: space-between;">
+          <span class="btn" style="cursor: default;">ESC</span>
+          <span style="flex: 1; margin-left: 1rem; color: #c7c7c7;">Fechar modal / Sair fullscreen</span>
+        </div>
+        <div style="display: flex; justify-content: space-between;">
+          <span class="btn" style="cursor: default;">?</span>
+          <span style="flex: 1; margin-left: 1rem; color: #c7c7c7;">Mostrar esta ajuda</span>
+        </div>
+      </div>
+      <button class="btn modal-close" onclick="toggleHelp()">Fechar</button>
+    </div>
+  </div>
+
+  <script>
+    let zoom = 1.0;
+    let panX = 0;
+    let panY = 0;
+    let isPanning = false;
+    let startX, startY;
+    let timerSeconds = 0;
+    let timerInterval = null;
+
+    const canvas = document.getElementById('canvas');
+    const svg = document.getElementById('mapa-svg');
+    const nodosData = [{"id": "nodo-1", "titulo": "Introdução: O Desafio", "conceito": "Transformar projetos do Google AI Studio em aplicações SaaS prontas para produção", "bullets": ["Projeto inicial no Google AI Studio é apenas MVP/frontend", "Falta backend, autenticação, banco de dados e pagamentos", "Objetivo: workflow completo e replicável"], "notas": "Enfatizar que o processo é rápido (1h06min no total) e utiliza ferramentas modernas"}, {"id": "nodo-2", "titulo": "Stack Tecnológica", "conceito": "Ferramentas escolhidas para máxima velocidade de desenvolvimento", "bullets": ["Google AI Studio (Gemini SDK multimodal)", "Supabase (Database + Auth via Magic Link)", "Stripe (Pagamentos + CLI para webhooks)", "Claude Code (Automação de desenvolvimento)"], "notas": "Mencionar que Gemini SDK é multimodal (imagens, vídeos, texto, scraping) em uma única API"}, {"id": "nodo-3", "titulo": "Etapa 1: Criar o Protótipo AI (Google AI Studio)", "conceito": "Usar interface visual do Google AI Studio para prototipar funcionalidade core", "bullets": ["Build → Descrever funcionalidade desejada", "Exemplo: \"Upload image → Extract keywords → Generate 4 thumbnail assets\"", "Google gera frontend + lógica de IA", "Download do projeto inicial"], "notas": "Esta etapa gera apenas frontend puro. Não tem backend ainda."}, {"id": "nodo-4", "titulo": "Etapa 2: Setup do Banco de Dados (Supabase)", "conceito": "Configurar Supabase local para armazenar dados de usuários e gerações", "bullets": ["Comando: `supabase init` (requer Supabase CLI)", "Schema automático: users, image_generations, subscription_status", "Database local para testes", "Variáveis .env para trocar depois"], "notas": "Supabase permite desenvolvimento 100% local antes de deploy"}, {"id": "nodo-5", "titulo": "Etapa 3: Autenticação Magic Link (Supabase Auth)", "conceito": "Sistema de login sem senha usando links mágicos por email", "bullets": ["Magic Link = email com token único", "Usuário clica → Login automático", "Integração nativa com Supabase", "UI: Header com \"Create Account\" e \"Sign In\""], "notas": "Testar criação de conta + login antes de avançar"}, {"id": "nodo-6", "titulo": "Etapa 4: Integração Stripe (Pagamentos)", "conceito": "Sistema de créditos com plano Free e Pro", "bullets": ["Stripe CLI: `stripe login` + webhook listener local", "2 planos: Free (50 imagens/mês) | Pro ($29.99 = 500 imagens/mês)", "Stripe Checkout para upgrade", "Webhooks processam confirmação de pagamento"], "notas": "Webhooks DEVEM rodar na URL correta (conferir listener antes de testar)"}, {"id": "nodo-7", "titulo": "Etapa 5: Backend com Edge Functions (Supabase)", "conceito": "Backend serverless usando Supabase Edge Functions (Deno)", "bullets": ["Edge Functions = código rodando no edge (sem servidor tradicional)", "Processa webhooks do Stripe", "Atualiza créditos do usuário", "Valida limites de uso"], "notas": "Alternativa ao FastAPI ou Express. Puramente serverless."}, {"id": "nodo-8", "titulo": "Etapa 6: Sistema de Créditos", "conceito": "Tracking de uso por usuário com UI visual", "bullets": ["Cada geração consome 1 crédito", "UI mostra créditos restantes", "Bloqueia geração se créditos = 0", "Webhook do Stripe adiciona créditos após pagamento"], "notas": "Testar fluxo completo: Free → Upgrade → Pro → Gerar imagem"}, {"id": "nodo-9", "titulo": "Resumo Final: Resultado em 1h06min", "conceito": "De zero a SaaS funcional em tempo recorde", "bullets": ["AI funcional (geração de thumbnails)", "Auth (Magic Link)", "Database (Supabase local)", "Pagamentos (Stripe + créditos)", "Backend serverless (Edge Functions)", "Gemini SDK multimodal = menos APIs", "Supabase = DB + Auth + Backend em um só", "Stripe CLI = webhooks locais instantâneos", "Claude Code = automação de tarefas repetitivas", "Deploy no DigitalOcean via CLI", "Push para GitHub", "Configurar variáveis de produção"], "notas": ""}, {"id": "nodo-10", "titulo": "Call to Action", "conceito": "", "bullets": [], "notas": ""}];
+
+    // Inicializar
+    document.addEventListener('DOMContentLoaded', () => {
+      setupPanning();
+      setupNodoClicks();
+      startTimer();
+      setupKeyboardShortcuts();
+      centerView();
+    });
+
+    function updateViewBox() {
+      const baseWidth = 1600;
+      const baseHeight = 1200;
+      const width = baseWidth / zoom;
+      const height = baseHeight / zoom;
+      const x = (baseWidth - width) / 2 - panX;
+      const y = (baseHeight - height) / 2 - panY;
+
+      svg.setAttribute('viewBox', `${x} ${y} ${width} ${height}`);
+      document.getElementById('zoom-display').textContent = Math.round(zoom * 100) + '%';
+    }
+
+    function zoomIn() {
+      zoom = Math.min(zoom * 1.2, 2.5);
+      updateViewBox();
+    }
+
+    function zoomOut() {
+      zoom = Math.max(zoom / 1.2, 0.5);
+      updateViewBox();
+    }
+
+    function setZoom(value) {
+      zoom = Math.max(0.5, Math.min(2.5, value));
+      updateViewBox();
+    }
+
+    function resetView() {
+      zoom = 1.0;
+      panX = 0;
+      panY = 0;
+      updateViewBox();
+    }
+
+    function centerView() {
+      panX = 0;
+      panY = 0;
+      updateViewBox();
+    }
+
+    function setupPanning() {
+      canvas.addEventListener('mousedown', (e) => {
+        isPanning = true;
+        startX = e.clientX - panX;
+        startY = e.clientY - panY;
+        canvas.classList.add('panning');
+      });
+
+      canvas.addEventListener('mousemove', (e) => {
+        if (!isPanning) return;
+        panX = e.clientX - startX;
+        panY = e.clientY - startY;
+        updateViewBox();
+      });
+
+      canvas.addEventListener('mouseup', () => {
+        isPanning = false;
+        canvas.classList.remove('panning');
+      });
+
+      canvas.addEventListener('mouseleave', () => {
+        isPanning = false;
+        canvas.classList.remove('panning');
+      });
+
+      // Zoom com scroll
+      canvas.addEventListener('wheel', (e) => {
+        e.preventDefault();
+        if (e.deltaY < 0) {
+          zoomIn();
+        } else {
+          zoomOut();
+        }
+      });
+    }
+
+    function setupNodoClicks() {
+      document.querySelectorAll('.nodo').forEach(nodo => {
+        nodo.addEventListener('click', () => {
+          const id = nodo.dataset.nodoId;
+          const data = nodosData[id];
+          if (data) {
+            showModal(data);
+          }
+        });
+
+        nodo.addEventListener('mouseenter', () => {
+          highlightNodo(nodo.dataset.nodoId);
+        });
+
+        nodo.addEventListener('mouseleave', () => {
+          clearHighlights();
+        });
+      });
+    }
+
+    function highlightNodo(nodoId) {
+      // Highlight o nodo
+      const nodo = document.querySelector(`[data-nodo-id="${nodoId}"]`);
+      if (nodo) {
+        nodo.classList.add('highlighted');
+      }
+
+      // Highlight conexões relacionadas
+      document.querySelectorAll(`.conexao[data-from="${nodoId}"], .conexao[data-to="${nodoId}"]`)
+        .forEach(c => c.classList.add('highlighted'));
+    }
+
+    function clearHighlights() {
+      document.querySelectorAll('.highlighted').forEach(el => {
+        el.classList.remove('highlighted');
+      });
+    }
+
+    function showModal(data) {
+      document.getElementById('modal-titulo').textContent = data.titulo;
+      document.getElementById('modal-descricao').textContent = data.descricao;
+      document.getElementById('modal-detalhes').innerHTML = data.detalhes || '';
+      document.getElementById('modal').classList.add('active');
+    }
+
+    function closeModal() {
+      document.getElementById('modal').classList.remove('active');
+    }
+
+    function toggleHelp() {
+      document.getElementById('help-modal').classList.toggle('active');
+    }
+
+    function startTimer() {
+      if (timerInterval) clearInterval(timerInterval);
+
+      timerInterval = setInterval(() => {
+        timerSeconds++;
+        const minutes = Math.floor(timerSeconds / 60);
+        const seconds = timerSeconds % 60;
+        document.getElementById('timer').textContent =
+          `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+      }, 1000);
+    }
+
+    function setupKeyboardShortcuts() {
+      document.addEventListener('keydown', (e) => {
+        switch(e.key) {
+          case '+':
+          case '=':
+            e.preventDefault();
+            zoomIn();
+            break;
+          case '-':
+          case '_':
+            e.preventDefault();
+            zoomOut();
+            break;
+          case 'r':
+          case 'R':
+            e.preventDefault();
+            resetView();
+            break;
+          case 'c':
+          case 'C':
+            e.preventDefault();
+            centerView();
+            break;
+          case 'f':
+          case 'F':
+            e.preventDefault();
+            toggleFullscreen();
+            break;
+          case 'F11':
+            toggleFullscreen();
+            break;
+          case 'Escape':
+            if (document.getElementById('modal').classList.contains('active')) {
+              closeModal();
+            } else if (document.getElementById('help-modal').classList.contains('active')) {
+              toggleHelp();
+            } else if (document.fullscreenElement) {
+              document.exitFullscreen();
+            }
+            break;
+          case '?':
+            e.preventDefault();
+            toggleHelp();
+            break;
+        }
+      });
+    }
+
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen();
+      } else {
+        document.exitFullscreen();
+      }
+    }
+
+    // Função para abrir modal de nodo específico
+    function openNodeModal(nodoId) {
+      const nodo = nodosData.find(n => n.id === nodoId);
+      if (!nodo) return;
+
+      // Preparar bullets HTML
+      let bulletsHtml = '';
+      if (nodo.bullets && nodo.bullets.length > 0) {
+        bulletsHtml = '<ul style="margin-top: 1rem; line-height: 1.8;">';
+        nodo.bullets.forEach(bullet => {
+          bulletsHtml += `<li>${bullet}</li>`;
+        });
+        bulletsHtml += '</ul>';
+      }
+
+      // Preencher modal
+      document.getElementById('modal-titulo').textContent = nodo.titulo;
+      document.getElementById('modal-descricao').textContent = nodo.conceito || '';
+      document.getElementById('modal-detalhes').innerHTML = bulletsHtml;
+
+      // Atualizar notas do apresentador
+      document.getElementById('notas').textContent = nodo.notas || 'Sem notas para este nodo';
+
+      // Mostrar modal
+      document.getElementById('modal').classList.add('active');
+
+      // Highlight do nodo
+      highlightNode(nodoId);
+    }
+
+    // Inicializar ao carregar
+    window.addEventListener('DOMContentLoaded', () => {
+      setupKeyboardShortcuts();
+      startTimer();
+      centerView();
+    });
+  </script>
+</body>
+</html>

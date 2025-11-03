@@ -41,38 +41,72 @@ Aplicar a metodologia completa de Alex Hormozi para gerar leads escaláveis e pr
 - Resultado/transformação prometida
 - Plataforma destino (YouTube, Instagram, Ads, etc)
 
-**2. Gerar Headlines/Hooks - SEMPRE APLICAR TODOS OS 5 FRAMEWORKS:**
+**2. Gerar Hooks Magnéticos - SEMPRE APLICAR 2-3 DOS 7 ELEMENTOS:**
 
-**Framework 1: FAR PAST** (Passado Distante)
-- Conectar com evento/época distante relevante
-- Gerar 2-3 variações
+**7 Elementos de Hook** (ver [hooks-biblioteca.md](hooks-biblioteca.md) para 50+ hooks validados):
+1. **RECENCY** - "Ontem descobri...", "Acabei de testar..."
+2. **RELEVANCY** - "Se você [persona específica]...", "Para quem [situação]..."
+3. **CELEBRITY** - "Como [autoridade] conseguiu...", "Roubei isso de [expert]..."
+4. **PROXIMITY** - "No seu negócio...", "Na sua cidade..."
+5. **CONFLICT** - "Por que [crença comum] está errada", "[A] vs [B]"
+6. **UNUSUAL** - "Eu não faço [ação esperada]...", "Parece loucura mas..."
+7. **ONGOING** - "Estou testando isso agora...", "Dia 7 de 30 fazendo..."
 
-**Framework 2: RECENT PAST** (Passado Recente)
-- Evento recente que mudou tudo
-- Gerar 2-3 variações
+**Combinar 2-3 elementos** para máximo impacto (ex: Recency + Unusual + Relevancy)
 
-**Framework 3: PRESENT** (Presente)
-- Situação atual que precisa mudar AGORA
-- Gerar 2-3 variações
+**3. Gerar Headlines - ESCOLHER ENTRE 30 FRAMEWORKS:**
 
-**Framework 4: TRENDING** (Tendência)
-- Movimento/tendência crescente
-- Gerar 2-3 variações
+Ver [headlines-frameworks.md](headlines-frameworks.md) para frameworks completos organizados em 13 categorias:
+- Transformação (Antes→Depois, Número+Resultado, Tempo Específico)
+- Revelação/Segredo (Segredo Escondido, Insight Contrário, Roubo Autorizado)
+- Erros/Avisos (Erro Custoso, Múltiplos Erros, Alerta Urgente)
+- Método/Sistema (Sistema Nomeado, Passo a Passo, Blueprint)
+- E mais 9 categorias...
 
-**Framework 5: MANUFACTURED** (Criado/Fabricado)
-- Criar evento/estatística própria
-- Gerar 2-3 variações
+**Fórmula Master:**
+[Número] [Forma/Método] para [Avatar Específico] conseguir [Resultado Desejado] em [Prazo] sem [Dor/Esforço]
 
-**Total:** 10-15 headlines para usuário escolher
+**Total:** Gerar 10-15 headlines usando frameworks variados para usuário escolher
 
-**Cada headline DEVE seguir:**
-- Hook (captura atenção com framework)
-- Retain (promessa de valor)
-- Reward (solução clara)
-- Big Promise + Proof/Curiosity
+**4. Estruturar Conteúdo - Escolher Mecanismo de Retenção:**
 
-**3. Gerar Pacote Completo:**
-- Descrição YouTube (Headline + Timestamps + Links + CTA + Hashtags)
+Ver [retain-formulas.md](retain-formulas.md) para estruturas completas:
+- **Listas** - "X formas de...", "X erros que..."
+- **Steps** - "Passo a passo", "O guia completo"
+- **Stories** - Jornada, transformação, caso real
+
+**5. Aplicar Equação de Valor em Cada Elemento:**
+
+Ver [equacao-valor.md](equacao-valor.md) para framework completo:
+
+```
+Valor = (Dream Outcome × Perceived Likelihood)
+        ÷ (Time Delay × Effort & Sacrifice)
+```
+
+**AUMENTAR:** Dream Outcome (melhor resultado) + Perceived Likelihood (prova que funciona)
+**DIMINUIR:** Time Delay (resultado rápido) + Effort & Sacrifice (sem dor)
+
+**6. Criar CTA Persuasivo:**
+
+Ver [ctas-persuasivos.md](ctas-persuasivos.md) para 30 templates organizados em 5 níveis:
+- Nível 1: Soft (Save, Follow, Share)
+- Nível 2: Engajamento (Comment, Tag, DM palavra)
+- Nível 3: Lead Magnet (Link na bio, Baixe grátis)
+- Nível 4: Qualificação (Preencha form, Agende call)
+- Nível 5: Venda Direta (Compre agora, Vagas limitadas)
+
+**7. FORMATO ESPECIAL - Carrossel Instagram (6-10 slides):**
+
+Ver [carrosseis-instagram.md](carrosseis-instagram.md) para estrutura completa:
+- Slide 1: Hook (2-3 elementos + headline framework)
+- Slides 2-8: Retain & Reward (lista/steps/story)
+- Slide 9: Recap + Transição
+- Slide 10: CTA persuasivo
+
+**8. Gerar Pacote Completo:**
+- Headlines (10-15 opções com frameworks variados)
+- Descrição plataforma (YouTube: Headline + Timestamps + Links + CTA + Hashtags)
 - Body copy (Hook → Retain → Reward)
 - CTAs (Ask proporcional ao Give)
 - Hashtags estratégicas
@@ -123,9 +157,19 @@ Se tem tração → Implement Lead Getters
 ```
 
 ## Próximos Passos
+
+### Documentação Estratégica:
 - **Metodologia completa**: Ver [REFERENCE.md](REFERENCE.md)
 - **Casos práticos**: Ver [EXAMPLES.md](EXAMPLES.md)
 - **Problemas comuns**: Ver [TROUBLESHOOTING.md](TROUBLESHOOTING.md)
+
+### Recursos de Criação de Conteúdo (Progressive Disclosure):
+- **Hooks magnéticos**: Ver [hooks-biblioteca.md](hooks-biblioteca.md) - 7 elementos + 50 hooks validados
+- **Headlines frameworks**: Ver [headlines-frameworks.md](headlines-frameworks.md) - 30 frameworks em 13 categorias
+- **Estruturas de retenção**: Ver [retain-formulas.md](retain-formulas.md) - Listas, Steps, Stories
+- **CTAs persuasivos**: Ver [ctas-persuasivos.md](ctas-persuasivos.md) - 30 templates em 5 níveis
+- **Equação de valor**: Ver [equacao-valor.md](equacao-valor.md) - 4 elementos de valor
+- **Carrosséis Instagram**: Ver [carrosseis-instagram.md](carrosseis-instagram.md) - Formato 6-10 slides
 
 ## Métricas de Sucesso
 - CAC decrescente

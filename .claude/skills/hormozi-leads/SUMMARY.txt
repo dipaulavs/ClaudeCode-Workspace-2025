@@ -1,0 +1,318 @@
+╔══════════════════════════════════════════════════════════════════════╗
+║                  HORMOZI LEADS - CLAUDE CODE SKILL                   ║
+║          Metodologia Alex Hormozi + Copy de Alta Conversão           ║
+╚══════════════════════════════════════════════════════════════════════╝
+
+📦 ESTRUTURA CRIADA
+═══════════════════
+
+📁 .claude/skills/hormozi-leads/
+├── 📄 SKILL.md               (67 linhas)    ← COMEÇA AQUI
+├── 📄 REFERENCE.md        (1,794 linhas)    ← Metodologia completa
+├── 📄 EXAMPLES.md          (689 linhas)    ← Casos B2C + B2B
+├── 📄 TROUBLESHOOTING.md (1,322 linhas)    ← Problemas + Soluções
+└── 📄 README.md            (260 linhas)    ← Instruções
+
+📊 ESTATÍSTICAS
+═══════════════
+
+Total: 3,872 linhas de conteúdo estratégico
+Palavras: ~13,253 palavras
+Tempo de leitura: ~2-3 horas (completo)
+Tempo para começar: 5 minutos (SKILL.md)
+
+🎯 CORE FOUR (4 Formas de Conseguir Leads)
+═══════════════════════════════════════════
+
+1. 🤝 WARM OUTREACH
+   • Alcance quente (contatos existentes)
+   • Framework ACA (Acknowledge-Compliment-Ask)
+   • 100 mensagens/dia
+   • Custo: $0 | Tempo: Alto | Skill: Baixa
+
+2. 📱 POST FREE CONTENT
+   • Conteúdo gratuito que atrai
+   • Hook-Retain-Reward
+   • 1-3 posts/dia mínimo
+   • Custo: $0-500 | Tempo: Médio | Skill: Média
+
+3. ❄️  COLD OUTREACH
+   • Prospecção ativa
+   • Email/DM/Call sequences
+   • Personalização em escala
+   • Custo: $0-200 | Tempo: Alto | Skill: Alta
+
+4. 💰 RUN PAID ADS
+   • Anúncios pagos escaláveis
+   • Facebook/Google/LinkedIn
+   • Testing sistemático
+   • Custo: $500+ | Tempo: Baixo | Skill: Máxima
+
+🚀 LEAD GETTERS (4 Multiplicadores)
+═══════════════════════════════════
+
+1. 👥 CUSTOMER REFERRALS  → 4x conversão, $0 custo
+2. 💼 EMPLOYEES           → Escala operacional
+3. 🏢 AGENCIES            → Expertise terceirizada
+4. 🤝 AFFILIATES          → Network effect
+
+📈 ROADMAP DE ESCALA
+════════════════════
+
+Stage 1: $0 → $10k/mês
+├─ Core Four: 100% Warm
+├─ Lead Getters: Nenhum
+└─ Resultado: 5-10 clientes em 30 dias
+
+Stage 2: $10k → $50k/mês
+├─ Core Four: 50% Warm, 30% Content, 20% Cold
+├─ Lead Getters: Referrals (informal)
+└─ Resultado: 20-30 clientes
+
+Stage 3: $50k → $250k/mês
+├─ Core Four: 40% Content, 30% Cold, 20% Warm, 10% Paid
+├─ Lead Getters: Referrals formal, Employee #1
+└─ Resultado: 50-100+ clientes
+
+Stage 4: $250k → $1M/mês
+├─ Core Four: 40% Paid, 30% Content, 20% Cold, 10% Warm
+├─ Lead Getters: Referrals, Employees (3-5), Agency
+└─ Resultado: 200-500 clientes
+
+Stage 5: $1M → $10M+/mês
+├─ Core Four: 50% Paid, 25% Content, 15% Partners, 10% Outros
+├─ Lead Getters: Todos ativos em escala
+└─ Resultado: 1000+ clientes
+
+🛠️  FRAMEWORKS INCLUÍDOS
+═════════════════════════
+
+✓ Value Equation (Offer creation)
+✓ Content Unit (Hook-Retain-Reward)
+✓ ACA Framework (Warm conversations)
+✓ More-Better-New (Scaling systematic)
+✓ BANT Qualification (Lead quality)
+✓ Hook Components (7 viral elements)
+✓ Email Sequences (4-5 emails)
+✓ Ad Structure (Hook-Story-Offer)
+✓ Landing Page (5 sections)
+✓ Lead Magnet Creation
+✓ Referral Systems
+✓ Testing Hierarchy
+✓ E muito mais...
+
+📚 CASOS PRÁTICOS INCLUÍDOS
+═══════════════════════════
+
+CASO B2C: Fitness Online
+├─ Situação: $0 → $168,980 (ano 1)
+├─ Estratégia: Warm → Content → Ads → Referrals
+├─ Budget inicial: $500
+├─ Time: 1 founder → 3 pessoas
+└─ LTV:CAC: 18:1
+
+CASO B2B: Consultoria SaaS
+├─ Situação: $10k → $7.3M ARR (ano 1)
+├─ Estratégia: Content → Warm → Cold → Paid
+├─ Budget inicial: $5,000
+├─ Time: 2 founders → 6 pessoas
+└─ LTV:CAC: 70:1
+
+🔧 TROUBLESHOOTING COBERTO
+══════════════════════════
+
+Problema 1: Lead Magnet Não Converte
+├─ Diagnóstico: 5 perguntas-chave
+├─ Soluções: 5 abordagens diferentes
+└─ Métricas: Benchmarks e targets
+
+Problema 2: Custo Por Lead Muito Alto
+├─ Diagnóstico: Target CPL calculation
+├─ Soluções: Creative, Offer, Targeting, LP, Platform
+└─ Metrics: CPL, CTR, CVR optimization
+
+Problema 3: Leads Não Qualificados
+├─ Diagnóstico: BANT framework
+├─ Soluções: Qualification em cada etapa
+└─ Scripts: Call qualification
+
+Problema 4: Não Tenho Tempo
+├─ Diagnóstico: Time audit
+├─ Soluções: Time-blocking, Delegação, Batch, Automate
+└─ Tools: Automação e VA
+
+Problema 5: Competição É Forte
+├─ Diagnóstico: Diferenciação check
+├─ Soluções: Niche, Unique Mechanism, Omnipresença
+└─ Framework: Blue Ocean Strategy
+
+💡 COMO USAR ESTA SKILL
+════════════════════════
+
+1. INSTALAÇÃO:
+   → Copie os 4 .md files para ~/.claude/skills/hormozi-leads/
+
+2. ATIVAÇÃO AUTOMÁTICA:
+   Claude ativa quando você menciona:
+   • "hook", "headline", "CTA", "copy", "legenda"
+   • "ângulo", "body copy", "descrição SEO"
+   • "leads", "geração de leads", "aquisição"
+   • "tráfego", "prospects", "marketing"
+   • Problemas com CAC, CPL, conversão
+
+3. USO PRÁTICO:
+   a) Comece com SKILL.md (5 min)
+   b) Consulte REFERENCE.md para frameworks
+   c) Use EXAMPLES.md para contexto
+   d) Aplique TROUBLESHOOTING.md quando travar
+
+4. WORKFLOW RECOMENDADO:
+   Pergunta → Claude diagnostica → Consulta skill → 
+   Sugere táticas → Você implementa → Mede resultados
+
+📊 MÉTRICAS-CHAVE RASTREADAS
+═════════════════════════════
+
+GERAÇÃO:
+• Leads/dia, semana, mês
+• CPL (Cost Per Lead)
+• Fonte de leads
+
+QUALIFICAÇÃO:
+• Lead quality score (BANT)
+• Taxa de resposta
+• Show rate
+
+CONVERSÃO:
+• Lead-to-customer %
+• CAC (Customer Acquisition Cost)
+• ROAS (Return on Ad Spend)
+
+LIFETIME:
+• LTV (Lifetime Value)
+• LTV:CAC ratio
+• Churn/Retention rate
+
+🎯 BENCHMARKS INCLUÍDOS
+════════════════════════
+
+Email Outreach:
+├─ Open rate: 40-60%
+├─ Response rate: 5-15%
+└─ Meeting rate: 1-3%
+
+LinkedIn DM:
+├─ Accept rate: 30-50%
+├─ Response rate: 10-25%
+└─ Meeting rate: 2-5%
+
+Paid Ads (B2C):
+├─ CPL: $5-30
+├─ ROAS: 2.5-4x
+└─ Landing page CVR: 20-40%
+
+Paid Ads (B2B):
+├─ CPL: $50-200
+├─ ROAS: 3-8x
+└─ Landing page CVR: 10-20%
+
+⚡ QUICK WINS (Primeiras 24 Horas)
+══════════════════════════════════
+
+[✓] Hora 1-2: Leia SKILL.md + identifique seu Core Four inicial
+[✓] Hora 3-4: Crie lista de 100 warm contacts
+[✓] Hora 5-6: Personalize 10 mensagens usando ACA framework
+[✓] Hora 7-8: Envie as 10 mensagens
+[✓] Hora 9-10: Setup tracking de métricas básicas
+[✓] Hora 11-12: Crie lead magnet outline
+[✓] Hora 13-16: Produza lead magnet MVP
+[✓] Hora 17-20: Setup landing page simples
+[✓] Hora 21-22: Crie 5 posts de conteúdo
+[✓] Hora 23-24: Agende posts para próximos 5 dias
+
+Resultado esperado: 2-5 conversas iniciadas, base montada
+
+🏆 EXPECTATIVAS REALISTAS
+══════════════════════════
+
+10% aplicado → Mais leads que consegue dar conta
+50% aplicado → Nunca mais preocupa com leads
+100% aplicado → Problema é ESCALA, não leads
+
+Mas lembre-se:
+• Consistência > Perfeição
+• Action > Planning
+• Teste > Teoria
+• Iteração > Parada
+
+📞 QUANDO ESTA SKILL AJUDA
+═══════════════════════════
+
+✓ Começando do zero (0 clientes)
+✓ Estagnado (mesma receita há meses)
+✓ CPL/CAC muito alto
+✓ Leads não qualificados
+✓ Quer escalar geração
+✓ Precisa delegar marketing
+✓ Competição forte no mercado
+✓ Mudando de modelo de negócio
+✓ Lançando novo produto/serviço
+✓ Entrando em novo mercado
+
+🎓 QUEM SE BENEFICIA
+════════════════════
+
+• Founders/Empreendedores (estratégia)
+• Profissionais de Marketing (táticas)
+• Consultores (frameworks para clientes)
+• Sales Leaders (pipeline building)
+• Growth Hackers (optimização)
+• Agency Owners (client results)
+• Coaches (lead generation)
+• Freelancers (client acquisition)
+
+🔗 INTEGRA COM
+══════════════
+
+• $100M Offers skill (create irresistible offers)
+• Sales/Closing skills (convert leads)
+• Copywriting skills (improve messaging)
+• Funnel skills (optimize conversions)
+• Analytics skills (track metrics)
+
+💎 DIFERENCIAL DESTA SKILL
+═══════════════════════════
+
+✓ Baseada em livro comprovado ($100M+ resultados)
+✓ 3,872 linhas de conteúdo estratégico
+✓ Progressive Disclosure (fácil começar, profundo quando precisa)
+✓ Model-invoked (Claude ativa automaticamente)
+✓ 2 casos completos B2C + B2B
+✓ 5 problemas principais resolvidos
+✓ Frameworks copy-paste ready
+✓ Benchmarks e métricas reais
+✓ Scripts e templates inclusos
+✓ Roadmap de $0 a $100M+
+
+📝 FILOSOFIA
+════════════
+
+"Leads são o sangue vital do negócio.
+Domine geração de leads e você domina negócios."
+- Alex Hormozi
+
+PRINCÍPIOS CORE:
+1. Volume sempre vence
+2. Teste tudo
+3. Mova rápido
+4. Meça metrics
+5. Nunca pare
+
+════════════════════════════════════════════════════════════════
+
+🚀 PRÓXIMO PASSO: Pare de ler. Comece a fazer.
+
+A melhor hora de começar foi ontem.
+A segunda melhor hora é AGORA.
+
+════════════════════════════════════════════════════════════════

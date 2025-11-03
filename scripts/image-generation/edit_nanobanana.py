@@ -59,6 +59,8 @@ Características:
     parser.add_argument('--size', '-s', default='auto',
                         choices=['1:1', '9:16', '16:9', '3:4', '4:3', '3:2', '2:3', '5:4', '4:5', '21:9', 'auto'],
                         help='Proporção da imagem de saída. Padrão: auto')
+    parser.add_argument('--variations', '-v', type=int, default=1, choices=[1, 2, 3, 4],
+                        help='Número de variações a gerar (1-4). Padrão: 1')
 
     args = parser.parse_args()
 
@@ -87,11 +89,15 @@ Características:
             image_url = upload_to_nextcloud(args.image, expire_days=1)
 
         # Edita a imagem
+        if args.variations > 1:
+            print(f"🎨 Gerando {args.variations} variações...")
+
         task_id = edit_image(
             prompt=args.prompt,
             image_url=image_url,
             output_format=args.format,
-            image_size=args.size
+            image_size=args.size,
+            num_outputs=args.variations
         )
 
         if not task_id:

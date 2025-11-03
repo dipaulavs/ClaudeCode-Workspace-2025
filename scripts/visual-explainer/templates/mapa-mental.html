@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{TITULO}}</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #0f0f0f;
+      color: #e5e5e5;
+      font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      overflow: hidden;
+      height: 100vh;
+    }
+
+    .toolbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: #0a0a0a;
+      border-bottom: 1px solid #2a2a2a;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+    }
+
+    .toolbar-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .toolbar-controls {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .btn {
+      background: #1a1a1a;
+      border: 1px solid #2a2a2a;
+      color: #a0a0a0;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: all 200ms ease;
+    }
+
+    .btn:hover {
+      background: #2a2a2a;
+      color: #e5e5e5;
+      border-color: #3b82f6;
+    }
+
+    .zoom-display {
+      font-family: 'JetBrains Mono', monospace;
+      color: #64748b;
+      font-size: 0.9rem;
+      min-width: 60px;
+      text-align: center;
+    }
+
+    .canvas-container {
+      position: absolute;
+      top: 70px;
+      left: 0;
+      right: 0;
+      bottom: 160px;
+      overflow: hidden;
+      cursor: grab;
+    }
+
+    .canvas-container.panning {
+      cursor: grabbing;
+    }
+
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .nodo {
+      cursor: pointer;
+      transition: all 200ms ease;
+    }
+
+    .nodo rect {
+      transition: all 200ms ease;
+    }
+
+    .nodo:hover rect {
+      filter: brightness(1.2);
+      stroke-width: 3;
+    }
+
+    .nodo.highlighted rect {
+      filter: brightness(1.4) drop-shadow(0 0 20px currentColor);
+      stroke-width: 3;
+    }
+
+    .nodo text {
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .conexao {
+      transition: all 200ms ease;
+    }
+
+    .conexao.highlighted {
+      stroke-width: 3;
+      filter: drop-shadow(0 0 8px currentColor);
+    }
+
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.85);
+      z-index: 150;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal-content {
+      background: #1a1a1a;
+      border: 1px solid #2a2a2a;
+      border-radius: 12px;
+      padding: 2rem;
+      max-width: 600px;
+      max-height: 70vh;
+      overflow-y: auto;
+    }
+
+    .modal-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: #fff;
+    }
+
+    .modal-descricao {
+      font-size: 1.2rem;
+      color: #c7c7c7;
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+
+    .modal-detalhes {
+      font-size: 1.1rem;
+      color: #a0a0a0;
+      line-height: 1.6;
+    }
+
+    .modal-close {
+      margin-top: 1.5rem;
+      width: 100%;
+    }
+
+    .apresentador-notas {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #0a0a0a;
+      border-top: 2px solid #2a2a2a;
+      padding: 1.5rem 2rem;
+      max-height: 25vh;
+      overflow-y: auto;
+      z-index: 100;
+    }
+
+    .apresentador-notas-label {
+      font-size: 0.9rem;
+      color: #64748b;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .apresentador-notas-texto {
+      font-size: 1.1rem;
+      color: #94a3b8;
+      line-height: 1.6;
+    }
+
+    .controles {
+      position: fixed;
+      bottom: calc(25vh + 2rem);
+      right: 2rem;
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+      z-index: 100;
+      background: rgba(10, 10, 10, 0.8);
+      padding: 1rem 1.5rem;
+      border-radius: 8px;
+      border: 1px solid #2a2a2a;
+    }
+
+    .timer {
+      font-family: 'JetBrains Mono', 'Courier New', monospace;
+      font-size: 1.5rem;
+      color: #64748b;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .nodo {
+      animation: fadeIn 400ms ease-out;
+    }
+  </style>
+</head>
+<body>
+  <div class="toolbar">
+    <div class="toolbar-title">{{TITULO}}</div>
+    <div class="toolbar-controls">
+      <button class="btn" onclick="zoomIn()">Zoom +</button>
+      <span class="zoom-display" id="zoom-display">100%</span>
+      <button class="btn" onclick="zoomOut()">Zoom -</button>
+      <button class="btn" onclick="resetView()">Reset</button>
+      <button class="btn" onclick="centerView()">Centralizar</button>
+      <button class="btn" onclick="toggleHelp()">?</button>
+    </div>
+  </div>
+
+  <div class="canvas-container" id="canvas">
+    <svg id="mapa-svg" viewBox="0 0 1600 1200">
+      <defs>
+        <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+          <path d="M0,0 L0,6 L9,3 z" fill="#64748b" />
+        </marker>
+
+        <filter id="glow">
+          <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+          <feMerge>
+            <feMergeNode in="coloredBlur"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+      </defs>
+
+      <g id="conexoes">
+        {{CONEXOES}}
+      </g>
+
+      <g id="nodos">
+        {{NODOS}}
+      </g>
+    </svg>
+  </div>
+
+  <div class="apresentador-notas">
+    <div class="apresentador-notas-label">📝 Notas do Apresentador</div>
+    <div class="apresentador-notas-texto" id="notas">{{NOTAS}}</div>
+  </div>
+
+  <div class="controles">
+    <div class="timer" id="timer">00:00</div>
+  </div>
+
+  <div class="modal-overlay" id="modal">
+    <div class="modal-content">
+      <h2 class="modal-title" id="modal-titulo"></h2>
+      <p class="modal-descricao" id="modal-descricao"></p>
+      <div class="modal-detalhes" id="modal-detalhes"></div>
+      <button class="btn modal-close" onclick="closeModal()">Fechar (ESC)</button>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="help-modal">
+    <div class="modal-content">
+      <h2 class="modal-title">⌨️ Atalhos de Teclado</h2>
+      <div style="display: grid; gap: 1rem; margin-top: 1.5rem;">
+        <div style="display: flex; justify-content: space-between;">
+          <span class="btn" style="cursor: default;">+</span>
+          <span style="flex: 1; margin-left: 1rem; color: #c7c7c7;">Zoom in</span>
+        </div>
+        <div style="display: flex; justify-content: space-between;">
+          <span class="btn" style="cursor: default;">-</span>
+          <span style="flex: 1; margin-left: 1rem; color: #c7c7c7;">Zoom out</span>
+        </div>
+        <div style="display: flex; justify-content: space-between;">
+          <span class="btn" style="cursor: default;">R</span>
+          <span style="flex: 1; margin-left: 1rem; color: #c7c7c7;">Reset view</span>
+        </div>
+        <div style="display: flex; justify-content: space-between;">
+          <span class="btn" style="cursor: default;">C</span>
+          <span style="flex: 1; margin-left: 1rem; color: #c7c7c7;">Centralizar</span>
+        </div>
+        <div style="display: flex; justify-content: space-between;">
+          <span class="btn" style="cursor: default;">F / F11</span>
+          <span style="flex: 1; margin-left: 1rem; color: #c7c7c7;">Fullscreen</span>
+        </div>
+        <div style="display: flex; justify-content: space-between;">
+          <span class="btn" style="cursor: default;">ESC</span>
+          <span style="flex: 1; margin-left: 1rem; color: #c7c7c7;">Fechar modal / Sair fullscreen</span>
+        </div>
+        <div style="display: flex; justify-content: space-between;">
+          <span class="btn" style="cursor: default;">?</span>
+          <span style="flex: 1; margin-left: 1rem; color: #c7c7c7;">Mostrar esta ajuda</span>
+        </div>
+      </div>
+      <button class="btn modal-close" onclick="toggleHelp()">Fechar</button>
+    </div>
+  </div>
+
+  <script>
+    let zoom = 1.0;
+    let panX = 0;
+    let panY = 0;
+    let isPanning = false;
+    let startX, startY;
+    let timerSeconds = 0;
+    let timerInterval = null;
+
+    const canvas = document.getElementById('canvas');
+    const svg = document.getElementById('mapa-svg');
+    const nodosData = {{NODOS_DATA}};
+
+    // Inicializar
+    document.addEventListener('DOMContentLoaded', () => {
+      setupPanning();
+      setupNodoClicks();
+      startTimer();
+      setupKeyboardShortcuts();
+      centerView();
+    });
+
+    function updateViewBox() {
+      const baseWidth = 1600;
+      const baseHeight = 1200;
+      const width = baseWidth / zoom;
+      const height = baseHeight / zoom;
+      const x = (baseWidth - width) / 2 - panX;
+      const y = (baseHeight - height) / 2 - panY;
+
+      svg.setAttribute('viewBox', `${x} ${y} ${width} ${height}`);
+      document.getElementById('zoom-display').textContent = Math.round(zoom * 100) + '%';
+    }
+
+    function zoomIn() {
+      zoom = Math.min(zoom * 1.2, 2.5);
+      updateViewBox();
+    }
+
+    function zoomOut() {
+      zoom = Math.max(zoom / 1.2, 0.5);
+      updateViewBox();
+    }
+
+    function setZoom(value) {
+      zoom = Math.max(0.5, Math.min(2.5, value));
+      updateViewBox();
+    }
+
+    function resetView() {
+      zoom = 1.0;
+      panX = 0;
+      panY = 0;
+      updateViewBox();
+    }
+
+    function centerView() {
+      panX = 0;
+      panY = 0;
+      updateViewBox();
+    }
+
+    function setupPanning() {
+      canvas.addEventListener('mousedown', (e) => {
+        isPanning = true;
+        startX = e.clientX - panX;
+        startY = e.clientY - panY;
+        canvas.classList.add('panning');
+      });
+
+      canvas.addEventListener('mousemove', (e) => {
+        if (!isPanning) return;
+        panX = e.clientX - startX;
+        panY = e.clientY - startY;
+        updateViewBox();
+      });
+
+      canvas.addEventListener('mouseup', () => {
+        isPanning = false;
+        canvas.classList.remove('panning');
+      });
+
+      canvas.addEventListener('mouseleave', () => {
+        isPanning = false;
+        canvas.classList.remove('panning');
+      });
+
+      // Zoom com scroll
+      canvas.addEventListener('wheel', (e) => {
+        e.preventDefault();
+        if (e.deltaY < 0) {
+          zoomIn();
+        } else {
+          zoomOut();
+        }
+      });
+    }
+
+    function setupNodoClicks() {
+      document.querySelectorAll('.nodo').forEach(nodo => {
+        nodo.addEventListener('click', () => {
+          const id = nodo.dataset.nodoId;
+          const data = nodosData[id];
+          if (data) {
+            showModal(data);
+          }
+        });
+
+        nodo.addEventListener('mouseenter', () => {
+          highlightNodo(nodo.dataset.nodoId);
+        });
+
+        nodo.addEventListener('mouseleave', () => {
+          clearHighlights();
+        });
+      });
+    }
+
+    function highlightNodo(nodoId) {
+      // Highlight o nodo
+      const nodo = document.querySelector(`[data-nodo-id="${nodoId}"]`);
+      if (nodo) {
+        nodo.classList.add('highlighted');
+      }
+
+      // Highlight conexões relacionadas
+      document.querySelectorAll(`.conexao[data-from="${nodoId}"], .conexao[data-to="${nodoId}"]`)
+        .forEach(c => c.classList.add('highlighted'));
+    }
+
+    function clearHighlights() {
+      document.querySelectorAll('.highlighted').forEach(el => {
+        el.classList.remove('highlighted');
+      });
+    }
+
+    function showModal(data) {
+      document.getElementById('modal-titulo').textContent = data.titulo;
+      document.getElementById('modal-descricao').textContent = data.descricao;
+      document.getElementById('modal-detalhes').innerHTML = data.detalhes || '';
+      document.getElementById('modal').classList.add('active');
+    }
+
+    function closeModal() {
+      document.getElementById('modal').classList.remove('active');
+    }
+
+    function toggleHelp() {
+      document.getElementById('help-modal').classList.toggle('active');
+    }
+
+    function startTimer() {
+      if (timerInterval) clearInterval(timerInterval);
+
+      timerInterval = setInterval(() => {
+        timerSeconds++;
+        const minutes = Math.floor(timerSeconds / 60);
+        const seconds = timerSeconds % 60;
+        document.getElementById('timer').textContent =
+          `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+      }, 1000);
+    }
+
+    function setupKeyboardShortcuts() {
+      document.addEventListener('keydown', (e) => {
+        switch(e.key) {
+          case '+':
+          case '=':
+            e.preventDefault();
+            zoomIn();
+            break;
+          case '-':
+          case '_':
+            e.preventDefault();
+            zoomOut();
+            break;
+          case 'r':
+          case 'R':
+            e.preventDefault();
+            resetView();
+            break;
+          case 'c':
+          case 'C':
+            e.preventDefault();
+            centerView();
+            break;
+          case 'f':
+          case 'F':
+            e.preventDefault();
+            toggleFullscreen();
+            break;
+          case 'F11':
+            toggleFullscreen();
+            break;
+          case 'Escape':
+            if (document.getElementById('modal').classList.contains('active')) {
+              closeModal();
+            } else if (document.getElementById('help-modal').classList.contains('active')) {
+              toggleHelp();
+            } else if (document.fullscreenElement) {
+              document.exitFullscreen();
+            }
+            break;
+          case '?':
+            e.preventDefault();
+            toggleHelp();
+            break;
+        }
+      });
+    }
+
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen();
+      } else {
+        document.exitFullscreen();
+      }
+    }
+
+    // Função para abrir modal de nodo específico
+    function openNodeModal(nodoId) {
+      const nodo = nodosData.find(n => n.id === nodoId);
+      if (!nodo) return;
+
+      // Preparar bullets HTML
+      let bulletsHtml = '';
+      if (nodo.bullets && nodo.bullets.length > 0) {
+        bulletsHtml = '<ul style="margin-top: 1rem; line-height: 1.8;">';
+        nodo.bullets.forEach(bullet => {
+          bulletsHtml += `<li>${bullet}</li>`;
+        });
+        bulletsHtml += '</ul>';
+      }
+
+      // Preencher modal
+      document.getElementById('modal-titulo').textContent = nodo.titulo;
+      document.getElementById('modal-descricao').textContent = nodo.conceito || '';
+      document.getElementById('modal-detalhes').innerHTML = bulletsHtml;
+
+      // Atualizar notas do apresentador
+      document.getElementById('notas').textContent = nodo.notas || 'Sem notas para este nodo';
+
+      // Mostrar modal
+      document.getElementById('modal').classList.add('active');
+
+      // Highlight do nodo
+      highlightNode(nodoId);
+    }
+
+    // Inicializar ao carregar
+    window.addEventListener('DOMContentLoaded', () => {
+      setupKeyboardShortcuts();
+      startTimer();
+      centerView();
+    });
+  </script>
+</body>
+</html>

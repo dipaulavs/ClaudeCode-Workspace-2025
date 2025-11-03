@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{TITULO}}</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #0f0f0f;
+      color: #e5e5e5;
+      font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 3rem 2rem;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .nav-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 3rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid #2a2a2a;
+    }
+
+    .nav-btn {
+      background: #1a1a1a;
+      border: 1px solid #2a2a2a;
+      color: #a0a0a0;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: all 200ms ease;
+    }
+
+    .nav-btn:hover:not(:disabled) {
+      background: #2a2a2a;
+      color: #e5e5e5;
+      border-color: #3b82f6;
+      transform: translateY(-2px);
+    }
+
+    .nav-btn:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+
+    .slide-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #ffffff;
+      flex: 1;
+      text-align: center;
+      margin: 0 2rem;
+    }
+
+    .slide {
+      display: none;
+      flex: 1;
+      animation: fadeInSlide 400ms ease-out;
+    }
+
+    .slide.active {
+      display: block;
+    }
+
+    @keyframes fadeInSlide {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Animações removidas para performance */
+
+    .conceito-principal {
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: #ffffff;
+      margin-bottom: 0.5rem;
+      padding-left: 1rem;
+      border-left: 4px solid #3b82f6;
+    }
+
+    .conceito-badge {
+      display: inline-block;
+      background: rgba(59, 130, 246, 0.1);
+      color: #3b82f6;
+      padding: 0.25rem 0.75rem;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      margin-bottom: 1.5rem;
+    }
+
+    .explicacao {
+      font-size: 1.3rem;
+      color: #c7c7c7;
+      margin: 2rem 0;
+      line-height: 1.8;
+    }
+
+    .analogia {
+      background: #1a1a1a;
+      border-left: 4px solid #8b5cf6;
+      padding: 1.5rem 2rem;
+      margin: 2.5rem 0;
+      border-radius: 8px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .analogia::before {
+      content: '💡';
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      font-size: 2rem;
+      opacity: 0.3;
+    }
+
+    .analogia-label {
+      font-weight: 600;
+      color: #8b5cf6;
+      font-size: 1.1rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .analogia-texto {
+      font-size: 1.2rem;
+      color: #c7c7c7;
+      line-height: 1.7;
+    }
+
+    .pontos-chave {
+      list-style: none;
+      margin: 2.5rem 0;
+    }
+
+    .pontos-chave li {
+      font-size: 1.2rem;
+      color: #c7c7c7;
+      margin: 1.25rem 0;
+      padding-left: 2.5rem;
+      position: relative;
+    }
+
+    .pontos-chave li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: #10b981;
+      font-weight: 700;
+      font-size: 1.4rem;
+    }
+
+    /* CARDS CLICÁVEIS */
+    .card-clickable {
+      background: #1a1a1a;
+      border: 2px solid #2a2a2a;
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      cursor: pointer;
+      transition: all 300ms ease;
+      position: relative;
+    }
+
+    .card-clickable:hover {
+      background: #252525;
+      border-color: #3b82f6;
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(59, 130, 246, 0.2);
+    }
+
+    .card-clickable::after {
+      content: '▼ Clique para ver detalhes';
+      position: absolute;
+      bottom: 1rem;
+      right: 1.5rem;
+      font-size: 0.8rem;
+      color: #64748b;
+      opacity: 0;
+      transition: opacity 200ms;
+    }
+
+    .card-clickable:hover::after {
+      opacity: 1;
+    }
+
+    .card-clickable.expanded::after {
+      content: '▲ Clique para esconder';
+    }
+
+    .card-header {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #3b82f6;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .card-icon {
+      font-size: 1.8rem;
+    }
+
+    .card-preview {
+      color: #a0a0a0;
+      font-size: 1.1rem;
+    }
+
+    .card-details {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 400ms ease;
+      margin-top: 0;
+    }
+
+    .card-clickable.expanded .card-details {
+      max-height: 500px;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid #2a2a2a;
+    }
+
+    .card-details-content {
+      color: #c7c7c7;
+      font-size: 1.1rem;
+      line-height: 1.7;
+    }
+
+    .card-example {
+      background: rgba(59, 130, 246, 0.05);
+      border-left: 3px solid #3b82f6;
+      padding: 1rem 1.5rem;
+      margin-top: 1rem;
+      border-radius: 6px;
+      font-family: 'Courier New', monospace;
+      color: #94a3b8;
+    }
+
+    /* TOOLTIPS */
+    .tooltip {
+      position: relative;
+      display: inline-block;
+      border-bottom: 2px dotted #3b82f6;
+      cursor: help;
+    }
+
+    .tooltip .tooltiptext {
+      visibility: hidden;
+      background-color: #1a1a1a;
+      color: #e5e5e5;
+      text-align: center;
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      position: absolute;
+      z-index: 200;
+      bottom: 125%;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0;
+      transition: opacity 300ms;
+      border: 1px solid #3b82f6;
+      white-space: nowrap;
+      font-size: 0.9rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    }
+
+    .tooltip .tooltiptext::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      margin-left: -5px;
+      border-width: 5px;
+      border-style: solid;
+      border-color: #3b82f6 transparent transparent transparent;
+    }
+
+    .tooltip:hover .tooltiptext {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    /* HOVER EFFECTS COM EXEMPLOS */
+    .hover-example {
+      background: #1a1a1a;
+      border: 1px solid #2a2a2a;
+      border-radius: 8px;
+      padding: 1rem 1.5rem;
+      margin: 1rem 0;
+      transition: all 300ms ease;
+      position: relative;
+    }
+
+    .hover-example:hover {
+      background: #252525;
+      border-color: #8b5cf6;
+      transform: scale(1.02);
+    }
+
+    .hover-example-main {
+      font-size: 1.2rem;
+      color: #e5e5e5;
+      font-weight: 500;
+    }
+
+    .hover-example-detail {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 300ms ease;
+      color: #94a3b8;
+      font-size: 1rem;
+      margin-top: 0;
+    }
+
+    .hover-example:hover .hover-example-detail {
+      max-height: 200px;
+      margin-top: 0.75rem;
+      padding-top: 0.75rem;
+      border-top: 1px solid #2a2a2a;
+    }
+
+    /* MINI QUIZ */
+    .quiz {
+      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+      border: 2px solid #3b82f6;
+      border-radius: 12px;
+      padding: 2rem;
+      margin: 2rem 0;
+    }
+
+    .quiz-question {
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: #ffffff;
+      margin-bottom: 1.5rem;
+    }
+
+    .quiz-options {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .quiz-option {
+      background: #1a1a1a;
+      border: 2px solid #2a2a2a;
+      border-radius: 8px;
+      padding: 1rem 1.5rem;
+      cursor: pointer;
+      transition: all 200ms ease;
+      font-size: 1.1rem;
+    }
+
+    .quiz-option:hover {
+      background: #252525;
+      border-color: #3b82f6;
+      transform: translateX(8px);
+    }
+
+    .quiz-option.correct {
+      background: #065f46;
+      border-color: #10b981;
+      animation: pulse 500ms ease;
+    }
+
+    .quiz-option.wrong {
+      background: #7f1d1d;
+      border-color: #ef4444;
+      animation: shake 300ms ease;
+    }
+
+    .quiz-feedback {
+      margin-top: 1rem;
+      padding: 1rem;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      display: none;
+    }
+
+    .quiz-feedback.show {
+      display: block;
+      animation: fadeIn 300ms ease;
+    }
+
+    .quiz-feedback.correct {
+      background: rgba(16, 185, 129, 0.1);
+      border-left: 4px solid #10b981;
+      color: #6ee7b7;
+    }
+
+    .quiz-feedback.wrong {
+      background: rgba(239, 68, 68, 0.1);
+      border-left: 4px solid #ef4444;
+      color: #fca5a5;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-10px); }
+      75% { transform: translateX(10px); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* FLUXO COM SETAS */
+    .flow-step {
+      background: #1a1a1a;
+      border: 1px solid #2a2a2a;
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin: 1rem 0;
+      position: relative;
+      transition: all 300ms ease;
+    }
+
+    .flow-step:hover {
+      background: #252525;
+      border-color: #3b82f6;
+      transform: translateX(8px);
+    }
+
+    .flow-step::after {
+      content: '↓';
+      position: absolute;
+      left: 50%;
+      bottom: -2rem;
+      transform: translateX(-50%);
+      font-size: 2rem;
+      color: #3b82f6;
+    }
+
+    .flow-step:last-child::after {
+      content: '';
+    }
+
+    .flow-step-number {
+      display: inline-block;
+      background: #3b82f6;
+      color: #fff;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 2rem;
+      font-weight: 700;
+      margin-right: 1rem;
+    }
+
+    .flow-step-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #ffffff;
+      margin-bottom: 0.5rem;
+    }
+
+    .flow-step-content {
+      color: #a0a0a0;
+      font-size: 1.1rem;
+      margin-left: 3rem;
+    }
+
+    /* Notas removidas - mais espaço para conteúdo */
+
+    .controles {
+      position: fixed;
+      top: 2rem;
+      right: 2rem;
+      z-index: 100;
+    }
+
+    .progresso {
+      font-size: 1.2rem;
+      color: #64748b;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(10, 10, 10, 0.8);
+      padding: 1rem 1.5rem;
+      border-radius: 12px;
+      border: 1px solid #2a2a2a;
+    }
+
+    .progresso-dots {
+      letter-spacing: 0.2rem;
+    }
+
+    .progresso-texto {
+      font-size: 1rem;
+      opacity: 0.8;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 2rem 1rem;
+      }
+      .slide-title {
+        font-size: 1.8rem;
+      }
+      .card-clickable::after {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="nav-header">
+      <button class="nav-btn" id="btn-prev" onclick="navigateSlide(-1)">← Anterior</button>
+      <h1 class="slide-title" id="current-title">{{TITULO}}</h1>
+      <button class="nav-btn" id="btn-next" onclick="navigateSlide(1)">Próximo →</button>
+    </div>
+
+    <div id="slides-container">
+      {{SLIDES}}
+    </div>
+  </div>
+
+  <div class="controles">
+    <div class="progresso">
+      <span class="progresso-dots" id="progresso-dots">●○○○○○</span>
+      <span class="progresso-texto" id="progresso-texto">1/6</span>
+    </div>
+  </div>
+
+  <script>
+    let currentSlide = 0;
+    let totalSlides = 0;
+    const slides = [];
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const slideElements = document.querySelectorAll('.slide');
+      totalSlides = slideElements.length;
+
+      slideElements.forEach((slide, index) => {
+        slides.push(slide);
+      });
+
+      updateSlide();
+      setupKeyboardShortcuts();
+      setupCardClicks();
+      setupQuizzes();
+    });
+
+    function navigateSlide(direction) {
+      const newSlide = currentSlide + direction;
+      if (newSlide >= 0 && newSlide < totalSlides) {
+        currentSlide = newSlide;
+        updateSlide();
+      }
+    }
+
+    function updateSlide() {
+      slides.forEach((slide, index) => {
+        slide.classList.toggle('active', index === currentSlide);
+      });
+
+      document.getElementById('current-title').textContent =
+        slides[currentSlide].dataset.title || '{{TITULO}}';
+      document.getElementById('btn-prev').disabled = currentSlide === 0;
+      document.getElementById('btn-next').disabled = currentSlide === totalSlides - 1;
+
+      updateProgress();
+    }
+
+    function updateProgress() {
+      let dots = '';
+      for (let i = 0; i < totalSlides; i++) {
+        dots += i === currentSlide ? '●' : '○';
+      }
+      document.getElementById('progresso-dots').textContent = dots;
+      document.getElementById('progresso-texto').textContent = `${currentSlide + 1}/${totalSlides}`;
+    }
+
+    function setupKeyboardShortcuts() {
+      document.addEventListener('keydown', (e) => {
+        switch(e.key) {
+          case 'ArrowRight':
+          case ' ':
+            e.preventDefault();
+            navigateSlide(1);
+            break;
+          case 'ArrowLeft':
+            e.preventDefault();
+            navigateSlide(-1);
+            break;
+          case 'f':
+          case 'F':
+            e.preventDefault();
+            toggleFullscreen();
+            break;
+          case 'Escape':
+            if (document.fullscreenElement) {
+              document.exitFullscreen();
+            }
+            break;
+          case 'r':
+          case 'R':
+            e.preventDefault();
+            currentSlide = 0;
+            updateSlide();
+            break;
+        }
+      });
+    }
+
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen();
+      } else {
+        document.exitFullscreen();
+      }
+    }
+
+    function setupCardClicks() {
+      document.querySelectorAll('.card-clickable').forEach(card => {
+        card.addEventListener('click', () => {
+          card.classList.toggle('expanded');
+        });
+      });
+    }
+
+    function setupQuizzes() {
+      document.querySelectorAll('.quiz-option').forEach(option => {
+        option.addEventListener('click', function() {
+          const quiz = this.closest('.quiz');
+          const allOptions = quiz.querySelectorAll('.quiz-option');
+          const feedback = quiz.querySelector('.quiz-feedback');
+          const isCorrect = this.dataset.correct === 'true';
+
+          allOptions.forEach(opt => {
+            opt.style.pointerEvents = 'none';
+          });
+
+          if (isCorrect) {
+            this.classList.add('correct');
+            feedback.classList.add('correct', 'show');
+            feedback.textContent = '✓ Correto! ' + this.dataset.explanation;
+          } else {
+            this.classList.add('wrong');
+            feedback.classList.add('wrong', 'show');
+            feedback.textContent = '✗ Ops! ' + this.dataset.explanation;
+          }
+
+          setTimeout(() => {
+            allOptions.forEach(opt => {
+              opt.style.pointerEvents = 'auto';
+              opt.classList.remove('correct', 'wrong');
+            });
+            feedback.classList.remove('show', 'correct', 'wrong');
+          }, 3000);
+        });
+      });
+    }
+  </script>
+</body>
+</html>

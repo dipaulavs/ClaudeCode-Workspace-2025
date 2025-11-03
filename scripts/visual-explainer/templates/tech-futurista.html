@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{TITULO}}</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;800&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #0a0a0a;
+      color: #ffffff;
+      font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      overflow: hidden;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .progress-bar {
+      position: fixed;
+      top: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      z-index: 100;
+      background: rgba(10, 10, 10, 0.8);
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      border: 1px solid #2a2a2a;
+      backdrop-filter: blur(10px);
+    }
+
+    .progress-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #2a2a2a;
+      transition: all 300ms ease;
+    }
+
+    .progress-dot.active {
+      background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+      box-shadow: 0 0 20px rgba(99, 102, 241, 0.6);
+      transform: scale(1.3);
+    }
+
+    .progress-text {
+      font-size: 0.9rem;
+      color: #64748b;
+      margin-left: 0.5rem;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .slide {
+      display: none;
+      text-align: center;
+      max-width: 1400px;
+      padding: 2rem;
+      animation: slideIn 500ms ease-out;
+    }
+
+    .slide.active {
+      display: block;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero-title {
+      font-size: 5rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -0.03em;
+      margin-bottom: 1rem;
+      line-height: 1.1;
+    }
+
+    .hero-subtitle {
+      font-size: 2rem;
+      color: #a3a3a3;
+      font-weight: 500;
+      margin-bottom: 4rem;
+      letter-spacing: -0.01em;
+    }
+
+    .visual-hero {
+      width: 500px;
+      height: 500px;
+      margin: 3rem auto;
+      background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+      border-radius: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 30px 80px rgba(99, 102, 241, 0.4);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .visual-hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+        45deg,
+        transparent,
+        rgba(255, 255, 255, 0.1),
+        transparent
+      );
+      animation: shine 3s infinite;
+    }
+
+    @keyframes shine {
+      0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+      100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+    }
+
+    .visual-content {
+      position: relative;
+      z-index: 1;
+      font-size: 8rem;
+    }
+
+    .section-title {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 3rem;
+      color: #ffffff;
+      letter-spacing: -0.02em;
+    }
+
+    .bullets {
+      text-align: left;
+      font-size: 1.8rem;
+      line-height: 2.8;
+      margin: 3rem auto;
+      max-width: 900px;
+    }
+
+    .bullet {
+      opacity: 0;
+      animation: fadeInBullet 500ms ease-out forwards;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .bullet::before {
+      content: '→';
+      color: #6366f1;
+      font-weight: 700;
+      font-size: 2rem;
+      flex-shrink: 0;
+    }
+
+    .bullet:nth-child(1) { animation-delay: 200ms; }
+    .bullet:nth-child(2) { animation-delay: 400ms; }
+    .bullet:nth-child(3) { animation-delay: 600ms; }
+    .bullet:nth-child(4) { animation-delay: 800ms; }
+    .bullet:nth-child(5) { animation-delay: 1000ms; }
+
+    @keyframes fadeInBullet {
+      to {
+        opacity: 1;
+      }
+    }
+
+    .comparison {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      margin: 4rem auto;
+      max-width: 1100px;
+    }
+
+    .comparison-item {
+      padding: 3rem;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.02);
+      backdrop-filter: blur(10px);
+      border: 1px solid #2a2a2a;
+      opacity: 0;
+      animation: fadeInBullet 500ms ease-out forwards;
+    }
+
+    .comparison-item:nth-child(1) { animation-delay: 200ms; }
+    .comparison-item:nth-child(2) { animation-delay: 500ms; }
+
+    .comparison-label {
+      font-size: 1.2rem;
+      color: #64748b;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 600;
+    }
+
+    .comparison-title {
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .comparison-item:first-child .comparison-title {
+      color: #f87171;
+    }
+
+    .comparison-item:last-child .comparison-title {
+      color: #10b981;
+    }
+
+    .comparison-desc {
+      font-size: 1.4rem;
+      color: #a3a3a3;
+      line-height: 1.7;
+    }
+
+    .icon-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin: 3rem auto;
+      max-width: 1100px;
+    }
+
+    .icon-item {
+      text-align: center;
+      padding: 2.5rem;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid #2a2a2a;
+      transition: all 300ms ease;
+      opacity: 0;
+      animation: fadeInBullet 500ms ease-out forwards;
+    }
+
+    .icon-item:nth-child(1) { animation-delay: 200ms; }
+    .icon-item:nth-child(2) { animation-delay: 400ms; }
+    .icon-item:nth-child(3) { animation-delay: 600ms; }
+    .icon-item:nth-child(4) { animation-delay: 800ms; }
+
+    .icon-item:hover {
+      background: rgba(99, 102, 241, 0.1);
+      border-color: #6366f1;
+      transform: translateY(-8px);
+    }
+
+    .icon-emoji {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .icon-title {
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: #ffffff;
+    }
+
+    .icon-desc {
+      font-size: 1.1rem;
+      color: #a3a3a3;
+      line-height: 1.5;
+    }
+
+    .space-hint {
+      position: fixed;
+      bottom: 4rem;
+      left: 50%;
+      transform: translateX(-50%);
+      color: #64748b;
+      font-size: 1.2rem;
+      opacity: 0.6;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 0.8; }
+    }
+
+    .apresentador-notas {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(10, 10, 10, 0.95);
+      border-top: 2px solid #2a2a2a;
+      padding: 1.5rem 2rem;
+      max-height: 20vh;
+      overflow-y: auto;
+      z-index: 100;
+      backdrop-filter: blur(20px);
+    }
+
+    .apresentador-notas-label {
+      font-size: 0.9rem;
+      color: #64748b;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .apresentador-notas-texto {
+      font-size: 1.1rem;
+      color: #94a3b8;
+      line-height: 1.6;
+    }
+
+    .timer {
+      position: fixed;
+      top: 2rem;
+      right: 2rem;
+      font-family: 'JetBrains Mono', 'Courier New', monospace;
+      font-size: 1.5rem;
+      color: #64748b;
+      background: rgba(10, 10, 10, 0.8);
+      padding: 1rem 1.5rem;
+      border-radius: 12px;
+      border: 1px solid #2a2a2a;
+      backdrop-filter: blur(10px);
+      z-index: 100;
+    }
+
+    .nav-hint {
+      position: fixed;
+      bottom: 1rem;
+      left: 2rem;
+      right: 2rem;
+      display: flex;
+      justify-content: space-between;
+      color: #64748b;
+      font-size: 0.9rem;
+      opacity: 0.5;
+      z-index: 100;
+    }
+
+    @media (max-width: 768px) {
+      .hero-title {
+        font-size: 3rem;
+      }
+
+      .hero-subtitle {
+        font-size: 1.5rem;
+      }
+
+      .visual-hero {
+        width: 300px;
+        height: 300px;
+      }
+
+      .section-title {
+        font-size: 2rem;
+      }
+
+      .bullets {
+        font-size: 1.3rem;
+      }
+
+      .comparison {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="progress-bar">
+    <div id="progress-dots"></div>
+    <span class="progress-text" id="progress-text">1 / 6</span>
+  </div>
+
+  <div class="timer" id="timer">00:00</div>
+
+  <div id="slides-container">
+    {{SLIDES}}
+  </div>
+
+  <div class="space-hint">Pressione ESPAÇO ou → para continuar</div>
+
+  <div class="apresentador-notas">
+    <div class="apresentador-notas-label">📝 Notas do Apresentador</div>
+    <div class="apresentador-notas-texto" id="notas">{{NOTAS_INICIAL}}</div>
+  </div>
+
+  <div class="nav-hint">
+    <span>← Anterior</span>
+    <span>→ Próximo | F = Fullscreen | ? = Ajuda</span>
+  </div>
+
+  <script>
+    let currentSlide = 0;
+    let totalSlides = 0;
+    let timerSeconds = 0;
+    let timerInterval = null;
+    const slides = [];
+    const notasSlides = [];
+
+    // Inicializar
+    document.addEventListener('DOMContentLoaded', () => {
+      const slideElements = document.querySelectorAll('.slide');
+      totalSlides = slideElements.length;
+
+      slideElements.forEach((slide, index) => {
+        slides.push(slide);
+        const notas = slide.dataset.notas || 'Sem notas para este slide.';
+        notasSlides.push(notas);
+      });
+
+      updateSlide();
+      startTimer();
+      setupKeyboardShortcuts();
+      renderProgressDots();
+    });
+
+    function navigateSlide(direction) {
+      const newSlide = currentSlide + direction;
+      if (newSlide >= 0 && newSlide < totalSlides) {
+        currentSlide = newSlide;
+        updateSlide();
+      }
+    }
+
+    function updateSlide() {
+      slides.forEach((slide, index) => {
+        slide.classList.toggle('active', index === currentSlide);
+      });
+
+      document.getElementById('notas').innerHTML = notasSlides[currentSlide];
+      updateProgressDots();
+    }
+
+    function renderProgressDots() {
+      const container = document.getElementById('progress-dots');
+      container.innerHTML = '';
+      for (let i = 0; i < totalSlides; i++) {
+        const dot = document.createElement('div');
+        dot.className = 'progress-dot';
+        if (i === currentSlide) dot.classList.add('active');
+        container.appendChild(dot);
+      }
+    }
+
+    function updateProgressDots() {
+      const dots = document.querySelectorAll('.progress-dot');
+      dots.forEach((dot, index) => {
+        dot.classList.toggle('active', index === currentSlide);
+      });
+      document.getElementById('progress-text').textContent =
+        `${currentSlide + 1} / ${totalSlides}`;
+    }
+
+    function startTimer() {
+      if (timerInterval) clearInterval(timerInterval);
+
+      timerInterval = setInterval(() => {
+        timerSeconds++;
+        const minutes = Math.floor(timerSeconds / 60);
+        const seconds = timerSeconds % 60;
+        document.getElementById('timer').textContent =
+          `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+      }, 1000);
+    }
+
+    function resetTimer() {
+      timerSeconds = 0;
+      document.getElementById('timer').textContent = '00:00';
+    }
+
+    function setupKeyboardShortcuts() {
+      document.addEventListener('keydown', (e) => {
+        switch(e.key) {
+          case 'ArrowRight':
+          case ' ':
+            e.preventDefault();
+            navigateSlide(1);
+            break;
+          case 'ArrowLeft':
+            e.preventDefault();
+            navigateSlide(-1);
+            break;
+          case 'f':
+          case 'F':
+            e.preventDefault();
+            toggleFullscreen();
+            break;
+          case 'F11':
+            toggleFullscreen();
+            break;
+          case 'Escape':
+            if (document.fullscreenElement) {
+              document.exitFullscreen();
+            }
+            break;
+          case 'r':
+          case 'R':
+            e.preventDefault();
+            currentSlide = 0;
+            resetTimer();
+            updateSlide();
+            break;
+          case '?':
+            e.preventDefault();
+            showHelp();
+            break;
+        }
+      });
+    }
+
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen();
+      } else {
+        document.exitFullscreen();
+      }
+    }
+
+    function showHelp() {
+      alert(`⌨️ Atalhos de Teclado:
+
+→ ou Space - Próximo slide
+← - Slide anterior
+F ou F11 - Toggle fullscreen
+ESC - Sair fullscreen
+R - Resetar (volta ao início)
+? - Mostrar esta ajuda`);
+    }
+  </script>
+</body>
+</html>
