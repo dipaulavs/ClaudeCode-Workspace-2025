@@ -375,7 +375,7 @@ Buscar onde?
 
 Skills são capacidades modulares model-invoked (Claude decide quando usar automaticamente).
 
-### Skills Disponíveis (9 Skills)
+### Skills Disponíveis (10 Skills)
 
 | Skill | Quando Usar | Descrição |
 |-------|-------------|-----------|
@@ -383,8 +383,9 @@ Skills são capacidades modulares model-invoked (Claude decide quando usar autom
 | **launch-planner** | Planejar lançamento de MVP | Transforma ideias validadas em PRDs completos com roadmap, schema de DB, e escopo MVP (2-4 semanas). |
 | **product-designer** | Design de UI/UX | Elimina o "visual de IA" (gradientes azul/roxo). Cria interfaces profissionais com Tailwind + shadcn/ui. |
 | **marketing-writer** | Criar conteúdo de marketing | Escreve landing pages, tweets, Product Hunt, emails de lançamento. Tom claro e focado em benefícios. |
+| **hormozi-leads** | Criar hooks/headlines/copy + gerar leads | AUTO-INVOCA quando pedir: hook, headline, CTA, ângulo, body, legenda IG/YT, descrição. Metodologia Hormozi: Core Four + Lead Getters. |
 | **roadmap-builder** | Priorizar features | Atua como PM: decide o que construir (e o que NÃO construir). Previne feature creep. |
-| **adaptive-mentor** | Explicar/implementar qualquer conceito | Mentor especialista que se adapta ao assunto. Explica ELI5 + analogias + diagramas. Cria plano executável simplificado. |
+| **adaptive-mentor** | Qualquer ideia/dúvida/implementação | Mentor que ativa PRIMEIRO e se adapta depois. Pergunta detalhes se necessário. Explica ELI5 + analogias + diagramas. Cria plano executável. |
 | **estudar-video** | Estudar vídeos do YouTube | Workflow automático: transcreve (Whisper) → analisa com IA → classifica tipo → extrai insights → salva no Obsidian. |
 | **orshot-design** | Gerar designs/imagens | Automação de designs profissionais usando Orshot API. Posts sociais, certificados, OG images. $0.01/render. |
 | **skill-creator** | Criar novas Skills | Meta-skill que cria outras Skills automaticamente. Gera estrutura multi-arquivo Progressive Disclosure. |

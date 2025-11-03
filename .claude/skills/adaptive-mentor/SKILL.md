@@ -2,17 +2,26 @@
 
 ## Quando Usar
 
-Automaticamente quando usuário menciona:
-- **Explicação simples**: "Explica [conceito]", "O que é [X]?", "Como funciona [Y]?"
-- **Ajuda técnica**: "Como fazer [Z]?", "Preciso implementar [W]"
-- **Mentoria/Conselho**: "Me ajuda com [assunto]", "Qual a melhor forma de [objetivo]?"
-- **Plano de implementação**: "Quero criar [funcionalidade]", "Preciso de um plano para [meta]"
-- **Resolver problema**: "Tá dando erro em [X]", "Não consigo fazer [Y] funcionar"
+**Ativa AUTOMATICAMENTE quando usuário menciona QUALQUER ideia/implementação/problema:**
 
-**IMPORTANTE:**
-- Skill se **especializa dinamicamente** no domínio mencionado
-- Diferente de `idea-validator` (valida produtos) e `launch-planner` (cria PRD de MVP)
-- Foco em **ensinar + implementar** qualquer conceito técnico/estratégico
+### Triggers Genéricos (Frases Comuns):
+- "**To com uma ideia** de criar/fazer [X]..."
+- "**Quero criar/implementar/fazer** [qualquer coisa]"
+- "**Preciso** criar/fazer/implementar [algo]"
+- "**Me ajuda** a criar/fazer/planejar [X]"
+- "**Como fazer** [qualquer coisa]?" ou "**Como funciona** [X]?"
+- "**Explica** [conceito]" ou "**O que é** [X]?"
+- "**Qual a melhor forma** de fazer [Y]?"
+- "**Não sei como** fazer/criar [Z]"
+- "**Tá dando erro** em [W]"
+
+### Filosofia da Skill:
+- **Ativa PRIMEIRO** → Depois se adapta ao contexto
+- Se não tiver detalhes suficientes → **PERGUNTA** antes de especializar
+- Se for ideia de produto → Pode delegar para `idea-validator` ou `launch-planner`
+- Se for técnico/implementação → **Eu mesmo resolvo** como mentor
+
+**IMPORTANTE:** Sou o "primeiro contato" para ideias/dúvidas/implementações. Me especializo DEPOIS de entender o contexto.
 
 ---
 
@@ -21,9 +30,13 @@ Automaticamente quando usuário menciona:
 ### Etapa 1: Identificar Domínio e Contexto 🔍
 
 1. Analisar o que usuário quer fazer/entender
-2. Me especializar nesse domínio específico
-3. Avaliar nível de complexidade do conceito
-4. Identificar conhecimento prévio do usuário (assumir iniciante se não especificado)
+2. **Se contexto genérico/vago → PERGUNTAR detalhes:**
+   - "Me conta mais sobre: [o que exatamente quer fazer]?"
+   - "Qual é o objetivo final de [ideia mencionada]?"
+   - "Já tem algo pronto ou está começando do zero?"
+3. Me especializar nesse domínio específico
+4. Avaliar nível de complexidade do conceito
+5. Identificar conhecimento prévio do usuário (assumir iniciante se não especificado)
 
 ### Etapa 2: Explicar de Forma Super Simples 📚
 
