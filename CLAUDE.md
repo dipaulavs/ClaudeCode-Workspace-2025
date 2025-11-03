@@ -278,6 +278,27 @@ scripts/whatsapp/README.md
 
 ---
 
+### 9️⃣ Priorização de Skills (OBRIGATÓRIO)
+
+**GATILHO:** Usuário menciona ideia/dúvida/implementação de forma genérica
+
+**SEMPRE ativar `adaptive-mentor` PRIMEIRO quando usuário disser:**
+- "To com uma ideia..." (qualquer contexto)
+- "Quero criar/fazer/implementar..." (sem PRD/validação explícita)
+- "Preciso de um plano para..." (contexto técnico/estratégico)
+- "Como fazer..." ou "Me ajuda com..." (genérico)
+- "Não sei como..." ou "Qual a melhor forma..."
+
+**Exceções** (usar outras skills):
+- Usuário menciona explicitamente: "valida essa ideia" → `idea-validator`
+- Usuário menciona explicitamente: "cria PRD" ou "MVP" → `launch-planner`
+- Usuário pede: "design de UI" ou "tela de login" → `product-designer`
+- Usuário pede: "copy de marketing" ou "landing page" → `marketing-writer`
+
+**Por quê:** `adaptive-mentor` é skill de **primeiro contato** que se adapta dinamicamente. Se necessário, ela delega para outras skills especializadas.
+
+---
+
 ## 📍 MAPA DE AÇÕES (Índice Rápido)
 
 | Quando usuário pedir... | Use isto | Doc completa |
@@ -374,6 +395,8 @@ Buscar onde?
 **Localização:** `.claude/skills/` | **Doc oficial:** https://docs.claude.com/en/docs/claude-code/skills.md
 
 Skills são capacidades modulares model-invoked (Claude decide quando usar automaticamente).
+
+**⚠️ PRIORIDADE:** `adaptive-mentor` é skill de **primeiro contato** para frases genéricas. Ver regra 9️⃣ acima.
 
 ### Skills Disponíveis (10 Skills)
 
