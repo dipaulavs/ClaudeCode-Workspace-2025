@@ -235,10 +235,10 @@ scripts/whatsapp/README.md
 
 **MÉTODO:** Claude Code Skill `estudar-video` (model-invoked, totalmente automática)
 
-**WORKFLOW:** Transcrever (Whisper) → Analisar (Claude) → Classificar tipo → Salvar Obsidian
+**WORKFLOW:** Transcrever (Whisper) → Analisar (Claude) → Salvar em `📺 Vídeos/` (obsidian-organizer)
 
 **Custo:** ~$0.006/vídeo | **Tempo:** ~3min | **Regras:** ❌ Sem confirmação
-**Skill:** `.claude/skills/estudar-video/SKILL.md` | **Doc:** `09 - YouTube Knowledge/README.md`
+**Skill:** `.claude/skills/estudar-video/SKILL.md` | **Formato:** Minimalista (obsidian-organizer)
 
 ---
 
@@ -315,6 +315,71 @@ scripts/whatsapp/README.md
 
 ---
 
+### 1️⃣1️⃣ Links YouTube: SEMPRE Transcrever
+
+**GATILHO:** Usuário envia link do YouTube (qualquer contexto)
+
+**SEMPRE executar:**
+```bash
+python3 scripts/extraction/transcribe_video.py "URL_DO_YOUTUBE"
+```
+
+**Aplicar em:**
+- URLs `youtube.com/watch?v=`
+- URLs `youtu.be/`
+- Qualquer menção a vídeo do YouTube
+
+**NUNCA:**
+- ❌ Tentar WebFetch em links YouTube (não funciona)
+- ❌ Pedir ao usuário para descrever o conteúdo
+- ❌ Ignorar o link
+
+**Por quê:** Transcrição dá contexto completo do vídeo. Essencial para workflows (youtube-educator, estudar-video).
+
+---
+
+### 1️⃣2️⃣ Obsidian: SEMPRE Usar obsidian-organizer
+
+**GATILHO:** Usuário pede para anotar, salvar, registrar algo no Obsidian
+
+**REGRA ABSOLUTA:** NUNCA criar arquivos diretamente no Obsidian. SEMPRE usar skill `obsidian-organizer`.
+
+**SEMPRE:**
+- ✅ Invocar skill `obsidian-organizer` (automática)
+- ✅ Skill decide local e formato correto
+- ✅ Sistema minimalista: `📺 Vídeos/`, `💡 Anotações/`, `📋 Tarefas/`
+
+**NUNCA:**
+- ❌ Usar scripts Python antigos (quick_note.py, capture_idea.py, etc) - OBSOLETOS
+- ❌ Criar arquivos diretamente com Write tool sem invocar skill
+- ❌ Usar estrutura antiga "00 - Inbox", "09 - YouTube Knowledge"
+
+**Por quê:** Skill garante formato minimalista, data/hora BR, local correto, transcrição colapsável.
+
+---
+
+### 1️⃣3️⃣ Orquestração Inteligente: builder-orchestrator
+
+**GATILHO:** Usuário diz "criar ferramenta/skill/workflow/implementar..."
+
+**SEMPRE ativar `builder-orchestrator` PRIMEIRO quando usuário disser:**
+- "Quero criar uma ferramenta..."
+- "Preciso de um workflow..."
+- "Cria uma skill..."
+- "Implementar [funcionalidade]..."
+- "Fazer uma campanha de..."
+
+**Comportamento da skill:**
+1. ✅ **Analisa recursos disponíveis** (14 skills + 67+ templates + ferramentas)
+2. ✅ **Identifica paralelização** (tarefas independentes vs dependentes)
+3. ✅ **Apresenta plano otimizado** (tempo estimado + ganho vs sequencial)
+4. ✅ **Delega para subagentes** quando possível (Task tool)
+5. ✅ **Cria novas skills** via `skill-creator` (Progressive Disclosure)
+
+**Por quê:** Maximiza velocidade (paralelização), usa recursos existentes (zero retrabalho), e padroniza criação (skill-creator).
+
+---
+
 ## 📍 MAPA DE AÇÕES (Índice Rápido)
 
 | Quando usuário pedir... | Use isto | Doc completa |
@@ -346,16 +411,14 @@ scripts/whatsapp/README.md
 | **Scrape Twitter/X** | `scripts/twitter/search_twitter.py` | `scripts/twitter/README.md` |
 | **Scrape TikTok** | `scripts/tiktok/*.py` | `scripts/tiktok/README.md` |
 | **Scrape Google Maps** | `scripts/scraping/google_maps_*.py` | `scripts/scraping/README.md` |
-| **Nota rápida Obsidian** | `scripts/obsidian/quick_note.py` | `scripts/obsidian/README.md` |
-| **Capturar ideia Obsidian** | `scripts/obsidian/capture_idea.py` | `scripts/obsidian/README.md` |
-| **Daily note Obsidian** | `scripts/obsidian/create_daily.py` | `scripts/obsidian/README.md` |
-| **Projeto Obsidian** | `scripts/obsidian/new_project.py` | `scripts/obsidian/README.md` |
-| **Estudar vídeo YouTube** | WORKFLOW AUTOMÁTICO (ver seção 6️⃣) | `09 - YouTube Knowledge/README.md` |
+| **Anotar/Salvar no Obsidian** | SKILL `obsidian-organizer` (automática) | `.claude/skills/obsidian-organizer/SKILL.md` |
+| **Estudar vídeo YouTube** | WORKFLOW AUTOMÁTICO (ver seção 6️⃣) | `.claude/skills/estudar-video/SKILL.md` |
 | **AI News diário** | `scripts/scheduling/daily_ai_news.py` (Python 3.11) | `scripts/scheduling/README.md` |
 | **Canva via MCP** | Claude.ai web (OAuth) | `scripts/canva/README.md` |
 | **Gerar design/imagem** | `scripts/orshot/generate_image.py` | `scripts/orshot/README.md` |
 | **Designs em lote** | `scripts/orshot/batch_generate.py` | `scripts/orshot/README.md` |
 | **Apresentação visual** | `scripts/visual-explainer/generate.py` | `scripts/visual-explainer/README.md` |
+| **Thumbnails YouTube profissionais** | `scripts/thumbnail-creation/generate_youtube_thumbnails.py` | `.claude/skills/youtube-thumbnailv2/SKILL.md` |
 
 ---
 
@@ -405,6 +468,15 @@ Buscar onde?
 └─ Notícias → xai_news.py (Python 3.11)
 ```
 
+### Obsidian (Salvar/Anotar)
+```
+Usuário quer salvar algo no Obsidian?
+└─ SEMPRE → Skill obsidian-organizer (automática)
+   ├─ É tarefa/ação? → 📋 Tarefas/
+   ├─ É vídeo YouTube? → 📺 Vídeos/
+   └─ É ideia/nota? → 💡 Anotações/
+```
+
 ---
 
 ## 🧠 CLAUDE SKILLS (Model-Invoked AI Capabilities)
@@ -415,7 +487,7 @@ Skills são capacidades modulares model-invoked (Claude decide quando usar autom
 
 **⚠️ PRIORIDADE:** `adaptive-mentor` é skill de **primeiro contato** para frases genéricas. Ver regra 9️⃣ acima.
 
-### Skills Disponíveis (12 Skills)
+### Skills Disponíveis (15 Skills)
 
 | Skill | Quando Usar | Descrição |
 |-------|-------------|-----------|
@@ -426,11 +498,14 @@ Skills são capacidades modulares model-invoked (Claude decide quando usar autom
 | **hormozi-leads** | Criar hooks/headlines/copy + gerar leads | AUTO-INVOCA quando pedir: hook, headline, CTA, ângulo, body, legenda IG/YT, descrição. Metodologia Hormozi: Core Four + Lead Getters. |
 | **roadmap-builder** | Priorizar features | Atua como PM: decide o que construir (e o que NÃO construir). Previne feature creep. |
 | **adaptive-mentor** | Qualquer ideia/dúvida/implementação | Mentor que ativa PRIMEIRO e se adapta depois. Pergunta detalhes se necessário. Explica ELI5 + analogias + diagramas. Cria plano executável. |
-| **estudar-video** | Estudar vídeos do YouTube | Workflow automático: transcreve (Whisper) → analisa com IA → classifica tipo → extrai insights → salva no Obsidian. |
+| **estudar-video** | Estudar vídeos do YouTube | Workflow automático: transcreve (Whisper) → analisa com IA → salva em `📺 Vídeos/` (formato minimalista obsidian-organizer). |
 | **visual-explainer** | Criar apresentações para vídeos | Gera apresentações HTML dark mode interativas (3 templates: Notion, Mapa Mental, Tech Futurista). Para gravação de vídeos educativos. |
 | **youtube-educator** | Criar vídeos educativos YouTube | Workflow completo: extrai conteúdo → roteiro → apresentação → headlines (hormozi) → thumbnails → nota Obsidian. FASE 1 (Pré-gravação). |
+| **youtube-thumbnailv2** | Gerar thumbnails YouTube profissionais | Gera 5 variações de thumbnails (estilo único: dourado/azul-ciano). Layout fixo, split lighting, ~90s. Integra com hormozi-leads para headlines. |
 | **orshot-design** | Gerar designs/imagens | Automação de designs profissionais usando Orshot API. Posts sociais, certificados, OG images. $0.01/render. |
+| **obsidian-organizer** | Anotar/salvar/organizar no Obsidian | Entende sistema minimalista (Tarefas/Anotações/Vídeos). Cria automaticamente no formato e local corretos. Data/hora BR. Transcrição colapsável. |
 | **skill-creator** | Criar novas Skills | Meta-skill que cria outras Skills automaticamente. Gera estrutura multi-arquivo Progressive Disclosure. |
+| **builder-orchestrator** | Criar ferramentas/skills/workflows | Orquestra criação otimizada usando paralelização máxima e recursos existentes. Conhece todo workspace. Delega para skill-creator quando necessário. |
 
 ### Estrutura de uma Skill (Progressive Disclosure)
 
@@ -597,5 +672,5 @@ ClaudeCode-Workspace/
 
 ---
 
-**Última atualização:** 2025-11-03 (+ Skill youtube-educator - produção completa de vídeos YouTube)
-**Versão:** 4.3 (12 Skills | 66+ templates)
+**Última atualização:** 2025-11-03 (+ builder-orchestrator: orquestração inteligente com paralelização)
+**Versão:** 4.6 (15 Skills | 67+ templates)
