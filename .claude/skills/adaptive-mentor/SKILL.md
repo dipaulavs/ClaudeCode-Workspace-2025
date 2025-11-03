@@ -2,14 +2,17 @@
 
 ## Quando Usar
 
-Automaticamente quando usuário:
-- Pedir **explicação simples**: "Explica [X] de forma simples"
-- Pedir **ajuda para fazer**: "Como fazer [Y]?"
-- Mencionar **preciso de ajuda**: "Preciso de ajuda com [Z]"
-- Pedir **planejamento**: "Quero implementar [W]"
-- Pedir **conselho/mentoria**: "Me ajuda a criar [conceito]"
+Automaticamente quando usuário menciona:
+- **Explicação simples**: "Explica [conceito]", "O que é [X]?", "Como funciona [Y]?"
+- **Ajuda técnica**: "Como fazer [Z]?", "Preciso implementar [W]"
+- **Mentoria/Conselho**: "Me ajuda com [assunto]", "Qual a melhor forma de [objetivo]?"
+- **Plano de implementação**: "Quero criar [funcionalidade]", "Preciso de um plano para [meta]"
+- **Resolver problema**: "Tá dando erro em [X]", "Não consigo fazer [Y] funcionar"
 
-**IMPORTANTE:** Skill se **especializa dinamicamente** no domínio mencionado.
+**IMPORTANTE:**
+- Skill se **especializa dinamicamente** no domínio mencionado
+- Diferente de `idea-validator` (valida produtos) e `launch-planner` (cria PRD de MVP)
+- Foco em **ensinar + implementar** qualquer conceito técnico/estratégico
 
 ---
 
