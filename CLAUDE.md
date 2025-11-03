@@ -128,6 +128,7 @@
 | Twitter/X | `scripts/twitter/` | 5 templates |
 | TikTok | `scripts/tiktok/` | 5 templates |
 | Google Maps | `scripts/scraping/` | 3 templates |
+| Scheduling | `scripts/scheduling/` | 1 template |
 | Canva MCP | `scripts/canva/` | 1 script + MCP |
 | Orshot Design | `scripts/orshot/` | 3 templates |
 
@@ -313,6 +314,7 @@ scripts/whatsapp/README.md
 | **Daily note Obsidian** | `scripts/obsidian/create_daily.py` | `scripts/obsidian/README.md` |
 | **Projeto Obsidian** | `scripts/obsidian/new_project.py` | `scripts/obsidian/README.md` |
 | **Estudar vídeo YouTube** | WORKFLOW AUTOMÁTICO (ver seção 6️⃣) | `09 - YouTube Knowledge/README.md` |
+| **AI News diário** | `scripts/scheduling/daily_ai_news.py` (Python 3.11) | `scripts/scheduling/README.md` |
 | **Canva via MCP** | Claude.ai web (OAuth) | `scripts/canva/README.md` |
 | **Gerar design/imagem** | `scripts/orshot/generate_image.py` | `scripts/orshot/README.md` |
 | **Designs em lote** | `scripts/orshot/batch_generate.py` | `scripts/orshot/README.md` |
@@ -373,7 +375,7 @@ Buscar onde?
 
 Skills são capacidades modulares model-invoked (Claude decide quando usar automaticamente).
 
-### Skills Disponíveis (8 Skills)
+### Skills Disponíveis (9 Skills)
 
 | Skill | Quando Usar | Descrição |
 |-------|-------------|-----------|
@@ -382,6 +384,7 @@ Skills são capacidades modulares model-invoked (Claude decide quando usar autom
 | **product-designer** | Design de UI/UX | Elimina o "visual de IA" (gradientes azul/roxo). Cria interfaces profissionais com Tailwind + shadcn/ui. |
 | **marketing-writer** | Criar conteúdo de marketing | Escreve landing pages, tweets, Product Hunt, emails de lançamento. Tom claro e focado em benefícios. |
 | **roadmap-builder** | Priorizar features | Atua como PM: decide o que construir (e o que NÃO construir). Previne feature creep. |
+| **adaptive-mentor** | Explicar/implementar qualquer conceito | Mentor especialista que se adapta ao assunto. Explica ELI5 + analogias + diagramas. Cria plano executável simplificado. |
 | **estudar-video** | Estudar vídeos do YouTube | Workflow automático: transcreve (Whisper) → analisa com IA → classifica tipo → extrai insights → salva no Obsidian. |
 | **orshot-design** | Gerar designs/imagens | Automação de designs profissionais usando Orshot API. Posts sociais, certificados, OG images. $0.01/render. |
 | **skill-creator** | Criar novas Skills | Meta-skill que cria outras Skills automaticamente. Gera estrutura multi-arquivo Progressive Disclosure. |
@@ -478,7 +481,7 @@ ClaudeCode-Workspace/
 │
 ├── 📁 .claude/
 │   ├── commands/                # /bk, /cbk
-│   └── skills/                  # 8 Claude Skills (model-invoked)
+│   └── skills/                  # 9 Claude Skills (model-invoked)
 │
 ├── 📁 scripts/                  # 65+ Templates prontos
 │   ├── whatsapp/                # 22 templates
