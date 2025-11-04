@@ -1,0 +1,373 @@
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                   FRAMEWORK HÍBRIDO - ARQUITETURA COMPLETA                   ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+
+┌──────────────────────────────────────────────────────────────────────────────┐
+│                         CLIENTE (WhatsApp)                                   │
+└──────────────────────────────────────────────────────────────────────────────┘
+                                      │
+                                      ↓
+┌──────────────────────────────────────────────────────────────────────────────┐
+│                        EVOLUTION API (WhatsApp)                              │
+└──────────────────────────────────────────────────────────────────────────────┘
+                                      │
+                                      ↓
+┌──────────────────────────────────────────────────────────────────────────────┐
+│                      MIDDLEWARE (Porta 5002)                                 │
+│  • Cria mensagem no Chatwoot                                                 │
+│  • Recebe webhook do Chatwoot                                                │
+│  • Decide: Bot ou Humano?                                                    │
+└──────────────────────────────────────────────────────────────────────────────┘
+                                      │
+                ┌─────────────────────┴─────────────────────┐
+                │                                           │
+                ↓                                           ↓
+    ┌───────────────────────┐                   ┌──────────────────────┐
+    │   BOT (Porta 5001)    │                   │   CHATWOOT (Humano)  │
+    │                       │                   │                      │
+    │  ┌─────────────────┐  │                   │  • Atendente manual  │
+    │  │ ORQUESTRADOR    │  │                   │  • Bot em standby    │
+    │  │                 │  │                   │                      │
+    │  │ Decide componente│ │                   └──────────────────────┘
+    │  └─────────────────┘  │
+    │          │            │
+    │          ↓            │
+    │  ┌─────────────────┐  │
+    │  │ Precisa         │  │
+    │  │ qualificação?   │  │
+    │  └─────────────────┘  │
+    │          │ SIM        │
+    │          ↓            │
+    │  ┌─────────────────────────────────────────┐
+    │  │  CHATBOT DE FLUXO (Determinístico)     │
+    │  │                                         │
+    │  │  ┌──────────────┐  ┌──────────────┐   │
+    │  │  │ Descoberta   │  │ Qualificação │   │
+    │  │  │              │  │              │   │
+    │  │  │ • Interesse  │  │ • Busca      │   │
+    │  │  │ • Tipo       │  │ • Apresenta  │   │
+    │  │  │ • Quartos    │  │ • Score +20  │   │
+    │  │  │ • Região     │  │ • Tags       │   │
+    │  │  │ • Orçamento  │  │              │   │
+    │  │  │              │  │              │   │
+    │  │  │ Score: +10   │  │              │   │
+    │  │  │ cada info    │  │              │   │
+    │  │  └──────────────┘  └──────────────┘   │
+    │  │                                         │
+    │  │  ┌──────────────────────────────────┐  │
+    │  │  │ Sistema de Score (0-100)         │  │
+    │  │  │                                  │  │
+    │  │  │ Informações: +40                 │  │
+    │  │  │ Comportamento: +40               │  │
+    │  │  │ Urgência: +20                    │  │
+    │  │  │                                  │  │
+    │  │  │ ≥70 → QUENTE 🔥                  │  │
+    │  │  │ 40-69 → MORNO 🌡️                 │  │
+    │  │  │ <40 → FRIO ❄️                    │  │
+    │  │  └──────────────────────────────────┘  │
+    │  │                                         │
+    │  │  ┌──────────────────────────────────┐  │
+    │  │  │ Sistema de Tags (Automático)     │  │
+    │  │  │                                  │  │
+    │  │  │ • descoberta                     │  │
+    │  │  │ • lead_quente / morno / frio     │  │
+    │  │  │ • urgente                        │  │
+    │  │  │ • precisa_humano                 │  │
+    │  │  │ • quer_visitar                   │  │
+    │  │  └──────────────────────────────────┘  │
+    │  │                                         │
+    │  │  ┌──────────────────────────────────┐  │
+    │  │  │ Follow-ups (Automático)          │  │
+    │  │  │                                  │  │
+    │  │  │ • 2h sem resposta                │  │
+    │  │  │ • 24h sem resposta               │  │
+    │  │  │ • 1h após enviar fotos           │  │
+    │  │  │ • 4h após visita                 │  │
+    │  │  │ • 24h antes visita (lembrete)    │  │
+    │  │  └──────────────────────────────────┘  │
+    │  └─────────────────────────────────────────┘
+    │          │
+    │          ↓
+    │  ┌─────────────────┐
+    │  │ Cliente         │
+    │  │ escolheu item?  │
+    │  └─────────────────┘
+    │          │ SIM
+    │          ↓
+    │  ┌─────────────────────────────────────────────────────────┐
+    │  │  RAG + PROGRESSIVE DISCLOSURE                           │
+    │  │                                                         │
+    │  │  ┌──────────────────────────────────────────────────┐  │
+    │  │  │ ESTÁGIO 1: Identificação (RAG Híbrido)          │  │
+    │  │  │                                                  │  │
+    │  │  │  ┌──────────────────┐  ┌──────────────────┐    │  │
+    │  │  │  │ Filtro Keywords  │  │ Ranking Semântico│    │  │
+    │  │  │  │                  │  │                  │    │  │
+    │  │  │  │ • Tipo           │→ │ Embeddings       │    │  │
+    │  │  │  │ • Quartos        │  │ OpenAI           │    │  │
+    │  │  │  │ • Região         │  │                  │    │  │
+    │  │  │  │ • Preço          │  │ TOP 3 mais       │    │  │
+    │  │  │  │                  │  │ relevantes       │    │  │
+    │  │  │  │ 50 → 10          │  │ 10 → 3           │    │  │
+    │  │  │  └──────────────────┘  └──────────────────┘    │  │
+    │  │  │                                                  │  │
+    │  │  │  Cliente escolhe: item_ativo = "apto-001"       │  │
+    │  │  └──────────────────────────────────────────────────┘  │
+    │  │                        ↓                                │
+    │  │  ┌──────────────────────────────────────────────────┐  │
+    │  │  │ ESTÁGIO 2: IA Especialista                      │  │
+    │  │  │                                                  │  │
+    │  │  │  Progressive Disclosure:                         │  │
+    │  │  │                                                  │  │
+    │  │  │  ┌─────────┐  ┌─────────┐  ┌─────────┐         │  │
+    │  │  │  │ Nível 1 │  │ Nível 2 │  │ Nível 3 │         │  │
+    │  │  │  │ Base    │  │Detalhes │  │  FAQ    │         │  │
+    │  │  │  │ 200 tk  │  │ 300 tk  │  │ 500 tk  │         │  │
+    │  │  │  │         │  │         │  │         │         │  │
+    │  │  │  │ SEMPRE  │  │SE TÉCNICA│ │SE PREÇO │         │  │
+    │  │  │  └─────────┘  └─────────┘  └─────────┘         │  │
+    │  │  │                                                  │  │
+    │  │  │  ┌─────────┐  ┌──────────────┐                 │  │
+    │  │  │  │ Nível 4 │  │   Nível 5    │                 │  │
+    │  │  │  │ Legal   │  │Financiamento │                 │  │
+    │  │  │  │ 300 tk  │  │   400 tk     │                 │  │
+    │  │  │  │         │  │              │                 │  │
+    │  │  │  │SE DOCS  │  │ SE BANCO     │                 │  │
+    │  │  │  └─────────┘  └──────────────┘                 │  │
+    │  │  │                                                  │  │
+    │  │  │  Exemplo:                                        │  │
+    │  │  │  "Qual o IPTU?" → Carrega Nível 1 + 3 (700 tk)  │  │
+    │  │  │  Economia: 60% vs carregar tudo (1.700 tk)      │  │
+    │  │  │                                                  │  │
+    │  │  │  IA responde com 100% precisão                   │  │
+    │  │  │  (só 1 item no contexto)                         │  │
+    │  │  └──────────────────────────────────────────────────┘  │
+    │  └─────────────────────────────────────────────────────────┘
+    │          │
+    │          ↓
+    │  ┌─────────────────┐
+    │  │ Detectou        │
+    │  │ escalonamento?  │
+    │  └─────────────────┘
+    │          │ SIM
+    │          ↓
+    │  ┌─────────────────────────────────────────────────────────┐
+    │  │  ESCALONAMENTO INTELIGENTE                              │
+    │  │                                                         │
+    │  │  Triggers:                                              │
+    │  │  • "falar com humano"                                   │
+    │  │  • Frustração (3x "não entendi")                        │
+    │  │  • "quero visitar"                                      │
+    │  │  • "quero proposta"                                     │
+    │  │  • Score ≥ 70                                           │
+    │  │                                                         │
+    │  │  Ações:                                                 │
+    │  │  1. Aplica TAG no Chatwoot                              │
+    │  │  2. Atribui corretor disponível                         │
+    │  │  3. Notifica corretor (WhatsApp)                        │
+    │  │  4. Bot entra em STANDBY                                │
+    │  │                                                         │
+    │  │  Mensagem: "Vou chamar um especialista! 👍"             │
+    │  └─────────────────────────────────────────────────────────┘
+    │          │
+    │          ↓
+    │  ┌─────────────────────────────────────────────────────────┐
+    │  │  RELATÓRIOS AUTOMÁTICOS (18h diário)                    │
+    │  │                                                         │
+    │  │  📊 Métricas:                                           │
+    │  │  • Total leads                                          │
+    │  │  • Novos hoje                                           │
+    │  │  • Quentes (score ≥70)                                  │
+    │  │  • Conversas bot vs humano                              │
+    │  │  • Visitas agendadas                                    │
+    │  │  • Propostas enviadas                                   │
+    │  │  • Taxa conversão                                       │
+    │  │                                                         │
+    │  │  Envia via WhatsApp para gestor                         │
+    │  └─────────────────────────────────────────────────────────┘
+    │
+    └───────────────────────┘
+
+
+┌──────────────────────────────────────────────────────────────────────────────┐
+│                         COMPONENTES EXTERNOS                                 │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+    ┌───────────────┐       ┌───────────────┐       ┌───────────────┐
+    │   REDIS       │       │   CHATWOOT    │       │   EVOLUTION   │
+    │   (Upstash)   │       │   (Atendimento│       │   API         │
+    │               │       │   Humano)     │       │   (WhatsApp)  │
+    │ • Contexto    │       │               │       │               │
+    │ • Fila        │       │ • Tags        │       │ • Mensagens   │
+    │ • Score       │       │ • Atribuição  │       │ • Mídia       │
+    │ • Follow-ups  │       │ • Relatórios  │       │ • Status      │
+    │ • Item ativo  │       │               │       │               │
+    └───────────────┘       └───────────────┘       └───────────────┘
+
+    ┌───────────────┐       ┌───────────────┐       ┌───────────────┐
+    │   CLAUDE      │       │   WHISPER     │       │   GPT-4o      │
+    │   Haiku 4.5   │       │   (OpenAI)    │       │   Vision      │
+    │               │       │               │       │               │
+    │ • IA Geral    │       │ • Transcrição │       │ • Análise     │
+    │ • Especialista│       │   Áudio       │       │   Imagem      │
+    │ • Completude  │       │ • Português   │       │               │
+    └───────────────┘       └───────────────┘       └───────────────┘
+
+
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                           FLUXO EXEMPLO COMPLETO                             ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+Cliente: "Oi"
+    ↓
+CHATBOT FLUXO (Descoberta)
+    Score: +10 | Tag: primeiro_contato
+    ↓
+Bot: "Oi! Quer alugar ou comprar? 🏠"
+
+────────────────────────────────────────────────────────────────────────────────
+
+Cliente: "Alugar apartamento 2 quartos pet friendly Savassi R$2000"
+    ↓
+RAG HÍBRIDO
+    Filtro keywords: 50 → 10 imóveis
+    Ranking semântico: 10 → 3 melhores
+    Score: +30 | Tags: 2quartos, pet_friendly, savassi
+    ↓
+Bot: "Achei 2 opções! 🐕
+      1️⃣ Rua Pernambuco - R$1.800
+      2️⃣ Rua Sergipe - R$1.950"
+
+────────────────────────────────────────────────────────────────────────────────
+
+Cliente: "O primeiro"
+    ↓
+MARCA: item_ativo = "apto-savassi-001"
+    Score: +20 | Tag: interesse_alto
+    ↓
+Bot: "Show! Esse da Pernambuco é top 😎"
+
+────────────────────────────────────────────────────────────────────────────────
+
+Cliente: "Qual o IPTU?"
+    ↓
+PROGRESSIVE DISCLOSURE
+    Detecta: pergunta FAQ
+    Carrega: Nível 1 (base) + Nível 3 (faq) = 700 tokens
+    NÃO carrega: detalhes, legal, financiamento
+    ↓
+IA ESPECIALISTA (100% preciso - só 1 item)
+    ↓
+Bot: "R$180/mês 👍"
+
+────────────────────────────────────────────────────────────────────────────────
+
+[2 HORAS SEM RESPOSTA]
+    ↓
+FOLLOW-UP AUTOMÁTICO
+    Trigger: inatividade_2h
+    ↓
+Bot: "E aí, ficou alguma dúvida? 😊"
+
+────────────────────────────────────────────────────────────────────────────────
+
+Cliente: "Quero visitar"
+    ↓
+ESCALONAMENTO INTELIGENTE
+    Detecta: trigger "quer_visitar"
+    Score final: 90 (QUENTE 🔥)
+    Tags: quer_visitar
+    ↓
+    Atribui corretor
+    Notifica via WhatsApp
+    Bot → STANDBY
+    ↓
+Bot: "Vou chamar o Bruno! 👍"
+
+────────────────────────────────────────────────────────────────────────────────
+
+[18:00 - FIM DO DIA]
+    ↓
+RELATÓRIO AUTOMÁTICO
+    ↓
+Gestor recebe WhatsApp:
+"📊 RELATÓRIO DIÁRIO - 04/11/2025
+
+👥 LEADS: 23 (8 novos | 5 quentes)
+🤖 BOT: 18 conversas (78%)
+🏠 INTERESSE: 3 visitas | 1 proposta
+💰 CONVERSÃO: 13% lead→visita"
+
+
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                            VANTAGENS DO FRAMEWORK                            ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+✅ PRECISÃO 100%
+   → RAG encontra item certo
+   → IA Especialista só sabe de 1 item
+   → Progressive Disclosure carrega só necessário
+
+✅ ECONOMIA 50-90% TOKENS
+   → V4 atual: 1.000 tokens/msg
+   → Framework: 200-500 tokens/msg
+
+✅ QUALIFICAÇÃO AUTOMÁTICA
+   → Score 0-100 automático
+   → Tags aplicadas automaticamente
+   → Leads classificados (quente/morno/frio)
+
+✅ ZERO LEAD PERDIDO
+   → Follow-ups automáticos (2h, 24h, 48h)
+   → Reengajamento pós-fotos
+   → Lembretes de visita
+
+✅ CORRETOR OTIMIZADO
+   → Bot atende 78% das conversas
+   → Corretor só pega leads score ≥60
+   → Notificação instant������nea quando escala
+
+✅ VISIBILIDADE TOTAL
+   → Relatórios diários automáticos
+   → Métricas de conversão
+   → Dashboard no Chatwoot
+
+✅ REUTILIZÁVEL
+   → Framework funciona para qualquer negócio
+   → Templates: imobiliária, advocacia, saúde, e-commerce
+   → Criar novo bot em 5 minutos
+
+
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                                  CUSTOS                                      ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+V4 ATUAL (1.000 mensagens/mês):
+• Claude Haiku: $0.50
+• Whisper: $0.03 (10 áudios)
+• GPT-4o Vision: $0.05 (5 imagens)
+• TOTAL: $0.58/mês
+
+FRAMEWORK (1.000 mensagens/mês):
+• Claude Haiku: $0.25 (50% economia - Progressive Disclosure)
+• Whisper: $0.03
+• GPT-4o Vision: $0.05
+• Embeddings: $0.02 (RAG semântico)
+• TOTAL: $0.35/mês
+
+ECONOMIA: 40% ($0.23/mês)
+
+
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                                ROADMAP                                       ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+FASE 1: RAG + Progressive Disclosure → 5h
+FASE 2: Score + Tags → 3h
+FASE 3: Follow-ups → 2h
+FASE 4: Escalonamento → 2h
+FASE 5: Relatórios → 1h
+FASE 6: Framework Reutilizável → 8h
+
+TOTAL: 21h (~3 dias úteis)

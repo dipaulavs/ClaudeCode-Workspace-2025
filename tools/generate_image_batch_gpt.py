@@ -29,7 +29,7 @@ HEADERS = {
 }
 
 
-def create_task(prompt, n_variants=1, enhance=False):
+def create_task(prompt, n_variants=1, enhance=False, files_url=None):
     """
     Cria uma tarefa de geração de imagem (não aguarda conclusão)
 
@@ -37,6 +37,7 @@ def create_task(prompt, n_variants=1, enhance=False):
         prompt: Descrição da imagem
         n_variants: Número de variações (1, 2 ou 4)
         enhance: Se True, ativa o refinamento do prompt
+        files_url: Lista de URLs de imagens de referência (opcional)
 
     Returns:
         dict com task_id e prompt, ou None se erro
@@ -47,6 +48,10 @@ def create_task(prompt, n_variants=1, enhance=False):
         "nVariants": n_variants,
         "isEnhance": enhance
     }
+
+    # Adiciona filesUrl se fornecido
+    if files_url:
+        payload["filesUrl"] = files_url
 
     try:
         response = requests.post(GENERATE_ENDPOINT, headers=HEADERS, json=payload)

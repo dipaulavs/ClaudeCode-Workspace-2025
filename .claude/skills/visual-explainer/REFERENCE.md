@@ -1,10 +1,114 @@
 # 📚 Visual Explainer - Referência Técnica Completa
 
-## Especificações dos 3 Templates
+## Especificações dos Templates
 
 ---
 
-## 1️⃣ Template: Notion Style (Minimalista/Profissional)
+## 🦆 Template: MotherDuck Style (PADRÃO) - Retro-Moderno Minimalista
+
+### Quando Usar
+- **PADRÃO para todas as apresentações** (a menos que usuário especifique outro)
+- Conteúdo técnico/developer-focused
+- Explicações estruturadas com estética warm/friendly
+- Quando quer visual profissional mas acessível
+
+### Design System Baseado em
+Clonado de https://motherduck.com (2025-11-04)
+
+### Estrutura Visual
+
+```
+┌────────────────────────────────────────────────────────┐
+│                                     ●●●○○○  3/6        │
+├────────────────────────────────────────────────────────┤
+│              TÍTULO DA SEÇÃO                           │
+├────────────────────────────────────────────────────────┤
+│                                                         │
+│    [BADGE AMARELO] CATEGORIA                            │
+│                                                         │
+│    | Conceito Principal                                │
+│    | (barra amarela lateral)                           │
+│                                                         │
+│    Explicação clara em fonte Inter, texto preto,       │
+│    sobre fundo beige suave. Fácil de ler.              │
+│                                                         │
+│    ┌───────────────────────────────────────┐           │
+│    │ 💡 Analogia                           │           │
+│    │ Card branco, borda preta 2px          │           │
+│    │ Hover: levanta + sombra offset        │           │
+│    └───────────────────────────────────────┘           │
+│                                                         │
+│    ┌──────────┐  →  ┌──────────┐  →  ┌──────────┐    │
+│    │ Passo 1  │      │ Passo 2  │      │ Passo 3  │    │
+│    └──────────┘      └──────────┘      └──────────┘    │
+│                                                         │
+├────────────────────────────────────────────────────────┤
+│  ← →  Navegar   | Espaço Próximo  | F Fullscreen      │
+└────────────────────────────────────────────────────────┘
+```
+
+### Características Técnicas
+
+**Cores:**
+- Background principal: `rgb(244, 239, 234)` - Beige warm
+- Acento primário: `rgb(255, 222, 0)` - Yellow
+- Texto principal: `rgb(56, 56, 56)` - Dark gray
+- Texto corpo: `rgb(0, 0, 0)` - Black
+- Cards/Containers: `rgb(255, 255, 255)` - White
+- Borders: `rgb(56, 56, 56)` - 2px solid
+
+**Tipografia:**
+- Headings: `monospace, "Aeonik Mono", sans-serif`
+- Body: `Inter, sans-serif`
+- Tamanho base: 16px
+- H1: 72px (letra-espaçamento 1.44px)
+- H2: 32px
+- H3: 18px
+- Body: 15-16px
+- Line-height: 1.6 (body), 1.2 (headings)
+
+**Componentes:**
+- **Badges:** Yellow bg, 2px border, uppercase, monospace
+- **Cards:** White bg, 2px solid border, border-radius 0px (sharp)
+- **Hover:** `translateY(-4px) + box-shadow: 8px 8px 0px solid`
+- **Buttons:** Yellow bg, 2px border, hover lift + shadow
+- **Inputs:** Semi-transparent white, 2px border, focus = solid white + shadow
+
+**Bordas & Sombras:**
+- Border-radius: 0-2px (maximal sharpness)
+- Box-shadow ao hover: `8px 8px 0px rgb(56, 56, 56)` (offset solid, sem blur)
+- Borders: SEMPRE 2px solid
+
+**Navegação:**
+- APENAS teclado (← → Espaço F R)
+- APENAS cliques laterais (1/3 esquerdo = prev, 1/3 direito = next)
+- SEM botões visíveis (estilo Obsidian minimalista)
+- Progresso: Dots no topo direito (●●●○○○) + contador (3/6)
+
+**Interatividade:**
+- Cards clicáveis (expandem com clique)
+- Quizzes com feedback visual (verde/vermelho)
+- Fluxos visuais com setas
+- Hover effects com lift + shadow
+
+**Responsividade:**
+- Mobile (<768px): 1 coluna, scroll vertical
+- Tablet (768-1024px): 2 colunas
+- Desktop (>1024px): 3 colunas
+- NUNCA esconder cards (sempre visíveis com scroll)
+
+### Filosofia de Design
+
+1. **Warm & Technical:** Beige + monospace = friendly mas profissional
+2. **High Contrast:** Dark text em light bg (máxima legibilidade)
+3. **Sharp Edges:** Border-radius mínimo (retro-moderno)
+4. **Offset Shadows:** Solid shadows (não blur) = distintivo
+5. **Yellow Accents:** Usado com parcimônia (CTAs, badges)
+6. **Minimalismo:** Zero UI poluída, apenas conteúdo
+
+---
+
+## 1️⃣ Template: Notion Style (Minimalista/Profissional) - FALLBACK
 
 ### Quando Usar
 - Explicações estruturadas (conceitos + detalhes)

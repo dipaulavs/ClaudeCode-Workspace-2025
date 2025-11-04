@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Demo: Apresentação MotherDuck Style</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: monospace, "Aeonik Mono", sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 1.6;
+      color: rgb(56, 56, 56);
+      background-color: rgb(244, 239, 234);
+      overflow-x: hidden;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 3rem 2rem;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .nav-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 3rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 2px solid rgb(56, 56, 56);
+      position: relative;
+    }
+    
+    .progress-indicator {
+      position: absolute;
+      top: -2rem;
+      right: 0;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: monospace;
+      font-size: 0.9rem;
+      color: rgb(56, 56, 56);
+    }
+    
+    .slide-title {
+      font-size: 2.5rem;
+      font-weight: 400;
+      letter-spacing: 0.5px;
+      color: rgb(56, 56, 56);
+      flex: 1;
+      text-align: center;
+      margin: 0 2rem;
+    }
+    
+    .slide { display: none; flex: 1; animation: fadeInSlide 300ms ease-out; }
+    .slide.active { display: block; }
+    
+    @keyframes fadeInSlide {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .conceito-principal {
+      font-size: 1.8rem;
+      font-weight: 400;
+      color: rgb(56, 56, 56);
+      margin-bottom: 1rem;
+      padding-left: 1rem;
+      border-left: 4px solid rgb(255, 222, 0);
+    }
+    
+    .conceito-badge {
+      display: inline-block;
+      background-color: rgb(255, 222, 0);
+      color: rgb(56, 56, 56);
+      padding: 4px 16px;
+      border: 2px solid rgb(56, 56, 56);
+      border-radius: 2px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .explicacao {
+      font-size: 1.2rem;
+      color: rgb(0, 0, 0);
+      margin: 2rem 0;
+      line-height: 1.8;
+      font-family: Inter, sans-serif;
+    }
+    
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+    
+    .card {
+      background: rgb(255, 255, 255);
+      border: 2px solid rgb(56, 56, 56);
+      border-radius: 0px;
+      padding: 1.5rem;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+    
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 8px 8px 0px rgb(56, 56, 56);
+    }
+    
+    .card-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: rgb(56, 56, 56);
+      margin-bottom: 0.75rem;
+    }
+    
+    .card-content {
+      font-size: 1rem;
+      color: rgb(0, 0, 0);
+      line-height: 1.5;
+      font-family: Inter, sans-serif;
+    }
+    
+    .cta-section {
+      text-align: center;
+      padding: 4rem 2rem;
+    }
+    
+    .cta-title {
+      font-size: 3rem;
+      font-weight: 400;
+      color: rgb(56, 56, 56);
+      margin-bottom: 2rem;
+      letter-spacing: 1px;
+    }
+    
+    .cta-btn {
+      background-color: rgb(255, 222, 0);
+      border: 2px solid rgb(56, 56, 56);
+      color: rgb(56, 56, 56);
+      padding: 1rem 2rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: inline-block;
+    }
+    
+    .cta-btn:hover {
+      transform: translateY(-4px);
+      box-shadow: 8px 8px 0px rgb(56, 56, 56);
+    }
+    
+    /* Keyboard hints removed - clean interface */
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="progress-indicator">
+      <span class="progresso-dots" id="progresso-dots"></span>
+      <span class="progresso-texto" id="progresso-texto"></span>
+    </div>
+    
+    <div class="nav-header">
+      <h1 class="slide-title" id="slide-title"></h1>
+    </div>
+    
+    <div id="slides-container">
+      <!-- Slide 1 -->
+      <div class="slide active" data-title="Introdução ao MotherDuck Style">
+        <span class="conceito-badge">Novo Template</span>
+        
+        <h2 class="conceito-principal">Template MotherDuck para Apresentações</h2>
+        
+        <p class="explicacao">
+          Design system clonado do motherduck.com: cores warm (beige + yellow), 
+          tipografia monospaced, bordas sharp (2px), e sombras offset. 
+          Perfeito para conteúdo técnico com estética friendly.
+        </p>
+      </div>
+      
+      <!-- Slide 2 -->
+      <div class="slide" data-title="Características Principais">
+        <span class="conceito-badge">Design System</span>
+        
+        <h2 class="conceito-principal">O que torna o MotherDuck único?</h2>
+        
+        <div class="cards-grid">
+          <div class="card">
+            <div class="card-title">🎨 Cores Warm</div>
+            <div class="card-content">
+              Beige (#F4EFEA) como base, Yellow (#FFDE00) para acentos. 
+              Acolhedor mas profissional.
+            </div>
+          </div>
+          
+          <div class="card">
+            <div class="card-title">📝 Monospace</div>
+            <div class="card-content">
+              Tipografia técnica com fonte monospaced. Cria estética developer-friendly.
+            </div>
+          </div>
+          
+          <div class="card">
+            <div class="card-title">🔲 Sharp Edges</div>
+            <div class="card-content">
+              Border-radius mínimo (0-2px). Visual retro-moderno e distintivo.
+            </div>
+          </div>
+          
+          <div class="card">
+            <div class="card-title">💫 Offset Shadows</div>
+            <div class="card-content">
+              Sombras sólidas (8px 8px) ao hover. Lift visual sem blur.
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Slide 3 -->
+      <div class="slide" data-title="Obrigado!">
+        <div class="cta-section">
+          <h2 class="cta-title">Pronto para criar apresentações incríveis?</h2>
+          <div class="cta-btn">Começar Agora</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    let currentSlide = 0;
+    let totalSlides = 0;
+    
+    function init() {
+      const slides = document.querySelectorAll('.slide');
+      totalSlides = slides.length;
+      if (totalSlides > 0) {
+        updateSlide();
+        setupKeyboardShortcuts();
+        setupClickNavigation();
+      }
+    }
+    
+    function updateSlide() {
+      const slides = document.querySelectorAll('.slide');
+      slides.forEach((slide, index) => {
+        slide.classList.toggle('active', index === currentSlide);
+      });
+      
+      const activeSlide = slides[currentSlide];
+      if (activeSlide) {
+        const title = activeSlide.getAttribute('data-title');
+        document.getElementById('slide-title').textContent = title;
+      }
+      
+      updateProgress();
+    }
+    
+    function navigateSlide(direction) {
+      const newSlide = currentSlide + direction;
+      if (newSlide >= 0 && newSlide < totalSlides) {
+        currentSlide = newSlide;
+        updateSlide();
+      }
+    }
+    
+    function updateProgress() {
+      const dots = Array(totalSlides).fill('○').map((dot, i) => i === currentSlide ? '●' : dot).join('');
+      document.getElementById('progresso-dots').textContent = dots;
+      document.getElementById('progresso-texto').textContent = `${currentSlide + 1}/${totalSlides}`;
+    }
+    
+    function setupKeyboardShortcuts() {
+      document.addEventListener('keydown', (e) => {
+        switch(e.key) {
+          case 'ArrowRight':
+          case ' ':
+            e.preventDefault();
+            navigateSlide(1);
+            break;
+          case 'ArrowLeft':
+            e.preventDefault();
+            navigateSlide(-1);
+            break;
+          case 'f':
+          case 'F':
+            e.preventDefault();
+            toggleFullscreen();
+            break;
+          case 'Escape':
+            if (document.fullscreenElement) {
+              document.exitFullscreen();
+            }
+            break;
+          case 'r':
+          case 'R':
+            e.preventDefault();
+            currentSlide = 0;
+            updateSlide();
+            break;
+        }
+      });
+    }
+    
+    function setupClickNavigation() {
+      document.addEventListener('click', (e) => {
+        const clickX = e.clientX;
+        const windowWidth = window.innerWidth;
+        
+        if (e.target.closest('.card, .cta-btn')) {
+          return;
+        }
+        
+        if (clickX < windowWidth / 3) {
+          navigateSlide(-1);
+        } else if (clickX > windowWidth * 2 / 3) {
+          navigateSlide(1);
+        }
+      });
+    }
+    
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen();
+      } else {
+        document.exitFullscreen();
+      }
+    }
+    
+    document.addEventListener('DOMContentLoaded', init);
+  </script>
+</body>
+</html>

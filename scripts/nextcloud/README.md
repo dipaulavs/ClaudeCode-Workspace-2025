@@ -10,6 +10,7 @@ Scripts para upload de arquivos no Nextcloud com links públicos automáticos.
 |--------|--------|--------|
 | `upload_to_nextcloud.py` | Upload de qualquer arquivo com link público | ✅ Pronto |
 | `upload_from_downloads.py` | Upload rápido da pasta Downloads | ✅ Pronto |
+| `upload_rapido.py` | Upload de imagens para criativos com auto-delete | ✅ Pronto |
 
 ---
 
@@ -265,5 +266,66 @@ curl https://media.loop9.com.br
 
 ---
 
-**Última atualização:** 2025-11-01
-**Versão:** 1.0
+### upload_rapido.py
+
+**Upload rápido de imagens para criativos com auto-delete**
+
+```bash
+python3 scripts/nextcloud/upload_rapido.py <arquivo(s)> [opções]
+```
+
+**Características:**
+- 📂 **Pasta fixa:** `imagens/upload/`
+- ♾️  **Links permanentes** (sem expiração)
+- 🗑️  **Auto-delete:** Apaga arquivo local após upload
+- 📸 **Múltiplos arquivos:** Upload em lote
+
+**Opções:**
+- `--name SEARCH` - Buscar arquivo no Downloads por nome
+
+**Exemplos:**
+```bash
+# Upload da pasta local (~/Pictures/upload/)
+python3 scripts/nextcloud/upload_rapido.py --from-local
+
+# 1 imagem
+python3 scripts/nextcloud/upload_rapido.py foto.jpg
+
+# Múltiplas imagens
+python3 scripts/nextcloud/upload_rapido.py foto1.jpg foto2.jpg foto3.jpg
+
+# Buscar no Downloads
+python3 scripts/nextcloud/upload_rapido.py --name "screenshot"
+
+# Todas as fotos de um imóvel
+python3 scripts/nextcloud/upload_rapido.py /path/imoveis/*.jpg
+```
+
+**Como Funciona:**
+1. Upload para `imagens/upload/` (Nextcloud)
+2. Cria link público permanente
+3. Deleta arquivo local automaticamente
+4. Retorna URL(s) pública(s)
+
+**Workflow Recomendado:**
+```
+1. Jogue imagens em: ~/Pictures/upload/
+2. Execute: python3 scripts/nextcloud/upload_rapido.py --from-local
+3. Receba links permanentes
+4. Arquivos locais deletados automaticamente
+```
+
+**Pasta Local:** `~/Pictures/upload/`
+- Arraste imagens para essa pasta
+- Use Finder: `⌘+Shift+G` → `~/Pictures/upload/`
+- Atalho criado automaticamente
+
+**Caso de Uso:**
+- Upload de imagens para criativos de anúncios
+- Imagens de imóveis para Meta Ads/Instagram
+- Fotos que você quer compartilhar e não manter localmente
+
+---
+
+**Última atualização:** 2025-11-03
+**Versão:** 1.1

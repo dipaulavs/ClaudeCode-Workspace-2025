@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MotherDuck Design Reference</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ========================================
+           BASE STYLES (from extracted CSS)
+           ======================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Aeonik Mono", monospace, sans-serif;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 16px;
+            color: rgb(56, 56, 56);
+            background-color: rgb(244, 239, 234);
+            padding: 0;
+            margin: 0;
+        }
+
+        /* ========================================
+           TYPOGRAPHY
+           ======================================== */
+
+        h1 {
+            font-family: "Aeonik Mono", monospace, sans-serif;
+            font-size: 72px;
+            font-weight: 400;
+            line-height: 86.4px;
+            letter-spacing: 1.44px;
+            color: rgb(56, 56, 56);
+            margin: 0;
+        }
+
+        h2 {
+            font-family: "Aeonik Mono", monospace, sans-serif;
+            font-size: 32px;
+            font-weight: 400;
+            line-height: 44.8px;
+            color: rgb(56, 56, 56);
+            margin: 0;
+            padding-bottom: 12px;
+        }
+
+        h3 {
+            font-family: "Aeonik Mono", monospace, sans-serif;
+            font-size: 18px;
+            font-weight: 400;
+            line-height: 25.2px;
+            color: rgb(56, 56, 56);
+            background-color: rgb(255, 222, 0);
+            border: 2px solid rgb(56, 56, 56);
+            border-radius: 0px;
+            padding: 4px 16px;
+            display: inline-block;
+            margin: 0;
+        }
+
+        p {
+            font-family: "Aeonik Fono", "Aeonik Mono", monospace;
+            font-size: 15px;
+            font-weight: 400;
+            line-height: 18px;
+            color: rgb(0, 0, 0);
+            margin: 0;
+        }
+
+        /* ========================================
+           COMPONENTS
+           ======================================== */
+
+        .btn {
+            font-family: Inter, sans-serif;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 19.2px;
+            letter-spacing: 0.32px;
+            color: rgb(56, 56, 56);
+            background-color: transparent;
+            border: 1px solid rgba(0, 0, 0, 0);
+            border-radius: 2px;
+            padding: 8px 16px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .btn-primary {
+            background-color: rgb(255, 222, 0);
+            border: 2px solid rgb(56, 56, 56);
+            color: rgb(56, 56, 56);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 4px 4px 0px rgb(56, 56, 56);
+        }
+
+        input[type="text"],
+        input[type="email"] {
+            font-family: Inter;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 25.6px;
+            letter-spacing: 0.32px;
+            color: rgb(0, 0, 0);
+            background-color: rgba(248, 248, 247, 0.7);
+            border: 2px solid rgb(56, 56, 56);
+            border-radius: 2px;
+            padding: 16px 24px;
+            width: 100%;
+            max-width: 382px;
+            transition: all 0.2s ease-in-out;
+        }
+
+        input:focus {
+            outline: none;
+            background-color: rgb(255, 255, 255);
+            box-shadow: 4px 4px 0px rgb(56, 56, 56);
+        }
+
+        /* ========================================
+           LAYOUT
+           ======================================== */
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px 40px;
+            background-color: rgb(244, 239, 234);
+        }
+
+        nav {
+            display: flex;
+            gap: 24px;
+            font-family: "Aeonik Mono", monospace, sans-serif;
+            font-size: 16px;
+        }
+
+        nav a {
+            color: rgb(0, 0, 0);
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+
+        nav a:hover {
+            opacity: 0.7;
+        }
+
+        .hero {
+            padding: 80px 40px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            margin-bottom: 24px;
+        }
+
+        .hero p {
+            margin-bottom: 32px;
+            font-size: 18px;
+            line-height: 28px;
+        }
+
+        .card {
+            background-color: rgb(255, 255, 255);
+            border: 2px solid rgb(56, 56, 56);
+            border-radius: 0px;
+            padding: 32px;
+            margin-bottom: 24px;
+            transition: transform 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 8px 8px 0px rgb(56, 56, 56);
+        }
+
+        .badge {
+            display: inline-block;
+            background-color: rgb(255, 222, 0);
+            border: 2px solid rgb(56, 56, 56);
+            padding: 8px 16px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        /* ========================================
+           UTILITY CLASSES
+           ======================================== */
+
+        .mt-1 { margin-top: 8px; }
+        .mt-2 { margin-top: 16px; }
+        .mt-3 { margin-top: 24px; }
+        .mt-4 { margin-top: 32px; }
+
+        .mb-1 { margin-bottom: 8px; }
+        .mb-2 { margin-bottom: 16px; }
+        .mb-3 { margin-bottom: 24px; }
+        .mb-4 { margin-bottom: 32px; }
+
+        .text-center { text-align: center; }
+
+        .flex { display: flex; }
+        .flex-center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .gap-2 { gap: 16px; }
+        .gap-3 { gap: 24px; }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div style="font-size: 24px; font-weight: 600;">MotherDuck</div>
+        <nav>
+            <a href="#">Product</a>
+            <a href="#">Docs</a>
+            <a href="#">Blog</a>
+            <a href="#">Pricing</a>
+        </nav>
+        <button class="btn btn-primary">Get Started</button>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h3 class="mb-3">Serverless Analytics</h3>
+        <h1 class="mb-3">Analytics at the<br>speed of thought</h1>
+        <p class="mb-4">Run analytics workloads faster with DuckDB in the cloud.<br>Zero infrastructure. Infinite scale.</p>
+
+        <div class="flex-center gap-2">
+            <input type="email" placeholder="Enter your email">
+            <button class="btn btn-primary">Start Free Trial</button>
+        </div>
+    </section>
+
+    <!-- Content Cards -->
+    <div class="container">
+        <div class="card">
+            <span class="badge">LIGHTNING FAST</span>
+            <h2 class="mb-2">Built on DuckDB</h2>
+            <p>Experience the power of DuckDB's columnar engine combined with cloud-scale data processing. Query billions of rows in seconds.</p>
+        </div>
+
+        <div class="card">
+            <span class="badge">ZERO CONFIG</span>
+            <h2 class="mb-2">Instant Setup</h2>
+            <p>No infrastructure to manage. No clusters to configure. Just connect and start querying your data immediately.</p>
+        </div>
+
+        <div class="card">
+            <span class="badge">SCALE ON DEMAND</span>
+            <h2 class="mb-2">Serverless Architecture</h2>
+            <p>Automatically scales from gigabytes to petabytes. Pay only for what you use, with no idle compute costs.</p>
+        </div>
+    </div>
+
+    <!-- Feature Showcase -->
+    <div class="container">
+        <div class="text-center mb-4">
+            <h3 class="mb-2">KEY FEATURES</h3>
+            <h2>Everything you need for modern analytics</h2>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px;">
+            <div style="padding: 24px;">
+                <h3 class="mb-2">SQL Interface</h3>
+                <p class="mt-2">Use familiar SQL syntax with DuckDB's powerful extensions and functions.</p>
+            </div>
+
+            <div style="padding: 24px;">
+                <h3 class="mb-2">Cloud Native</h3>
+                <p class="mt-2">Built for the cloud from the ground up. S3, GCS, Azure - we've got you covered.</p>
+            </div>
+
+            <div style="padding: 24px;">
+                <h3 class="mb-2">API First</h3>
+                <p class="mt-2">Integrate seamlessly with your existing tools and workflows via REST API.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- CTA Section -->
+    <section class="hero" style="background-color: rgb(255, 222, 0); margin-top: 80px;">
+        <h2 class="mb-3">Ready to get started?</h2>
+        <p class="mb-4">Start analyzing your data in minutes. No credit card required.</p>
+        <button class="btn btn-primary">Start Free Trial</button>
+    </section>
+
+</body>
+</html>

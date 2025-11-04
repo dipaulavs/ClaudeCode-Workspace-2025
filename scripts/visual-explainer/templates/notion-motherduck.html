@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{TITULO}}</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ========================================
+       MOTHERDUCK DESIGN SYSTEM
+       Based on: https://motherduck.com
+       Extracted: 2025-11-04
+       ======================================== */
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: monospace, "Aeonik Mono", sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 1.6;
+      color: rgb(56, 56, 56);
+      background-color: rgb(244, 239, 234);
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 3rem 2rem;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ========================================
+       NAVIGATION HEADER
+       ======================================== */
+
+    .nav-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 3rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 2px solid rgb(56, 56, 56);
+      position: relative;
+    }
+
+    .progress-indicator {
+      position: absolute;
+      top: -2rem;
+      right: 0;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: monospace;
+      font-size: 0.9rem;
+      color: rgb(56, 56, 56);
+    }
+
+    .progresso-dots {
+      letter-spacing: 0.2rem;
+    }
+
+    .slide-title {
+      font-size: 2.5rem;
+      font-weight: 400;
+      letter-spacing: 0.5px;
+      color: rgb(56, 56, 56);
+      flex: 1;
+      text-align: center;
+      margin: 0 2rem;
+      font-family: monospace;
+    }
+
+    /* ========================================
+       SLIDE SYSTEM
+       ======================================== */
+
+    .slide {
+      display: none;
+      flex: 1;
+      animation: fadeInSlide 300ms ease-out;
+    }
+
+    .slide.active {
+      display: block;
+    }
+
+    @keyframes fadeInSlide {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ========================================
+       TYPOGRAPHY
+       ======================================== */
+
+    .conceito-principal {
+      font-size: 1.8rem;
+      font-weight: 400;
+      color: rgb(56, 56, 56);
+      margin-bottom: 1rem;
+      padding-left: 1rem;
+      border-left: 4px solid rgb(255, 222, 0);
+      font-family: monospace;
+    }
+
+    .conceito-badge {
+      display: inline-block;
+      background-color: rgb(255, 222, 0);
+      color: rgb(56, 56, 56);
+      padding: 4px 16px;
+      border: 2px solid rgb(56, 56, 56);
+      border-radius: 2px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      font-family: monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .explicacao {
+      font-size: 1.2rem;
+      color: rgb(0, 0, 0);
+      margin: 2rem 0;
+      line-height: 1.8;
+      font-family: Inter, sans-serif;
+    }
+
+    /* ========================================
+       ANALOGIA SECTION
+       ======================================== */
+
+    .analogia {
+      background: rgb(255, 255, 255);
+      border: 2px solid rgb(56, 56, 56);
+      border-radius: 0px;
+      padding: 1.5rem 2rem;
+      margin: 2.5rem 0;
+      position: relative;
+      transition: transform 0.2s ease;
+    }
+
+    .analogia:hover {
+      transform: translateY(-4px);
+      box-shadow: 8px 8px 0px rgb(56, 56, 56);
+    }
+
+    .analogia::before {
+      content: '💡';
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      font-size: 2rem;
+      opacity: 0.3;
+    }
+
+    .analogia-label {
+      font-weight: 600;
+      color: rgb(56, 56, 56);
+      font-size: 1.1rem;
+      margin-bottom: 0.75rem;
+      font-family: monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .analogia-texto {
+      font-size: 1.1rem;
+      color: rgb(0, 0, 0);
+      line-height: 1.6;
+      font-family: Inter, sans-serif;
+    }
+
+    /* ========================================
+       CARDS SYSTEM
+       ======================================== */
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .card {
+      background: rgb(255, 255, 255);
+      border: 2px solid rgb(56, 56, 56);
+      border-radius: 0px;
+      padding: 1.5rem;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 8px 8px 0px rgb(56, 56, 56);
+    }
+
+    .card-clickable {
+      cursor: pointer;
+    }
+
+    .card-clickable::after {
+      content: '▶';
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      font-size: 0.8rem;
+      color: rgb(56, 56, 56);
+      transition: transform 0.2s ease;
+    }
+
+    .card-clickable.expanded::after {
+      transform: rotate(90deg);
+    }
+
+    .card-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: rgb(56, 56, 56);
+      margin-bottom: 0.75rem;
+      font-family: monospace;
+    }
+
+    .card-content {
+      font-size: 1rem;
+      color: rgb(0, 0, 0);
+      line-height: 1.5;
+      font-family: Inter, sans-serif;
+    }
+
+    .card-details {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      margin-top: 0;
+    }
+
+    .card-clickable.expanded .card-details {
+      max-height: 500px;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 2px solid rgb(244, 239, 234);
+    }
+
+    /* ========================================
+       FLUXO VISUAL (Process Flow)
+       ======================================== */
+
+    .fluxo {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 2.5rem 0;
+      flex-wrap: wrap;
+    }
+
+    .fluxo-item {
+      background: rgb(255, 255, 255);
+      border: 2px solid rgb(56, 56, 56);
+      border-radius: 2px;
+      padding: 1rem 1.5rem;
+      font-weight: 500;
+      color: rgb(56, 56, 56);
+      font-family: monospace;
+      transition: all 0.2s ease;
+    }
+
+    .fluxo-item:hover {
+      transform: translateY(-2px);
+      box-shadow: 4px 4px 0px rgb(56, 56, 56);
+    }
+
+    .fluxo-seta {
+      font-size: 1.5rem;
+      color: rgb(56, 56, 56);
+    }
+
+    /* ========================================
+       QUIZ SYSTEM
+       ======================================== */
+
+    .quiz {
+      background: rgb(255, 255, 255);
+      border: 2px solid rgb(56, 56, 56);
+      border-radius: 0px;
+      padding: 2rem;
+      margin: 2.5rem 0;
+    }
+
+    .quiz-question {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: rgb(56, 56, 56);
+      margin-bottom: 1.5rem;
+      font-family: monospace;
+    }
+
+    .quiz-options {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .quiz-option {
+      background: rgb(244, 239, 234);
+      border: 2px solid rgb(56, 56, 56);
+      border-radius: 2px;
+      padding: 1rem 1.5rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: Inter, sans-serif;
+      color: rgb(0, 0, 0);
+    }
+
+    .quiz-option:hover {
+      transform: translateY(-2px);
+      box-shadow: 4px 4px 0px rgb(56, 56, 56);
+    }
+
+    .quiz-option.correct {
+      background-color: rgb(144, 238, 144);
+      border-color: rgb(0, 128, 0);
+    }
+
+    .quiz-option.wrong {
+      background-color: rgb(255, 182, 193);
+      border-color: rgb(220, 20, 60);
+    }
+
+    .quiz-feedback {
+      margin-top: 1rem;
+      padding: 1rem;
+      border-radius: 2px;
+      font-size: 1rem;
+      font-family: Inter, sans-serif;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      border: 2px solid;
+    }
+
+    .quiz-feedback.show {
+      opacity: 1;
+    }
+
+    .quiz-feedback.correct {
+      background-color: rgb(144, 238, 144);
+      border-color: rgb(0, 128, 0);
+      color: rgb(0, 100, 0);
+    }
+
+    .quiz-feedback.wrong {
+      background-color: rgb(255, 182, 193);
+      border-color: rgb(220, 20, 60);
+      color: rgb(139, 0, 0);
+    }
+
+    /* ========================================
+       LISTA DE ITENS
+       ======================================== */
+
+    .lista-destaque {
+      list-style: none;
+      margin: 2rem 0;
+      padding: 0;
+    }
+
+    .lista-destaque li {
+      background: rgb(255, 255, 255);
+      border: 2px solid rgb(56, 56, 56);
+      border-radius: 2px;
+      padding: 1rem 1.5rem;
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+      color: rgb(0, 0, 0);
+      font-family: Inter, sans-serif;
+      transition: all 0.2s ease;
+      position: relative;
+      padding-left: 3rem;
+    }
+
+    .lista-destaque li:hover {
+      transform: translateY(-2px);
+      box-shadow: 4px 4px 0px rgb(56, 56, 56);
+    }
+
+    .lista-destaque li::before {
+      content: '→';
+      position: absolute;
+      left: 1rem;
+      color: rgb(255, 222, 0);
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+
+    /* ========================================
+       SLIDE RESUMO (3 columns)
+       ======================================== */
+
+    .resumo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+
+    .resumo-coluna {
+      background: rgb(255, 255, 255);
+      border: 2px solid rgb(56, 56, 56);
+      border-radius: 0px;
+      padding: 2rem;
+      transition: all 0.2s ease;
+    }
+
+    .resumo-coluna:hover {
+      transform: translateY(-4px);
+      box-shadow: 8px 8px 0px rgb(56, 56, 56);
+    }
+
+    .resumo-titulo {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: rgb(56, 56, 56);
+      margin-bottom: 1rem;
+      font-family: monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .resumo-texto {
+      font-size: 1rem;
+      color: rgb(0, 0, 0);
+      line-height: 1.6;
+      font-family: Inter, sans-serif;
+    }
+
+    /* ========================================
+       SLIDE CTA (Call to Action)
+       ======================================== */
+
+    .cta-section {
+      text-align: center;
+      padding: 4rem 2rem;
+    }
+
+    .cta-title {
+      font-size: 3rem;
+      font-weight: 400;
+      color: rgb(56, 56, 56);
+      margin-bottom: 2rem;
+      font-family: monospace;
+      letter-spacing: 1px;
+    }
+
+    .cta-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+
+    .cta-btn {
+      background-color: rgb(255, 222, 0);
+      border: 2px solid rgb(56, 56, 56);
+      color: rgb(56, 56, 56);
+      padding: 1rem 2rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .cta-btn:hover {
+      transform: translateY(-4px);
+      box-shadow: 8px 8px 0px rgb(56, 56, 56);
+    }
+
+    /* Keyboard hints removed - clean interface */
+
+    /* ========================================
+       RESPONSIVE
+       ======================================== */
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 2rem 1rem;
+      }
+
+      .slide-title {
+        font-size: 1.8rem;
+        margin: 0 1rem;
+      }
+
+      .conceito-principal {
+        font-size: 1.4rem;
+      }
+
+      .cards-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .fluxo {
+        flex-direction: column;
+      }
+
+      .fluxo-seta {
+        transform: rotate(90deg);
+      }
+
+      .cta-title {
+        font-size: 2rem;
+      }
+
+      .keyboard-hints {
+        gap: 1rem;
+        font-size: 0.8rem;
+      }
+    }
+
+    @media (min-width: 769px) and (max-width: 1024px) {
+      .cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 1025px) {
+      .cards-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    /* ========================================
+       UTILITY CLASSES
+       ======================================== */
+
+    .text-center { text-align: center; }
+    .mb-1 { margin-bottom: 0.5rem; }
+    .mb-2 { margin-bottom: 1rem; }
+    .mb-3 { margin-bottom: 1.5rem; }
+    .mb-4 { margin-bottom: 2rem; }
+    .mt-2 { margin-top: 1rem; }
+    .mt-3 { margin-top: 1.5rem; }
+    .mt-4 { margin-top: 2rem; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Progress Indicator -->
+    <div class="progress-indicator">
+      <span class="progresso-dots" id="progresso-dots"></span>
+      <span class="progresso-texto" id="progresso-texto"></span>
+    </div>
+
+    <!-- Navigation Header -->
+    <div class="nav-header">
+      <h1 class="slide-title" id="slide-title"></h1>
+    </div>
+
+    <!-- Slides Container -->
+    <div id="slides-container">
+      {{SLIDES_CONTENT}}
+    </div>
+  </div>
+
+  <script>
+    let currentSlide = 0;
+    let totalSlides = 0;
+
+    function init() {
+      const slides = document.querySelectorAll('.slide');
+      totalSlides = slides.length;
+
+      if (totalSlides > 0) {
+        updateSlide();
+        setupKeyboardShortcuts();
+        setupCardClicks();
+        setupQuizzes();
+        setupClickNavigation();
+      }
+    }
+
+    function updateSlide() {
+      const slides = document.querySelectorAll('.slide');
+      const titles = document.querySelectorAll('.slide-title-data');
+
+      slides.forEach((slide, index) => {
+        slide.classList.toggle('active', index === currentSlide);
+      });
+
+      if (titles[currentSlide]) {
+        document.getElementById('slide-title').textContent = titles[currentSlide].textContent;
+      }
+
+      updateProgress();
+    }
+
+    function navigateSlide(direction) {
+      const newSlide = currentSlide + direction;
+      if (newSlide >= 0 && newSlide < totalSlides) {
+        currentSlide = newSlide;
+        updateSlide();
+      }
+    }
+
+    function updateProgress() {
+      const dots = Array(totalSlides).fill('○').map((dot, i) => i === currentSlide ? '●' : dot).join('');
+      document.getElementById('progresso-dots').textContent = dots;
+      document.getElementById('progresso-texto').textContent = `${currentSlide + 1}/${totalSlides}`;
+    }
+
+    function setupKeyboardShortcuts() {
+      document.addEventListener('keydown', (e) => {
+        switch(e.key) {
+          case 'ArrowRight':
+          case ' ':
+            e.preventDefault();
+            navigateSlide(1);
+            break;
+          case 'ArrowLeft':
+            e.preventDefault();
+            navigateSlide(-1);
+            break;
+          case 'f':
+          case 'F':
+            e.preventDefault();
+            toggleFullscreen();
+            break;
+          case 'Escape':
+            if (document.fullscreenElement) {
+              document.exitFullscreen();
+            }
+            break;
+          case 'r':
+          case 'R':
+            e.preventDefault();
+            currentSlide = 0;
+            updateSlide();
+            break;
+        }
+      });
+    }
+
+    function setupClickNavigation() {
+      document.addEventListener('click', (e) => {
+        const clickX = e.clientX;
+        const windowWidth = window.innerWidth;
+
+        // Ignore clicks on interactive elements
+        if (e.target.closest('.card-clickable, .quiz-option, .cta-btn')) {
+          return;
+        }
+
+        // Left 1/3 = previous, Right 1/3 = next
+        if (clickX < windowWidth / 3) {
+          navigateSlide(-1);
+        } else if (clickX > windowWidth * 2 / 3) {
+          navigateSlide(1);
+        }
+      });
+    }
+
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen();
+      } else {
+        document.exitFullscreen();
+      }
+    }
+
+    function setupCardClicks() {
+      document.querySelectorAll('.card-clickable').forEach(card => {
+        card.addEventListener('click', (e) => {
+          e.stopPropagation();
+          card.classList.toggle('expanded');
+        });
+      });
+    }
+
+    function setupQuizzes() {
+      document.querySelectorAll('.quiz-option').forEach(option => {
+        option.addEventListener('click', function(e) {
+          e.stopPropagation();
+
+          const quiz = this.closest('.quiz');
+          const allOptions = quiz.querySelectorAll('.quiz-option');
+          const feedback = quiz.querySelector('.quiz-feedback');
+          const isCorrect = this.dataset.correct === 'true';
+
+          allOptions.forEach(opt => {
+            opt.style.pointerEvents = 'none';
+          });
+
+          if (isCorrect) {
+            this.classList.add('correct');
+            feedback.classList.add('correct', 'show');
+            feedback.textContent = '✓ Correto! ' + this.dataset.explanation;
+          } else {
+            this.classList.add('wrong');
+            feedback.classList.add('wrong', 'show');
+            feedback.textContent = '✗ Ops! ' + this.dataset.explanation;
+          }
+
+          setTimeout(() => {
+            allOptions.forEach(opt => {
+              opt.style.pointerEvents = 'auto';
+              opt.classList.remove('correct', 'wrong');
+            });
+            feedback.classList.remove('show', 'correct', 'wrong');
+          }, 3000);
+        });
+      });
+    }
+
+    // Initialize on load
+    document.addEventListener('DOMContentLoaded', init);
+  </script>
+</body>
+</html>

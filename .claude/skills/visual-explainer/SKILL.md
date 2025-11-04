@@ -27,16 +27,22 @@
 
 **Lógica de decisão:**
 ```
-Se conteúdo tem arquitetura/relações → Mapa Mental
-Se conteúdo é novidade/impacto → Tech Futurista
-Senão → Notion Style (padrão)
+PADRÃO: MotherDuck Style (minimalista, retro-moderno, beige + yellow)
+Fallback: Notion Style (se MotherDuck indisponível)
 ```
+
+**Template MotherDuck:**
+- Cores: Beige (#F4EFEA), Yellow (#FFDE00), Dark Gray (#383838)
+- Tipografia: Monospace (Aeonik Mono fallback)
+- Bordas: 2px solid, sharp edges (border-radius: 0-2px)
+- Sombras: Offset solid (4px/8px sem blur) ao hover
+- Estilo: Warm, technical, developer-friendly
 
 Ver specs completas dos templates em [REFERENCE.md](REFERENCE.md).
 
 ### Etapa 3: Gerar Apresentação HTML 🎨
 
-1. Carregar template interativo (notion-interativo.html)
+1. Carregar template MotherDuck (notion-motherduck.html) - PADRÃO
 2. Injetar conteúdo estruturado com elementos interativos:
    - Cards clicáveis (para conceitos técnicos)
    - Fluxos visuais com setas (para processos)
@@ -99,6 +105,7 @@ Pronto para gravar! 🚀
 - **Navegação minimalista** → APENAS teclado (setas, espaço, F, ESC) + cliques laterais
 - **Sem distrações** → SEM timer, SEM notas visíveis, SEM animações que travam
 - **SEM botões visíveis** → Nenhum botão de navegação na tela (estilo Obsidian clean)
+- **SEM keyboard hints** → Sem indicações visuais de atalhos no rodapé
 
 ### Visual:
 - **Dark mode only** → Design profissional noturno

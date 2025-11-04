@@ -140,6 +140,133 @@ python3 scripts/image-generation/edit_nanobanana.py retrato.jpg "transformar em 
 
 ---
 
+### 5. batch_carrossel_gpt4o.py - Carrosséis Meta Ads (Hormozi)
+
+Gera carrosséis completos para Meta Ads no estilo Alex Hormozi para nicho de imóveis.
+**Visual:** Colagem artesanal feita à mão | **Geração:** 100% paralela | **Output:** 4 variantes por slide
+
+#### Uso:
+
+```bash
+# Modo interativo (recomendado)
+python3 scripts/image-generation/batch_carrossel_gpt4o.py
+
+# Modo teste (3 slides para validar visual)
+python3 scripts/image-generation/batch_carrossel_gpt4o.py --limit 3
+
+# Carrossel 1 completo (10 slides - Matemática Brutal)
+python3 scripts/image-generation/batch_carrossel_gpt4o.py \
+  --tipo "Chácara 1.000m²" \
+  --preco "70000" \
+  --entrada "10000" \
+  --parcela "1000" \
+  --parcelas "60" \
+  --localizacao "Itatiaiuçu, 15min do centro" \
+  --carrossel 1 \
+  --image-url "https://exemplo.com/foto-imovel.jpg"
+
+# Carrossel 2 completo (8 slides - Objeção Nome Sujo)
+python3 scripts/image-generation/batch_carrossel_gpt4o.py \
+  --tipo "Apartamento 3 quartos" \
+  --preco "450000" \
+  --entrada "50000" \
+  --parcela "2500" \
+  --parcelas "120" \
+  --localizacao "Savassi, BH" \
+  --carrossel 2 \
+  --image-url "https://exemplo.com/apto.jpg"
+```
+
+#### Parâmetros:
+- `--tipo` (obrigatório): Tipo do imóvel (ex: "Chácara 1.000m²", "Apartamento 3 quartos")
+- `--preco` (obrigatório): Preço total do imóvel (ex: 70000)
+- `--entrada` (obrigatório): Valor da entrada (ex: 10000)
+- `--parcela` (obrigatório): Valor da parcela mensal (ex: 1000)
+- `--parcelas` (obrigatório): Número de parcelas (ex: 60)
+- `--localizacao` (obrigatório): Localização do imóvel (ex: "Itatiaiuçu, 15min do centro")
+- `--carrossel` (opcional): Tipo de carrossel [1|2|3] (padrão: 1)
+  - **1** = Matemática Brutal (10 slides)
+  - **2** = Objeção Nome Sujo (8 slides)
+  - **3** = Custo de Não Agir (7 slides - em breve)
+- `--image-url` (opcional): URL da imagem do imóvel (usado apenas no slide 1)
+- `--limit` (opcional): Limitar número de slides para teste (ex: --limit 3)
+
+#### Características:
+- **Metodologia:** Alex Hormozi (100M Offers + 100M Leads)
+- **Visual:** Colagem artesanal feita à mão (papéis coloridos, canetinhas, sombras reais)
+- **Geração:** 100% paralela (ThreadPoolExecutor)
+- **Variantes:** 4 por slide (escolher melhor depois)
+- **Formato:** Portrait 2:3 (ideal para Meta Ads)
+- **Slide 1:** Usa imagem de referência do imóvel (`filesUrl`)
+- **Slides 2-10:** Apenas prompt (visual de colagem)
+- **Salvamento:** `~/Downloads/carrossel_slide_01_v1.png`, `carrossel_slide_01_v2.png`, etc.
+- **Tempo:** ~5-7 minutos para carrossel completo (10 slides × 4 variantes = 40 imagens)
+
+#### Templates de Slide de Capa:
+
+**📍 Localização:** `scripts/image-generation/templates/slide_capa_templates.json`
+
+**Template 1: Divisão Vertical - Foto + Texto**
+- **Layout:** Dividido em duas metades verticais (50% cada)
+- **Lado Esquerdo:** Foto limpa do imóvel (sem texto ou overlay)
+- **Lado Direito:** Colagem artesanal com hook e textos
+- **Parte Inferior:** Setinha "Deslize para continuar ➜" (apenas Slide 1)
+- **Quando usar:** Ideal para mostrar produto + hook simultaneamente. Bom para first impression.
+
+**Template 2: Colagem Vertical - Textos em Cima + Foto Embaixo**
+- **Layout:** Vertical de cima para baixo (60% textos + 40% foto)
+- **Parte Superior:** Colagem artesanal completa com hook/objeção
+- **Parte Inferior:** Foto do imóvel (limpa ou só com preço destacado)
+- **Rodapé:** Setinha "Deslize para continuar ➜" (apenas Slide 1)
+- **Quando usar:** Ideal para hooks emocionais/objeções. Textos ganham mais destaque, foto prova credibilidade.
+
+**Como reutilizar:**
+1. Ver templates disponíveis: `cat scripts/image-generation/templates/slide_capa_templates.json`
+2. Copiar `prompt_base` do template desejado
+3. Substituir `{CONTEUDO_TEXTO}` pelo hook/copy específica
+4. (Template 2) Substituir `{PRECO_DESTAQUE}` por valor opcional sobre a foto
+5. Usar com `--image-url` para incluir foto do imóvel
+
+#### Estrutura dos Carrosséis:
+
+**Carrossel 1 - Matemática Brutal (10 slides):**
+1. Hook - "Você VAI pagar R$ X/mês de qualquer jeito"
+2. Credibilidade - "23 famílias de aluguel para dona de terra"
+3. Opção 1: Aluguel (perdas)
+4. Opção 2: Imóvel (ganhos)
+5. Comparação lado a lado
+6. Objeção: "Nome sujo"
+7. Sem juros (economia R$ 70k)
+8. Value stack (tudo incluso)
+9. Recap + Custo de não agir
+10. CTA urgente
+
+**Carrossel 2 - Objeção Nome Sujo (8 slides):**
+1. Hook - "Não consigo comprar, nome sujo"
+2. Reframe - "NO BANCO. Aqui não tem banco"
+3. Casos reais (João, Maria, Carlos)
+4. O que eles tinham em comum
+5. Matemática (aluguel vs imóvel)
+6. Sem banco = Sem barreiras
+7. Dignidade (empatia)
+8. CTA qualificado
+
+#### Exemplo de Output:
+```
+✅ Slides gerados com sucesso: 10/10
+🖼️  Total de imagens geradas: 40 (10 slides × 4 variantes)
+⏱️  Tempo total: 324.5s (32.5s por slide)
+📂 ~/Downloads/carrossel_slide_01_v1.png ... carrossel_slide_10_v4.png
+```
+
+#### Quando Usar:
+- Criar anúncios de imóveis para Meta Ads (Facebook/Instagram)
+- Precisa de copy persuasivo estilo Hormozi
+- Quer testar múltiplas variações visuais (4 por slide)
+- Visual diferenciado (colagem artesanal) vs templates genéricos
+
+---
+
 ## 🎯 Casos de Uso Comuns
 
 ### 1. Post para Instagram (Portrait)

@@ -1,0 +1,55 @@
+{
+  "templates": {
+    "divisao_vertical_foto_texto": {
+      "nome": "Divisão Vertical - Foto + Texto (Colagem Artesanal)",
+      "descricao": "Layout dividido 50/50: foto limpa à esquerda, textos em colagem artesanal à direita. Setinha 'deslize' embaixo.",
+      "estrutura": {
+        "lado_esquerdo": "Foto do imóvel (limpa, sem texto)",
+        "lado_direito": "Colagem artesanal (madeira + papéis + canetinha)",
+        "parte_inferior": "Setinha 'Deslize para continuar ➜'"
+      },
+      "prompt_base": "Layout dividido vertical em duas metades iguais:\n\nLado esquerdo: A foto do imóvel fornecida, limpa e sem texto sobre ela.\n\nLado direito: Colagem artesanal em fundo de madeira clara com papéis coloridos escritos à mão em canetinha:\n\n{CONTEUDO_TEXTO}\n\nNA PARTE DE BAIXO (centralizado):\nDesenhe uma setinha para a direita (→) ou emoji de dedo apontando, com texto pequeno:\n\"Deslize para continuar ➜\"",
+      "exemplo_uso": {
+        "conteudo_texto": "\"VOCÊ VAI PAGAR R$ 1.500/MÊS PELOS PRÓXIMOS 7 ANOS DE QUALQUER JEITO.\"\n\n\"A pergunta é: pra quem?\"\n\n\"Aluguel ou patrimônio? Você decide.\"",
+        "icones": "interrogação, casinha, cifrão (desenhados à mão no lado direito)"
+      },
+      "quando_usar": "Ideal para slides de capa de carrosséis de imóveis. Mostra o produto + hook de forma clara e profissional.",
+      "notas": [
+        "SEMPRE requer --image-url com foto do imóvel",
+        "Setinha 'deslize' aparece APENAS no slide 1",
+        "Foto à esquerda permanece limpa (sem overlay)",
+        "Textos ficam apenas no lado direito"
+      ],
+      "criado_em": "2025-11-04",
+      "versao": "1.0"
+    },
+    "colagem_vertical_texto_foto": {
+      "nome": "Colagem Vertical - Textos em Cima + Foto Embaixo",
+      "descricao": "Layout vertical: colagem artesanal com hook na parte superior, foto limpa do imóvel na parte inferior (opcional: preço sobre a foto).",
+      "estrutura": {
+        "parte_superior": "Colagem artesanal completa (papéis coloridos + hook)",
+        "parte_inferior": "Foto do imóvel (limpa ou com preço destacado)",
+        "rodape": "Setinha 'Deslize para continuar ➜'"
+      },
+      "prompt_base": "Colagem artesanal completa em fundo de madeira clara:\n\nPARTE SUPERIOR (60% da imagem):\nPapéis coloridos colados em estilo artesanal com escrita à mão em canetinha:\n\n{CONTEUDO_TEXTO}\n\nPARTE INFERIOR (40% da imagem):\nFoto do imóvel fornecido como referência, limpa e sem texto sobre ela (ou apenas com texto pequeno: \"{PRECO_DESTAQUE}\").\n\nRODAPÉ (centralizado):\nDesenhe uma setinha para a direita (→) com texto pequeno:\n\"Deslize para continuar ➜\"",
+      "exemplo_uso": {
+        "conteudo_texto": "Papel branco com aspas vermelhas:\n\"NÃO CONSIGO COMPRAR\nMEU NOME TÁ SUJO\"\n\nPapel amarelo:\n\"Escuto isso 10 vezes por dia.\"\n(desenho de pessoa preocupada)\n\nPapel azul claro com interrogação:\n\"E minha resposta é sempre a mesma:\"",
+        "preco_destaque": "10 MIL DE ENTRADA",
+        "icones": "aspas, pessoa preocupada, interrogação"
+      },
+      "quando_usar": "Ideal para hooks emocionais/objeções. Colagem artesanal completa dá destaque ao texto, foto embaixo prova credibilidade.",
+      "notas": [
+        "Foto do imóvel aparece na PARTE INFERIOR (não superior)",
+        "Texto sobre foto é OPCIONAL (padrão: apenas preço destaque)",
+        "Layout vertical: textos 60% + foto 40%",
+        "Setinha 'deslize' aparece APENAS no slide 1"
+      ],
+      "criado_em": "2025-11-04",
+      "versao": "1.0"
+    }
+  },
+  "proximos_templates": [
+    "foto_overlay_minimalista",
+    "tres_colunas_produto_preco_cta"
+  ]
+}

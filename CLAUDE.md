@@ -411,6 +411,38 @@ python3 scripts/extraction/transcribe_video.py "URL_DO_YOUTUBE"
 
 ---
 
+### 1️⃣5️⃣ Visualização de Processos (OBRIGATÓRIO)
+
+**GATILHO:** Usuário pede explicação/resumo/ideia com múltiplas etapas
+
+**SEMPRE incluir visualização ASCII antes da explicação:**
+
+```
+Etapa 1 → Etapa 2 → Etapa 3 → Resultado
+   ↓          ↓          ↓
+[breve]   [breve]   [breve]
+```
+
+**SEMPRE:**
+- ✅ Mostrar fluxo visual ANTES da explicação detalhada
+- ✅ Usar setas (→ ↓ ↑ ←) para indicar direção
+- ✅ Máximo 5-7 palavras por etapa
+- ✅ Numerar quando sequencial (1. 2. 3.)
+
+**Exemplo aplicado:**
+```
+📺 URL YouTube → 🎤 Whisper → 🤖 Claude → 📝 Obsidian
+                 (transcrição)  (análise)   (📺 Vídeos/)
+```
+
+**Exceções:**
+- ❌ Resposta única sem etapas
+- ❌ Usuário pede só código sem explicação
+
+**Por quê:** Compreensão visual rápida antes dos detalhes. Facilita entendimento de processos complexos.
+
+---
+
 ## 📍 MAPA DE AÇÕES (Índice Rápido)
 
 | Quando usuário pedir... | Use isto | Doc completa |
@@ -444,6 +476,7 @@ python3 scripts/extraction/transcribe_video.py "URL_DO_YOUTUBE"
 | **Scrape Twitter/X** | `scripts/twitter/search_twitter.py` | `scripts/twitter/README.md` |
 | **Scrape TikTok** | `scripts/tiktok/*.py` | `scripts/tiktok/README.md` |
 | **Scrape Google Maps** | `scripts/scraping/google_maps_*.py` | `scripts/scraping/README.md` |
+| **Clonar design de site** | `scripts/design-cloning/extract_styles.py` + SKILL `website-cloner` | `.claude/skills/website-cloner/SKILL.md` |
 | **Anotar/Salvar no Obsidian** | SKILL `obsidian-organizer` (automática) | `.claude/skills/obsidian-organizer/SKILL.md` |
 | **Estudar vídeo YouTube** | WORKFLOW AUTOMÁTICO (ver seção 6️⃣) | `.claude/skills/estudar-video/SKILL.md` |
 | **AI News diário** | `scripts/scheduling/daily_ai_news.py` (Python 3.11) | `scripts/scheduling/README.md` |
@@ -520,13 +553,14 @@ Skills são capacidades modulares model-invoked (Claude decide quando usar autom
 
 **⚠️ PRIORIDADE:** `adaptive-mentor` é skill de **primeiro contato** para frases genéricas. Ver regra 9️⃣ acima.
 
-### Skills Disponíveis (17 Skills)
+### Skills Disponíveis (19 Skills)
 
 | Skill | Quando Usar | Descrição |
 |-------|-------------|-----------|
 | **idea-validator** | Validar ideias antes de construir | Analisa saturação de mercado, viabilidade, demanda real, monetização. Dá feedback brutalmente honesto. |
 | **launch-planner** | Planejar lançamento de MVP | Transforma ideias validadas em PRDs completos com roadmap, schema de DB, e escopo MVP (2-4 semanas). |
 | **product-designer** | Design de UI/UX | Elimina o "visual de IA" (gradientes azul/roxo). Cria interfaces profissionais com Tailwind + shadcn/ui. |
+| **website-cloner** | Clonar design de qualquer site | Extração automática CSS via Playwright + co-criação → 100% fidelidade (não 60-70%). Gera style guide detalhado reutilizável. Baseado em metodologia comprovada. |
 | **marketing-writer** | Criar conteúdo de marketing | Escreve landing pages, tweets, Product Hunt, emails de lançamento. Tom claro e focado em benefícios. |
 | **hormozi-leads** | Criar hooks/headlines/copy + gerar leads | AUTO-INVOCA quando pedir: hook, headline, CTA, ângulo, body, legenda IG/YT, descrição. Metodologia Hormozi: Core Four + Lead Getters. |
 | **roadmap-builder** | Priorizar features | Atua como PM: decide o que construir (e o que NÃO construir). Previne feature creep. |
@@ -541,6 +575,7 @@ Skills são capacidades modulares model-invoked (Claude decide quando usar autom
 | **builder-orchestrator** | Criar ferramentas/skills/workflows | Orquestra criação otimizada usando paralelização máxima e recursos existentes. Conhece todo workspace. Delega para skill-creator quando necessário. |
 | **carrossel-meta-ads** | Criar carrosséis Meta Ads (imóveis) | Workflow completo: coleta dados → subagente gera copy (3 opções) → subagente gera prompts → imagens paralelas. Copy Hormozi + visual artesanal. |
 | **prompt-templates** | Pesquisar templates de prompt engineering | Consulta biblioteca aitmpl.com (100+ templates). Busca por categoria (Agents, Commands, Skills, MCPs, Hooks, Settings). WebFetch sob demanda. |
+| **army-of-agents** | Criar conteúdo de alta qualidade com múltiplas perspectivas | Sistema multi-agente: Orquestrador define roles (Pesquisador, Copywriter, Crítico Hormozi, Diretor) → execução paralela/sequencial → feedback mútuo → iteração até aprovação. |
 
 ### Estrutura de uma Skill (Progressive Disclosure)
 
@@ -707,5 +742,5 @@ ClaudeCode-Workspace/
 
 ---
 
-**Última atualização:** 2025-11-04 (+ skill carrossel-meta-ads: copy dinâmica com subagentes Claude Code)
-**Versão:** 5.0 (16 Skills | 70 templates)
+**Última atualização:** 2025-11-04 (+ regra 1️⃣5️⃣: visualização de processos com ASCII art)
+**Versão:** 5.3 (19 Skills | 71 templates | 15 regras comportamento)
