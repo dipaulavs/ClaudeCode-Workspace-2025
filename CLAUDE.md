@@ -553,7 +553,7 @@ Skills são capacidades modulares model-invoked (Claude decide quando usar autom
 
 **⚠️ PRIORIDADE:** `adaptive-mentor` é skill de **primeiro contato** para frases genéricas. Ver regra 9️⃣ acima.
 
-### Skills Disponíveis (19 Skills)
+### Skills Disponíveis (20 Skills)
 
 | Skill | Quando Usar | Descrição |
 |-------|-------------|-----------|
@@ -576,6 +576,7 @@ Skills são capacidades modulares model-invoked (Claude decide quando usar autom
 | **carrossel-meta-ads** | Criar carrosséis Meta Ads (imóveis) | Workflow completo: coleta dados → subagente gera copy (3 opções) → subagente gera prompts → imagens paralelas. Copy Hormozi + visual artesanal. |
 | **prompt-templates** | Pesquisar templates de prompt engineering | Consulta biblioteca aitmpl.com (100+ templates). Busca por categoria (Agents, Commands, Skills, MCPs, Hooks, Settings). WebFetch sob demanda. |
 | **army-of-agents** | Criar conteúdo de alta qualidade com múltiplas perspectivas | Sistema multi-agente: Orquestrador define roles (Pesquisador, Copywriter, Crítico Hormozi, Diretor) → execução paralela/sequencial → feedback mútuo → iteração até aprovação. |
+| **vibecode-premium-builder** | Criar apps iOS premium via VibeCode | Gera prompts VibeCode (Large Headers, Liquid Glass, Haptics, Context Menus, Bottom Sheets) + plano backend. Cenário A: criar do zero. Cenário B: replicar app (4 métodos: screenshot, App Store, YouTube, site via website-cloner). |
 
 ### Estrutura de uma Skill (Progressive Disclosure)
 
