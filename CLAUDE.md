@@ -62,6 +62,8 @@
 
 ### 0️⃣ Modo Conciso (Comunicação)
 
+**⚠️ PREFERÊNCIA DO USUÁRIO:** Respostas ULTRA-CURTAS. Zero fluff. Zero repetição.
+
 **SEMPRE usar Modo Conciso nas respostas:**
 
 **Estrutura:**
@@ -118,9 +120,9 @@
 | Instagram Publicação | `scripts/instagram/` | 6 templates |
 | Instagram Scraper | `scripts/instagram-scraper/` | 5 templates |
 | Meta Ads | `scripts/meta-ads/` | 4 templates |
-| Nextcloud | `scripts/nextcloud/` | 2 templates |
+| Nextcloud | `scripts/nextcloud/` | 3 templates |
 | Obsidian | `scripts/obsidian/` | 6 templates |
-| Imagens | `scripts/image-generation/` | 4 templates |
+| Imagens | `scripts/image-generation/` | 6 templates |
 | Vídeos | `scripts/video-generation/` | 2 templates |
 | Áudio | `scripts/audio-generation/` | 2 templates |
 | Extração | `scripts/extraction/` | 4 templates |
@@ -380,6 +382,35 @@ python3 scripts/extraction/transcribe_video.py "URL_DO_YOUTUBE"
 
 ---
 
+### 1️⃣4️⃣ Upload Rápido de Imagens
+
+**GATILHO:** Usuário diz "suba as imagens" / "upload rápido" / "faça upload"
+
+**REGRA ABSOLUTA:** SEMPRE usar `upload_rapido.py --from-local`
+
+**SEMPRE:**
+- ✅ Executar `python3 scripts/nextcloud/upload_rapido.py --from-local`
+- ✅ Pasta local: `~/Pictures/upload/`
+- ✅ Upload para: `imagens/upload/` (Nextcloud)
+- ✅ Links permanentes (sem expiração)
+- ✅ Auto-delete dos arquivos locais após upload
+
+**NUNCA:**
+- ❌ Pedir caminho do arquivo
+- ❌ Usar upload_to_nextcloud.py ou upload_from_downloads.py
+- ❌ Perguntar "qual arquivo?"
+
+**Workflow:**
+1. Usuário joga imagens em `~/Pictures/upload/`
+2. Usuário diz "suba as imagens" ou "upload rápido"
+3. Claude executa `upload_rapido.py --from-local`
+4. Links permanentes retornados
+5. Arquivos locais deletados automaticamente
+
+**Por quê:** Workflow padrão para imagens de criativos/anúncios. Pasta fixa, sem perguntas, máxima velocidade.
+
+---
+
 ## 📍 MAPA DE AÇÕES (Índice Rápido)
 
 | Quando usuário pedir... | Use isto | Doc completa |
@@ -396,9 +427,11 @@ python3 scripts/extraction/transcribe_video.py "URL_DO_YOUTUBE"
 | **Campanha Meta Ads** | `scripts/meta-ads/create_campaign.py` | `scripts/meta-ads/README.md` |
 | **Anúncio Meta Ads** | `scripts/meta-ads/create_ad.py` | `scripts/meta-ads/README.md` |
 | **Upload Nextcloud** | `scripts/nextcloud/upload_from_downloads.py` | `scripts/nextcloud/README.md` |
+| **Upload imagem criativo** | `scripts/nextcloud/upload_rapido.py` | `scripts/nextcloud/README.md` |
 | **1 imagem** | `scripts/image-generation/generate_nanobanana.py` | `scripts/image-generation/README.md` |
 | **2+ imagens** | `scripts/image-generation/batch_generate.py --api nanobanana` | `scripts/image-generation/README.md` |
 | **Editar imagem** | `scripts/image-generation/edit_nanobanana.py` | `scripts/image-generation/README.md` |
+| **Carrossel Meta Ads** | SKILL `carrossel-meta-ads` (automática) | `.claude/skills/carrossel-meta-ads/SKILL.md` |
 | **1 vídeo** | `scripts/video-generation/generate_sora.py` | `scripts/video-generation/README.md` |
 | **2+ vídeos** | `scripts/video-generation/batch_generate.py` | `scripts/video-generation/README.md` |
 | **1 áudio** | `scripts/audio-generation/generate_elevenlabs.py` | `scripts/audio-generation/README.md` |
@@ -487,7 +520,7 @@ Skills são capacidades modulares model-invoked (Claude decide quando usar autom
 
 **⚠️ PRIORIDADE:** `adaptive-mentor` é skill de **primeiro contato** para frases genéricas. Ver regra 9️⃣ acima.
 
-### Skills Disponíveis (15 Skills)
+### Skills Disponíveis (17 Skills)
 
 | Skill | Quando Usar | Descrição |
 |-------|-------------|-----------|
@@ -506,6 +539,8 @@ Skills são capacidades modulares model-invoked (Claude decide quando usar autom
 | **obsidian-organizer** | Anotar/salvar/organizar no Obsidian | Entende sistema minimalista (Tarefas/Anotações/Vídeos). Cria automaticamente no formato e local corretos. Data/hora BR. Transcrição colapsável. |
 | **skill-creator** | Criar novas Skills | Meta-skill que cria outras Skills automaticamente. Gera estrutura multi-arquivo Progressive Disclosure. |
 | **builder-orchestrator** | Criar ferramentas/skills/workflows | Orquestra criação otimizada usando paralelização máxima e recursos existentes. Conhece todo workspace. Delega para skill-creator quando necessário. |
+| **carrossel-meta-ads** | Criar carrosséis Meta Ads (imóveis) | Workflow completo: coleta dados → subagente gera copy (3 opções) → subagente gera prompts → imagens paralelas. Copy Hormozi + visual artesanal. |
+| **prompt-templates** | Pesquisar templates de prompt engineering | Consulta biblioteca aitmpl.com (100+ templates). Busca por categoria (Agents, Commands, Skills, MCPs, Hooks, Settings). WebFetch sob demanda. |
 
 ### Estrutura de uma Skill (Progressive Disclosure)
 
@@ -672,5 +707,5 @@ ClaudeCode-Workspace/
 
 ---
 
-**Última atualização:** 2025-11-03 (+ builder-orchestrator: orquestração inteligente com paralelização)
-**Versão:** 4.6 (15 Skills | 67+ templates)
+**Última atualização:** 2025-11-04 (+ skill carrossel-meta-ads: copy dinâmica com subagentes Claude Code)
+**Versão:** 5.0 (16 Skills | 70 templates)
