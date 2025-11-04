@@ -7,7 +7,8 @@
 3. [Cálculo de ROI](#cálculo-de-roi)
 4. [Estrutura de Apresentação](#estrutura-de-apresentação)
 5. [Frameworks de Ancoragem](#frameworks-de-ancoragem)
-6. [Fórmulas e Cálculos](#fórmulas-e-cálculos)
+6. [Valores Quebrados (Preços Psicológicos)](#valores-quebrados-preços-psicológicos)
+7. [Fórmulas e Cálculos](#fórmulas-e-cálculos)
 
 ---
 
@@ -413,6 +414,215 @@ Valor Percebido = (Dream Outcome × Perceived Likelihood)
 **Diminuir denominador:**
 - **Time Delay:** "Entrega em 8 semanas (não 6 meses)"
 - **Effort & Sacrifice:** "Zero esforço da sua equipe, fazemos tudo"
+
+---
+
+## Valores Quebrados (Preços Psicológicos)
+
+### Fundamento: Percepção de Preço
+
+**Cérebro processa preços da esquerda para direita:**
+
+```
+R$ 3.500 → "Três mil e quinhentos"
+R$ 3.497 → "Três mil e..." (cérebro arredonda para baixo)
+```
+
+**Resultado:** R$ 3.497 parece significativamente mais barato que R$ 3.500, mesmo sendo diferença de R$ 3.
+
+---
+
+### Regra dos Dígitos Mágicos
+
+**SEMPRE terminar preços em:**
+- **7** → R$ 1.497, R$ 3.497, R$ 5.997
+- **9** → R$ 1.499, R$ 3.499, R$ 5.999
+
+**NUNCA terminar em:**
+- **0** → R$ 1.500, R$ 3.500 (parece "redondo", caro)
+- **5** → R$ 1.495, R$ 3.495 (sem impacto psicológico)
+
+---
+
+### Técnica Completa (4 Passos)
+
+#### **Passo 1: Calcular Preço Base**
+```python
+# Preço justo baseado em valor
+preco_base = 3500  # R$
+```
+
+#### **Passo 2: Criar Ancoragem Alta (+35-40%)**
+```python
+# Adicionar 35-40% para criar "tabela empresas"
+ancoragem = preco_base * 1.37  # 37% maior
+# R$ 3.500 × 1.37 = R$ 4.795
+
+# Aplicar valor quebrado na ancoragem
+ancoragem_quebrada = 4791  # R$ (arredondar para terminar em 1, 7 ou 9)
+```
+
+#### **Passo 3: Calcular Descontos Nomeados**
+```python
+# Total de desconto = diferença entre ancoragem e preço desejado
+desconto_total = ancoragem_quebrada - preco_base  # R$ 1.291
+
+# Dividir em 2 descontos nomeados (psicologia)
+desconto_1 = 800  # "Desconto parceria estratégica"
+desconto_2 = desconto_total - desconto_1  # R$ 491 → arredondar para 494
+```
+
+#### **Passo 4: Valor Final Quebrado**
+```python
+# Aplicar descontos e ajustar para valor quebrado
+preco_final = ancoragem_quebrada - desconto_1 - desconto_2
+# R$ 4.791 - R$ 800 - R$ 494 = R$ 3.497 ✅
+
+# Garantir que termina em 7 ou 9
+if preco_final % 10 not in [7, 9]:
+    preco_final = (preco_final // 10) * 10 + 7
+```
+
+---
+
+### Exemplo Prático Completo
+
+**Cenário:** Projeto vale R$ 3.500/mês (preço base justo)
+
+**Aplicando técnica:**
+
+```
+1. Preço base: R$ 3.500
+
+2. Ancoragem (+37%): R$ 4.795 → R$ 4.791 (quebrado)
+
+3. Descontos nomeados:
+   - Desconto parceria: -R$ 800
+   - Desconto combo: -R$ 494
+
+4. Valor final: R$ 4.791 - R$ 1.294 = R$ 3.497 ✅
+```
+
+**Apresentação ao cliente:**
+```html
+<h2>Investimento</h2>
+
+<div class="regular-price">
+  <p class="strikethrough">Tabela empresas: R$ 4.791/mês</p>
+</div>
+
+<div class="discounts">
+  <p>✅ Desconto parceria estratégica: -R$ 800</p>
+  <p>✅ Desconto combo completo: -R$ 494</p>
+</div>
+
+<div class="final-price">
+  <h3>Investimento para [Cliente]:</h3>
+  <p class="big-price">R$ 3.497/mês</p>
+  <p class="small">Economia de R$ 1.294/mês (27%)</p>
+</div>
+```
+
+---
+
+### Tabela de Conversão Rápida
+
+| Preço Base | Ancoragem (+37%) | Desconto Total | Preço Final Quebrado |
+|------------|------------------|----------------|----------------------|
+| R$ 1.000 | R$ 1.397 | R$ 400 | R$ 997 |
+| R$ 1.500 | R$ 2.097 | R$ 600 | R$ 1.497 |
+| R$ 2.000 | R$ 2.797 | R$ 800 | R$ 1.997 |
+| R$ 2.500 | R$ 3.497 | R$ 1.000 | R$ 2.497 |
+| R$ 3.000 | R$ 4.197 | R$ 1.200 | R$ 2.997 |
+| R$ 3.500 | R$ 4.891 | R$ 1.394 | R$ 3.497 |
+| R$ 4.000 | R$ 5.591 | R$ 1.594 | R$ 3.997 |
+| R$ 5.000 | R$ 6.991 | R$ 1.994 | R$ 4.997 |
+| R$ 6.000 | R$ 8.391 | R$ 2.394 | R$ 5.997 |
+| R$ 8.000 | R$ 11.191 | R$ 3.194 | R$ 7.997 |
+| R$ 10.000 | R$ 13.991 | R$ 3.994 | R$ 9.997 |
+
+---
+
+### Nomes de Descontos Persuasivos
+
+**Use descontos nomeados (psicologia de exclusividade):**
+
+**Opções de nomenclatura:**
+
+1. **"Desconto Parceria Estratégica"**
+   - Quando: Cliente grande, potencial de case
+   - Mensagem: "Você é especial para nós"
+
+2. **"Desconto Primeiro Cliente Setor"**
+   - Quando: Primeiro cliente no nicho dele
+   - Mensagem: "Você é pioneiro"
+
+3. **"Desconto Combo Completo"**
+   - Quando: Contrata múltiplos serviços
+   - Mensagem: "Você é inteligente (comprou junto)"
+
+4. **"Desconto Lançamento"**
+   - Quando: Serviço novo que você oferece
+   - Mensagem: "Pegou a oportunidade"
+
+5. **"Desconto Pagamento à Vista"**
+   - Quando: Cliente paga adiantado
+   - Mensagem: "Você facilita nosso fluxo"
+
+**SEMPRE use 2 descontos** (não 1, não 3):
+- 1 desconto = parece simples demais
+- 2 descontos = percepção de "muito desconto"
+- 3+ descontos = cliente desconfia
+
+---
+
+### Setup Inicial (One-Time) Também Quebrado
+
+**Consistência é chave:**
+
+```
+Se mensalidade: R$ 3.497
+Então setup: R$ 1.497 (não R$ 1.500)
+
+Se mensalidade: R$ 5.997
+Então setup: R$ 1.997 (não R$ 2.000)
+```
+
+**Regra:** Setup = ~40-50% da primeira mensalidade, sempre quebrado.
+
+---
+
+### Impacto Real (Estudos)
+
+**Pesquisas mostram:**
+- Preços terminados em 9: +15-20% conversão vs preços redondos
+- Preços terminados em 7: +10-15% conversão vs preços redondos
+- Ancoragem alta: +30-50% aceitação vs sem ancoragem
+
+**Fontes:**
+- MIT Study on Pricing Psychology (2003)
+- Journal of Consumer Research (2005)
+- Priceless: The Myth of Fair Value (William Poundstone, 2010)
+
+---
+
+### Quando NÃO Usar Valores Quebrados
+
+**Exceções (usar valores redondos):**
+
+1. ❌ **Produtos premium de luxo**
+   - Ex: Rolex cobra R$ 50.000 (não R$ 49.997)
+   - Razão: Preço redondo = exclusividade
+
+2. ❌ **B2B enterprise (>R$ 50k/mês)**
+   - Ex: Consultoria estratégica R$ 80.000/mês
+   - Razão: Valores altos, quebrado parece "pequeno"
+
+3. ❌ **Doações/Caridade**
+   - Ex: Doar R$ 100 (não R$ 97)
+   - Razão: Generosidade não combina com "truque"
+
+**Para 99% dos casos (incluindo PMEs, B2B médio), SEMPRE usar valores quebrados.**
 
 ---
 

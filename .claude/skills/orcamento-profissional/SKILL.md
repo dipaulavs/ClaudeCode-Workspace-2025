@@ -63,22 +63,30 @@ Preço Justo = 2-10% do Valor Gerado no Primeiro Ano
 2. Quanto cliente PERDE sem isso? (oportunidade, risco)
 3. Qual ROI esperado? (conservador: 3x, realista: 5x, otimista: 10x)
 
+**SEMPRE aplicar Valores Quebrados + Ancoragem:**
+
+**Técnica de Preços Psicológicos:**
+1. **Calcular preço base** (ex: R$ 6.000)
+2. **Criar ancoragem alta** → Tabela +30-40% (ex: R$ 8.391)
+3. **Aplicar descontos nomeados** → Parceria + Combo
+4. **Valor final quebrado** → Terminar em 7 ou 9 (ex: R$ 5.997)
+
 **Output para usuário:**
 ```
-💰 Precificação Sugerida:
+💰 Precificação Sugerida (com Ancoragem):
 
-Valor Gerado (ano 1): R$ 120.000
-├─ Receita nova: R$ 80.000
-├─ Economia tempo: R$ 30.000
-└─ Redução custos: R$ 10.000
+TABELA EMPRESAS PADRÃO: R$ 8.391
+├─ Desconto parceria: -R$ 1.200
+├─ Desconto combo: -R$ 1.194
+└─ INVESTIMENTO CLIENTE: R$ 5.997/mês ⭐
 
-Preço Justo (5%): R$ 6.000
-ROI Cliente: 20x (R$ 120k ÷ R$ 6k)
+Economia: 28% (R$ 2.394)
+ROI Cliente: 20x
 
-Faixas:
-• Conservador (2%): R$ 2.400
-• Realista (5%): R$ 6.000
-• Premium (10%): R$ 12.000
+Valores quebrados aplicados:
+• Tabela:  R$ 8.391 (ancoragem alta)
+• Final:   R$ 5.997 (parece "R$ 5 mil")
+• Setup:   R$ 1.497 (consistência)
 ```
 
 ### Etapa 4: Gerar Apresentação HTML 📊
