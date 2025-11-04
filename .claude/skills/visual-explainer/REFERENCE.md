@@ -4,7 +4,143 @@
 
 ---
 
-## 🦆 Template: MotherDuck Style (PADRÃO) - Retro-Moderno Minimalista
+## 🎓 Template: Educativo (PADRÃO para YouTube) - Reveal Progressivo
+
+### Quando Usar
+- **PADRÃO para vídeos educativos do YouTube**
+- Tutoriais passo a passo
+- Explicações didáticas
+- Aulas gravadas para screen recording
+- Quando precisa controlar o ritmo da revelação (gravação de vídeo)
+
+### Design System
+Baseado em MotherDuck Style (light mode, beige + yellow + dark gray)
+
+### Estrutura Visual
+
+```
+┌────────────────────────────────────────────────────────┐
+│                             Slide 2 de 7      (2/5)    │
+├────────────────────────────────────────────────────────┤
+│              O QUE VOCÊ VAI APRENDER                   │
+├────────────────────────────────────────────────────────┤
+│                                                         │
+│    ┌───────────────────────────────────────┐           │
+│    │ ✅ Tópico 1                            │ ← Step 1 │
+│    │ Descrição do tópico                    │           │
+│    └───────────────────────────────────────┘           │
+│                                                         │
+│    ┌───────────────────────────────────────┐           │
+│    │ ✅ Tópico 2                            │ ← Step 2 │
+│    │ Descrição do tópico                    │           │
+│    └───────────────────────────────────────┘           │
+│                                                         │
+│    (Tópicos 3-5 aparecem progressivamente)             │
+│                                                         │
+├────────────────────────────────────────────────────────┤
+│  Clique ou → para revelar próximo item                 │
+└────────────────────────────────────────────────────────┘
+```
+
+### Características Técnicas
+
+**Cores (Light Mode - MotherDuck):**
+- Background: `#F4EFEA` (beige warm)
+- Acento: `#FFDE00` (yellow)
+- Texto: `#383838` (dark gray)
+- Borders: `2px solid #383838`
+- Cards: `#fff` background
+
+**Tipografia:**
+- Font: `'SF Mono', 'Monaco', 'Cascadia Code', monospace`
+- H1: 48px (títulos principais)
+- H2: 38px (títulos de slides)
+- H3: 24px (títulos de cards)
+- Body: 19px
+- Line-height: 1.4
+
+**Animações (Reveal Progressivo):**
+- Todos itens iniciam com `opacity: 0` + `transform: translateY(20px)`
+- Ao clicar/→: classe `.revealed` adiciona `opacity: 1` + `transform: translateY(0)`
+- Transição: `0.4s cubic-bezier(0.4, 0, 0.2, 1)`
+- Cada item tem `data-step="N"` para ordem de revelação
+
+**Estrutura de 7 Slides Fixos:**
+
+1. **Capa** (sem reveals)
+   - Título do vídeo
+   - Subtítulo/frase de impacto
+   - Informações básicas
+
+2. **O Que Vai Aprender** (5 steps)
+   - 5 tópicos progressivos
+   - Cada tópico = 1 step
+   - Formato: ✅ Título + descrição
+
+3. **Conceito Principal** (4 steps)
+   - 4 conceitos fundamentais
+   - Cards com ícones (📌)
+   - Explicações claras
+
+4. **Como Funciona** (6 steps)
+   - Step 1: Fluxo visual (Passo 1 → Passo 2 → Resultado)
+   - Steps 2-5: Cards de etapas (1️⃣ 2️⃣ 3️⃣ 4️⃣)
+   - Step 6: Dica final
+
+5. **Exemplos Práticos** (3 steps)
+   - 3 casos reais
+   - Estrutura: Situação → Solução → Resultado
+   - Card por exemplo
+
+6. **Resumo** (4 steps)
+   - Steps 1-3: Grid 3 colunas (O Que É | Como Funciona | Por Que Usar)
+   - Step 4: Box próximo passo (amarelo)
+
+7. **CTA** (3 steps)
+   - Step 1: Grid 3x1 (👍 Like | 🔔 Inscrição | 📱 Instagram)
+   - Step 2: Prompt comentário
+   - Step 3: Mensagem despedida
+
+**Navegação:**
+- `→` ou `Espaço`: Revela próximo item (se houver) OU avança slide
+- `←`: Slide anterior
+- `F`: Fullscreen
+- `ESC`: Sair fullscreen
+- Clique lateral esquerdo: Slide anterior
+- Clique lateral direito: Revelar próximo OU avançar slide
+
+**Indicadores:**
+- Contador no topo direito: "Slide X de 7"
+- Progresso de reveals: "(3/5)" durante revelações
+- Hint dinâmico: "Clique para revelar próximo item" (some quando slide completo)
+
+**Sistema data-step:**
+```html
+<!-- Slide com 5 reveals -->
+<div class="slide" data-total-steps="5">
+    <div class="box reveal-item" data-step="1">Item 1</div>
+    <div class="box reveal-item" data-step="2">Item 2</div>
+    <div class="box reveal-item" data-step="3">Item 3</div>
+    <div class="box reveal-item" data-step="4">Item 4</div>
+    <div class="box reveal-item" data-step="5">Item 5</div>
+</div>
+```
+
+**Localização:**
+- Base template: `templates/video-educativo/template_video_youtube.html`
+- Documentação: `templates/video-educativo/README.md`
+
+### Filosofia de Design
+
+1. **Didático:** Informações aparecem conforme você fala (ritmo controlado)
+2. **Progressivo:** Viewer não se perde lendo tudo de uma vez
+3. **Clean:** Design minimalista, foco no conteúdo
+4. **Interativo:** Presenter controla revelação (não automático)
+5. **Warm:** Beige + yellow = acessível, não intimidante
+
+---
+
+## 🦆 Template: MotherDuck Style - Retro-Moderno Minimalista
 
 ### Quando Usar
 - **PADRÃO para todas as apresentações** (a menos que usuário especifique outro)

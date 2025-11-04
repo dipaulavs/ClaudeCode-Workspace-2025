@@ -27,11 +27,21 @@
 
 **Lógica de decisão:**
 ```
-PADRÃO: MotherDuck Style (minimalista, retro-moderno, beige + yellow)
-Fallback: Notion Style (se MotherDuck indisponível)
+PADRÃO: Educativo (reveal progressivo, 7 slides fixos, light mode)
+Alternativas:
+  - MotherDuck Style (apresentações gerais, retro-moderno)
+  - Notion Style (fallback dark mode)
 ```
 
-**Template MotherDuck:**
+**Template Educativo (PADRÃO para vídeos YouTube):**
+- Cores: Beige (#F4EFEA), Yellow (#FFDE00), Dark Gray (#383838)
+- Tipografia: Monospace (SF Mono, Monaco)
+- Animações: Reveal progressivo (clique avança, data-step)
+- Estrutura: 7 slides fixos (Capa → Aprender → Conceito → Processo → Exemplos → Resumo → CTA)
+- Estilo: Educativo, didático, interativo para gravação
+- Localização: `templates/video-educativo/template_video_youtube.html`
+
+**Template MotherDuck (alternativa):**
 - Cores: Beige (#F4EFEA), Yellow (#FFDE00), Dark Gray (#383838)
 - Tipografia: Monospace (Aeonik Mono fallback)
 - Bordas: 2px solid, sharp edges (border-radius: 0-2px)
@@ -42,33 +52,50 @@ Ver specs completas dos templates em [REFERENCE.md](REFERENCE.md).
 
 ### Etapa 3: Gerar Apresentação HTML 🎨
 
-1. Carregar template MotherDuck (notion-motherduck.html) - PADRÃO
-2. Injetar conteúdo estruturado com elementos interativos:
-   - Cards clicáveis (para conceitos técnicos)
-   - Fluxos visuais com setas (para processos)
-   - Quizzes interativos (para fixação)
+**Carregar template conforme tipo de conteúdo:**
+
+**OPÇÃO A: Template Educativo (PADRÃO - vídeos YouTube):**
+1. Copiar `templates/video-educativo/template_video_youtube.html`
+2. Estrutura fixa de 7 slides:
+   - Slide 1: Capa (título do vídeo)
+   - Slide 2: O Que Vai Aprender (5 tópicos progressivos)
+   - Slide 3: Conceito Principal (4 cards progressivos)
+   - Slide 4: Como Funciona (6 reveals: fluxo + 4 passos + dica)
+   - Slide 5: Exemplos Práticos (3 casos progressivos)
+   - Slide 6: Resumo (4 reveals: 3 colunas + próximo passo)
+   - Slide 7: CTA (3 reveals: like/inscrição + comentário + despedida)
+3. Customizar placeholders:
+   - `[TÍTULO DO VÍDEO]` → Título fornecido
+   - `[Tópico 1]`, `[Conceito A]`, etc → Conteúdo do roteiro
+   - Manter estrutura de `data-step` intacta
+4. Features incluídas:
+   - ✅ Reveal progressivo (clique ou → revela próximo item)
+   - ✅ Indicador de progresso "(3/5)" atualiza dinamicamente
+   - ✅ Hint "Clique para revelar próximo item"
+   - ✅ Navegação: ← → (slides), Clique (reveal), F (fullscreen)
+   - ✅ Design MotherDuck light (beige + yellow + dark gray)
+
+**OPÇÃO B: Template MotherDuck (apresentações gerais):**
+1. Carregar base MotherDuck dark mode
+2. Injetar conteúdo com:
+   - Cards clicáveis (conceitos técnicos)
+   - Fluxos visuais com setas (processos)
+   - Quizzes interativos (fixação)
 3. Adicionar slides obrigatórios:
-   - Resumo Final (penúltimo slide)
-   - CTA/Obrigado (último slide com like + inscrição + Instagram)
-4. Configurar features:
-   - ✅ Atalhos: ← → (navegar), Espaço (avançar), F (fullscreen), ESC (sair)
-   - ✅ Barra de progresso (●●●○○○)
-   - ❌ SEM timer (removido)
-   - ❌ SEM notas do apresentador (removidas)
-   - ❌ SEM animações sequenciais (performance)
-   - ❌ SEM botões de navegação visíveis (NUNCA incluir)
-   - ✅ Estilo minimalista Obsidian (SEMPRE)
-5. **RESPONSIVIDADE (OBRIGATÓRIO):**
-   - ✅ TODOS os cards devem ser SEMPRE visíveis
-   - ✅ Usar CSS Grid/Flexbox com wrap automático
-   - ✅ Breakpoints: mobile (<768px), tablet (768-1024px), desktop (>1024px)
-   - ✅ Cards em 1 coluna (mobile), 2 colunas (tablet), 3-4 colunas (desktop)
-   - ✅ Scroll vertical se necessário (NUNCA esconder cards)
-   - ✅ Testar viewport: min 375px (mobile) até 2560px (ultrawide)
-   - ❌ NUNCA usar overflow:hidden que esconda conteúdo
-   - ❌ NUNCA fixar altura que corte cards
-6. Gerar arquivo `apresentacao_[assunto].html` standalone
-7. Abrir automaticamente no navegador
+   - Resumo Final (penúltimo)
+   - CTA/Obrigado (último: like + inscrição + Instagram)
+
+**Configurações comuns (ambos templates):**
+- ✅ Atalhos: ← → Espaço F ESC
+- ✅ Barra de progresso visual
+- ❌ SEM timer, SEM notas visíveis, SEM animações que travam
+- ❌ SEM botões de navegação visíveis
+- ✅ Estilo minimalista clean
+- ✅ 100% responsivo (todos cards visíveis)
+- ✅ Standalone (funciona offline)
+
+5. Gerar arquivo `apresentacao_[assunto].html`
+6. Abrir automaticamente no navegador
 
 ### Etapa 4: Confirmar e Orientar 📝
 

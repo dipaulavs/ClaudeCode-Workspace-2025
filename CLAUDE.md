@@ -554,7 +554,7 @@ Skills são capacidades modulares model-invoked (Claude decide quando usar autom
 
 **⚠️ PRIORIDADE:** `adaptive-mentor` é skill de **primeiro contato** para frases genéricas. Ver regra 9️⃣ acima.
 
-### Skills Disponíveis (20 Skills)
+### Skills Disponíveis (21 Skills)
 
 | Skill | Quando Usar | Descrição |
 |-------|-------------|-----------|
@@ -745,5 +745,5 @@ ClaudeCode-Workspace/
 
 ---
 
-**Última atualização:** 2025-11-04 (+ regra 1️⃣5️⃣: visualização de processos com ASCII art)
-**Versão:** 5.3 (19 Skills | 71 templates | 15 regras comportamento)
+**Última atualização:** 2025-11-04 (+ skill vibecode-premium-builder)
+**Versão:** 5.4 (21 Skills | 71 templates | 15 regras comportamento)

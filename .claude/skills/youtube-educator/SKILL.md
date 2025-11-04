@@ -30,10 +30,14 @@
 
 **FASE 1 - Processamento SUPER PARALELO (4 agents simultâneos):**
 
-#### Agent 1: Apresentação HTML (Estilo Notion)
+#### Agent 1: Apresentação HTML (Template Educativo)
 - **Subagent:** general-purpose
 - **Input:** Transcrição completa
-- **Tarefa:** Criar roteiro único (6-8 slides) + chamar skill `visual-explainer` (template Notion)
+- **Tarefa:** Chamar skill `visual-explainer` (template Educativo - PADRÃO)
+  - Template: `templates/video-educativo/template_video_youtube.html`
+  - Estrutura: 7 slides fixos com reveal progressivo
+  - Customizar placeholders com conteúdo do roteiro
+  - Manter sistema data-step intacto
 - **Salvamento duplo:**
   - `~/Downloads/apresentacao_[tema].html` (backup rápido)
   - `~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Claude-code-ios/📺 Vídeos/Apresentações/apresentacao_[tema].html` (permanente)
@@ -103,7 +107,7 @@
 
 ## Output Final
 
-✅ **Apresentação HTML** → 1 apresentação estilo Notion (salva em `📺 Vídeos/Apresentações/` + `~/Downloads/`)
+✅ **Apresentação HTML** → Template Educativo (7 slides com reveal progressivo, salva em `📺 Vídeos/Apresentações/` + `~/Downloads/`)
 ✅ **Headlines Hormozi** → 7 opções profissionais + 1 escolhida como MAIS IMPACTANTE
 ✅ **Thumbnails** → 5 variações profissionais (dourado/azul-ciano) geradas com headline escolhida
 ✅ **Descrição YouTube** → Completa (Título + Timestamps + CTA + Hashtags)
@@ -135,4 +139,4 @@
 
 **Skill Type:** Model-invoked (auto-ativa)
 **FASE:** 1 (Pré-gravação + Metadados)
-**Versão:** 5.0 (Workflow otimizado: 1 apresentação Notion | 4 agents SUPER PARALELO | Obsidian via skill obsidian-organizer | Fase 2 thumbnails independente)
+**Versão:** 6.0 (Template Educativo PADRÃO: 7 slides reveal progressivo | 4 agents SUPER PARALELO | Obsidian via skill obsidian-organizer | Fase 2 thumbnails independente)
