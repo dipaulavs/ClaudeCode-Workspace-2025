@@ -91,25 +91,29 @@ Valores quebrados aplicados:
 
 ### Etapa 4: Gerar Apresentação HTML 📊
 
-Invocar `visual-explainer` com template MotherDuck:
+Usar template interativo padrão: `templates/proposta-orcamento/template_proposta_interativa.html`
 
-**Estrutura obrigatória (8-10 slides):**
+**Estrutura padrão (9 slides com animações progressivas):**
 1. **Capa** → Título + cliente
-2. **Problema** → Situação atual (dor)
-3. **Solução** → Transformação proposta
-4. **Processos** → O que será feito (etapas técnicas)
-5. **Recursos** → O que você já tem (reutilização)
-6. **Timeline** → Prazo realista
-7. **Investimento** → Preço + ancoragem
-8. **ROI Matemático** → Cenários conservador/realista/otimista
-9. **Garantias** → O que está incluso
-10. **CTA** → Próximos passos
+2. **Situação Atual** → 4 problemas (revelam progressivamente)
+3. **Solução Proposta** → 6 serviços (revelam progressivamente)
+4. **Como Funciona** → Fluxo + Diferenciais
+5. **Timeline** → Prazo realista (10 dias úteis padrão)
+6. **Investimento Detalhado** → Tabela progressiva (10 steps!)
+7. **Comparação Mercado** → Economia vs concorrentes
+8. **O Que Está Incluso** → Detalhamento
+9. **Próximos Passos** → CTA
 
-**Features:**
-- Dark mode (MotherDuck: beige + yellow)
-- Navegação teclado (setas, F fullscreen)
-- Barra de progresso
-- Standalone HTML (funciona offline)
+**Features do template:**
+- ✅ Animações progressivas (itens aparecem ao clicar)
+- ✅ Design MotherDuck (beige + yellow + dark gray)
+- ✅ Navegação teclado (→, F fullscreen)
+- ✅ Indicador de progresso "(3/6)"
+- ✅ Hints dinâmicos ("Clique para revelar")
+- ✅ Slide Investimento em 10 steps (quadrado amarelo por último!)
+- ✅ 100% responsivo e standalone
+
+**Documentação completa:** `templates/proposta-orcamento/README.md`
 
 ### Etapa 5: Ancoragem Realista 🎯
 

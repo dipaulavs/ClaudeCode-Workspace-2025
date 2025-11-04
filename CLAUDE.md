@@ -485,6 +485,7 @@ Etapa 1 → Etapa 2 → Etapa 3 → Resultado
 | **Designs em lote** | `scripts/orshot/batch_generate.py` | `scripts/orshot/README.md` |
 | **Apresentação visual** | `scripts/visual-explainer/generate.py` | `scripts/visual-explainer/README.md` |
 | **Thumbnails YouTube profissionais** | `scripts/thumbnail-creation/generate_youtube_thumbnails.py` | `.claude/skills/youtube-thumbnailv2/SKILL.md` |
+| **Apresentação proposta/orçamento** | `templates/proposta-orcamento/template_proposta_interativa.html` | `templates/proposta-orcamento/README.md` |
 
 ---
 
