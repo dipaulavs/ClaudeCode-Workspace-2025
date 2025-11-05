@@ -1,0 +1,256 @@
+{
+  "description": "Complete book $100M Leads by Alex Hormozi - comprehensive guide on lead generation (Core Four: warm outreach, content, cold outreach, paid ads) and lead getters (referrals, employees, agencies, affiliates). Use when user asks about lead generation strategies, Core Four methods, lead magnets, advertising, or mentions '100M Leads' or 'Hormozi leads'.",
+  "document_info": {
+    "type": "business_book",
+    "language": "en",
+    "total_lines": 9670,
+    "tokens_per_line": 3.8
+  },
+  "sections": [
+    {
+      "id": "section_001",
+      "title": "Front Matter",
+      "start_line": 0,
+      "end_line": 82,
+      "semantic_type": "introduction",
+      "start_marker": "Acquisition.com Volume II",
+      "children": []
+    },
+    {
+      "id": "section_002",
+      "title": "Section I: Start Here",
+      "start_line": 83,
+      "end_line": 892,
+      "semantic_type": "section",
+      "start_marker": "S e c t i o n  I :  S t a r t  H e r e",
+      "children": [
+        {
+          "id": "section_002_001",
+          "title": "How I Got Here",
+          "start_line": 83,
+          "end_line": 519,
+          "semantic_type": "chapter",
+          "children": []
+        },
+        {
+          "id": "section_002_002",
+          "title": "The Problem This Book Solves",
+          "start_line": 520,
+          "end_line": 892,
+          "semantic_type": "chapter",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "section_003",
+      "title": "Section II: Get Understanding",
+      "start_line": 893,
+      "end_line": 1726,
+      "semantic_type": "section",
+      "start_marker": "S e c t i o n  I I :  G e t  U n d e r s t a n d i n g",
+      "children": [
+        {
+          "id": "section_003_001",
+          "title": "Leads Alone Aren't Enough",
+          "start_line": 893,
+          "end_line": 1327,
+          "semantic_type": "chapter",
+          "children": []
+        },
+        {
+          "id": "section_003_002",
+          "title": "Engage Your Leads: Offers and Lead Magnets",
+          "start_line": 1328,
+          "end_line": 1726,
+          "semantic_type": "chapter",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "section_004",
+      "title": "Section III: Get Leads",
+      "start_line": 1727,
+      "end_line": 6099,
+      "semantic_type": "section",
+      "start_marker": "S e c t i o n  I I I :  G e t  L e a d s",
+      "children": [
+        {
+          "id": "section_004_001",
+          "title": "Introduction: Core Four Methods",
+          "start_line": 1727,
+          "end_line": 1816,
+          "semantic_type": "introduction",
+          "children": []
+        },
+        {
+          "id": "section_004_002",
+          "title": "#1 Warm Outreach",
+          "start_line": 1817,
+          "end_line": 2437,
+          "semantic_type": "chapter",
+          "children": []
+        },
+        {
+          "id": "section_004_003",
+          "title": "#2 Post Free Content Part I",
+          "start_line": 2438,
+          "end_line": 3045,
+          "semantic_type": "chapter",
+          "children": []
+        },
+        {
+          "id": "section_004_004",
+          "title": "#2 Post Free Content Part II",
+          "start_line": 3046,
+          "end_line": 3566,
+          "semantic_type": "chapter",
+          "children": []
+        },
+        {
+          "id": "section_004_005",
+          "title": "Free Goodwill",
+          "start_line": 3567,
+          "end_line": 3648,
+          "semantic_type": "chapter",
+          "children": []
+        },
+        {
+          "id": "section_004_006",
+          "title": "#3 Cold Outreach",
+          "start_line": 3649,
+          "end_line": 4464,
+          "semantic_type": "chapter",
+          "children": []
+        },
+        {
+          "id": "section_004_007",
+          "title": "#4 Run Paid Ads Part I: Making An Ad",
+          "start_line": 4465,
+          "end_line": 5256,
+          "semantic_type": "chapter",
+          "children": []
+        },
+        {
+          "id": "section_004_008",
+          "title": "#4 Run Paid Ads Part II: Money Stuff",
+          "start_line": 5257,
+          "end_line": 5666,
+          "semantic_type": "chapter",
+          "children": []
+        },
+        {
+          "id": "section_004_009",
+          "title": "Core Four On Steroids: More Better New",
+          "start_line": 5667,
+          "end_line": 6099,
+          "semantic_type": "chapter",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "section_005",
+      "title": "Section IV: Get Lead Getters",
+      "start_line": 6100,
+      "end_line": 8762,
+      "semantic_type": "section",
+      "start_marker": "S e c t i o n  I V :  G e t  L e a d  G e t t e r s",
+      "children": [
+        {
+          "id": "section_005_001",
+          "title": "Introduction: Lead Getters",
+          "start_line": 6100,
+          "end_line": 6240,
+          "semantic_type": "introduction",
+          "children": []
+        },
+        {
+          "id": "section_005_002",
+          "title": "#1 Customer Referrals - Word of Mouth",
+          "start_line": 6241,
+          "end_line": 7013,
+          "semantic_type": "chapter",
+          "children": []
+        },
+        {
+          "id": "section_005_003",
+          "title": "#2 Employees",
+          "start_line": 7014,
+          "end_line": 7515,
+          "semantic_type": "chapter",
+          "children": []
+        },
+        {
+          "id": "section_005_004",
+          "title": "#3 Agencies",
+          "start_line": 7516,
+          "end_line": 7887,
+          "semantic_type": "chapter",
+          "children": []
+        },
+        {
+          "id": "section_005_005",
+          "title": "#4 Affiliates and Partners",
+          "start_line": 7888,
+          "end_line": 8762,
+          "semantic_type": "chapter",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "section_006",
+      "title": "Section IV Conclusion: Get Lead Getters",
+      "start_line": 8763,
+      "end_line": 8832,
+      "semantic_type": "conclusion",
+      "start_marker": "S e c t i o n  I V  C o n c l u s i o n",
+      "children": []
+    },
+    {
+      "id": "section_007",
+      "title": "Section V: Get Started",
+      "start_line": 8833,
+      "end_line": 9569,
+      "semantic_type": "section",
+      "start_marker": "S e c t i o n  V :  G e t  S t a r t e d",
+      "children": [
+        {
+          "id": "section_007_001",
+          "title": "Advertising in Real Life: Open To Goal",
+          "start_line": 8833,
+          "end_line": 9100,
+          "semantic_type": "chapter",
+          "children": []
+        },
+        {
+          "id": "section_007_002",
+          "title": "The Roadmap - Putting it All Together",
+          "start_line": 9101,
+          "end_line": 9387,
+          "semantic_type": "chapter",
+          "children": []
+        },
+        {
+          "id": "section_007_003",
+          "title": "A Decade in a Page",
+          "start_line": 9388,
+          "end_line": 9569,
+          "semantic_type": "chapter",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "section_008",
+      "title": "Free Goodies: Calls To Action",
+      "start_line": 9570,
+      "end_line": 9670,
+      "semantic_type": "appendix",
+      "start_marker": "F r e e  G o o d i e s :  C a l l s  T o  A c t i o n",
+      "children": []
+    }
+  ]
+}

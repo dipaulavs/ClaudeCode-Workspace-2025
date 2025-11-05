@@ -443,6 +443,87 @@ Etapa 1 → Etapa 2 → Etapa 3 → Resultado
 
 ---
 
+### 1️⃣6️⃣ Chatbot WhatsApp: Adicionar Imóvel/Criar Novo Bot
+
+**GATILHO:** Usuário diz "adiciona imóvel" ou "cria chatbot para [empresa]"
+
+**WORKFLOW ADICIONAR IMÓVEL:**
+1. Usuário fornece: descrição, preço, FAQ, detalhes
+2. Usuário coloca fotos em `~/Pictures/upload/`
+3. Claude executa: upload Nextcloud → cria estrutura (base.txt, faq.txt, etc) → links.json
+4. Bot reconhece automaticamente (reiniciar ou `/reload`)
+
+**ESTRUTURA IMÓVEL:**
+```
+imoveis/
+└── nome-imovel-001/
+    ├── base.txt           (info básica - sempre carrega)
+    ├── detalhes.txt       (metragem, acabamentos)
+    ├── faq.txt            (perguntas frequentes)
+    ├── legal.txt          (documentação)
+    ├── financiamento.txt  (opções pagamento)
+    └── links.json         (URLs fotos Nextcloud)
+```
+
+**CRIAR NOVO CHATBOT (3 opções):**
+- **Opção A:** Mesma conta Chatwoot, nova inbox (2-3 clientes)
+- **Opção B:** Conta Chatwoot separada (4-10 clientes)
+- **Opção C:** Multi-tenant framework (10+ clientes)
+
+**Docs:** `whatsapp-chatbot/FRAMEWORK_COMPLETO_README.md` | `whatsapp-chatbot/INTEGRACAO_FRAMEWORK.md`
+
+---
+
+### 1️⃣7️⃣ Chatbot Automaia (Carros Seminovos)
+
+**EMPRESA:** Automaia - Agência de Carros Seminovos
+**LOCALIZAÇÃO:** `whatsapp-chatbot-carros/`
+
+**SETUP INICIAL (UMA vez):**
+```bash
+cd whatsapp-chatbot-carros
+python3 setup_chatwoot.py           # Criar inbox + config
+python3 configurar_filtro_numero.py # Números permitidos (opcional)
+```
+
+**INICIAR/PARAR:**
+```bash
+cd whatsapp-chatbot-carros
+./INICIAR_COM_NGROK.sh              # Iniciar (ngrok + webhooks automáticos) ✅
+./PARAR_BOT_AUTOMAIA.sh && pkill -f ngrok  # Parar
+```
+
+**⚠️  SEMPRE usar `INICIAR_COM_NGROK.sh`** - Configura webhooks automaticamente com URL pública
+
+**ADICIONAR CARRO:**
+1. Organizar fotos: `~/Desktop/fotos de carros/[id-carro]/`
+2. Upload: `python3 upload_fotos_carros.py`
+3. Preencher: `carros/[id-carro]/*.txt` (base, detalhes, faq, historico, financiamento)
+
+**ESTRUTURA CARRO:**
+```
+carros/
+└── [id-carro]/
+    ├── base.txt           (marca, modelo, ano, km, preço)
+    ├── detalhes.txt       (motor, opcionais, consumo)
+    ├── faq.txt            (garantia, troca, financiamento)
+    ├── historico.txt      (proprietários, acidentes, revisões)
+    ├── financiamento.txt  (planos de pagamento)
+    └── links.json         (URLs fotos Nextcloud)
+```
+
+**PORTAS:**
+- Bot: 5003
+- Middleware: 5004
+
+**LOGS:**
+- `logs/chatbot_automaia.log`
+- `logs/middleware_automaia.log`
+
+**DOCS:** `whatsapp-chatbot-carros/README.md`
+
+---
+
 ## 📍 MAPA DE AÇÕES (Índice Rápido)
 
 | Quando usuário pedir... | Use isto | Doc completa |
@@ -466,6 +547,7 @@ Etapa 1 → Etapa 2 → Etapa 3 → Resultado
 | **Carrossel Meta Ads** | SKILL `carrossel-meta-ads` (automática) | `.claude/skills/carrossel-meta-ads/SKILL.md` |
 | **1 vídeo** | `scripts/video-generation/generate_sora.py` | `scripts/video-generation/README.md` |
 | **2+ vídeos** | `scripts/video-generation/batch_generate.py` | `scripts/video-generation/README.md` |
+| **Editar vídeo via JSON** | `scripts/video-generation/edit_json2video.py` | `.claude/skills/json2video/SKILL.md` |
 | **1 áudio** | `scripts/audio-generation/generate_elevenlabs.py` | `scripts/audio-generation/README.md` |
 | **2+ áudios** | `scripts/audio-generation/batch_generate.py` | `scripts/audio-generation/README.md` |
 | **Transcrever vídeo** | `scripts/extraction/transcribe_video.py` | `scripts/extraction/README.md` |
@@ -486,6 +568,9 @@ Etapa 1 → Etapa 2 → Etapa 3 → Resultado
 | **Apresentação visual** | `scripts/visual-explainer/generate.py` | `scripts/visual-explainer/README.md` |
 | **Thumbnails YouTube profissionais** | `scripts/thumbnail-creation/generate_youtube_thumbnails.py` | `.claude/skills/youtube-thumbnailv2/SKILL.md` |
 | **Apresentação proposta/orçamento** | `templates/proposta-orcamento/template_proposta_interativa.html` | `templates/proposta-orcamento/README.md` |
+| **Adicionar imóvel ao chatbot** | Workflow automático (fotos + dados) | `whatsapp-chatbot/FRAMEWORK_COMPLETO_README.md` |
+| **Criar chatbot para outra empresa** | 3 opções (inbox/conta/multi-tenant) | `whatsapp-chatbot/INTEGRACAO_FRAMEWORK.md` |
+| **Ativar Framework Híbrido** | Orquestrador (RAG+Score+Follow-ups+Escalação+Relatórios) | `whatsapp-chatbot/INTEGRACAO_FRAMEWORK.md` |
 
 ---
 
@@ -554,10 +639,11 @@ Skills são capacidades modulares model-invoked (Claude decide quando usar autom
 
 **⚠️ PRIORIDADE:** `adaptive-mentor` é skill de **primeiro contato** para frases genéricas. Ver regra 9️⃣ acima.
 
-### Skills Disponíveis (21 Skills)
+### Skills Disponíveis (24 Skills)
 
 | Skill | Quando Usar | Descrição |
 |-------|-------------|-----------|
+| **100m-leads** | Consultar metodologias $100M Leads | Busca frameworks de geração de leads (Core Four, Lead Getters, Hook-Retain-Reward, Headlines, Curiosidade). Consulta KB do livro Alex Hormozi. |
 | **idea-validator** | Validar ideias antes de construir | Analisa saturação de mercado, viabilidade, demanda real, monetização. Dá feedback brutalmente honesto. |
 | **launch-planner** | Planejar lançamento de MVP | Transforma ideias validadas em PRDs completos com roadmap, schema de DB, e escopo MVP (2-4 semanas). |
 | **product-designer** | Design de UI/UX | Elimina o "visual de IA" (gradientes azul/roxo). Cria interfaces profissionais com Tailwind + shadcn/ui. |
@@ -579,6 +665,8 @@ Skills são capacidades modulares model-invoked (Claude decide quando usar autom
 | **army-of-agents** | Criar conteúdo de alta qualidade com múltiplas perspectivas | Sistema multi-agente: Orquestrador define roles (Pesquisador, Copywriter, Crítico Hormozi, Diretor) → execução paralela/sequencial → feedback mútuo → iteração até aprovação. |
 | **orcamento-profissional** | Criar orçamentos/propostas para clientes | Analisa recursos disponíveis (scripts/skills), calcula preço baseado em VALOR (não tempo), gera apresentação HTML profissional, aplica ancoragem realista (Hormozi), mostra ROI matemático (3 cenários). Para videochamadas de proposta. |
 | **vibecode-premium-builder** | Criar apps iOS premium via VibeCode | Gera prompts VibeCode (Large Headers, Liquid Glass, Haptics, Context Menus, Bottom Sheets) + plano backend. Cenário A: criar do zero. Cenário B: replicar app (4 métodos: screenshot, App Store, YouTube, site via website-cloner). |
+| **rag-novo** | Criar knowledge bases de documentos grandes | Gera KB skills semanticamente estruturadas de PDFs/Markdown/TXT. Processo 2 fases (análise semântica → geração). Quebra em chunks <5k tokens preservando hierarquia lógica. Line number precision + auto token estimation. |
+| **json2video** | Criar/editar vídeos via JSON | Gera vídeos programaticamente (JSON2Video API). Suporta: texto/imagem/vídeo/áudio, legendas automáticas, audiogramas, voice-over (ElevenLabs), variáveis, templates. Renderização cloud ~1-5min. |
 
 ### Estrutura de uma Skill (Progressive Disclosure)
 
@@ -595,14 +683,72 @@ Skills são capacidades modulares model-invoked (Claude decide quando usar autom
 
 ---
 
+## 📚 KNOWLEDGE BASES (Consulta de Livros/Docs)
+
+**Geradas por:** `rag-novo` skill → **Viram Skills automaticamente**
+
+Após geração com `rag-novo`, livros/documentos viram **Claude Skills consultáveis**:
+- **Localização física:** `livros/kb/[nome-kb]/` (armazenamento)
+- **Skill auto-descoberta:** `.claude/skills/books/[nome-kb]/` (symlink automático)
+- **Consulta:** Sempre via `.claude/skills/books/` (como skill)
+
+KBs são livros/documentos quebrados em chunks semânticos (<5k tokens) para consulta eficiente.
+
+### KBs Disponíveis (2 KBs)
+
+| KB | Fonte | Chunks | Tipo | Skill Path |
+|----|-------|--------|------|------------|
+| **100m-offers** | $100M Offers Complete (Alex Hormozi) | 25 chunks | business_book | `.claude/skills/books/100m-offers/` |
+| **100m-leads** | $100M Leads (Alex Hormozi) | 24 chunks | business_book | `.claude/skills/books/100m-leads/` |
+
+**100m-offers:** 21 capítulos + front/back matter. Inclui Lost Chapter (Cap. 17-21: Your First Avatar - Vista Equity methodology).
+**100m-leads:** 5 seções (Start Here, Get Understanding, Get Leads, Get Lead Getters, Get Started). Core Four + Lead Getters methodology.
+
+### Como Consultar KB (via Skill)
+
+**Buscar keyword:**
+```bash
+Grep pattern="keyword" path=".claude/skills/books/[nome-kb]/chunks"
+```
+
+**Ler índice:**
+```bash
+Read file_path=".claude/skills/books/[nome-kb]/index.md"
+```
+
+**Ler chunk específico:**
+```bash
+Read file_path=".claude/skills/books/[nome-kb]/chunks/section_XXX.md"
+```
+
+**Ativação:** Automática (symlink criado na geração). KB fica disponível como skill imediatamente após `rag-novo` finalizar.
+
+---
+
 ## ⚡ Quick Actions
 
-### Chatbot WhatsApp
+### Chatbot WhatsApp (Imóveis)
 ```bash
-bot         # Iniciar
+bot         # Iniciar Bot V4 + Framework Híbrido
 botstop     # Parar
 # Logs: whatsapp-chatbot/logs/chatbot_v4.log
+# Docs: whatsapp-chatbot/FRAMEWORK_COMPLETO_README.md
 ```
+
+**Adicionar imóvel:** Workflow automático (ver regra 1️⃣6️⃣ abaixo)
+**Novo chatbot:** 3 opções - mesma conta/conta separada/multi-tenant
+
+### Chatbot Automaia (Carros)
+```bash
+cd whatsapp-chatbot-carros
+./INICIAR_COM_NGROK.sh      # Iniciar (ngrok + portas 5003/5004) ✅ USAR ESTE
+./PARAR_BOT_AUTOMAIA.sh && pkill -f ngrok  # Parar tudo
+# Logs: whatsapp-chatbot-carros/logs/chatbot_automaia.log
+# Docs: whatsapp-chatbot-carros/README.md
+```
+
+**Setup inicial:** `python3 setup_chatwoot.py` + `python3 configurar_filtro_numero.py`
+**Adicionar carro:** Upload fotos + preencher .txt (ver regra 1️⃣7️⃣)
 
 ### Backup Git
 ```bash
@@ -685,7 +831,10 @@ ClaudeCode-Workspace/
 ├── 📁 tools/                    # 40+ Ferramentas low-level
 ├── 📁 config/                   # Configurações APIs
 ├── 📁 docs/                     # Documentação organizada
-├── 📁 whatsapp-chatbot/         # Bot V4 (produção)
+├── 📁 whatsapp-chatbot/         # Bot V4 + Framework Híbrido completo
+│   ├── componentes/             # RAG, Score, Follow-ups, Escalonamento, Relatórios
+│   ├── imoveis/                 # Banco de dados (1 pasta por imóvel)
+│   └── docs/                    # FRAMEWORK_COMPLETO_README.md, INTEGRACAO_FRAMEWORK.md
 ├── 📁 scheduling-system/        # Agendamento WhatsApp
 └── [outros projetos]/
 ```
@@ -745,5 +894,5 @@ ClaudeCode-Workspace/
 
 ---
 
-**Última atualização:** 2025-11-04 (+ skill vibecode-premium-builder)
-**Versão:** 5.4 (21 Skills | 71 templates | 15 regras comportamento)
+**Última atualização:** 2025-11-05 (+ Skill 100m-leads)
+**Versão:** 5.8 (24 Skills | 71 templates | 17 regras | 2 chatbots | Framework Híbrido)

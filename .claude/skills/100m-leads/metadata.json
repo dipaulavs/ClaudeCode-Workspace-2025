@@ -1,0 +1,194 @@
+[
+  {
+    "id": "section_001",
+    "title": "Front Matter",
+    "path": "Front Matter",
+    "type": "introduction",
+    "tokens": 311,
+    "file": "chunks/section_001.md"
+  },
+  {
+    "id": "section_002_001",
+    "title": "How I Got Here",
+    "path": "Section I: Start Here/How I Got Here",
+    "type": "chapter",
+    "tokens": 1656,
+    "file": "chunks/section_002_001.md"
+  },
+  {
+    "id": "section_002_002",
+    "title": "The Problem This Book Solves",
+    "path": "Section I: Start Here/The Problem This Book Solves",
+    "type": "chapter",
+    "tokens": 1413,
+    "file": "chunks/section_002_002.md"
+  },
+  {
+    "id": "section_003_001",
+    "title": "Leads Alone Aren't Enough",
+    "path": "Section II: Get Understanding/Leads Alone Aren't Enough",
+    "type": "chapter",
+    "tokens": 1649,
+    "file": "chunks/section_003_001.md"
+  },
+  {
+    "id": "section_003_002",
+    "title": "Engage Your Leads: Offers and Lead Magnets",
+    "path": "Section II: Get Understanding/Engage Your Leads: Offers and Lead Magnets",
+    "type": "chapter",
+    "tokens": 1512,
+    "file": "chunks/section_003_002.md"
+  },
+  {
+    "id": "section_004_001",
+    "title": "Introduction: Core Four Methods",
+    "path": "Section III: Get Leads/Introduction: Core Four Methods",
+    "type": "introduction",
+    "tokens": 338,
+    "file": "chunks/section_004_001.md"
+  },
+  {
+    "id": "section_004_002",
+    "title": "#1 Warm Outreach",
+    "path": "Section III: Get Leads/#1 Warm Outreach",
+    "type": "chapter",
+    "tokens": 2356,
+    "file": "chunks/section_004_002.md"
+  },
+  {
+    "id": "section_004_003",
+    "title": "#2 Post Free Content Part I",
+    "path": "Section III: Get Leads/#2 Post Free Content Part I",
+    "type": "chapter",
+    "tokens": 2306,
+    "file": "chunks/section_004_003.md"
+  },
+  {
+    "id": "section_004_004",
+    "title": "#2 Post Free Content Part II",
+    "path": "Section III: Get Leads/#2 Post Free Content Part II",
+    "type": "chapter",
+    "tokens": 1976,
+    "file": "chunks/section_004_004.md"
+  },
+  {
+    "id": "section_004_005",
+    "title": "Free Goodwill",
+    "path": "Section III: Get Leads/Free Goodwill",
+    "type": "chapter",
+    "tokens": 307,
+    "file": "chunks/section_004_005.md"
+  },
+  {
+    "id": "section_004_006",
+    "title": "#3 Cold Outreach",
+    "path": "Section III: Get Leads/#3 Cold Outreach",
+    "type": "chapter",
+    "tokens": 3097,
+    "file": "chunks/section_004_006.md"
+  },
+  {
+    "id": "section_004_007",
+    "title": "#4 Run Paid Ads Part I: Making An Ad",
+    "path": "Section III: Get Leads/#4 Run Paid Ads Part I: Making An Ad",
+    "type": "chapter",
+    "tokens": 3005,
+    "file": "chunks/section_004_007.md"
+  },
+  {
+    "id": "section_004_008",
+    "title": "#4 Run Paid Ads Part II: Money Stuff",
+    "path": "Section III: Get Leads/#4 Run Paid Ads Part II: Money Stuff",
+    "type": "chapter",
+    "tokens": 1554,
+    "file": "chunks/section_004_008.md"
+  },
+  {
+    "id": "section_004_009",
+    "title": "Core Four On Steroids: More Better New",
+    "path": "Section III: Get Leads/Core Four On Steroids: More Better New",
+    "type": "chapter",
+    "tokens": 1641,
+    "file": "chunks/section_004_009.md"
+  },
+  {
+    "id": "section_005_001",
+    "title": "Introduction: Lead Getters",
+    "path": "Section IV: Get Lead Getters/Introduction: Lead Getters",
+    "type": "introduction",
+    "tokens": 532,
+    "file": "chunks/section_005_001.md"
+  },
+  {
+    "id": "section_005_002",
+    "title": "#1 Customer Referrals - Word of Mouth",
+    "path": "Section IV: Get Lead Getters/#1 Customer Referrals - Word of Mouth",
+    "type": "chapter",
+    "tokens": 2933,
+    "file": "chunks/section_005_002.md"
+  },
+  {
+    "id": "section_005_003",
+    "title": "#2 Employees",
+    "path": "Section IV: Get Lead Getters/#2 Employees",
+    "type": "chapter",
+    "tokens": 1903,
+    "file": "chunks/section_005_003.md"
+  },
+  {
+    "id": "section_005_004",
+    "title": "#3 Agencies",
+    "path": "Section IV: Get Lead Getters/#3 Agencies",
+    "type": "chapter",
+    "tokens": 1409,
+    "file": "chunks/section_005_004.md"
+  },
+  {
+    "id": "section_005_005",
+    "title": "#4 Affiliates and Partners",
+    "path": "Section IV: Get Lead Getters/#4 Affiliates and Partners",
+    "type": "chapter",
+    "tokens": 3321,
+    "file": "chunks/section_005_005.md"
+  },
+  {
+    "id": "section_006",
+    "title": "Section IV Conclusion: Get Lead Getters",
+    "path": "Section IV Conclusion: Get Lead Getters",
+    "type": "conclusion",
+    "tokens": 262,
+    "file": "chunks/section_006.md"
+  },
+  {
+    "id": "section_007_001",
+    "title": "Advertising in Real Life: Open To Goal",
+    "path": "Section V: Get Started/Advertising in Real Life: Open To Goal",
+    "type": "chapter",
+    "tokens": 1014,
+    "file": "chunks/section_007_001.md"
+  },
+  {
+    "id": "section_007_002",
+    "title": "The Roadmap - Putting it All Together",
+    "path": "Section V: Get Started/The Roadmap - Putting it All Together",
+    "type": "chapter",
+    "tokens": 1086,
+    "file": "chunks/section_007_002.md"
+  },
+  {
+    "id": "section_007_003",
+    "title": "A Decade in a Page",
+    "path": "Section V: Get Started/A Decade in a Page",
+    "type": "chapter",
+    "tokens": 687,
+    "file": "chunks/section_007_003.md"
+  },
+  {
+    "id": "section_008",
+    "title": "Free Goodies: Calls To Action",
+    "path": "Free Goodies: Calls To Action",
+    "type": "appendix",
+    "tokens": 380,
+    "file": "chunks/section_008.md"
+  }
+]
