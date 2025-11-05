@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-🤖 CHATBOT AUTOMAIA V4 - FRAMEWORK HÍBRIDO COMPLETO
+🤖 CHATBOT LF IMÓVEIS V4 - FRAMEWORK HÍBRIDO COMPLETO
 
 ✅ V3 features:
   - Debounce inteligente (15s + 50s)
@@ -32,7 +32,7 @@ import sys
 
 # Importa Orquestrador
 sys.path.append(str(Path(__file__).parent))
-from componentes.orquestrador_carros import OrquestradorCarros
+from componentes.orquestrador import OrquestradorInteligente
 
 app = Flask(__name__)
 
@@ -227,7 +227,7 @@ def enviar_imagem_whatsapp(phone, image_url, caption=""):
 def obter_contexto_historico(numero):
     """Obtém histórico do Redis"""
     try:
-        chave = f"contexto:automaia:{numero}"
+        chave = f"contexto:lfimoveis:{numero}"
         contexto = redis.get(chave)
         return json.loads(contexto) if contexto else []
     except:
@@ -237,7 +237,7 @@ def obter_contexto_historico(numero):
 def salvar_contexto(numero, mensagem, tipo="user"):
     """Salva mensagem no contexto"""
     try:
-        chave = f"contexto:automaia:{numero}"
+        chave = f"contexto:lfimoveis:{numero}"
         contexto = obter_contexto_historico(numero)
 
         contexto.append({
@@ -300,7 +300,7 @@ Responda APENAS "COMPLETA" ou "INCOMPLETA"."""
 def processar_mensagens_agrupadas(numero):
     """Processa mensagens após debounce"""
     try:
-        chave_fila = f"fila:automaia:{numero}"
+        chave_fila = f"fila:lfimoveis:{numero}"
         mensagens_json = redis.get(chave_fila)
 
         if not mensagens_json:
@@ -313,7 +313,7 @@ def processar_mensagens_agrupadas(numero):
         print(f"\n🚀 Timer disparado! {len(mensagens)} mensagem(ns) de {numero}", flush=True)
 
         # Análise completude
-        chave_aguardou = f"aguardou_extra:automaia:{numero}"
+        chave_aguardou = f"aguardou_extra:lfimoveis:{numero}"
         ja_aguardou_extra = redis.get(chave_aguardou)
 
         if not ja_aguardou_extra:
@@ -407,14 +407,14 @@ def processar_mensagens_agrupadas(numero):
 def adicionar_mensagem_na_fila(numero, mensagem):
     """Adiciona mensagem na fila com debounce"""
     try:
-        chave_fila = f"fila:automaia:{numero}"
+        chave_fila = f"fila:lfimoveis:{numero}"
         mensagens_json = redis.get(chave_fila)
         mensagens = json.loads(mensagens_json) if mensagens_json else []
 
         mensagens.append(mensagem)
         redis.setex(chave_fila, 90, json.dumps(mensagens))
 
-        chave_aguardou = f"aguardou_extra:automaia:{numero}"
+        chave_aguardou = f"aguardou_extra:lfimoveis:{numero}"
         redis.delete(chave_aguardou)
 
         with lock:
@@ -520,7 +520,7 @@ def health():
 
 if __name__ == '__main__':
     print("=" * 70)
-    print("🤖 CHATBOT AUTOMAIA V4 - FRAMEWORK HÍBRIDO COMPLETO!")
+    print("🤖 CHATBOT LF IMÓVEIS V4 - FRAMEWORK HÍBRIDO COMPLETO!")
     print("=" * 70)
     print("✨ Componentes:")
     print("   ✅ Agente Principal + 4 Ferramentas")
@@ -536,8 +536,9 @@ if __name__ == '__main__':
 
     # Inicializa Orquestrador
     print("\n🚀 Inicializando Orquestrador...")
-    orquestrador = OrquestradorCarros(
-        CARROS_DIR,
+    IMOVEIS_DIR = Path(__file__).parent / "imoveis"
+    orquestrador = OrquestradorInteligente(
+        IMOVEIS_DIR,
         OPENAI_API_KEY,
         OPENROUTER_API_KEY,
         redis,

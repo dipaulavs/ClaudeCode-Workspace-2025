@@ -50,17 +50,17 @@ def agendar_visita_vendedor(
 
     # AÇÃO: SUGERIR HORÁRIOS
     if acao == "sugerir":
-        # Busca carro ativo (se houver)
-        carro_id = None
+        # Busca imóvel ativo (se houver)
+        imovel_id = None
         try:
-            carro_ativo = redis_client.get(f"carro_ativo:automaia:{cliente_numero}")
-            if carro_ativo:
-                carro_id = carro_ativo
+            imovel_ativo = redis_client.get(f"imovel_ativo:lfimoveis:{cliente_numero}")
+            if imovel_ativo:
+                imovel_id = imovel_ativo
         except Exception as e:
-            print(f"⚠️ Erro ao buscar carro ativo: {e}")
+            print(f"⚠️ Erro ao buscar imóvel ativo: {e}")
 
         # Chama integrador para sugerir horários
-        mensagem = integrador.sugerir_horarios(cliente_numero, carro_id)
+        mensagem = integrador.sugerir_horarios(cliente_numero, imovel_id)
 
         print(f"📅 Horários sugeridos para {cliente_numero}")
         return mensagem
@@ -70,29 +70,29 @@ def agendar_visita_vendedor(
         if not escolha:
             return "❌ Preciso que você escolha um dos números (1, 2 ou 3)"
 
-        # Busca carro ativo
-        carro_id = None
+        # Busca imóvel ativo
+        imovel_id = None
         try:
-            carro_ativo = redis_client.get(f"carro_ativo:automaia:{cliente_numero}")
-            if carro_ativo:
-                carro_id = carro_ativo
+            imovel_ativo = redis_client.get(f"imovel_ativo:lfimoveis:{cliente_numero}")
+            if imovel_ativo:
+                imovel_id = imovel_ativo
         except Exception as e:
-            print(f"⚠️ Erro ao buscar carro ativo: {e}")
+            print(f"⚠️ Erro ao buscar imóvel ativo: {e}")
 
         # Confirma agendamento
         sucesso, mensagem = integrador.confirmar_agendamento(
             cliente_numero,
             escolha,
-            carro_id
+            imovel_id
         )
 
         if sucesso:
             print(f"✅ Agendamento confirmado para {cliente_numero}")
 
-            # NOTIFICA VENDEDOR
-            _notificar_vendedor_agendamento(
+            # NOTIFICA CORRETOR
+            _notificar_corretor_agendamento(
                 cliente_numero,
-                carro_id,
+                imovel_id,
                 mensagem,
                 redis_client,
                 config
@@ -106,19 +106,19 @@ def agendar_visita_vendedor(
         return f"❌ Ação inválida: {acao}. Use 'sugerir' ou 'confirmar'"
 
 
-def _notificar_vendedor_agendamento(
+def _notificar_corretor_agendamento(
     cliente_numero: str,
-    carro_id: Optional[str],
+    imovel_id: Optional[str],
     mensagem_confirmacao: str,
     redis_client: Redis,
     config: Dict
 ):
     """
-    Notifica vendedor sobre novo agendamento via WhatsApp
+    Notifica corretor sobre novo agendamento via WhatsApp
 
     Args:
         cliente_numero: Número do cliente
-        carro_id: ID do carro de interesse
+        imovel_id: ID do imóvel de interesse
         mensagem_confirmacao: Mensagem de confirmação enviada ao cliente
         redis_client: Cliente Redis
         config: Config completo
@@ -141,27 +141,27 @@ def _notificar_vendedor_agendamento(
         else:
             classificacao = "❄️ Lead Frio"
 
-        # 2. BUSCA INFO DO CARRO
-        info_carro = "Não definido"
-        if carro_id:
+        # 2. BUSCA INFO DO IMÓVEL
+        info_imovel = "Não definido"
+        if imovel_id:
             try:
-                carros_dir = Path(__file__).parent.parent / "carros"
-                base_file = carros_dir / carro_id / "base.txt"
+                imoveis_dir = Path(__file__).parent.parent / "imoveis"
+                base_file = imoveis_dir / imovel_id / "base.txt"
                 if base_file.exists():
                     with open(base_file, 'r') as f:
                         conteudo = f.read()
-                        # Extrai marca e modelo
+                        # Extrai tipo e localização
                         import re
-                        marca = re.search(r'Marca:\s*(.+)', conteudo)
-                        modelo = re.search(r'Modelo:\s*(.+)', conteudo)
-                        ano = re.search(r'Ano:\s*(.+)', conteudo)
+                        tipo = re.search(r'Tipo:\s*(.+)', conteudo)
+                        bairro = re.search(r'Bairro:\s*(.+)', conteudo)
+                        quartos = re.search(r'Quartos:\s*(.+)', conteudo)
 
-                        if marca and modelo:
-                            info_carro = f"{marca.group(1)} {modelo.group(1)}"
-                            if ano:
-                                info_carro += f" {ano.group(1)}"
+                        if tipo and bairro:
+                            info_imovel = f"{tipo.group(1)} - {bairro.group(1)}"
+                            if quartos:
+                                info_imovel += f" ({quartos.group(1)} quartos)"
             except Exception as e:
-                print(f"⚠️ Erro ao buscar info do carro: {e}")
+                print(f"⚠️ Erro ao buscar info do imóvel: {e}")
 
         # 3. EXTRAI HORÁRIO DA MENSAGEM DE CONFIRMAÇÃO
         # Mensagem formato: "✅ *Agendado!*\n\n📅 DD/MM/YYYY às HH:MM"
@@ -171,15 +171,15 @@ def _notificar_vendedor_agendamento(
         if horario_match:
             data_hora = f"{horario_match.group(1)} às {horario_match.group(2)}"
 
-        # 4. MONTA MENSAGEM PARA VENDEDOR
-        # Vendedor padrão (em produção, buscar da atribuição)
-        vendedor_whatsapp = "5531999999999"  # TODO: buscar vendedor atribuído
+        # 4. MONTA MENSAGEM PARA CORRETOR
+        # Corretor padrão (em produção, buscar da atribuição)
+        corretor_whatsapp = "5521999999999"  # TODO: buscar corretor atribuído
 
-        mensagem_vendedor = f"""
+        mensagem_corretor = f"""
 🗓️ *NOVA VISITA AGENDADA*
 
 📱 *Cliente:* {nome_cliente or cliente_numero}
-🚗 *Veículo:* {info_carro}
+🏠 *Imóvel:* {info_imovel}
 📊 *Score:* {score} - {classificacao}
 
 📅 *Data/Hora:* {data_hora}
@@ -191,17 +191,17 @@ def _notificar_vendedor_agendamento(
         from tools.send_message_evolution import enviar_mensagem
 
         resultado = enviar_mensagem(
-            numero_destino=vendedor_whatsapp,
-            mensagem=mensagem_vendedor
+            numero_destino=corretor_whatsapp,
+            mensagem=mensagem_corretor
         )
 
         if resultado:
-            print(f"✅ Vendedor notificado sobre agendamento ({cliente_numero})")
+            print(f"✅ Corretor notificado sobre agendamento ({cliente_numero})")
         else:
-            print(f"⚠️ Falha ao notificar vendedor ({cliente_numero})")
+            print(f"⚠️ Falha ao notificar corretor ({cliente_numero})")
 
     except Exception as e:
-        print(f"❌ Erro ao notificar vendedor: {e}")
+        print(f"❌ Erro ao notificar corretor: {e}")
 
 
 def _buscar_nome_cliente(cliente_numero: str, config: Dict) -> Optional[str]:

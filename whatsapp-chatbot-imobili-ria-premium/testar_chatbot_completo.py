@@ -10,7 +10,7 @@ import time
 from datetime import datetime
 
 # Configurações
-BOT_URL = "http://localhost:5007"
+BOT_URL = "http://localhost:5008"  # Middleware (recebe webhooks)
 CORRETOR_WHATSAPP = "5531980160822"
 
 # Cenários de teste

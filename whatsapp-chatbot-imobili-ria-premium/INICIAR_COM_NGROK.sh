@@ -1,16 +1,16 @@
 #!/bin/bash
 
 echo "=============================================="
-echo "🚀 INICIANDO CHATBOT AUTOMAIA COM NGROK"
+echo "🚀 INICIANDO CHATBOT LF IMÓVEIS COM NGROK"
 echo "=============================================="
 
 # Navega para o diretório do chatbot
 cd "$(dirname "$0")"
 
-# Verifica se chatwoot_config_automaia.json existe
-if [ ! -f "chatwoot_config_automaia.json" ]; then
+# Verifica se chatwoot_config_imobili-ria-premium.json existe
+if [ ! -f "chatwoot_config_imobili-ria-premium.json" ]; then
     echo ""
-    echo "❌ ERRO: Arquivo chatwoot_config_automaia.json não encontrado!"
+    echo "❌ ERRO: Arquivo chatwoot_config_imobili-ria-premium.json não encontrado!"
     echo ""
     echo "📝 Execute primeiro: python3 setup_chatwoot.py"
     echo ""
@@ -23,15 +23,15 @@ mkdir -p logs
 # Para processos antigos (se existirem)
 echo ""
 echo "🔄 Parando processos anteriores..."
-pkill -f "chatbot_automaia_v1.py" 2>/dev/null
-pkill -f "webhook_middleware_automaia.py" 2>/dev/null
+pkill -f "chatbot_imobili-ria-premium_v4.py" 2>/dev/null
+pkill -f "webhook_middleware_imobili-ria-premium.py" 2>/dev/null
 pkill -f "ngrok http 5008" 2>/dev/null
 sleep 2
 
 # Inicia o middleware em background
 echo ""
 echo "📡 Iniciando Middleware (porta 5008)..."
-nohup python3 webhook_middleware_automaia.py > logs/middleware_automaia.log 2>&1 &
+nohup python3 webhook_middleware_imobili-ria-premium.py > logs/middleware_lfimoveis.log 2>&1 &
 MIDDLEWARE_PID=$!
 echo "   PID: $MIDDLEWARE_PID"
 
@@ -39,8 +39,8 @@ sleep 2
 
 # Inicia o chatbot em background
 echo ""
-echo "🤖 Iniciando Chatbot Automaia (porta 5007)..."
-nohup python3 chatbot_automaia_v1.py > logs/chatbot_automaia.log 2>&1 &
+echo "🤖 Iniciando Chatbot LF Imóveis (porta 5007)..."
+nohup python3 chatbot_imobili-ria-premium_v4.py > logs/chatbot_lfimoveis.log 2>&1 &
 BOT_PID=$!
 echo "   PID: $BOT_PID"
 
@@ -49,7 +49,7 @@ sleep 3
 # Inicia ngrok
 echo ""
 echo "🌐 Iniciando Ngrok (porta 5008)..."
-nohup ngrok http 5008 > /tmp/ngrok_automaia.log 2>&1 &
+nohup ngrok http 5008 > /tmp/ngrok_lfimoveis.log 2>&1 &
 NGROK_PID=$!
 echo "   PID: $NGROK_PID"
 
@@ -81,12 +81,12 @@ fi
 echo "✅ Ngrok URL: $NGROK_URL"
 
 # Lê configurações do arquivo JSON
-CHATWOOT_URL=$(python3 -c "import json; f=open('chatwoot_config_automaia.json'); c=json.load(f); print(c['chatwoot']['url'])")
-CHATWOOT_TOKEN=$(python3 -c "import json; f=open('chatwoot_config_automaia.json'); c=json.load(f); print(c['chatwoot']['token'])")
-ACCOUNT_ID=$(python3 -c "import json; f=open('chatwoot_config_automaia.json'); c=json.load(f); print(c['chatwoot']['account_id'])")
-EVOLUTION_URL=$(python3 -c "import json; f=open('chatwoot_config_automaia.json'); c=json.load(f); print(c['evolution']['url'])")
-EVOLUTION_API_KEY=$(python3 -c "import json; f=open('chatwoot_config_automaia.json'); c=json.load(f); print(c['evolution']['api_key'])")
-EVOLUTION_INSTANCE=$(python3 -c "import json; f=open('chatwoot_config_automaia.json'); c=json.load(f); print(c['evolution']['instance'])")
+CHATWOOT_URL=$(python3 -c "import json; f=open('chatwoot_config_imobili-ria-premium.json'); c=json.load(f); print(c['chatwoot']['url'])")
+CHATWOOT_TOKEN=$(python3 -c "import json; f=open('chatwoot_config_imobili-ria-premium.json'); c=json.load(f); print(c['chatwoot']['token'])")
+ACCOUNT_ID=$(python3 -c "import json; f=open('chatwoot_config_imobili-ria-premium.json'); c=json.load(f); print(c['chatwoot']['account_id'])")
+EVOLUTION_URL=$(python3 -c "import json; f=open('chatwoot_config_imobili-ria-premium.json'); c=json.load(f); print(c['evolution']['url'])")
+EVOLUTION_API_KEY=$(python3 -c "import json; f=open('chatwoot_config_imobili-ria-premium.json'); c=json.load(f); print(c['evolution']['api_key'])")
+EVOLUTION_INSTANCE=$(python3 -c "import json; f=open('chatwoot_config_imobili-ria-premium.json'); c=json.load(f); print(c['evolution']['instance'])")
 
 # Configura webhook Evolution
 echo ""
@@ -193,9 +193,9 @@ echo "   🤖 Bot:        http://localhost:5007/health"
 echo "   📡 Middleware: http://localhost:5008/health"
 echo ""
 echo "📁 Logs:"
-echo "   Bot:        tail -f logs/chatbot_automaia.log"
-echo "   Middleware: tail -f logs/middleware_automaia.log"
-echo "   Ngrok:      tail -f /tmp/ngrok_automaia.log"
+echo "   Bot:        tail -f logs/chatbot_lfimoveis.log"
+echo "   Middleware: tail -f logs/middleware_lfimoveis.log"
+echo "   Ngrok:      tail -f /tmp/ngrok_lfimoveis.log"
 echo ""
-echo "🛑 Para parar: ./PARAR_BOT_AUTOMAIA.sh && pkill -f ngrok"
+echo "🛑 Para parar: ./PARAR_BOT_IMOBILI-RIA-PREMIUM.sh && pkill -f ngrok"
 echo "=============================================="

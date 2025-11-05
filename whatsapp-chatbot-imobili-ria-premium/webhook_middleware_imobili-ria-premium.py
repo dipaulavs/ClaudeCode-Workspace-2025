@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-🔄 WEBHOOK MIDDLEWARE AUTOMAIA - CHATWOOT + EVOLUTION API
+🔄 WEBHOOK MIDDLEWARE LF IMOVEIS - CHATWOOT + EVOLUTION API
 Bot recebe webhook do CHATWOOT (não Evolution)
 
 FLUXO:
@@ -208,7 +208,7 @@ def webhook_evolution():
         data = request.json
 
         log(f"\n{'='*80}")
-        log(f"📱 WEBHOOK EVOLUTION → MIDDLEWARE AUTOMAIA")
+        log(f"📱 WEBHOOK EVOLUTION → MIDDLEWARE LF IMOVEIS")
         log(f"{'='*80}")
 
         event = data.get('event')
@@ -230,10 +230,10 @@ def webhook_evolution():
         numero = key.get('remoteJid', '').replace('@s.whatsapp.net', '')
         push_name = message_data.get('pushName', numero)
 
-        # 🔒 FILTRO DE NÚMERO - Aceita apenas números permitidos
-        if numero not in NUMEROS_PERMITIDOS:
-            log(f"🚫 Número {numero} não autorizado. Ignorando mensagem.")
-            return jsonify({"status": "ignored", "reason": "numero_nao_autorizado"})
+        # 🔒 FILTRO DE NÚMERO - DESABILITADO PARA TESTES
+        # if numero not in NUMEROS_PERMITIDOS:
+        #     log(f"🚫 Número {numero} não autorizado. Ignorando mensagem.")
+        #     return jsonify({"status": "ignored", "reason": "numero_nao_autorizado"})
 
         # Extrai conteúdo
         conversation = message.get('conversation', '')
@@ -306,7 +306,7 @@ def webhook_chatwoot():
         data = request.json
 
         log(f"\n{'='*80}")
-        log(f"🔔 WEBHOOK CHATWOOT → MIDDLEWARE AUTOMAIA")
+        log(f"🔔 WEBHOOK CHATWOOT → MIDDLEWARE LF IMOVEIS")
         log(f"{'='*80}")
 
         event = data.get('event')
@@ -391,7 +391,7 @@ def health():
     """Health check"""
     return jsonify({
         "status": "online",
-        "service": "Middleware Automaia",
+        "service": "Middleware LF Imóveis",
         "version": "1.0",
         "chatwoot": CHATWOOT_URL,
         "evolution_instance": EVOLUTION_INSTANCE,
@@ -400,7 +400,7 @@ def health():
 
 if __name__ == '__main__':
     print("=" * 70)
-    print("🔄 WEBHOOK MIDDLEWARE AUTOMAIA V1")
+    print("🔄 WEBHOOK MIDDLEWARE LF IMOVEIS V1")
     print("=" * 70)
     print(f"🌐 Evolution Webhook: http://localhost:5008/webhook/evolution")
     print(f"🌐 Chatwoot Webhook: http://localhost:5008/webhook/chatwoot")
