@@ -57,7 +57,7 @@ def create_image_task(prompt: str, size: str = "1:1", files_url: list = None,
 
 def query_task(task_id: str) -> dict:
     """Consulta o status de uma task"""
-    url = f"{API_BASE_URL}/jobs/recordInfo"
+    url = f"{API_BASE_URL}/gpt4o-image/record-info"
 
     headers = {
         "Authorization": f"Bearer {API_KEY}"
@@ -72,7 +72,6 @@ def query_task(task_id: str) -> dict:
 def wait_for_task_completion(task_id: str, max_wait: int = 60) -> dict:
     """Aguarda a conclusão da task com polling"""
     import time
-    import json as json_module
 
     waited = 0
     while waited < max_wait:
@@ -82,15 +81,11 @@ def wait_for_task_completion(task_id: str, max_wait: int = 60) -> dict:
             return result
 
         data = result.get("data", {})
-        state = data.get("state")
+        status = data.get("status")
 
-        if state == "success":
-            # Parse do resultJson se for string
-            result_json_str = data.get("resultJson", "{}")
-            if isinstance(result_json_str, str):
-                data["resultJson"] = json_module.loads(result_json_str)
+        if status == "SUCCESS":
             return result
-        elif state == "fail":
+        elif status == "FAILED":
             return result
 
         time.sleep(2)
@@ -350,14 +345,11 @@ async def wait_for_task_completion_async(task_id: str, max_wait: int = 60) -> di
             return result
 
         data = result.get("data", {})
-        state = data.get("state")
+        status = data.get("status")
 
-        if state == "success":
-            result_json_str = data.get("resultJson", "{}")
-            if isinstance(result_json_str, str):
-                data["resultJson"] = json.loads(result_json_str)
+        if status == "SUCCESS":
             return result
-        elif state == "fail":
+        elif status == "FAILED":
             return result
 
         await asyncio.sleep(2)  # ASYNC sleep - não bloqueia!
@@ -390,11 +382,8 @@ async def generate_single_async(prompt: str, size: str, wait_for_completion: boo
 
     if final_result.get("code") == 200:
         data = final_result.get("data", {})
-        result_json = data.get("resultJson", {})
-        if isinstance(result_json, str):
-            result_json = json.loads(result_json)
-
-        image_urls = result_json.get("resultUrls", [])
+        response_data = data.get("response", {})
+        image_urls = response_data.get("resultUrls", [])
         response = {
             "status": "success",
             "prompt": prompt,
@@ -466,11 +455,8 @@ async def generate_batch_parallel(prompts: list, size: str, wait_for_completion:
 
         if final_result.get("code") == 200:
             data = final_result.get("data", {})
-            result_json = data.get("resultJson", {})
-            if isinstance(result_json, str):
-                result_json = json.loads(result_json)
-
-            image_urls = result_json.get("resultUrls", [])
+            response_data = data.get("response", {})
+            image_urls = response_data.get("resultUrls", [])
             response = {
                 "status": "success",
                 "prompt": prompt,
@@ -510,7 +496,7 @@ async def generate_batch_parallel(prompts: list, size: str, wait_for_completion:
         "successful": len(successful),
         "failed": len(failed),
         "results": results,
-        "total_time": sum(r.get("cost_time", 0) for r in successful) if successful else 0
+        "total_time": sum((r.get("cost_time") or 0) for r in successful) if successful else 0
     }
 
 
@@ -572,11 +558,8 @@ async def handle_call_tool(name: str, arguments: dict[str, Any]) -> list[TextCon
 
             if final_result.get("code") == 200:
                 data = final_result.get("data", {})
-                result_json = data.get("resultJson", {})
-                if isinstance(result_json, str):
-                    result_json = json.loads(result_json)
-
-                image_urls = result_json.get("resultUrls", [])
+                response_data = data.get("response", {})
+                image_urls = response_data.get("resultUrls", [])
                 response = {
                     "status": "success",
                     "task_id": task_id,
@@ -658,25 +641,23 @@ async def handle_call_tool(name: str, arguments: dict[str, Any]) -> list[TextCon
 
         if result.get("code") == 200:
             data = result.get("data", {})
-            state = data.get("state")
+            status = data.get("status")
+            progress = data.get("progress")
 
             response = {
                 "task_id": task_id,
-                "state": state,
+                "status": status,
+                "progress": progress,
                 "create_time": data.get("createTime"),
                 "update_time": data.get("updateTime")
             }
 
-            if state == "success":
-                # resultJson pode ser string ou já estar parseado
-                result_json = data.get("resultJson", {})
-                if isinstance(result_json, str):
-                    result_json = json.loads(result_json)
-
-                response["image_urls"] = result_json.get("resultUrls", [])
+            if status == "SUCCESS":
+                response_data = data.get("response", {})
+                response["image_urls"] = response_data.get("resultUrls", [])
                 response["cost_time"] = data.get("costTime")
                 response["consume_credits"] = data.get("consumeCredits")
-            elif state == "fail":
+            elif status == "FAILED":
                 response["fail_code"] = data.get("failCode")
                 response["fail_msg"] = data.get("failMsg")
 

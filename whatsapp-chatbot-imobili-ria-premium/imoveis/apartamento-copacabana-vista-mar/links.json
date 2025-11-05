@@ -1,0 +1,12 @@
+{
+  "fotos": [
+    "https://exemplo.com/fotos/copa-vista-mar.jpg",
+    "https://exemplo.com/fotos/copa-sala-varanda.jpg",
+    "https://exemplo.com/fotos/copa-suite.jpg",
+    "https://exemplo.com/fotos/copa-cozinha.jpg"
+  ],
+  "tour_virtual": "https://exemplo.com/tour/copa-vista-mar",
+  "video": "https://youtube.com/watch?v=exemplo-copa",
+  "localizacao": "https://maps.google.com/?q=Av+Atlantica+Copacabana+RJ",
+  "plantas": "https://exemplo.com/plantas/copa-95m2.pdf"
+}

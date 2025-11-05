@@ -1,0 +1,12 @@
+{
+  "fotos": [
+    "https://exemplo.com/fotos/barra-fachada.jpg",
+    "https://exemplo.com/fotos/barra-sala.jpg",
+    "https://exemplo.com/fotos/barra-piscina.jpg",
+    "https://exemplo.com/fotos/barra-quintal.jpg"
+  ],
+  "tour_virtual": "https://exemplo.com/tour/casa-barra-4qtos",
+  "video": "https://youtube.com/watch?v=exemplo-barra",
+  "localizacao": "https://maps.google.com/?q=Rua+Alexandre+Moura+Barra+Tijuca+RJ",
+  "plantas": "https://exemplo.com/plantas/casa-barra-280m2.pdf"
+}

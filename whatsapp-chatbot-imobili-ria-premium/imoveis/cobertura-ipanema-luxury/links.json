@@ -1,0 +1,18 @@
+{
+  "fotos": [
+    "https://exemplo.com/fotos/ipanema-fachada-predio.jpg",
+    "https://exemplo.com/fotos/ipanema-sala-vista-mar.jpg",
+    "https://exemplo.com/fotos/ipanema-suite-master.jpg",
+    "https://exemplo.com/fotos/ipanema-terraco-piscina.jpg",
+    "https://exemplo.com/fotos/ipanema-cozinha-gourmet.jpg",
+    "https://exemplo.com/fotos/ipanema-vista-noturna.jpg",
+    "https://exemplo.com/fotos/ipanema-por-do-sol.jpg"
+  ],
+  "tour_virtual": "https://exemplo.com/tour/cobertura-ipanema-luxury-360",
+  "video": "https://youtube.com/watch?v=exemplo-cobertura-ipanema",
+  "video_drone": "https://youtube.com/watch?v=exemplo-drone-ipanema",
+  "localizacao": "https://maps.google.com/?q=Rua+Visconde+de+Piraja+Ipanema+RJ",
+  "plantas": "https://exemplo.com/plantas/cobertura-ipanema-320m2.pdf",
+  "memorial_descritivo": "https://exemplo.com/memorial-descritivo-cobertura-ipanema.pdf",
+  "brochure": "https://exemplo.com/brochure-luxury-ipanema.pdf"
+}

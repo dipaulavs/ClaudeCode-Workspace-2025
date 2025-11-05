@@ -1,0 +1,17 @@
+{
+  "chatwoot": {
+    "url": "https://chatwoot.loop9.com.br",
+    "token": "xp1AcWvf6F2p2ZypabNWHfW6",
+    "account_id": "1",
+    "inbox_id": "43"
+  },
+  "evolution": {
+    "url": "https://evolution.loop9.com.br",
+    "api_key": "178e43e1c4f459527e7008e57e378e1c",
+    "instance": "lfimoveis"
+  },
+  "_comment_google_sheet_id": "ID da planilha Google Sheets agenda (criar com OAuth)",
+  "google_sheet_id": "1EFpfCdFFk72j24HL7gnpWswHnl04k-m8YHfs_0k-zms",
+  "_comment_vendedor": "WhatsApp do vendedor para notifica\u00e7\u00f5es",
+  "whatsapp_vendedor": "5531999887766"
+}
