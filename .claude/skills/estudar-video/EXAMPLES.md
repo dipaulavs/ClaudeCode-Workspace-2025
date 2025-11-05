@@ -387,9 +387,9 @@ app.use(rateLimit({ windowMs: 15 * 60 * 1000, max: 100 }));
 
 ## 📄 Transcrição Completa
 
-> Transcrição disponível em: `09 - YouTube Knowledge/Transcricoes/[VIDEO_ID].txt`
-
-[[Transcrição completa aqui]]
+> [!note]- 📄 Transcrição Completa (clique para expandir)
+> [Transcrição salva em ~/Downloads/ durante processamento]
+> [Conteúdo completo incluído no callout colapsável acima]
 ```
 
 ---
@@ -625,11 +625,15 @@ Pode usar MASTER dentro de Scrum (sprints de 1 semana seguindo etapas).
 
 ## 📄 Transcrição Completa
 
-> Transcrição disponível em: `09 - YouTube Knowledge/Transcricoes/[VIDEO_ID].txt`
+> [!note]- 📄 Transcrição Completa (clique para expandir)
+> [Transcrição salva em ~/Downloads/ durante processamento]
+> [Conteúdo completo incluído no callout colapsável acima]
 ```
 
 ---
 
-**Mais exemplos:** Ver transcrições salvas em `09 - YouTube Knowledge/Transcricoes/`
+**Mais exemplos:** Ver vídeos processados em `📺 Vídeos/` no vault Obsidian
+
+**MCP Filesystem:** Todos arquivos criados com Write tool (acesso direto ao filesystem)
 
 **Related:** See `REFERENCE.md` for system architecture and `TROUBLESHOOTING.md` for common issues.

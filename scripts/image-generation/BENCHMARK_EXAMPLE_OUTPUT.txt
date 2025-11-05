@@ -1,0 +1,243 @@
+════════════════════════════════════════════════════════════════════════════════
+  EXEMPLO DE SAÍDA ESPERADA AO EXECUTAR O SCRIPT
+════════════════════════════════════════════════════════════════════════════════
+
+$ python3 scripts/image-generation/benchmark_mcp_vs_direct.py
+
+==================================================
+║      BENCHMARK: DIRECT vs MCP                  ║
+==================================================
+
+┌────────────────────────────────────────────────┐
+│           CONFIGURAÇÃO                         │
+└────────────────────────────────────────────────┘
+
+Prompt teste: gato astronauta flutuando no espaço, estilo ilustração digital, cinematic
+
+
+┌────────────────────────────────────────────────┐
+│        TESTE 1: ABORDAGEM DIRETA               │
+└────────────────────────────────────────────────┘
+
+📍 Estratégia: Import tools + chamada direta
+
+🍌 Gerando imagem com Nano Banana (Gemini 2.5 Flash)...
+📝 Prompt: gato astronauta flutuando no espaço, estilo ilustração digital, cinematic
+🖼️  Formato: PNG | Tamanho: Portrait (2:3)
+✅ Tarefa criada com sucesso!
+🆔 Task ID: 5f3e7a2b1c9d8e6f4a2b1c9d
+
+⏳ Aguardando geração da imagem...
+⏳ Processando...
+✅ Imagem gerada com sucesso!
+
+📥 Baixando imagem...
+💾 Imagem salva em: /tmp/tmpabcd1234/direct_test.png
+
+✅ Sucesso!
+
+┌────────────────────────────────────────────────┐
+│ Tempo Total                    48.32s          │
+│ Geração                        42.18s          │
+│ Download                        6.14s          │
+│ Status                    ✅ SUCESSO           │
+└────────────────────────────────────────────────┘
+
+
+┌────────────────────────────────────────────────┐
+│    TESTE 2: 2 CHAMADAS SEQUENCIAIS             │
+└────────────────────────────────────────────────┘
+
+📍 Estratégia: Direct import com 2 gerações
+
+[1/2] Gerando imagem 1...
+🍌 Gerando imagem com Nano Banana (Gemini 2.5 Flash)...
+📝 Prompt: gato astronauta flutuando no espaço, estilo ilustração digital, cinematic (versão 1)
+✅ Tarefa criada com sucesso!
+
+⏳ Aguardando geração da imagem...
+✅ Imagem gerada com sucesso!
+
+📥 Baixando imagem...
+💾 Imagem salva em: /tmp/tmpxyz5678/sequential_0.png
+
+[2/2] Gerando imagem 2...
+🍌 Gerando imagem com Nano Banana (Gemini 2.5 Flash)...
+📝 Prompt: gato astronauta flutuando no espaço, estilo ilustração digital, cinematic (versão 2)
+✅ Tarefa criada com sucesso!
+
+⏳ Aguardando geração da imagem...
+✅ Imagem gerada com sucesso!
+
+📥 Baixando imagem...
+💾 Imagem salva em: /tmp/tmpxyz5678/sequential_1.png
+
+✅ 2/2 imagens geradas com sucesso
+
+┌────────────────────────────────────────────────┐
+│ Tempo Total                    96.45s          │
+│ Tempo Geração (total)          84.22s          │
+│ Tempo Download (total)         12.23s          │
+│ Taxa de Sucesso                 2/2            │
+└────────────────────────────────────────────────┘
+
+
+┌────────────────────────────────────────────────┐
+│   TESTE 3: OVERHEAD DE IMPORT (3x)             │
+└────────────────────────────────────────────────┘
+
+📍 Estratégia: Direct import com 3 gerações
+
+[1/3] Medindo overhead...
+   Iteração 1: 45.2ms
+
+[2/3] Medindo overhead...
+   Iteração 2: 42.8ms
+
+[3/3] Medindo overhead...
+   Iteração 3: 44.1ms
+
+✅ Sucesso!
+
+┌────────────────────────────────────────────────┐
+│ Tempo Médio                     44.0ms         │
+│ Mínimo                          42.8ms         │
+│ Máximo                          45.2ms         │
+│ Total                            0.13s         │
+└────────────────────────────────────────────────┘
+
+
+┌────────────────────────────────────────────────┐
+│      TESTE 4: TRATAMENTO DE ERROS              │
+└────────────────────────────────────────────────┘
+
+📍 Estratégia: Tentar prompt inválido
+
+Testando com prompt vazio...
+❌ Erro: Prompt vazio não é permitido
+
+✅ Erro capturado corretamente (prompt vazio rejeitado)
+
+┌────────────────────────────────────────────────┐
+│ Tempo                            0.05s         │
+│ Erro Detectado                  ✅ SIM         │
+└────────────────────────────────────────────────┘
+
+
+┌────────────────────────────────────────────────┐
+│           RESUMO DOS TESTES                    │
+├────────────────────────────────────────────────┤
+│ 1. Direct Import                   ✅ PASSOU   │
+│ 2. Sequential x2                   ✅ PASSOU   │
+│ 3. Import Overhead                 ✅ PASSOU   │
+│ 4. Error Handling                  ✅ PASSOU   │
+└────────────────────────────────────────────────┘
+
+┌────────────────────────────────────────────────┐
+│        ANÁLISE DE PERFORMANCE                  │
+├────────────────────────────────────────────────┤
+│ Geração (Direct)          42.18s               │
+│ Download                   6.14s               │
+│ Total                     48.32s               │
+└────────────────────────────────────────────────┘
+
+📊 Relatório salvo em: /Users/felipemdepaula/Desktop/ClaudeCode-Workspace/scripts/image-generation/benchmark_report_20250105_143022.json
+
+==================================================
+║           BENCHMARK CONCLUÍDO                  ║
+==================================================
+
+
+════════════════════════════════════════════════════════════════════════════════
+  ARQUIVO JSON GERADO
+════════════════════════════════════════════════════════════════════════════════
+
+benchmark_report_20250105_143022.json:
+
+{
+  "timestamp": "2025-01-05T14:30:22.123456",
+  "test_prompt": "gato astronauta flutuando no espaço, estilo ilustração digital, cinematic",
+  "results": [
+    {
+      "name": "Direct Import",
+      "success": true,
+      "total_time": 48.32,
+      "generation_time": 42.18,
+      "download_time": 6.14,
+      "error": null
+    },
+    {
+      "name": "Sequential x2",
+      "success": true,
+      "total_time": 96.45,
+      "generation_time": 84.22,
+      "download_time": 12.23,
+      "error": null
+    },
+    {
+      "name": "Import Overhead",
+      "success": true,
+      "total_time": 0.13,
+      "generation_time": 0.0,
+      "download_time": 0.0,
+      "error": null
+    },
+    {
+      "name": "Error Handling",
+      "success": true,
+      "total_time": 0.05,
+      "generation_time": 0.0,
+      "download_time": 0.0,
+      "error": null
+    }
+  ]
+}
+
+════════════════════════════════════════════════════════════════════════════════
+  INTERPRETAÇÃO DOS RESULTADOS
+════════════════════════════════════════════════════════════════════════════════
+
+✅ DIRECT IMPORT (Teste 1)
+   Tempo total: 48.32s
+   - 42.18s na geração de imagem (API call + aguardar)
+   - 6.14s no download
+   
+   Conclusão: Latência esperada para uma geração única
+
+✅ SEQUENTIAL (Teste 2)
+   2 gerações: 96.45s
+   - Média por imagem: 48.2s (equivalente ao direct)
+   - Tempo linear (sem paralelismo)
+   
+   Conclusão: Sem overhead significativo entre chamadas sequenciais
+
+✅ IMPORT OVERHEAD (Teste 3)
+   Tempo médio: 44.0ms
+   - Mínimo: 42.8ms
+   - Máximo: 45.2ms
+   - Variância: <2ms
+   
+   Conclusão: Overhead de import é negligenciável e consistente
+
+✅ ERROR HANDLING (Teste 4)
+   Erro detectado: ✅ SIM
+   Tempo: 0.05s
+   
+   Conclusão: Validação de input funcionando corretamente
+
+════════════════════════════════════════════════════════════════════════════════
+
+RECOMENDAÇÕES:
+
+1. Abordagem DIRETA é eficiente para uso imediato
+2. Import overhead (<50ms) não é gargalo
+3. Latência total dominada pela API (42.18s)
+4. Tratamento de erros robusto e rápido
+5. Sequencial funciona bem para N < 10 gerações
+
+MCP seria recomendado para:
+- Múltiplas requisições concorrentes
+- Isolamento de processos
+- Sistema distribuído
+
+════════════════════════════════════════════════════════════════════════════════

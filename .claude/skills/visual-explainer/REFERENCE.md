@@ -127,8 +127,14 @@ Baseado em MotherDuck Style (light mode, beige + yellow + dark gray)
 ```
 
 **Localização:**
-- Base template: `templates/video-educativo/template_video_youtube.html`
+- Base template: `templates/video-educativo/template_video_youtube.html` (usar `Read` tool)
 - Documentação: `templates/video-educativo/README.md`
+
+**Salvamento (MCP Filesystem):**
+- Usar `Write` tool (NUNCA REST API)
+- Vault path: `/Users/felipemdepaula/Library/Mobile Documents/iCloud~md~obsidian/Documents/Claude-code-ios/📺 Vídeos/Apresentações/`
+- Workspace path: `/Users/felipemdepaula/Desktop/ClaudeCode-Workspace/`
+- Obsidian NÃO precisa estar aberto (MCP filesystem-based)
 
 ### Filosofia de Design
 
@@ -576,11 +582,42 @@ Clonado de https://motherduck.com (2025-11-04)
 
 ---
 
-## Script Gerador
+## Fluxo MCP Filesystem (OBRIGATÓRIO)
+
+**Skill visual-explainer é 100% MCP filesystem-based:**
+
+1. **Ler templates:** Usar `Read` tool
+   ```
+   Read: templates/video-educativo/template_video_youtube.html
+   ```
+
+2. **Processar conteúdo:** Gerar HTML completo em memória
+
+3. **Salvar apresentação:** Usar `Write` tool
+   ```
+   Write: /Users/felipemdepaula/Library/Mobile Documents/iCloud~md~obsidian/Documents/Claude-code-ios/📺 Vídeos/Apresentações/apresentacao_[assunto].html
+   ```
+
+4. **Abrir navegador:** Usar `Bash` tool
+   ```bash
+   open "/Users/felipemdepaula/Library/Mobile Documents/iCloud~md~obsidian/Documents/Claude-code-ios/📺 Vídeos/Apresentações/apresentacao_[assunto].html"
+   ```
+
+**IMPORTANTE:**
+- ❌ NUNCA usar REST API do Obsidian
+- ❌ NUNCA requerer que Obsidian esteja aberto
+- ✅ SEMPRE usar `Write` tool (filesystem direto)
+- ✅ Funciona mesmo com Obsidian fechado
+
+---
+
+## Script Gerador (Legado - Opcional)
 
 **Localização:** `scripts/visual-explainer/generate.py`
 
-**Uso:**
+**Nota:** Skill não precisa do script Python (MCP filesystem faz tudo).
+Se preferir usar script standalone:
+
 ```bash
 python3 scripts/visual-explainer/generate.py \
   --roteiro "caminho/roteiro.md" \

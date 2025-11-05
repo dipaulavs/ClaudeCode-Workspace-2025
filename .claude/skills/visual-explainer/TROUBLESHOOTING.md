@@ -15,34 +15,35 @@
 ### Causa
 Permissões do sistema podem bloquear abertura automática de arquivos.
 
-### Solução
+### Solução (MCP Filesystem)
 
-**macOS:**
+**Skill usa `Bash` tool para abrir:**
 ```bash
-# Abrir manualmente
-open apresentacao_tema.html
+# macOS (skill executa automaticamente)
+open "/Users/felipemdepaula/Library/Mobile Documents/iCloud~md~obsidian/Documents/Claude-code-ios/📺 Vídeos/Apresentações/apresentacao_tema.html"
+```
 
-# Ou configurar permissão permanente
-xattr -d com.apple.quarantine apresentacao_tema.html
+**Se falhar, abrir manualmente:**
+```bash
+# Vault Obsidian
+open "/Users/felipemdepaula/Library/Mobile Documents/iCloud~md~obsidian/Documents/Claude-code-ios/📺 Vídeos/Apresentações/apresentacao_tema.html"
+
+# Workspace
+open "/Users/felipemdepaula/Desktop/ClaudeCode-Workspace/apresentacao_tema.html"
 ```
 
 **Linux:**
 ```bash
-# Abrir com navegador padrão
-xdg-open apresentacao_tema.html
-
-# Ou especificar navegador
-google-chrome apresentacao_tema.html
-firefox apresentacao_tema.html
+xdg-open [caminho-completo]
 ```
 
 **Windows:**
 ```cmd
-start apresentacao_tema.html
+start [caminho-completo]
 ```
 
 ### Prevenção
-A skill tenta abrir automaticamente mas se falhar, mostra o caminho completo do arquivo para você abrir manualmente.
+Skill usa `Bash` tool (`open` command) automaticamente. Se falhar, mostra caminho completo para abrir manualmente.
 
 ---
 
@@ -114,13 +115,9 @@ Apresentação abre normalmente mas:
    - Se tela pequena, as notas podem estar fora da viewport
    - Scroll até o final da página
 
-4. **Recriar apresentação:**
-   ```bash
-   python3 scripts/visual-explainer/generate.py \
-     --roteiro roteiro.md \
-     --output nova_apresentacao.html \
-     --notas-visiveis true
-   ```
+4. **Recriar apresentação (MCP):**
+   - Pedir novamente: "Claude, cria apresentação com notas visíveis"
+   - Skill usa `Write` tool para gerar novo HTML
 
 ### Prevenção
 Sempre inclua seção "Notas do Apresentador" no roteiro:
@@ -160,11 +157,8 @@ JavaScript do timer pode ter falhado ao inicializar.
    - Timer deve iniciar automaticamente
 
 4. **Desativar timer se não precisar:**
-   ```bash
-   python3 scripts/visual-explainer/generate.py \
-     --roteiro roteiro.md \
-     --sem-timer
-   ```
+   - Pedir: "Claude, cria apresentação sem timer"
+   - Skill gera HTML sem componente de timer
 
 ### Prevenção
 Timer inicia automaticamente ao carregar página. Se não iniciar, é bug — reporte!
@@ -196,12 +190,8 @@ Zoom inicial do SVG pode estar incorreto para quantidade de nós.
    - Ou: `setZoom(0.7)` (diminui 30%)
 
 4. **Recriar com zoom customizado:**
-   ```bash
-   python3 scripts/visual-explainer/generate.py \
-     --roteiro roteiro.md \
-     --template mapa-mental \
-     --zoom-inicial 1.2
-   ```
+   - Pedir: "Claude, cria mapa mental com zoom inicial 1.2x"
+   - Skill gera HTML com configuração ajustada
 
 ### Prevenção
 Skill calcula zoom automaticamente, mas você pode ajustar manualmente após abrir.
@@ -227,12 +217,9 @@ Algoritmo de decisão automática interpretou conteúdo diferente do esperado.
           (especifica o template)↑
 ```
 
-**Opção 2 - Regenerar com flag:**
-```bash
-python3 scripts/visual-explainer/generate.py \
-  --roteiro roteiro.md \
-  --template mapa-mental  # força template
-```
+**Opção 2 - Regenerar (MCP):**
+- Pedir: "Claude, cria apresentação [assunto] usando template mapa-mental"
+- Skill usa `Read` + `Write` tools para gerar corretamente
 
 **Opção 3 - Melhorar roteiro:**
 Adicione palavras-chave que ativam o template desejado:
@@ -277,13 +264,9 @@ Se tem preferência clara, sempre especifique o template no prompt.
    - Verifique se termina com `</html>`
    - Se não termina: Arquivo corrompido
 
-4. **Regenerar do zero:**
-   ```bash
-   rm apresentacao_tema.html
-   python3 scripts/visual-explainer/generate.py \
-     --roteiro roteiro.md \
-     --output apresentacao_tema_v2.html
-   ```
+4. **Regenerar do zero (MCP):**
+   - Pedir: "Claude, recria apresentação [assunto]"
+   - Skill usa `Write` tool para sobrescrever arquivo
 
 5. **Testar em outro navegador:**
    - Chrome não funciona? Tente Firefox
@@ -311,11 +294,8 @@ Fontes customizadas não foram embedadas corretamente.
    - Não impacta muito a gravação
 
 2. **Forçar fontes do sistema:**
-   ```bash
-   python3 scripts/visual-explainer/generate.py \
-     --roteiro roteiro.md \
-     --fontes-sistema  # usa só fonts locais
-   ```
+   - Templates já usam fallbacks adequados
+   - Não impacta funcionalidade (apenas estética)
 
 3. **Instalar fontes localmente:**
    ```bash
@@ -499,15 +479,16 @@ document.querySelectorAll('.card').forEach(card => {
 - [ ] Scroll horizontal NÃO existe?
 - [ ] Scroll vertical funciona (se necessário)?
 
-#### 5. Regenerar Apresentação:
+#### 5. Regenerar Apresentação (MCP):
 
-Se o problema persistir, **regenere a apresentação:**
+Se o problema persistir, **regenere via skill:**
 
-```bash
-# A skill visual-explainer agora tem regras fortes de responsividade
-# Basta pedir novamente:
+```
+Pedir: "Claude, cria apresentação sobre [assunto] (certifica que todos os cards estejam visíveis)"
 
-"Claude, cria apresentação sobre [assunto] (certifica que todos os cards estejam visíveis)"
+Skill usa:
+- Read tool: Carregar template corrigido
+- Write tool: Salvar HTML com responsividade garantida
 ```
 
 ### Prevenção

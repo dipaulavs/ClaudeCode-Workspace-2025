@@ -28,9 +28,10 @@ INPUT: "Cria vídeo sobre [tema]" ou URL YouTube
 │ • Input: Transcrição completa                      │
 │ • Output: descricao_youtube_[tema].md              │
 │                                                     │
-│ Agent 4: Nota Obsidian                             │
+│ Agent 4: Nota Obsidian (MCP Filesystem)           │
 │ • Input: Transcrição completa                      │
 │ • Output: Nota em 📺 Vídeos/ (obsidian-organizer) │
+│ • Método: Write tool direto (sem REST API)        │
 └────────────┬────────────────────────────────────────┘
              ↓ [FASE 1 completa em ~2min]
 ┌─────────────────────────────────────────────────────┐
@@ -69,7 +70,7 @@ INPUT: "Cria vídeo sobre [tema]" ou URL YouTube
 
 **Salvamento duplo:**
 1. `~/Downloads/apresentacao_[tema].html` (backup rápido)
-2. `~/Library/Mobile Documents/iCloud~md~obsidian/Documents/02 - Tarefas e Anotações/📺 Vídeos/Apresentações/apresentacao_[tema].html` (permanente)
+2. `~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Claude-code-ios/📺 Vídeos/Apresentações/apresentacao_[tema].html` (permanente)
 
 **Uso:** Abrir em navegador → Fullscreen (F) → Gravar tela + áudio
 
@@ -353,7 +354,7 @@ Para aprofundar cada elemento:
 
 **Salvamento:**
 - `~/Downloads/apresentacao_[tema].html`
-- `~/Library/Mobile Documents/iCloud~md~obsidian/Documents/02 - Tarefas e Anotações/📺 Vídeos/Apresentações/apresentacao_[tema].html`
+- `~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Claude-code-ios/📺 Vídeos/Apresentações/apresentacao_[tema].html`
 
 **Doc:** `.claude/skills/visual-explainer/SKILL.md`
 
@@ -387,6 +388,11 @@ Para aprofundar cada elemento:
 **Input:** Transcrição + Assets gerados
 
 **Output:** Nota em `📺 Vídeos/`
+
+**Método:** MCP filesystem direto (Write tool)
+- **Sem REST API:** Obsidian não precisa estar aberto
+- **Vault path:** `/Users/felipemdepaula/Library/Mobile Documents/iCloud~md~obsidian/Documents/Claude-code-ios`
+- **Write direto:** Cria arquivo `.md` diretamente no vault
 
 **Estrutura:**
 - Status da produção
@@ -459,10 +465,10 @@ ClaudeCode-Workspace/
 │   ├── thumbnail_[tema]_var4.png
 │   └── thumbnail_[tema]_var5.png
 │
-└── ~/Library/Mobile Documents/iCloud~md~obsidian/Documents/02 - Tarefas e Anotações/
+└── ~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Claude-code-ios/
     │
     ├── 📺 Vídeos/
-    │   ├── Vídeo YouTube - [Tema] - [DATA].md  # Nota (Agent 4)
+    │   ├── Vídeo YouTube - [Tema] - [DATA].md  # Nota (Agent 4 via MCP)
     │   │
     │   └── Apresentações/
     │       └── apresentacao_[tema].html         # Apresentação (permanente)
@@ -471,6 +477,29 @@ ClaudeCode-Workspace/
 ---
 
 ## Decisões de Arquitetura
+
+### Por que MCP Filesystem (não REST API)?
+
+**Razão:** Confiabilidade, simplicidade e independência do Obsidian.
+
+**MCP Filesystem (atual):**
+- ✅ Write tool cria arquivos `.md` diretamente no vault
+- ✅ Obsidian não precisa estar aberto
+- ✅ Funciona offline
+- ✅ Sem dependências de servidor local
+- ✅ Sincronização automática via iCloud
+- ✅ Mais confiável (menos pontos de falha)
+
+**REST API Local (antigo - NÃO usado):**
+- ❌ Obsidian precisa estar aberto
+- ❌ Servidor local precisa estar rodando
+- ❌ Plugin REST API precisa estar habilitado
+- ❌ Mais pontos de falha
+- ❌ Dependência de configuração externa
+
+**Resultado:** MCP filesystem é mais simples, confiável e eficiente.
+
+---
 
 ### Por que Agents autônomos (não script único)?
 
@@ -511,5 +540,5 @@ Cada agent é especialista em sua tarefa:
 
 ---
 
-**Última atualização:** 2025-11-03
-**Versão:** 5.0 (1 apresentação HTML | 4 agents FASE 1 | Thumbnails FASE 2)
+**Última atualização:** 2025-11-05
+**Versão:** 5.1 (1 apresentação HTML | 4 agents FASE 1 MCP filesystem | Thumbnails FASE 2)

@@ -64,14 +64,15 @@
   - Hashtags estratégicas
 - **Output:** Caminho do arquivo criado
 
-#### Agent 4: Nota Obsidian
+#### Agent 4: Nota Obsidian (MCP Filesystem)
 - **Subagent:** general-purpose
 - **Input:** Transcrição completa
-- **Tarefa:** Chamar skill `obsidian-organizer` para criar nota de vídeo YouTube
-  - Local automático: `📺 Vídeos/`
+- **Tarefa:** Chamar skill `obsidian-organizer` (MCP filesystem-based) para criar nota de vídeo YouTube
+  - Local automático: `📺 Vídeos/` (usando Write tool direto no vault)
   - Formato: Template de Vídeo YouTube (da skill obsidian-organizer)
   - Conteúdo: Link (se houver) + Resumo + Aprendizados + Checklist de produção
   - **Assets incluir:** Link para apresentação HTML salva em `📺 Vídeos/Apresentações/`
+  - **Método:** MCP filesystem direto (sem REST API, Obsidian não precisa estar aberto)
 - **Output:** Caminho da nota no Obsidian
 
 **⏱️ Tempo Fase 1:** ~2 minutos (tudo em SUPER PARALELO)
@@ -139,4 +140,4 @@
 
 **Skill Type:** Model-invoked (auto-ativa)
 **FASE:** 1 (Pré-gravação + Metadados)
-**Versão:** 6.0 (Template Educativo PADRÃO: 7 slides reveal progressivo | 4 agents SUPER PARALELO | Obsidian via skill obsidian-organizer | Fase 2 thumbnails independente)
+**Versão:** 6.1 (Template Educativo PADRÃO: 7 slides reveal progressivo | 4 agents SUPER PARALELO | Obsidian via skill obsidian-organizer MCP filesystem | Fase 2 thumbnails independente)

@@ -27,12 +27,26 @@ Claude-code-ios/
 
 ---
 
-## 🛠️ Tools Necessários
+## 🛠️ Tools Necessários (MCP Filesystem)
 
-### Write Tool
-Usado para criar arquivos:
+**IMPORTANTE:** Esta skill é 100% MCP filesystem-based. NÃO usa REST API.
+
+### Write Tool (Principal)
+Usado para criar arquivos diretamente no sistema de arquivos:
 ```python
 file_path = "/Users/felipemdepaula/Library/Mobile Documents/iCloud~md~obsidian/Documents/Claude-code-ios/[pasta]/[arquivo].md"
+```
+
+**Vantagens:**
+- ✅ Funciona com Obsidian fechado
+- ✅ Não requer configuração de API
+- ✅ Acesso direto ao vault via iCloud
+- ✅ Sincronização automática via iCloud
+
+### Read Tool (Verificação)
+Usado para ler arquivos existentes ou verificar estrutura:
+```python
+file_path = "/Users/felipemdepaula/Library/Mobile Documents/iCloud~md~obsidian/Documents/Claude-code-ios/[arquivo].md"
 ```
 
 ### Bash Tool (Opcional)

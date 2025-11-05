@@ -17,7 +17,7 @@ Use esta skill automaticamente quando o usuário:
 
 **IMPORTANTE:** Esta skill é **totalmente automática** - NÃO pedir confirmação ao usuário. Executar imediatamente.
 
-**INTEGRAÇÃO:** Segue sistema minimalista do [[obsidian-organizer]] - pasta `📺 Vídeos/`, formato limpo, data/hora BR.
+**INTEGRAÇÃO MCP:** Usa Write tool (MCP filesystem) para salvar direto no vault - pasta `📺 Vídeos/`, formato limpo, data/hora BR.
 
 ---
 
@@ -53,11 +53,11 @@ python3 scripts/extraction/transcribe_video.py "URL_DO_VIDEO"
    - **Principais aprendizados** (3-5 pontos práticos)
    - **Tags relevantes** (baseadas no conteúdo)
 
-3. **Criar arquivo no Obsidian** manualmente (Write tool)
+3. **Criar arquivo no Obsidian** usando Write tool (MCP filesystem)
 
-**Local:**
+**Local (caminho absoluto):**
 ```
-📺 Vídeos/[TITULO_DESCRITIVO].md
+/Users/felipemdepaula/Library/Mobile Documents/iCloud~md~obsidian/Documents/Claude-code-ios/📺 Vídeos/[TITULO_DESCRITIVO].md
 ```
 
 **Template (formato obsidian-organizer):**
@@ -116,11 +116,11 @@ tags:
 1. Usuário: "Estuda esse vídeo: https://youtube.com/watch?v=ABC123"
 
 2. VOCÊ (automaticamente):
-   a) Transcrever com Whisper
-   b) Ler transcrição completa
+   a) Transcrever com Whisper (Bash + transcribe_video.py)
+   b) Ler transcrição completa (Read tool)
    c) Analisar conteúdo e classificar categoria
    d) Extrair resumo e aprendizados práticos
-   e) Criar arquivo markdown no Obsidian (Write tool)
+   e) Criar arquivo markdown no vault (Write tool com caminho absoluto)
    f) Confirmar criação ao usuário
 
 3. Informar ao usuário (formato minimalista):
@@ -211,14 +211,15 @@ Escolher a mais adequada (obrigatória):
 
 ## Troubleshooting
 
-**Erro: Vault não encontrado**
-- Verificar caminho do vault
-- Garantir que pasta `📺 Vídeos/` existe
+**Erro: Write tool falhou (Permission denied)**
+- Verificar caminho absoluto do vault: `/Users/felipemdepaula/Library/Mobile Documents/iCloud~md~obsidian/Documents/Claude-code-ios/`
+- Garantir que pasta `📺 Vídeos/` existe no vault
+- MCP filesystem não requer Obsidian aberto
 
 **Erro: Transcrição falhou**
 - Verificar URL do vídeo
-- Verificar conexão com API Whisper
-- Checar saldo da API
+- Verificar conexão com API Whisper (OpenAI)
+- Checar saldo da API OpenAI
 
 **Erro: Categoria não definida**
 - SEMPRE escolher uma das 5 categorias válidas
@@ -232,13 +233,18 @@ Escolher a mais adequada (obrigatória):
 
 ## Histórico de Iterações
 
+**v3.0 (2025-11-05):** MCP filesystem puro
+- Removidas dependências de REST APIs
+- Write tool direto no vault (caminho absoluto)
+- Não requer Obsidian aberto
+- Totalmente baseado em MCP filesystem
+
 **v2.0 (2025-11-03):** Integração com obsidian-organizer
 - Migrado para sistema minimalista
 - Pasta única `📺 Vídeos/` (sem subpastas por tipo)
 - Template simplificado e limpo
 - Data/hora brasileira obrigatória
 - Transcrição colapsável com callout
-- Resposta minimalista ao usuário
 
 **v1.0 (2025-11-02):** Skill inicial
 - Workflow de 3 etapas
@@ -248,5 +254,5 @@ Escolher a mais adequada (obrigatória):
 ---
 
 **Criado em:** 02/11/2025
-**Atualizado em:** 03/11/2025
-**Status:** ✅ Ativo e alinhado com obsidian-organizer
+**Atualizado em:** 05/11/2025
+**Status:** ✅ Ativo | 100% MCP filesystem

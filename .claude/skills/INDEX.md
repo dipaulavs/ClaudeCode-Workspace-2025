@@ -1,6 +1,6 @@
 # 🧠 Claude Skills - Índice Completo
 
-**Total:** 26 Skills | **Localização:** `.claude/skills/` | **Doc oficial:** https://docs.claude.com/en/docs/claude-code/skills.md
+**Total:** 27 Skills | **Localização:** `.claude/skills/` | **Doc oficial:** https://docs.claude.com/en/docs/claude-code/skills.md
 
 Skills são capacidades modulares model-invoked (Claude decide quando usar automaticamente).
 
@@ -73,6 +73,7 @@ Skills são capacidades modulares model-invoked (Claude decide quando usar autom
 
 | Skill | Quando Usar | Descrição |
 |-------|-------------|-----------|
+| **obsidian-quick-capture** | Capturar ideias bagunçadas rapidamente | Captura nota solta (texto/voz) → identifica tipo (tarefa/ideia/projeto/nota) → formata visual ASCII → organiza no local correto. Sistema INBOX → processamento automático. |
 | **obsidian-organizer** | Anotar/salvar/organizar no Obsidian | Entende sistema minimalista (Tarefas/Anotações/Vídeos). Cria automaticamente no formato e local corretos. Data/hora BR. Transcrição colapsável. |
 | **prompt-templates** | Pesquisar templates de prompt engineering | Consulta biblioteca aitmpl.com (100+ templates). Busca por categoria (Agents, Commands, Skills, MCPs, Hooks, Settings). WebFetch sob demanda. |
 
@@ -80,11 +81,12 @@ Skills são capacidades modulares model-invoked (Claude decide quando usar autom
 
 ## 📊 Estatísticas
 
-- **Total Skills:** 26
+- **Total Skills:** 27
 - **Model-Invoked:** Todas (Claude decide automaticamente)
 - **Skills com KB:** 3 (100m-leads, 100m-offers, 100m-money-models)
 - **Skills multi-agente:** 4 (army-of-agents, carrossel-meta-ads, youtube-educator, builder-orchestrator)
 - **Skills de automação:** 5 (json2video, orshot-design, visual-explainer, estudar-video, orcamento-profissional)
+- **Skills de produtividade:** 2 (obsidian-quick-capture, obsidian-organizer)
 
 ---
 

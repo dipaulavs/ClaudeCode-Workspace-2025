@@ -2,24 +2,26 @@
 
 ## Arquitetura do Sistema
 
-### Fluxo Completo (3 Etapas)
+### Fluxo Completo (3 Etapas - MCP Filesystem)
 
 ```
 ┌─────────────────────────────────────────────────────────┐
 │                    1. TRANSCRIÇÃO                       │
-│  transcribe_video.py → Whisper API → transcription.txt │
+│  Bash tool → transcribe_video.py → Whisper API         │
+│  Output: transcription.txt no ~/Downloads/              │
 └─────────────────────────────────────────────────────────┘
                            ↓
 ┌─────────────────────────────────────────────────────────┐
 │                    2. ANÁLISE IA                        │
-│  Claude lê transcrição → Classifica tipo → Extrai      │
-│  insights → Gera resumo + análise profunda             │
+│  Read tool → lê transcrição → Claude analisa           │
+│  Classifica tipo → Extrai insights → Gera resumo       │
 └─────────────────────────────────────────────────────────┘
                            ↓
 ┌─────────────────────────────────────────────────────────┐
-│                   3. SALVAR OBSIDIAN                    │
-│  add_youtube_video.py → Cria nota formatada →          │
-│  Salva em 09 - YouTube Knowledge/Videos/[Tipo]/        │
+│                3. SALVAR OBSIDIAN (MCP)                 │
+│  Write tool → Cria arquivo markdown direto no vault    │
+│  Caminho: vault/📺 Vídeos/[TITULO].md                  │
+│  Não requer Obsidian aberto                             │
 └─────────────────────────────────────────────────────────┘
 ```
 
@@ -67,10 +69,12 @@ yt-dlp -x --audio-format mp3 \
 - Aplicações práticas
 - Insights profundos
 
-#### 4. Integração com Obsidian
-**API:** Local filesystem (não usa Obsidian API)
+#### 4. Integração com Obsidian (MCP Filesystem)
+**Método:** Write tool (MCP filesystem nativo do Claude Code)
+**API:** Nenhuma REST API - acesso direto ao filesystem
 **Formato:** Markdown com frontmatter YAML
 **Localização:** iCloud Drive (sincroniza iOS)
+**Requisito:** Obsidian NÃO precisa estar aberto
 **Estrutura:** Tags, links internos, templates
 
 ## Sistema de Classificação de Vídeos
@@ -414,37 +418,41 @@ SORT data_assistido DESC
 ```
 ```
 
-## Configuração Técnica
+## Configuração Técnica (MCP-Based)
 
 ### Variáveis de Ambiente
 
 ```bash
 # .env
-OPENAI_API_KEY=sk-...           # Para Whisper (transcrição)
-OPENROUTER_API_KEY=sk-...       # Para Claude (análise)
-OBSIDIAN_VAULT_PATH=/Users/.../Claude-code-ios/
+OPENAI_API_KEY=sk-...           # Para Whisper (transcrição apenas)
+# Não requer OPENROUTER_API_KEY - Claude já está integrado
+# Não requer OBSIDIAN_VAULT_PATH - MCP filesystem acessa direto
 ```
 
-### Caminhos do Sistema
+### Caminhos do Sistema (Hardcoded - MCP Write Tool)
 
-```python
-# config/obsidian_config.py
-VAULT_PATH = "/Users/felipemdepaula/Library/Mobile Documents/iCloud~md~obsidian/Documents/Claude-code-ios/"
+```bash
+# Caminho absoluto do vault (usado no Write tool)
+VAULT_PATH="/Users/felipemdepaula/Library/Mobile Documents/iCloud~md~obsidian/Documents/Claude-code-ios/"
 
-YOUTUBE_KNOWLEDGE = f"{VAULT_PATH}/09 - YouTube Knowledge/"
-VIDEOS_PATH = f"{YOUTUBE_KNOWLEDGE}/Videos/"
-TRANSCRIPTIONS_PATH = f"{YOUTUBE_KNOWLEDGE}/Transcricoes/"
-DASHBOARD_PATH = f"{YOUTUBE_KNOWLEDGE}/YouTube Dashboard.md"
+# Pasta destino dos vídeos
+VIDEOS_PATH="${VAULT_PATH}/📺 Vídeos/"
+
+# Transcrições temporárias (fora do vault)
+TRANSCRIPTIONS_PATH="/Users/felipemdepaula/Downloads/transcription_youtube_[TIMESTAMP]/"
 ```
 
-### Dependências Python
+### Dependências Python (Mínimas)
 
 ```
 # requirements.txt (parcial)
-yt-dlp>=2023.3.4          # Download de vídeos
-openai>=1.0.0             # Whisper API
-requests>=2.31.0          # HTTP requests
-python-dotenv>=1.0.0      # Variáveis de ambiente
+yt-dlp>=2023.3.4          # Download de vídeos do YouTube
+openai>=1.0.0             # Whisper API (transcrição apenas)
+python-dotenv>=1.0.0      # Variáveis de ambiente (.env)
+
+# NÃO requer:
+# - requests (não usa REST API customizada)
+# - obsidian-api (MCP filesystem direto)
 ```
 
 ## Performance & Custos
@@ -491,15 +499,18 @@ TOTAL: ~$0.45 por vídeo de 1 hora
 - Whisper: 99 idiomas (automático)
 - Claude: Análise em PT, EN, ES, FR
 
-## Troubleshooting Técnico
+## Troubleshooting Técnico (MCP)
 
-### Erro: "Vault not found"
+### Erro: "Write tool: Permission denied"
 ```bash
-# Verificar caminho
+# Verificar caminho absoluto do vault
 ls "/Users/felipemdepaula/Library/Mobile Documents/iCloud~md~obsidian/Documents/Claude-code-ios/"
 
-# Atualizar config se necessário
-vim config/obsidian_config.py
+# Verificar pasta destino existe
+ls "/Users/felipemdepaula/Library/Mobile Documents/iCloud~md~obsidian/Documents/Claude-code-ios/📺 Vídeos/"
+
+# MCP Write tool não requer configuração adicional
+# Obsidian NÃO precisa estar aberto
 ```
 
 ### Erro: "yt-dlp failed"

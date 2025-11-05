@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "nextcloud-upload": {
+      "command": "python3",
+      "args": [
+        "/Users/felipemdepaula/Desktop/ClaudeCode-Workspace/mcp-nextcloud-upload/server.py"
+      ]
+    }
+  }
+}

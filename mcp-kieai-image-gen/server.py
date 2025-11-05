@@ -1,0 +1,720 @@
+#!/usr/bin/env python3
+"""
+MCP Server para Geração de Imagens com KIE.AI (NanoBanana)
+"""
+import asyncio
+import json
+import os
+from typing import Any
+from pathlib import Path
+import requests
+from mcp.server.models import InitializationOptions
+from mcp.server import NotificationOptions, Server
+from mcp.server.stdio import stdio_server
+from mcp.types import Tool, TextContent
+
+# Configuração da API
+API_KEY = os.getenv("KIEAI_API_KEY", "fa32b7ea4ff0e9b5acce83abe09d2b06")
+API_BASE_URL = "https://api.kie.ai/api/v1"
+DOWNLOADS_PATH = str(Path.home() / "Downloads")
+
+app = Server("kie-nanobanana-create")
+
+
+def create_image_task(prompt: str, output_format: str = "png", image_size: str = "1:1",
+                      image_url: str = None) -> dict:
+    """
+    Cria uma task de geração OU edição de imagem na API KIE.AI
+    - Se image_url fornecido: EDITA a imagem
+    - Se image_url ausente: CRIA imagem nova
+    """
+    url = f"{API_BASE_URL}/jobs/createTask"
+
+    headers = {
+        "Content-Type": "application/json",
+        "Authorization": f"Bearer {API_KEY}"
+    }
+
+    # Detecção automática: criar vs editar
+    if image_url:
+        # MODO EDIÇÃO
+        model = "google/nano-banana-edit"
+        input_data = {
+            "prompt": prompt,
+            "image_urls": [image_url],  # Lista com 1 URL
+            "output_format": output_format,
+            "image_size": image_size
+        }
+    else:
+        # MODO CRIAÇÃO
+        model = "google/nano-banana"
+        input_data = {
+            "prompt": prompt,
+            "output_format": output_format,
+            "image_size": image_size
+        }
+
+    payload = {
+        "model": model,
+        "input": input_data
+    }
+
+    response = requests.post(url, headers=headers, json=payload)
+    return response.json()
+
+
+def query_task(task_id: str) -> dict:
+    """Consulta o status de uma task"""
+    url = f"{API_BASE_URL}/jobs/recordInfo"
+
+    headers = {
+        "Authorization": f"Bearer {API_KEY}"
+    }
+
+    params = {"taskId": task_id}
+
+    response = requests.get(url, headers=headers, params=params)
+    return response.json()
+
+
+def wait_for_task_completion(task_id: str, max_wait: int = 60) -> dict:
+    """Aguarda a conclusão da task com polling"""
+    import time
+    import json as json_module
+
+    waited = 0
+    while waited < max_wait:
+        result = query_task(task_id)
+
+        if result.get("code") != 200:
+            return result
+
+        data = result.get("data", {})
+        state = data.get("state")
+
+        if state == "success":
+            # Parse do resultJson se for string
+            result_json_str = data.get("resultJson", "{}")
+            if isinstance(result_json_str, str):
+                data["resultJson"] = json_module.loads(result_json_str)
+            return result
+        elif state == "fail":
+            return result
+
+        time.sleep(2)
+        waited += 2
+
+    return {"code": 408, "message": "Timeout waiting for task completion"}
+
+
+def translate_to_portuguese(text: str) -> str:
+    """Traduz texto para português usando Google Translate API"""
+    try:
+        url = "https://translate.googleapis.com/translate_a/single"
+        params = {
+            "client": "gtx",
+            "sl": "auto",
+            "tl": "pt",
+            "dt": "t",
+            "q": text
+        }
+        response = requests.get(url, params=params, timeout=3)
+        if response.status_code == 200:
+            result = response.json()
+            translated = result[0][0][0]
+            return translated.lower()
+        return text.lower()
+    except:
+        return text.lower()
+
+
+def remove_accents(text: str) -> str:
+    """Remove acentos de um texto"""
+    import unicodedata
+    # Normaliza para NFD (decomposição) e remove marcas diacríticas
+    nfd = unicodedata.normalize('NFD', text)
+    return ''.join(char for char in nfd if unicodedata.category(char) != 'Mn')
+
+
+def create_descriptive_filename(prompt: str, extension: str = "png") -> str:
+    """Cria um nome de arquivo descritivo baseado no prompt (em português, sem acentos)"""
+    import re
+    import random
+    import string
+
+    # Remove pontuação e caracteres especiais
+    clean_prompt = re.sub(r'[^\w\s]', '', prompt.lower())
+
+    # Remove palavras comuns (stopwords) em inglês e português
+    stopwords = {'a', 'an', 'the', 'in', 'on', 'at', 'of', 'for', 'with', 'and', 'or', 'but',
+                 'is', 'are', 'was', 'were', 'be', 'been', 'being', 'have', 'has', 'had',
+                 'do', 'does', 'did', 'will', 'would', 'should', 'could', 'may', 'might',
+                 'beautiful', 'cute', 'nice', 'pretty', 'digital', 'art', 'photorealistic',
+                 'image', 'picture', 'photo', 'style', 'lighting', 'natural',
+                 'o', 'uma', 'um', 'de', 'da', 'do', 'em', 'na', 'no', 'com', 'e', 'ou',
+                 'bonito', 'bonita', 'fofo', 'fofa', 'lindo', 'linda', 'realista', 'digital',
+                 'sobre', 'para', 'travesseiro'}
+
+    # Pega as primeiras 2-3 palavras significativas
+    words = [w for w in clean_prompt.split() if w not in stopwords][:3]
+
+    if not words:
+        # Fallback se não houver palavras válidas
+        words = clean_prompt.split()[:2]
+
+    # Junta as palavras
+    key_phrase = ' '.join(words)
+
+    # Traduz para português
+    translated = translate_to_portuguese(key_phrase)
+
+    # Remove acentos
+    translated_no_accents = remove_accents(translated)
+
+    # Limpa novamente após tradução
+    translated_clean = re.sub(r'[^\w\s]', '', translated_no_accents)
+
+    # Remove stopwords em português novamente
+    final_words = [w for w in translated_clean.split() if w not in stopwords]
+
+    if not final_words:
+        final_words = translated_clean.split()[:2]
+
+    # Junta com underscore
+    descriptive_part = '_'.join(final_words[:3])
+
+    # Limita a 30 caracteres
+    if len(descriptive_part) > 30:
+        descriptive_part = descriptive_part[:30]
+
+    # Adiciona código aleatório curto (3 caracteres)
+    random_code = ''.join(random.choices(string.ascii_lowercase + string.digits, k=3))
+
+    # Nome final
+    filename = f"{descriptive_part}_{random_code}.{extension}"
+
+    return filename
+
+
+def download_image(url: str, filename: str = None, prompt: str = None) -> dict:
+    """Baixa uma imagem da URL e salva na pasta Downloads"""
+    try:
+        # Extrai extensão da URL
+        url_extension = url.split('.')[-1].lower()
+        if url_extension not in ['png', 'jpg', 'jpeg']:
+            url_extension = 'png'
+
+        if not filename:
+            if prompt:
+                # Cria nome descritivo baseado no prompt
+                filename = create_descriptive_filename(prompt, url_extension)
+            else:
+                # Fallback: usa nome da URL
+                filename = url.split("/")[-1]
+
+        output_path = os.path.join(DOWNLOADS_PATH, filename)
+
+        response = requests.get(url, stream=True)
+        response.raise_for_status()
+
+        with open(output_path, 'wb') as f:
+            for chunk in response.iter_content(chunk_size=8192):
+                f.write(chunk)
+
+        return {
+            "success": True,
+            "path": output_path,
+            "filename": filename
+        }
+
+    except Exception as e:
+        return {
+            "success": False,
+            "error": str(e)
+        }
+
+
+@app.list_tools()
+async def handle_list_tools() -> list[Tool]:
+    """Lista as ferramentas disponíveis"""
+    return [
+        Tool(
+            name="generate_image",
+            description="Cria OU edita imagens com NanoBanana. Detecta automaticamente se é criação (sem image_url) ou edição (com image_url). Suporta 1-15 imagens em paralelo.",
+            inputSchema={
+                "type": "object",
+                "properties": {
+                    "prompt": {
+                        "type": "string",
+                        "description": "Prompt único. Para CRIAR: descreva a imagem. Para EDITAR: descreva a modificação (ex: 'troque a cor da camisa para vermelho'). Use este OU 'prompts'.",
+                        "maxLength": 5000
+                    },
+                    "prompts": {
+                        "type": "array",
+                        "description": "Lista de prompts para múltiplas imagens em PARALELO (1-15). Use este OU 'prompt'.",
+                        "items": {
+                            "type": "string",
+                            "maxLength": 5000
+                        },
+                        "minItems": 1,
+                        "maxItems": 15
+                    },
+                    "image_url": {
+                        "type": "string",
+                        "description": "URL da imagem a ser editada (modo EDIÇÃO). Se fornecido, ativa modo edição. Use com 'prompt' para editar 1 imagem.",
+                        "format": "uri"
+                    },
+                    "image_urls": {
+                        "type": "array",
+                        "description": "Lista de URLs de imagens a serem editadas (modo EDIÇÃO batch). Use com 'prompts' (mesmo tamanho). prompts[0] edita image_urls[0], etc.",
+                        "items": {
+                            "type": "string",
+                            "format": "uri"
+                        },
+                        "minItems": 1,
+                        "maxItems": 15
+                    },
+                    "output_format": {
+                        "type": "string",
+                        "description": "Formato de saída da imagem",
+                        "enum": ["png", "jpeg"],
+                        "default": "png"
+                    },
+                    "image_size": {
+                        "type": "string",
+                        "description": "Proporção da imagem",
+                        "enum": ["1:1", "9:16", "16:9", "3:4", "4:3", "3:2", "2:3", "5:4", "4:5", "21:9", "auto"],
+                        "default": "4:5"
+                    },
+                    "wait_for_completion": {
+                        "type": "boolean",
+                        "description": "Se true, aguarda a conclusão da geração (até 60s). Se false, retorna apenas o task_id",
+                        "default": True
+                    },
+                    "auto_download": {
+                        "type": "boolean",
+                        "description": "Se true, baixa automaticamente as imagens para ~/Downloads",
+                        "default": False
+                    }
+                }
+            }
+        ),
+        Tool(
+            name="download_image",
+            description="Baixa uma imagem da URL e salva na pasta ~/Downloads",
+            inputSchema={
+                "type": "object",
+                "properties": {
+                    "url": {
+                        "type": "string",
+                        "description": "URL da imagem a ser baixada"
+                    },
+                    "filename": {
+                        "type": "string",
+                        "description": "Nome do arquivo (opcional). Se não fornecido, usa o nome da URL"
+                    }
+                },
+                "required": ["url"]
+            }
+        ),
+        Tool(
+            name="check_task_status",
+            description="Verifica o status de uma task de geração de imagem",
+            inputSchema={
+                "type": "object",
+                "properties": {
+                    "task_id": {
+                        "type": "string",
+                        "description": "ID da task a ser consultada"
+                    }
+                },
+                "required": ["task_id"]
+            }
+        )
+    ]
+
+
+async def wait_for_task_completion_async(task_id: str, max_wait: int = 60) -> dict:
+    """Aguarda a conclusão da task de forma ASSÍNCRONA (não bloqueia)"""
+    waited = 0
+    while waited < max_wait:
+        result = query_task(task_id)
+
+        if result.get("code") != 200:
+            return result
+
+        data = result.get("data", {})
+        state = data.get("state")
+
+        if state == "success":
+            result_json_str = data.get("resultJson", "{}")
+            if isinstance(result_json_str, str):
+                data["resultJson"] = json.loads(result_json_str)
+            return result
+        elif state == "fail":
+            return result
+
+        await asyncio.sleep(2)  # ASYNC sleep - não bloqueia!
+        waited += 2
+
+    return {"code": 408, "message": "Timeout waiting for task completion"}
+
+
+async def generate_single_async(prompt: str, output_format: str, image_size: str,
+                               wait_for_completion: bool, auto_download: bool,
+                               image_url: str = None) -> dict:
+    """
+    Gera/edita uma única imagem de forma assíncrona
+    - image_url=None: CRIA imagem nova
+    - image_url=URL: EDITA imagem existente
+    """
+    result = create_image_task(prompt, output_format, image_size, image_url)
+
+    if result.get("code") != 200:
+        return {"error": True, "prompt": prompt, "data": result}
+
+    task_id = result.get("data", {}).get("taskId")
+
+    if not wait_for_completion:
+        return {"status": "task_created", "prompt": prompt, "task_id": task_id}
+
+    # Aguarda conclusão de forma ASSÍNCRONA
+    final_result = await wait_for_task_completion_async(task_id)
+
+    if final_result.get("code") == 200:
+        data = final_result.get("data", {})
+        result_json = data.get("resultJson", {})
+        if isinstance(result_json, str):
+            result_json = json.loads(result_json)
+
+        image_urls = result_json.get("resultUrls", [])
+        response = {
+            "status": "success",
+            "prompt": prompt,
+            "task_id": task_id,
+            "image_urls": image_urls,
+            "cost_time": data.get("costTime"),
+            "consume_credits": data.get("consumeCredits")
+        }
+
+        if auto_download and image_urls:
+            downloads = []
+            for url in image_urls:
+                download_result = download_image(url, prompt=prompt)
+                if download_result.get("success"):
+                    downloads.append({
+                        "url": url,
+                        "path": download_result["path"],
+                        "filename": download_result["filename"]
+                    })
+            response["downloads"] = downloads
+            response["downloads_path"] = DOWNLOADS_PATH
+
+        return response
+    else:
+        return {"error": True, "prompt": prompt, "data": final_result}
+
+
+async def generate_batch_parallel(prompts: list, output_format: str, image_size: str,
+                                  wait_for_completion: bool, auto_download: bool,
+                                  image_urls: list = None) -> dict:
+    """
+    Gera/edita múltiplas imagens EM PARALELO - TODAS AO MESMO TEMPO
+    - image_urls=None: CRIA todas as imagens
+    - image_urls=[...]: EDITA as imagens (prompts[i] edita image_urls[i])
+    """
+
+    # Validação: se image_urls fornecido, deve ter mesmo tamanho que prompts
+    if image_urls and len(image_urls) != len(prompts):
+        return {
+            "error": True,
+            "message": f"image_urls ({len(image_urls)}) e prompts ({len(prompts)}) devem ter o mesmo tamanho"
+        }
+
+    # FASE 1: Cria TODAS as tasks na API de uma vez (rápido, ~1s por task)
+    task_ids = []
+    for i, prompt in enumerate(prompts):
+        # Pega a URL correspondente se for edição
+        img_url = image_urls[i] if image_urls else None
+
+        result = create_image_task(prompt, output_format, image_size, img_url)
+        if result.get("code") == 200:
+            task_id = result.get("data", {}).get("taskId")
+            task_ids.append({
+                "prompt": prompt,
+                "task_id": task_id,
+                "image_url": img_url,
+                "mode": "edit" if img_url else "create"
+            })
+        else:
+            task_ids.append({"prompt": prompt, "error": True, "data": result})
+
+    if not wait_for_completion:
+        return {
+            "mode": "batch_parallel",
+            "total": len(prompts),
+            "tasks_created": len([t for t in task_ids if "task_id" in t]),
+            "task_ids": task_ids
+        }
+
+    # FASE 2: Aguarda TODAS em paralelo (asyncio.gather não bloqueia)
+    async def wait_and_download(task_info):
+        """Aguarda uma task e faz download se necessário"""
+        if task_info.get("error"):
+            return task_info
+
+        task_id = task_info["task_id"]
+        prompt = task_info["prompt"]
+
+        # Aguarda de forma assíncrona
+        final_result = await wait_for_task_completion_async(task_id)
+
+        if final_result.get("code") == 200:
+            data = final_result.get("data", {})
+            result_json = data.get("resultJson", {})
+            if isinstance(result_json, str):
+                result_json = json.loads(result_json)
+
+            image_urls = result_json.get("resultUrls", [])
+            response = {
+                "status": "success",
+                "prompt": prompt,
+                "task_id": task_id,
+                "image_urls": image_urls,
+                "cost_time": data.get("costTime"),
+                "consume_credits": data.get("consumeCredits")
+            }
+
+            if auto_download and image_urls:
+                downloads = []
+                for url in image_urls:
+                    download_result = download_image(url, prompt=prompt)
+                    if download_result.get("success"):
+                        downloads.append({
+                            "url": url,
+                            "path": download_result["path"],
+                            "filename": download_result["filename"]
+                        })
+                response["downloads"] = downloads
+                response["downloads_path"] = DOWNLOADS_PATH
+
+            return response
+        else:
+            return {"error": True, "prompt": prompt, "data": final_result}
+
+    # Executa TODAS em paralelo
+    results = await asyncio.gather(*[wait_and_download(t) for t in task_ids])
+
+    # Estatísticas
+    successful = [r for r in results if r.get("status") == "success"]
+    failed = [r for r in results if r.get("error")]
+
+    return {
+        "mode": "batch_parallel",
+        "total": len(prompts),
+        "successful": len(successful),
+        "failed": len(failed),
+        "results": results,
+        "total_time": sum(r.get("cost_time", 0) for r in successful) if successful else 0
+    }
+
+
+@app.call_tool()
+async def handle_call_tool(name: str, arguments: dict[str, Any]) -> list[TextContent]:
+    """Executa uma ferramenta"""
+
+    if name == "generate_image":
+        prompt = arguments.get("prompt")
+        prompts = arguments.get("prompts")
+        image_url = arguments.get("image_url")
+        image_urls = arguments.get("image_urls")
+        output_format = arguments.get("output_format", "png")
+        image_size = arguments.get("image_size", "4:5")  # Padrão: 4:5 (vertical)
+        wait_for_completion = arguments.get("wait_for_completion", True)
+        auto_download = arguments.get("auto_download", False)
+
+        # Verifica se é batch ou single
+        if prompts:
+            # MODO BATCH (1-15 imagens em paralelo - CRIAR ou EDITAR)
+            batch_result = await generate_batch_parallel(
+                prompts, output_format, image_size,
+                wait_for_completion, auto_download,
+                image_urls  # Passa image_urls (pode ser None)
+            )
+
+            return [TextContent(
+                type="text",
+                text=json.dumps(batch_result, indent=2)
+            )]
+
+        elif prompt:
+            # MODO SINGLE (1 imagem - CRIAR ou EDITAR)
+            result = create_image_task(prompt, output_format, image_size, image_url)
+
+            if result.get("code") != 200:
+                return [TextContent(
+                    type="text",
+                    text=json.dumps(result, indent=2)
+                )]
+
+            task_id = result.get("data", {}).get("taskId")
+
+            if not wait_for_completion:
+                return [TextContent(
+                    type="text",
+                    text=json.dumps({
+                        "status": "task_created",
+                        "task_id": task_id,
+                        "message": "Task criada"
+                    }, indent=2)
+                )]
+
+            # Aguarda conclusão
+            final_result = wait_for_task_completion(task_id)
+
+            if final_result.get("code") == 200:
+                data = final_result.get("data", {})
+                result_json = data.get("resultJson", {})
+                if isinstance(result_json, str):
+                    result_json = json.loads(result_json)
+
+                image_urls = result_json.get("resultUrls", [])
+                response = {
+                    "status": "success",
+                    "task_id": task_id,
+                    "image_urls": image_urls,
+                    "cost_time": data.get("costTime"),
+                    "consume_credits": data.get("consumeCredits")
+                }
+
+                if auto_download and image_urls:
+                    downloads = []
+                    for url in image_urls:
+                        download_result = download_image(url, prompt=prompt)
+                        if download_result.get("success"):
+                            downloads.append({
+                                "url": url,
+                                "path": download_result["path"],
+                                "filename": download_result["filename"]
+                            })
+                    response["downloads"] = downloads
+                    response["downloads_path"] = DOWNLOADS_PATH
+
+                return [TextContent(
+                    type="text",
+                    text=json.dumps(response, indent=2)
+                )]
+            else:
+                return [TextContent(
+                    type="text",
+                    text=json.dumps(final_result, indent=2)
+                )]
+        else:
+            return [TextContent(
+                type="text",
+                text=json.dumps({"error": "Forneça 'prompt' (1 imagem) ou 'prompts' (2-4 imagens)"}, indent=2)
+            )]
+
+    elif name == "download_image":
+        url = arguments.get("url")
+        filename = arguments.get("filename")
+
+        if not url:
+            return [TextContent(
+                type="text",
+                text=json.dumps({"error": "URL é obrigatória"}, indent=2)
+            )]
+
+        result = download_image(url, filename)
+
+        if result.get("success"):
+            return [TextContent(
+                type="text",
+                text=json.dumps({
+                    "status": "success",
+                    "message": "Imagem baixada com sucesso",
+                    "path": result["path"],
+                    "filename": result["filename"],
+                    "downloads_folder": DOWNLOADS_PATH
+                }, indent=2)
+            )]
+        else:
+            return [TextContent(
+                type="text",
+                text=json.dumps({
+                    "status": "error",
+                    "error": result["error"]
+                }, indent=2)
+            )]
+
+    elif name == "check_task_status":
+        task_id = arguments.get("task_id")
+
+        if not task_id:
+            return [TextContent(
+                type="text",
+                text=json.dumps({"error": "task_id é obrigatório"}, indent=2)
+            )]
+
+        result = query_task(task_id)
+
+        if result.get("code") == 200:
+            data = result.get("data", {})
+            state = data.get("state")
+
+            response = {
+                "task_id": task_id,
+                "state": state,
+                "create_time": data.get("createTime"),
+                "update_time": data.get("updateTime")
+            }
+
+            if state == "success":
+                # resultJson pode ser string ou já estar parseado
+                result_json = data.get("resultJson", {})
+                if isinstance(result_json, str):
+                    result_json = json.loads(result_json)
+
+                response["image_urls"] = result_json.get("resultUrls", [])
+                response["cost_time"] = data.get("costTime")
+                response["consume_credits"] = data.get("consumeCredits")
+            elif state == "fail":
+                response["fail_code"] = data.get("failCode")
+                response["fail_msg"] = data.get("failMsg")
+
+            return [TextContent(
+                type="text",
+                text=json.dumps(response, indent=2)
+            )]
+        else:
+            return [TextContent(
+                type="text",
+                text=json.dumps(result, indent=2)
+            )]
+
+    else:
+        return [TextContent(
+            type="text",
+            text=json.dumps({"error": f"Ferramenta desconhecida: {name}"}, indent=2)
+        )]
+
+
+async def main():
+    """Inicia o servidor MCP"""
+    async with stdio_server() as (read_stream, write_stream):
+        await app.run(
+            read_stream,
+            write_stream,
+            InitializationOptions(
+                server_name="kie-nanobanana-create",
+                server_version="2.0.0",
+                capabilities=app.get_capabilities(
+                    notification_options=NotificationOptions(),
+                    experimental_capabilities={}
+                )
+            )
+        )
+
+
+if __name__ == "__main__":
+    asyncio.run(main())

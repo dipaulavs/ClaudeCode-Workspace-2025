@@ -207,69 +207,70 @@ RAZÃO: Foca em framework de trabalho, não código
 
 ---
 
-## Problema 4: Obsidian Vault Não Encontrado
+## Problema 4: MCP Write Tool Falhou
 
 ### Sintomas
 ```bash
-Error: Vault path does not exist
-FileNotFoundError: [Errno 2] No such file or directory
+Error: Write tool failed: Permission denied
+Error: Cannot write to file
+FileNotFoundError: Directory does not exist
 ```
 
 ### Causa Raiz
-- Caminho do vault mudou (Obsidian movido)
+- Caminho do vault incorreto (hardcoded no skill)
+- Pasta destino `📺 Vídeos/` não existe
 - iCloud Drive não sincronizado
-- Permissões de acesso negadas
-- Typo no caminho configurado
+- Permissões de acesso negadas no filesystem
 
 ### Solução
 
-**Passo 1: Verificar caminho atual**
+**Passo 1: Verificar caminho absoluto do vault**
 ```bash
-# Caminho configurado
-grep VAULT_PATH config/obsidian_config.py
+# Caminho esperado (MCP Write tool)
+VAULT="/Users/felipemdepaula/Library/Mobile Documents/iCloud~md~obsidian/Documents/Claude-code-ios/"
 
-# Resultado esperado:
-VAULT_PATH = "/Users/felipemdepaula/Library/Mobile Documents/iCloud~md~obsidian/Documents/Claude-code-ios/"
+# Testar se existe
+ls "$VAULT"
+
+# Se erro "No such file": Vault mudou de local ou iCloud não sincronizado
 ```
 
-**Passo 2: Testar se existe**
+**Passo 2: Verificar pasta destino existe**
 ```bash
-# Listar conteúdo do vault
-ls "/Users/felipemdepaula/Library/Mobile Documents/iCloud~md~obsidian/Documents/Claude-code-ios/"
+# Pasta onde vídeos são salvos
+ls "/Users/felipemdepaula/Library/Mobile Documents/iCloud~md~obsidian/Documents/Claude-code-ios/📺 Vídeos/"
 
-# Se erro "No such file": Vault mudou de local
-# Se listar pastas: Vault existe, problema é permissão
+# Se não existe: Criar pasta manualmente
+mkdir -p "/Users/felipemdepaula/Library/Mobile Documents/iCloud~md~obsidian/Documents/Claude-code-ios/📺 Vídeos/"
 ```
 
-**Passo 3: Encontrar vault correto**
+**Passo 3: Troubleshooting iCloud Drive**
 ```bash
-# Procurar vault do Obsidian
-find ~ -name "Claude-code-ios" -type d 2>/dev/null
-
-# Resultado mostrará caminho real:
-/Users/felipemdepaula/Library/Mobile Documents/iCloud~md~obsidian/Documents/Claude-code-ios/
-```
-
-**Passo 4: Atualizar configuração**
-```python
-# config/obsidian_config.py
-VAULT_PATH = "/CAMINHO/CORRETO/ENCONTRADO/ACIMA/"
-
-# Salvar e testar novamente
-```
-
-**Troubleshooting iCloud:**
-
-```bash
-# iCloud Drive não sincronizado?
+# iCloud não sincronizado?
 # 1. Abrir Finder → iCloud Drive
-# 2. Verificar se pasta Obsidian existe
-# 3. Se tiver ícone de nuvem: Forçar download
+# 2. Verificar se pasta "Obsidian" existe
+# 3. Se ícone de nuvem aparecer: Forçar download
 
-# Alternativa: Mover vault para local (não iCloud)
-# Obsidian → Settings → Vault → Move vault
-# Escolher: /Users/felipemdepaula/Documents/Obsidian/
+# Verificar status de sincronização
+brctl log --wait --shorten
+
+# Forçar sincronização (se necessário)
+killall bird  # Daemon do iCloud
 ```
+
+**Passo 4: Alternativa - Vault local (não iCloud)**
+```bash
+# Se iCloud causa problemas, mover vault para local
+# 1. Obsidian → Settings → Vault → Move vault
+# 2. Escolher: /Users/felipemdepaula/Documents/Obsidian/
+# 3. Atualizar caminho no SKILL.md (hardcoded)
+```
+
+**Importante (MCP Filesystem):**
+- Write tool acessa filesystem diretamente (não via REST API)
+- Obsidian NÃO precisa estar aberto
+- Caminho é hardcoded no SKILL.md (não usa config.py)
+- Se vault mudar de local: Atualizar SKILL.md manualmente
 
 ---
 
@@ -347,72 +348,78 @@ Se análise automática falhar, fazer manual:
 
 ---
 
-## Problema 6: Dashboard Não Atualiza Automaticamente
+## Problema 6: Dashboard Não é Criado/Atualizado
 
 ### Sintomas
-- Novo vídeo adicionado mas não aparece no dashboard
-- Contador de vídeos não aumenta
-- Seção "Recentes" não mostra último vídeo
+- Vídeos salvos mas não há dashboard centralizado
+- Sem visualização de vídeos recentes
+- Sem contadores por categoria
 
 ### Causa Raiz
-- Script `add_youtube_video.py` não atualiza dashboard
-- Dashboard usa query Dataview que falhou
-- Cache do Obsidian não refresh
+- Skill `estudar-video` v3.0 não cria dashboard (removido)
+- Sistema minimalista foca em notas individuais
+- Dashboard requer manutenção manual ou plugin Dataview
 
 ### Solução
 
-**Passo 1: Verificar se dashboard existe**
+**Passo 1: Entender mudança de arquitetura**
+```markdown
+# v3.0 (MCP) - Sistema minimalista:
+- Foco: Criar nota individual do vídeo
+- Local: 📺 Vídeos/[TITULO].md
+- Dashboard: NÃO é criado automaticamente
+
+# v1.0 (Antigo) - Sistema complexo:
+- Dashboard automático em 09 - YouTube Knowledge/
+- Contadores, estatísticas, queries Dataview
+- Subpastas por tipo (Tutoriais/, Metodologias/, etc)
+```
+
+**Passo 2: Criar dashboard manual (opcional)**
 ```bash
-# Caminho do dashboard
-ls "09 - YouTube Knowledge/YouTube Dashboard.md"
+# Se quiser dashboard, criar manualmente no Obsidian
+# Criar: 📺 Vídeos/Dashboard.md
 
-# Se não existe: Criar manualmente
+# Conteúdo sugerido (usando Dataview):
 ```
 
-**Passo 2: Atualizar dashboard manualmente**
+**Passo 3: Query Dataview para listar vídeos**
 ```markdown
-# Abrir dashboard no Obsidian
-# Forçar refresh: Cmd+R (Mac) ou Ctrl+R (Windows)
+# 📺 Vídeos/Dashboard.md
 
-# Se usar Dataview plugin:
-# Settings → Dataview → Refresh Interval: 1000ms
-```
-
-**Passo 3: Verificar query Dataview**
-```markdown
-# Dashboard deve ter queries assim:
-
-## Recentes (Últimos 10)
+## Vídeos Recentes
 
 ```dataview
-TABLE tipo, canal, duracao, rating
-FROM "09 - YouTube Knowledge/Videos"
-SORT data_assistido DESC
+TABLE assistido, categoria
+FROM "📺 Vídeos"
+WHERE file.name != "Dashboard"
+SORT assistido DESC
 LIMIT 10
 ```
 
-# Se query não funciona:
-# - Verificar se Dataview plugin está instalado
-# - Verificar se frontmatter das notas está correto (data_assistido existe?)
+## Por Categoria
+
+```dataview
+TABLE rows.file.link
+FROM "📺 Vídeos"
+WHERE file.name != "Dashboard"
+GROUP BY categoria
+```
+\`\`\`
+
+**Passo 4: Alternativa - Busca nativa do Obsidian**
+```markdown
+# Não precisa de dashboard se usar busca nativa:
+# - Cmd+O / Ctrl+O: Quick switcher
+# - Cmd+Shift+F / Ctrl+Shift+F: Busca global
+# - Tags: #youtube #tutorial #noticia
+# - Links: [[📺 Vídeos]]
 ```
 
-**Passo 4: Automatizar atualização do dashboard**
-
-```python
-# scripts/obsidian/add_youtube_video.py
-# Adicionar função que atualiza dashboard após criar nota
-
-def update_dashboard():
-    dashboard_path = f"{VAULT_PATH}/09 - YouTube Knowledge/YouTube Dashboard.md"
-
-    # Contar vídeos por tipo
-    tutoriais = len(list(Path(f"{VIDEOS_PATH}/Tutoriais/").glob("*.md")))
-    metodologias = len(list(Path(f"{VIDEOS_PATH}/Metodologias/").glob("*.md")))
-    # ...
-
-    # Atualizar contadores no dashboard
-    # (implementação específica)
-```
+**Filosofia v3.0:**
+- Minimalista: Uma nota por vídeo (bem organizada)
+- Busca > Dashboard: Obsidian search é poderoso
+- Sem overhead: Não manter estatísticas complexas
 
 ---
 
@@ -516,14 +523,26 @@ Obsidian → Settings → About → Open debug console
 # 1. Testar download apenas
 yt-dlp "URL" -o "/tmp/test.mp3"
 
-# 2. Testar transcrição com arquivo local
-python3 scripts/extraction/transcribe_video.py --file "/tmp/test.mp3"
+# 2. Testar transcrição isolada
+python3 scripts/extraction/transcribe_video.py "URL_YOUTUBE"
 
-# 3. Testar análise com transcrição existente
-python3 scripts/obsidian/add_youtube_video.py \
-  --transcricao "/path/to/transcription.txt"
+# 3. Testar Write tool (MCP) manualmente
+# No Claude Code CLI:
+# Write tool com caminho absoluto do vault + conteúdo teste
+```
+
+**MCP Filesystem Debug:**
+```bash
+# Verificar permissões de escrita
+touch "/Users/felipemdepaula/Library/Mobile Documents/iCloud~md~obsidian/Documents/Claude-code-ios/📺 Vídeos/test.md"
+
+# Se erro "Permission denied": Problema de permissão filesystem
+# Se sucesso: Write tool deve funcionar normalmente
+
+# Limpar arquivo de teste
+rm "/Users/felipemdepaula/Library/Mobile Documents/iCloud~md~obsidian/Documents/Claude-code-ios/📺 Vídeos/test.md"
 ```
 
 ---
 
-**Related:** See `REFERENCE.md` for system architecture and `EXAMPLES.md` for analysis examples.
+**Related:** See `REFERENCE.md` for MCP architecture and `EXAMPLES.md` for usage examples.

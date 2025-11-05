@@ -32,7 +32,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent.parent / 'config'))
 sys.path.insert(0, str(Path(__file__).parent))
 
 try:
-    from obsidian_config import OBSIDIAN_VAULT_PATH, DISPLAY_DATE_FORMAT
+    from obsidian_config import OBSIDIAN_VAULT_PATH, DISPLAY_DATE_FORMAT, DAILY_NOTE_FORMAT
 except ImportError:
     print("❌ Erro: obsidian_config.py não encontrado!")
     sys.exit(1)

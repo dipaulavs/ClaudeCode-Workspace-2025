@@ -40,9 +40,11 @@ de uma vez, em vez de palavra por palavra
 [...]
 ```
 
-### Output Gerado
+### Output Gerado (MCP Filesystem)
 ```
-✅ Apresentação criada: apresentacao_transformers.html
+✅ Apresentação criada e salva em:
+   📂 Vault: /Users/felipemdepaula/Library/Mobile Documents/iCloud~md~obsidian/Documents/Claude-code-ios/📺 Vídeos/Apresentações/apresentacao_transformers.html
+   📂 Workspace: /Users/felipemdepaula/Desktop/ClaudeCode-Workspace/apresentacao_transformers.html
 
 📊 Template: Notion Style
 📍 Total de slides: 5
@@ -54,8 +56,14 @@ de uma vez, em vez de palavra por palavra
   • Notas aparecem na parte inferior
   • Timer no canto superior direito
 
-Pronto para gravar! 🚀
+🚀 Abrindo no navegador...
+Pronto para gravar!
 ```
+
+**Ferramentas MCP usadas:**
+1. `Read` - Carregar template base
+2. `Write` - Salvar HTML no vault + workspace
+3. `Bash` - Abrir no navegador (`open [caminho]`)
 
 ### HTML Gerado (Snippet)
 ```html

@@ -200,15 +200,21 @@ python3 scripts/thumbnail-creation/create_thumbnails.py \
 
 ---
 
-#### ETAPA 7: Nota Obsidian
+#### ETAPA 7: Nota Obsidian (MCP Filesystem)
 
-**Arquivo criado:** `09 - YouTube Production/2025-11-03 - Transformers em IA.md`
+**Arquivo criado:** `📺 Vídeos/Vídeo YouTube - Transformers em IA - 03-11-2025.md`
+
+**Método:**
+- **MCP filesystem direto:** Write tool cria arquivo `.md` no vault
+- **Obsidian não precisa estar aberto:** Funciona offline
+- **Skill delegada:** `obsidian-organizer` (MCP-based)
 
 **Conteúdo:**
 - Status completo da produção
-- Links para todos arquivos
+- Links para todos arquivos (incluindo apresentação HTML)
 - Checklist de publicação
 - Metadados do vídeo
+- "Cola" de gravação
 
 ---
 
@@ -377,5 +383,5 @@ python3 scripts/thumbnail-creation/create_thumbnails.py \
 
 ---
 
-**Última atualização:** 2025-11-03
-**Casos:** 4 exemplos completos
+**Última atualização:** 2025-11-05
+**Casos:** 4 exemplos completos (MCP filesystem integration)

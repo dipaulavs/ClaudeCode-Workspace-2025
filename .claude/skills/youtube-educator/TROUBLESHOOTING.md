@@ -141,21 +141,23 @@ Tire múltiplas fotos com diferentes expressões e escolha as 4 melhores antes d
 Workflow completo mas nota não aparece em Obsidian.
 
 ### Causa
-Pasta `09 - YouTube Production/` não existe no vault Obsidian.
+Pasta `📺 Vídeos/` não existe no vault Obsidian.
 
-### Solução
+### Solução (MCP Filesystem)
 ```bash
 # Verificar caminho do vault Obsidian
-# Criar pasta manualmente
-mkdir -p "/caminho/do/vault/09 - YouTube Production"
+# Vault path: ~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Claude-code-ios
 
-# Ou atualizar config em:
-scripts/obsidian/quick_note.py
-# Modificar OBSIDIAN_VAULT_PATH
+# Criar pasta manualmente se não existir
+mkdir -p ~/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/Claude-code-ios/📺\ Vídeos/
+mkdir -p ~/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/Claude-code-ios/📺\ Vídeos/Apresentações/
 ```
 
-### Alternativa
-Skill salva nota em `output/obsidian-notes/` como fallback.
+### Notas Importantes
+- **MCP Filesystem:** Obsidian NÃO precisa estar aberto
+- **Write tool direto:** Skill usa Write tool para criar arquivo `.md` diretamente no vault
+- **Sem REST API:** Não depende de REST API Local do Obsidian
+- **Sincronização automática:** iCloud sincroniza automaticamente quando Obsidian abrir
 
 ---
 
@@ -260,13 +262,17 @@ cat scripts/thumbnail-creation/photos_urls.json
 ls scripts/thumbnail-creation/templates/fotos/
 ```
 
-### Verificar Obsidian
+### Verificar Obsidian (MCP Filesystem)
 ```bash
 # Vault existe
-ls ~/Documents/Obsidian\ Vault/
+ls ~/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/Claude-code-ios/
 
-# Pasta Production existe
-ls ~/Documents/Obsidian\ Vault/09\ -\ YouTube\ Production/
+# Pastas necessárias existem
+ls ~/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/Claude-code-ios/📺\ Vídeos/
+ls ~/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/Claude-code-ios/📺\ Vídeos/Apresentações/
+
+# Notas criadas recentemente
+ls -lt ~/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/Claude-code-ios/📺\ Vídeos/*.md | head -5
 ```
 
 ---
@@ -289,5 +295,5 @@ E verificar seção correspondente acima.
 
 ---
 
-**Última atualização:** 2025-11-03
-**Versão:** 1.0
+**Última atualização:** 2025-11-05
+**Versão:** 1.1 (MCP filesystem integration)

@@ -123,7 +123,7 @@ tags:
 
 **Quando usuário pedir:**
 1. Identificar tipo (tarefa/anotação/vídeo)
-2. Criar arquivo no local correto
+2. Criar arquivo no local correto usando **Write tool** (filesystem direto)
 3. Aplicar template apropriado
 4. Usar data/hora atual (formato BR)
 5. Preencher com informações fornecidas
@@ -135,6 +135,15 @@ tags:
 - Indicar onde está salvo
 
 ---
+
+## 🔧 Método de Acesso
+
+**MCP Filesystem-Based:**
+- ✅ Usa Write/Read tools (acesso direto ao filesystem)
+- ✅ Funciona com Obsidian fechado
+- ✅ Sincronização automática via iCloud
+- ❌ NÃO usa REST API
+- ❌ NÃO requer Obsidian rodando
 
 **Vault path:** `~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Claude-code-ios/`
 

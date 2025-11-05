@@ -244,15 +244,21 @@ Erro ao tentar criar arquivo (file not found)
 **Causa:**
 Path do vault mudou ou está incorreto.
 
-**Path correto:**
+**Path correto (MCP Filesystem):**
 ```
 /Users/felipemdepaula/Library/Mobile Documents/iCloud~md~obsidian/Documents/Claude-code-ios/
 ```
+
+**Método de acesso:**
+- ✅ Write tool (filesystem direto via iCloud)
+- ✅ Funciona mesmo com Obsidian fechado
+- ❌ NÃO usa REST API do Obsidian
 
 **Verificar:**
 1. Path existe?
 2. Subpastas existem? (📋 Tarefas/, 💡 Anotações/, 📺 Vídeos/)
 3. Permissões corretas?
+4. iCloud sincronizando?
 
 **Teste:**
 ```bash

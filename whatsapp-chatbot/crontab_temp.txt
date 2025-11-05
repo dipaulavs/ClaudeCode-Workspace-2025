@@ -1,3 +1,0 @@
-# Claude Code - Agendamento de mensagem WhatsApp
-# Executa todos os dias às 06:58 da manhã
-58 6 * * * cd /Users/felipemdepaula/Desktop/ClaudeCode-Workspace/n8n-mcp-project && /usr/bin/python3 test_scheduled_whatsapp.py >> /Users/felipemdepaula/Desktop/ClaudeCode-Workspace/n8n-mcp-project/whatsapp_schedule.log 2>&1

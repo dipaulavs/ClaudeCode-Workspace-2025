@@ -55,7 +55,7 @@ Ver specs completas dos templates em [REFERENCE.md](REFERENCE.md).
 **Carregar template conforme tipo de conteúdo:**
 
 **OPÇÃO A: Template Educativo (PADRÃO - vídeos YouTube):**
-1. Copiar `templates/video-educativo/template_video_youtube.html`
+1. Ler template base: `Read` tool em `templates/video-educativo/template_video_youtube.html`
 2. Estrutura fixa de 7 slides:
    - Slide 1: Capa (título do vídeo)
    - Slide 2: O Que Vai Aprender (5 tópicos progressivos)
@@ -76,7 +76,7 @@ Ver specs completas dos templates em [REFERENCE.md](REFERENCE.md).
    - ✅ Design MotherDuck light (beige + yellow + dark gray)
 
 **OPÇÃO B: Template MotherDuck (apresentações gerais):**
-1. Carregar base MotherDuck dark mode
+1. Ler base MotherDuck dark mode (via `Read` tool)
 2. Injetar conteúdo com:
    - Cards clicáveis (conceitos técnicos)
    - Fluxos visuais com setas (processos)
@@ -94,8 +94,10 @@ Ver specs completas dos templates em [REFERENCE.md](REFERENCE.md).
 - ✅ 100% responsivo (todos cards visíveis)
 - ✅ Standalone (funciona offline)
 
-5. Gerar arquivo `apresentacao_[assunto].html`
-6. Abrir automaticamente no navegador
+5. **Salvar HTML:** Usar `Write` tool para salvar em:
+   - **Vault Obsidian:** `/Users/felipemdepaula/Library/Mobile Documents/iCloud~md~obsidian/Documents/Claude-code-ios/📺 Vídeos/Apresentações/apresentacao_[assunto].html`
+   - **Workspace:** `/Users/felipemdepaula/Desktop/ClaudeCode-Workspace/apresentacao_[assunto].html`
+6. Abrir automaticamente no navegador (via `Bash` tool: `open [caminho]`)
 
 ### Etapa 4: Confirmar e Orientar 📝
 
@@ -180,6 +182,32 @@ Pronto para gravar! 🚀
 
 ---
 
+## 🔧 Ferramentas MCP (OBRIGATÓRIO)
+
+**Skill é 100% MCP filesystem-based:**
+
+### Read Tool
+- Carregar templates: `templates/video-educativo/template_video_youtube.html`
+- Nunca usar REST API ou scripts externos
+
+### Write Tool
+- Salvar HTML em: `/Users/felipemdepaula/Library/Mobile Documents/iCloud~md~obsidian/Documents/Claude-code-ios/📺 Vídeos/Apresentações/`
+- Backup workspace: `/Users/felipemdepaula/Desktop/ClaudeCode-Workspace/`
+- **Obsidian NÃO precisa estar aberto**
+
+### Bash Tool
+- Abrir navegador: `open "[caminho-completo-html]"`
+- Apenas após salvar com sucesso via Write
+
+**IMPORTANTE:**
+- ❌ NUNCA usar Obsidian REST API
+- ❌ NUNCA requerer que Obsidian esteja aberto
+- ❌ NUNCA usar scripts Python externos (a menos que solicitado)
+- ✅ SEMPRE usar Write tool para filesystem direto
+- ✅ Funciona mesmo com vault fechado
+
+---
+
 ## Documentação Adicional
 
 - **Specs técnicas dos 3 templates:** Ver [REFERENCE.md](REFERENCE.md)
@@ -190,4 +218,5 @@ Pronto para gravar! 🚀
 
 **Skill Type:** Model-invoked (ativação automática)
 **Output:** HTML standalone dark mode
-**Versão:** 1.0
+**Método:** MCP filesystem-based (Write tool)
+**Versão:** 2.0 (MCP)

@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 """
-🤖 GERADOR DE CHATBOT - Framework Universal
-Clona estrutura Automaia e adapta para qualquer nicho
+🤖 GERADOR DE CHATBOT - Framework Universal (v2.0 - MCP Híbrido)
+Clona estrutura template e adapta para qualquer nicho
+
+✨ NOVO: Inclui estrutura MCP híbrida (Function Calling + MCP)
 
 USO:
     python3 criar_chatbot_cliente.py
@@ -17,6 +19,7 @@ from typing import Dict, List
 class GeradorChatbot:
     """Gera chatbot completo a partir do template"""
 
+    VERSION = "2.0.0"  # Rastreia versão do gerador
     TEMPLATE_DIR = Path(__file__).parent / "chatbot-template"
 
     # Nichos pré-configurados
@@ -134,6 +137,33 @@ class GeradorChatbot:
             "dir_destino": Path(__file__).parent / f"whatsapp-chatbot-{slug}"
         }
 
+    def validar_template(self):
+        """Valida que o template tem estrutura MCP"""
+        print("\n🔍 Validando template...")
+
+        # Verifica arquivos críticos da estrutura MCP
+        arquivos_obrigatorios = [
+            self.TEMPLATE_DIR / "mcp-server" / "server.py",
+            self.TEMPLATE_DIR / "componentes" / "cliente_mcp.py",
+            self.TEMPLATE_DIR / "componentes" / "rag_hibrido.py",
+            self.TEMPLATE_DIR / "mcp-server" / "requirements.txt"
+        ]
+
+        faltando = []
+        for arquivo in arquivos_obrigatorios:
+            if not arquivo.exists():
+                faltando.append(str(arquivo.relative_to(self.TEMPLATE_DIR)))
+
+        if faltando:
+            print("   ❌ ERRO: Template desatualizado! Faltam:")
+            for f in faltando:
+                print(f"      • {f}")
+            print("\n   💡 Solução: Atualize o template com a estrutura MCP")
+            return False
+
+        print("   ✅ Template MCP v2.0 validado")
+        return True
+
     def criar_estrutura(self, config: Dict):
         """Copia template e cria estrutura"""
 
@@ -154,15 +184,19 @@ class GeradorChatbot:
 
         shutil.copytree(self.TEMPLATE_DIR, destino)
         print(f"   ✅ Copiado para: {destino}")
+        print(f"   📡 Estrutura MCP incluída")
 
         # Renomear pasta de itens
         print("\n2️⃣ Adaptando estrutura de itens...")
-        pasta_antiga = destino / "carros"
+        pasta_antiga = destino / "itens"  # Template agora usa "itens"
         pasta_nova = destino / config["nicho"]["pasta_itens"]
 
         if pasta_antiga.exists() and pasta_antiga != pasta_nova:
             pasta_antiga.rename(pasta_nova)
-            print(f"   ✅ carros/ → {config['nicho']['pasta_itens']}/")
+            print(f"   ✅ itens/ → {config['nicho']['pasta_itens']}/")
+        elif not pasta_nova.exists():
+            pasta_nova.mkdir(parents=True)
+            print(f"   ✅ Criada pasta: {config['nicho']['pasta_itens']}/")
 
         # Criar item exemplo
         item_exemplo = pasta_nova / config["nicho"]["exemplo_item"]
@@ -187,21 +221,23 @@ class GeradorChatbot:
         # Mapeamento de substituições
         substituicoes = {
             # Nomes
-            "automaia": config["slug"],
-            "Automaia": config["nome_cliente"],
-            "AUTOMAIA": config["slug"].upper(),
+            "template-tools": f"{config['slug']}-tools",  # Renomeia MCP server
+            "template": config["slug"],
+            "Template": config["nome_cliente"],
+            "TEMPLATE": config["slug"].upper(),
 
-            # Itens
-            "carros": config["nicho"]["pasta_itens"],
-            "carro": config["nicho"]["item_singular"],
+            # Itens (genérico → específico)
+            "itens": config["nicho"]["pasta_itens"],
+            "item": config["nicho"]["item_singular"],
+            "Item": config["nicho"]["item_singular"].capitalize(),
 
             # Portas
             "5003": config["porta_bot"],
             "5004": config["porta_middleware"],
 
             # Descrição
-            "Agência de Carros Seminovos": config["descricao"],
-            "seminovos": config["nicho"]["item_plural"]
+            "Descrição do negócio": config["descricao"],
+            "itens disponíveis": f"{config['nicho']['item_plural']} disponíveis"
         }
 
         # Arquivos a modificar
@@ -286,16 +322,25 @@ class GeradorChatbot:
 
 **Nicho:** {config['nicho']['nome']}
 **Descrição:** {config['descricao']}
+**Framework:** v2.0 MCP Híbrido ✨
 
 ## 🚀 Setup Rápido
 
-### 1. Configurar Chatwoot + Evolution
+### 1. Instalar MCP (Primeira vez)
+
+```bash
+cd {config['dir_destino'].name}
+chmod +x INSTALAR_MCP.sh
+./INSTALAR_MCP.sh
+```
+
+### 2. Configurar Chatwoot + Evolution
 
 Edite `chatwoot_config_{config['slug']}.json`:
 - Chatwoot token + inbox_id
 - Evolution API key
 
-### 2. Criar Agenda Google Sheets
+### 3. Criar Agenda Google Sheets
 
 ```bash
 # Autenticar OAuth (1x)
@@ -305,7 +350,7 @@ python3 componentes/escalonamento/autenticar_google.py
 python3 componentes/escalonamento/criar_agenda_publica_oauth.py
 ```
 
-### 3. Adicionar {config['nicho']['item_plural'].capitalize()}
+### 4. Adicionar {config['nicho']['item_plural'].capitalize()}
 
 Estrutura em `{config['nicho']['pasta_itens']}/`:
 
@@ -318,7 +363,7 @@ Estrutura em `{config['nicho']['pasta_itens']}/`:
     └── links.json
 ```
 
-### 4. Iniciar Bot
+### 5. Iniciar Bot
 
 ```bash
 ./INICIAR_COM_NGROK.sh
@@ -326,11 +371,23 @@ Estrutura em `{config['nicho']['pasta_itens']}/`:
 
 ## 🛠️ Componentes
 
-- ✅ RAG Híbrido (keywords + semântico)
-- ✅ 4 Ferramentas (lista_{config['nicho']['pasta_itens']}, consulta_faq, tagueamento, agendar_visita)
+### Ferramentas Locais (0ms overhead)
+- ✅ lista_{config['nicho']['pasta_itens']} - Lista itens
+- ✅ consulta_faq - FAQ do item ativo
+- ✅ taguear_cliente - Marca interesse
+- ✅ agendar_visita - Agenda (2 etapas)
+
+### Ferramentas MCP (~150ms cada)
+- ✅ analisar_sentimento - Análise emocional
+- ✅ gerar_proposta_comercial - Proposta formal
+- ✅ buscar_itens_similares - Busca semântica
+- ✅ calcular_financiamento - Simulação completa
+- ✅ consultar_tabela_preco - Preço de mercado
+
+### Automações
 - ✅ Follow-ups automáticos
-- ✅ Score de leads
-- ✅ Escalonamento (notifica vendedor)
+- ✅ Score de leads (0-100)
+- ✅ Escalonamento inteligente
 - ✅ Agenda Google Sheets
 - ✅ Áudio (Whisper) + Imagem (GPT-4o)
 - ✅ Métricas e relatórios
@@ -355,10 +412,21 @@ tail -f logs/chatbot_{config['slug']}.log
 # 3. Upload fotos: python3 upload_fotos_{config['nicho']['pasta_itens']}.py
 ```
 
+## 🔌 Arquitetura Híbrida
+
+```
+Chatbot → RAG Híbrido
+            ├─ Ferramentas Locais (rápidas)
+            └─ Ferramentas MCP (pesadas)
+```
+
+**Decisão Inteligente:** A IA escolhe automaticamente qual ferramenta usar baseado no contexto.
+
 ---
 
-**Framework:** Chatbot Universal v1.0
+**Framework:** Chatbot Universal v2.0 MCP Híbrido
 **Baseado em:** whatsapp-chatbot-carros (Automaia)
+**Ferramentas:** 9 (4 locais + 5 MCP)
 """
 
         readme.write_text(conteudo)
@@ -382,22 +450,26 @@ tail -f logs/chatbot_{config['slug']}.log
         print("="*60)
 
         print(f"""
-1️⃣ Configurar APIs
+1️⃣ Instalar MCP (Primeira vez)
    cd {config['dir_destino']}
-   # Editar: chatwoot_config_{config['slug']}.json
+   ./INSTALAR_MCP.sh
 
-2️⃣ Criar Agenda Google Sheets
+2️⃣ Configurar APIs
+   # Editar: chatwoot_config_{config['slug']}.json
+   # Preencher: Chatwoot token + Evolution API key
+
+3️⃣ Criar Agenda Google Sheets
    python3 componentes/escalonamento/autenticar_google.py
    python3 componentes/escalonamento/criar_agenda_publica_oauth.py
 
-3️⃣ Adicionar {config['nicho']['item_plural'].capitalize()}
+4️⃣ Adicionar {config['nicho']['item_plural'].capitalize()}
    # Criar pastas em {config['nicho']['pasta_itens']}/
    # Preencher arquivos .txt
 
-4️⃣ Iniciar Bot
+5️⃣ Iniciar Bot
    ./INICIAR_COM_NGROK.sh
 
-5️⃣ Verificar
+6️⃣ Verificar
    tail -f logs/chatbot_{config['slug']}.log
 """)
 
@@ -409,6 +481,12 @@ tail -f logs/chatbot_{config['slug']}.log
     def executar(self):
         """Executa todo o processo"""
         try:
+            # Validar template PRIMEIRO
+            if not self.validar_template():
+                print("\n❌ ERRO CRÍTICO: Template desatualizado ou incompleto")
+                print("   Execute 'git pull' ou atualize manualmente o template")
+                return
+
             # Coletar informações
             config = self.coletar_informacoes()
             self.config = config
@@ -422,6 +500,7 @@ tail -f logs/chatbot_{config['slug']}.log
             print(f"   Nicho: {config['nicho']['nome']}")
             print(f"   Itens: {config['nicho']['pasta_itens']}/")
             print(f"   Portas: {config['porta_bot']}/{config['porta_middleware']}")
+            print(f"   🆕 MCP: Incluído (9 ferramentas)")
             print()
 
             confirma = input("Confirmar criação? (s/n): ")
