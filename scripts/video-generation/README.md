@@ -36,6 +36,21 @@ Gera **2+ vídeos simultaneamente** em paralelo.
 
 **Tempo estimado:** 2-5 minutos (mesmo para múltiplos vídeos!)
 
+### 3. `edit_json2video.py` - Edição via JSON
+Cria e edita vídeos programaticamente usando **JSON2Video API**.
+
+**Quando usar:**
+- ✅ Criar vídeos complexos (múltiplas scenes, elementos)
+- ✅ Adicionar legendas automáticas
+- ✅ Criar audiogramas (podcast visual)
+- ✅ Voice-over com ElevenLabs
+- ✅ Templates reutilizáveis com variáveis
+- ✅ Slideshows com transições
+
+**Tempo estimado:** 1-5 minutos (renderização cloud)
+
+**Documentação completa:** `.claude/skills/json2video/SKILL.md`
+
 ---
 
 ## ⚡ Uso Rápido
@@ -71,6 +86,45 @@ python3 scripts/video-generation/batch_generate.py \
   "café sendo servido - plano aberto" \
   "café sendo servido - câmera lenta"
 ```
+
+### Edição via JSON (JSON2Video)
+
+```bash
+# Criar vídeo a partir de JSON
+python3 scripts/video-generation/edit_json2video.py video.json
+
+# Output customizado
+python3 scripts/video-generation/edit_json2video.py video.json --output ~/Desktop/result.mp4
+
+# Verificar status de renderização
+python3 scripts/video-generation/edit_json2video.py --status PROJECT_ID
+
+# Ver exemplos de JSON
+python3 scripts/video-generation/edit_json2video.py --examples
+```
+
+**Estrutura JSON mínima:**
+```json
+{
+  "scenes": [
+    {
+      "elements": [
+        {
+          "type": "text",
+          "text": "Hello World"
+        }
+      ]
+    }
+  ]
+}
+```
+
+**Configuração necessária:**
+```bash
+export JSON2VIDEO_API_KEY='sua_api_key'
+```
+
+Obtenha API key em: https://json2video.com/dashboard
 
 ---
 
@@ -270,12 +324,20 @@ curl -X POST https://api.kie.ai/api/v1/jobs/createTask \
 ```
 scripts/video-generation/
 ├── README.md              # Esta documentação
-├── generate_sora.py       # Template vídeo único
-└── batch_generate.py      # Template vídeos em lote
+├── generate_sora.py       # Template vídeo único (Sora 2)
+├── batch_generate.py      # Template vídeos em lote (Sora 2)
+└── edit_json2video.py     # Template edição via JSON (JSON2Video)
 
 tools/
 ├── generate_video_sora.py       # Ferramenta base (vídeo único)
-└── generate_video_batch_sora.py # Ferramenta base (lote)
+├── generate_video_batch_sora.py # Ferramenta base (lote)
+└── json2video_api.py            # Ferramenta base (JSON2Video API)
+
+.claude/skills/json2video/
+├── SKILL.md               # Instruções principais
+├── REFERENCE.md           # Documentação técnica completa
+├── EXAMPLES.md            # Casos de uso (7 exemplos)
+└── TROUBLESHOOTING.md     # Erros comuns e soluções
 ```
 
 ---
@@ -301,17 +363,25 @@ tools/
 **Ferramentas base:**
 - `tools/generate_video_sora.py`
 - `tools/generate_video_batch_sora.py`
+- `tools/json2video_api.py`
 
 **Docs relacionada:**
-- `docs/tools/generate_video_sora.md` (se existir)
+- `.claude/skills/json2video/SKILL.md` (JSON2Video completo)
+- `.claude/skills/json2video/EXAMPLES.md` (7 exemplos práticos)
+- `.claude/skills/json2video/REFERENCE.md` (API técnica)
 - `CLAUDE.md` (configuração geral)
 
-**API Kie.ai:**
+**API Kie.ai (Sora 2):**
 - Base URL: `https://api.kie.ai`
 - Modelo: `sora-2-text-to-video`
 - Duração: ~15 segundos por vídeo
 
+**API JSON2Video:**
+- Base URL: `https://api.json2video.com/v2`
+- Docs: `https://json2video.com/docs/v2/`
+- Dashboard: `https://json2video.com/dashboard`
+
 ---
 
-**Última atualização:** 2025-11-02
-**Versão:** 1.0 (Templates prontos)
+**Última atualização:** 2025-11-04
+**Versão:** 2.0 (+ JSON2Video API)

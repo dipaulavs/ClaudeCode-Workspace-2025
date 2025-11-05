@@ -1,0 +1,333 @@
+{
+  "description": "Complete book $100M Offers by Alex Hormozi - how to create irresistible offers using value equation, pricing strategies, guarantees, scarcity, urgency, bonuses, and naming. Includes Lost Chapter (Vista Equity methodology). Use when user asks about offer creation, pricing, guarantees, value stacking, or mentions '100M Offers' or 'Hormozi offers'.",
+  "document_info": {
+    "type": "business_book",
+    "language": "en",
+    "total_lines": 4641,
+    "tokens_per_line": 15.0
+  },
+  "sections": [
+    {
+      "id": "section_001",
+      "title": "Front Matter",
+      "start_line": 0,
+      "end_line": 83,
+      "semantic_type": "front_matter",
+      "children": []
+    },
+    {
+      "id": "section_002",
+      "title": "Contents",
+      "start_line": 84,
+      "end_line": 126,
+      "semantic_type": "table_of_contents",
+      "children": []
+    },
+    {
+      "id": "section_003",
+      "title": "Start Here",
+      "start_line": 127,
+      "end_line": 201,
+      "semantic_type": "introduction",
+      "children": []
+    },
+    {
+      "id": "section_004",
+      "title": "Section I: How We Got Here",
+      "start_line": 202,
+      "end_line": 636,
+      "semantic_type": "book_section",
+      "children": [
+        {
+          "id": "section_004_001",
+          "title": "Chapter 1: How We Got Here",
+          "start_line": 207,
+          "end_line": 398,
+          "semantic_type": "chapter",
+          "children": []
+        },
+        {
+          "id": "section_004_002",
+          "title": "Chapter 2: Grand Slam Offers",
+          "start_line": 399,
+          "end_line": 636,
+          "semantic_type": "chapter",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "section_005",
+      "title": "Section II: Pricing",
+      "start_line": 637,
+      "end_line": 1576,
+      "semantic_type": "book_section",
+      "children": [
+        {
+          "id": "section_005_001",
+          "title": "Chapter 3: Pricing: The Commodity Problem",
+          "start_line": 642,
+          "end_line": 900,
+          "semantic_type": "chapter",
+          "children": []
+        },
+        {
+          "id": "section_005_002",
+          "title": "Chapter 4: Pricing: Finding The Right Market - A Starving Crowd",
+          "start_line": 901,
+          "end_line": 1239,
+          "semantic_type": "chapter",
+          "children": [
+            {
+              "id": "section_005_002_001",
+              "title": "A Starving Crowd & Market Selection",
+              "start_line": 901,
+              "end_line": 1093,
+              "semantic_type": "subsection",
+              "children": []
+            },
+            {
+              "id": "section_005_002_002",
+              "title": "Commit to the Niche & Riches in Niches",
+              "start_line": 1094,
+              "end_line": 1239,
+              "semantic_type": "subsection",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "section_005_003",
+          "title": "Chapter 5: Pricing: Charge What It's Worth",
+          "start_line": 1240,
+          "end_line": 1576,
+          "semantic_type": "chapter",
+          "children": [
+            {
+              "id": "section_005_003_001",
+              "title": "Price to Value Discrepancy",
+              "start_line": 1240,
+              "end_line": 1399,
+              "semantic_type": "subsection",
+              "children": []
+            },
+            {
+              "id": "section_005_003_002",
+              "title": "Virtuous Cycle of Price & Premium Price Experience",
+              "start_line": 1400,
+              "end_line": 1576,
+              "semantic_type": "subsection",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_006",
+      "title": "Section III: Value - Create Your Offer",
+      "start_line": 1577,
+      "end_line": 2862,
+      "semantic_type": "book_section",
+      "children": [
+        {
+          "id": "section_006_001",
+          "title": "Chapter 6: Value Offer: The Value Equation",
+          "start_line": 1582,
+          "end_line": 1975,
+          "semantic_type": "chapter",
+          "children": [
+            {
+              "id": "section_006_001_001",
+              "title": "Introduction & The Value Equation Framework",
+              "start_line": 1582,
+              "end_line": 1758,
+              "semantic_type": "subsection",
+              "children": []
+            },
+            {
+              "id": "section_006_001_002",
+              "title": "Dream Outcome & Perceived Likelihood of Achievement",
+              "start_line": 1759,
+              "end_line": 1850,
+              "semantic_type": "subsection",
+              "children": []
+            },
+            {
+              "id": "section_006_001_003",
+              "title": "Time Delay & Effort and Sacrifice",
+              "start_line": 1851,
+              "end_line": 1975,
+              "semantic_type": "subsection",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "section_006_002",
+          "title": "Chapter 7: Free Goodwill",
+          "start_line": 1976,
+          "end_line": 2025,
+          "semantic_type": "chapter",
+          "children": []
+        },
+        {
+          "id": "section_006_003",
+          "title": "Chapter 8: Value Offer: The Thought Process",
+          "start_line": 2026,
+          "end_line": 2131,
+          "semantic_type": "chapter",
+          "children": []
+        },
+        {
+          "id": "section_006_004",
+          "title": "Chapter 9: Value Offer: Creating Your Grand Slam Offer Part I - Problems & Solutions",
+          "start_line": 2132,
+          "end_line": 2353,
+          "semantic_type": "chapter",
+          "children": []
+        },
+        {
+          "id": "section_006_005",
+          "title": "Chapter 10: Value Offer: Creating Your Grand Slam Offer Part II - Trim & Stack",
+          "start_line": 2354,
+          "end_line": 2862,
+          "semantic_type": "chapter",
+          "children": [
+            {
+              "id": "section_006_005_001",
+              "title": "Introduction & Sales to Fulfillment Continuum",
+              "start_line": 2354,
+              "end_line": 2427,
+              "semantic_type": "subsection",
+              "children": []
+            },
+            {
+              "id": "section_006_005_002",
+              "title": "Step 4: Create Your Solutions Delivery Vehicles",
+              "start_line": 2428,
+              "end_line": 2617,
+              "semantic_type": "subsection",
+              "children": []
+            },
+            {
+              "id": "section_006_005_003",
+              "title": "Step 5: Trim and Stack",
+              "start_line": 2618,
+              "end_line": 2862,
+              "semantic_type": "subsection",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section_007",
+      "title": "Section IV: Enhancing Your Offer",
+      "start_line": 2863,
+      "end_line": 4433,
+      "semantic_type": "book_section",
+      "children": [
+        {
+          "id": "section_007_001",
+          "title": "Chapter 11: Enhancing The Offer: Scarcity, Urgency, Bonuses, Guarantees, and Naming",
+          "start_line": 2870,
+          "end_line": 3079,
+          "semantic_type": "chapter",
+          "children": []
+        },
+        {
+          "id": "section_007_002",
+          "title": "Chapter 12: Enhancing The Offer: Scarcity",
+          "start_line": 3080,
+          "end_line": 3324,
+          "semantic_type": "chapter",
+          "children": []
+        },
+        {
+          "id": "section_007_003",
+          "title": "Chapter 13: Enhancing The Offer: Urgency",
+          "start_line": 3325,
+          "end_line": 3468,
+          "semantic_type": "chapter",
+          "children": []
+        },
+        {
+          "id": "section_007_004",
+          "title": "Chapter 14: Enhancing The Offer: Bonuses",
+          "start_line": 3469,
+          "end_line": 3676,
+          "semantic_type": "chapter",
+          "children": []
+        },
+        {
+          "id": "section_007_005",
+          "title": "Chapter 15: Enhancing The Offer: Guarantees",
+          "start_line": 3677,
+          "end_line": 4165,
+          "semantic_type": "chapter",
+          "children": [
+            {
+              "id": "section_007_005_001",
+              "title": "Introduction & Types of Guarantees",
+              "start_line": 3677,
+              "end_line": 3791,
+              "semantic_type": "subsection",
+              "children": []
+            },
+            {
+              "id": "section_007_005_002",
+              "title": "Unconditional & Conditional Guarantees (Part 1)",
+              "start_line": 3792,
+              "end_line": 3958,
+              "semantic_type": "subsection",
+              "children": []
+            },
+            {
+              "id": "section_007_005_003",
+              "title": "Conditional Guarantees (Part 2) & Anti-Guarantees",
+              "start_line": 3959,
+              "end_line": 4165,
+              "semantic_type": "subsection",
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "section_007_006",
+          "title": "Chapter 16: Enhancing The Offer: Naming",
+          "start_line": 4166,
+          "end_line": 4433,
+          "semantic_type": "chapter",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "section_008",
+      "title": "Section V: Execution",
+      "start_line": 4434,
+      "end_line": 4640,
+      "semantic_type": "book_section",
+      "children": [
+        {
+          "id": "section_008_001",
+          "title": "Your First $100,000",
+          "start_line": 4441,
+          "end_line": 4550,
+          "semantic_type": "chapter",
+          "children": []
+        },
+        {
+          "id": "section_008_002",
+          "title": "Final Thoughts",
+          "start_line": 4551,
+          "end_line": 4640,
+          "semantic_type": "conclusion",
+          "children": []
+        }
+      ]
+    }
+  ]
+}

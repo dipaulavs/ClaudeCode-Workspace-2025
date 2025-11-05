@@ -1,0 +1,263 @@
+{
+  "description": "Complete guide to creating money models by Alex Hormozi - frameworks for building profitable business models",
+  "document_info": {
+    "type": "business_book",
+    "language": "en",
+    "total_lines": 4627,
+    "tokens_per_line": 13.79
+  },
+  "sections": [
+    {
+      "id": "section_001",
+      "title": "Front Matter",
+      "start_line": 0,
+      "end_line": 173,
+      "semantic_type": "front_matter",
+      "children": []
+    },
+    {
+      "id": "section_002",
+      "title": "START HERE - Introduction",
+      "start_line": 174,
+      "end_line": 386,
+      "semantic_type": "introduction",
+      "children": []
+    },
+    {
+      "id": "section_003",
+      "title": "Section I: What's a Money Model?",
+      "start_line": 387,
+      "end_line": 706,
+      "semantic_type": "chapter",
+      "children": []
+    },
+    {
+      "id": "section_004",
+      "title": "Section II: Attraction Offers",
+      "start_line": 707,
+      "end_line": 1853,
+      "semantic_type": "chapter",
+      "children": [
+        {
+          "id": "section_004_001",
+          "title": "Win Your Money Back",
+          "start_line": 707,
+          "end_line": 953,
+          "semantic_type": "section",
+          "children": []
+        },
+        {
+          "id": "section_004_002",
+          "title": "Giveaways",
+          "start_line": 954,
+          "end_line": 1197,
+          "semantic_type": "section",
+          "children": []
+        },
+        {
+          "id": "section_004_003",
+          "title": "Decoy Offer",
+          "start_line": 1198,
+          "end_line": 1397,
+          "semantic_type": "section",
+          "children": []
+        },
+        {
+          "id": "section_004_004",
+          "title": "Buy X Get Y Free",
+          "start_line": 1398,
+          "end_line": 1564,
+          "semantic_type": "section",
+          "children": []
+        },
+        {
+          "id": "section_004_005",
+          "title": "Pay Less Now or Pay More Later",
+          "start_line": 1565,
+          "end_line": 1714,
+          "semantic_type": "section",
+          "children": []
+        },
+        {
+          "id": "section_004_006",
+          "title": "Free Goodwill Offer",
+          "start_line": 1715,
+          "end_line": 1787,
+          "semantic_type": "section",
+          "children": []
+        },
+        {
+          "id": "section_004_007",
+          "title": "Attraction Offers Conclusion",
+          "start_line": 1788,
+          "end_line": 1853,
+          "semantic_type": "conclusion",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "section_005",
+      "title": "Section III: Upsell Offers",
+      "start_line": 1854,
+      "end_line": 2736,
+      "semantic_type": "chapter",
+      "children": [
+        {
+          "id": "section_005_001",
+          "title": "The Classic Upsell",
+          "start_line": 1854,
+          "end_line": 2068,
+          "semantic_type": "section",
+          "children": []
+        },
+        {
+          "id": "section_005_002",
+          "title": "Menu Upsell",
+          "start_line": 2069,
+          "end_line": 2312,
+          "semantic_type": "section",
+          "children": []
+        },
+        {
+          "id": "section_005_003",
+          "title": "Anchor Upsell",
+          "start_line": 2313,
+          "end_line": 2469,
+          "semantic_type": "section",
+          "children": []
+        },
+        {
+          "id": "section_005_004",
+          "title": "Rollover Upsell",
+          "start_line": 2470,
+          "end_line": 2649,
+          "semantic_type": "section",
+          "children": []
+        },
+        {
+          "id": "section_005_005",
+          "title": "Upsell Offers Conclusion",
+          "start_line": 2650,
+          "end_line": 2736,
+          "semantic_type": "conclusion",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "section_006",
+      "title": "Section IV: Downsell Offers",
+      "start_line": 2737,
+      "end_line": 3535,
+      "semantic_type": "chapter",
+      "children": [
+        {
+          "id": "section_006_001",
+          "title": "Payment Plan Downsells",
+          "start_line": 2737,
+          "end_line": 2986,
+          "semantic_type": "section",
+          "children": []
+        },
+        {
+          "id": "section_006_002",
+          "title": "Trial With Penalty",
+          "start_line": 2987,
+          "end_line": 3222,
+          "semantic_type": "section",
+          "children": []
+        },
+        {
+          "id": "section_006_003",
+          "title": "Feature Downsells",
+          "start_line": 3223,
+          "end_line": 3471,
+          "semantic_type": "section",
+          "children": []
+        },
+        {
+          "id": "section_006_004",
+          "title": "Downsell Offers Conclusion",
+          "start_line": 3472,
+          "end_line": 3535,
+          "semantic_type": "conclusion",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "section_007",
+      "title": "Section V: Continuity Offers",
+      "start_line": 3536,
+      "end_line": 4153,
+      "semantic_type": "chapter",
+      "children": [
+        {
+          "id": "section_007_001",
+          "title": "Continuity Bonus Offers",
+          "start_line": 3536,
+          "end_line": 3791,
+          "semantic_type": "section",
+          "children": []
+        },
+        {
+          "id": "section_007_002",
+          "title": "Continuity Discount Offers",
+          "start_line": 3792,
+          "end_line": 4001,
+          "semantic_type": "section",
+          "children": []
+        },
+        {
+          "id": "section_007_003",
+          "title": "Waived Fee Offer",
+          "start_line": 4002,
+          "end_line": 4120,
+          "semantic_type": "section",
+          "children": []
+        },
+        {
+          "id": "section_007_004",
+          "title": "Continuity Offers Conclusion",
+          "start_line": 4121,
+          "end_line": 4153,
+          "semantic_type": "conclusion",
+          "children": []
+        }
+      ]
+    },
+    {
+      "id": "section_008",
+      "title": "Section VI: Make Your Money Model",
+      "start_line": 4154,
+      "end_line": 4422,
+      "semantic_type": "chapter",
+      "children": []
+    },
+    {
+      "id": "section_009",
+      "title": "Ten Years In Ten Minutes",
+      "start_line": 4423,
+      "end_line": 4529,
+      "semantic_type": "section",
+      "children": []
+    },
+    {
+      "id": "section_010",
+      "title": "Final Thoughts",
+      "start_line": 4530,
+      "end_line": 4577,
+      "semantic_type": "conclusion",
+      "children": []
+    },
+    {
+      "id": "section_011",
+      "title": "Free Goodies",
+      "start_line": 4578,
+      "end_line": 4626,
+      "semantic_type": "appendix",
+      "children": []
+    }
+  ]
+}

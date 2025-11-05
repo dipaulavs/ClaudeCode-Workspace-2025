@@ -12,49 +12,32 @@
 
 ### ✅ O QUE INCLUIR (permitido):
 
-1. **MAPA DE AÇÕES** → Linha única por ação (template path + doc)
-2. **Regras de comportamento** → Instruções críticas de como Claude Code deve agir
-3. **Regras de decisão** → Fluxogramas simples (3-5 linhas por regra)
-4. **Skills tabela** → Nome + quando usar + descrição (1 linha por skill)
-5. **Quick Actions** → Comandos essenciais (formato resumido)
-6. **Tabelas de referência** → Formato compacto (sem detalhes inline)
+1. **Regras de comportamento** → Instruções críticas de como Claude Code deve agir
+2. **Links para índices** → 1 linha por recurso (Skills, Templates, Ferramentas, KBs)
+3. **Quick Actions** → Comandos essenciais (formato resumido)
+4. **Estrutura workspace** → Visão geral compacta
+5. **APIs configuradas** → Lista simples
 
 ### ❌ O QUE NÃO INCLUIR (proibido):
 
-1. ❌ **Documentação inline detalhada** → Vai para README específico
-2. ❌ **Exemplos de código longos** → Vai para EXAMPLES.md da skill/template
-3. ❌ **Seções duplicadas** → Se está no MAPA, não repetir em "Categorias"
-4. ❌ **Tutoriais passo a passo** → Vai para docs/ ou script README
-5. ❌ **Descrições longas** → Máximo 1-2 linhas, linkar para doc completa
-6. ❌ **Comandos git detalhados** → Linkar para .claude/commands/
-
-### 🎯 FORMATO OBRIGATÓRIO ao adicionar novo recurso:
-
-```markdown
-## 📍 MAPA DE AÇÕES
-| **[Ação]** | `caminho/template.py` | `caminho/README.md` |
-```
-
-**Se precisar mais detalhes:**
-- Criar/atualizar README na pasta do recurso
-- Criar EXAMPLES.md se for skill
-- NUNCA escrever mais de 3 linhas no CLAUDE.md
+1. ❌ **Tabelas inline detalhadas** → Vai para índices em docs/
+2. ❌ **Documentação de skills** → Vai para `.claude/skills/INDEX.md`
+3. ❌ **Mapa de ações completo** → Vai para `docs/MAPA_ACOES.md`
+4. ❌ **Regras de decisão** → Vai para `docs/REGRAS_DECISAO.md`
+5. ❌ **Knowledge Bases detalhadas** → Vai para `docs/KNOWLEDGE_BASES.md`
 
 ### 📏 LIMITES RÍGIDOS:
 
-- **MAPA DE AÇÕES:** 1 linha por entrada (template | doc)
-- **Regras comportamento:** Máx 10 linhas por regra
-- **Skills:** Só tabela (sem exemplos inline)
-- **Backup/Docs:** Máx 5 linhas + link para arquivo
-- **Arquivo total:** Máx 600 linhas
+- **Regras comportamento:** Máx 15 linhas por regra
+- **Arquivo total:** Máx 400 linhas
+- **Índices:** 1 linha de link por recurso
 
 ### 🔍 CHECKLIST antes de salvar edições:
 
-- [ ] Removi duplicações?
-- [ ] Usei links para docs detalhadas?
-- [ ] Mantive formato tabela compacto?
-- [ ] Informação cabe em 1-2 linhas?
-- [ ] Se não cabe → criei README separado?
+- [ ] Removi tabelas inline?
+- [ ] Usei links para índices?
+- [ ] Mantive só regras críticas?
+- [ ] Total < 400 linhas?
 
 ---
 
@@ -63,8 +46,6 @@
 ### 0️⃣ Modo Conciso (Comunicação)
 
 **⚠️ PREFERÊNCIA DO USUÁRIO:** Respostas ULTRA-CURTAS. Zero fluff. Zero repetição.
-
-**SEMPRE usar Modo Conciso nas respostas:**
 
 **Estrutura:**
 1. O que vou fazer (1 linha)
@@ -104,35 +85,15 @@
 - Busca/pesquisa
 - Comandos informativos (ls, git status)
 - Templates únicos e diretos (ex: enviar mensagem WhatsApp)
-- **Estudo de vídeos YouTube** (workflow automático - ver seção 6️⃣)
-
-**Por quê:** Garante alinhamento com raciocínio do usuário e evita retrabalho.
+- Estudo de vídeos YouTube (workflow automático)
 
 ---
 
 ### 2️⃣ Preferência por Templates
 
-**SEMPRE verificar se existe template antes de criar código novo:**
+**SEMPRE verificar se existe template antes de criar código novo.**
 
-| Categoria | Localização | Total |
-|-----------|-------------|-------|
-| WhatsApp | `scripts/whatsapp/` | 22 templates |
-| Instagram Publicação | `scripts/instagram/` | 6 templates |
-| Instagram Scraper | `scripts/instagram-scraper/` | 5 templates |
-| Meta Ads | `scripts/meta-ads/` | 4 templates |
-| Nextcloud | `scripts/nextcloud/` | 3 templates |
-| Obsidian | `scripts/obsidian/` | 6 templates |
-| Imagens | `scripts/image-generation/` | 6 templates |
-| Vídeos | `scripts/video-generation/` | 2 templates |
-| Áudio | `scripts/audio-generation/` | 2 templates |
-| Extração | `scripts/extraction/` | 4 templates |
-| Busca (xAI) | `scripts/search/` | 3 templates |
-| Twitter/X | `scripts/twitter/` | 5 templates |
-| TikTok | `scripts/tiktok/` | 5 templates |
-| Google Maps | `scripts/scraping/` | 3 templates |
-| Scheduling | `scripts/scheduling/` | 1 template |
-| Canva MCP | `scripts/canva/` | 1 script + MCP |
-| Orshot Design | `scripts/orshot/` | 3 templates |
+**Ver índice completo:** `docs/MAPA_ACOES.md` (71+ templates)
 
 **NUNCA:**
 - ❌ Criar scripts descartáveis/temporários
@@ -152,68 +113,16 @@
    - Configs → `config/` (com nome descritivo)
    - Projetos completos → Pasta própria na raiz
 
-3. ✅ **Estrutura para NOVOS projetos:**
-   ```
-   nome-projeto/
-   ├── README.md          (obrigatório)
-   ├── src/               (código)
-   ├── config/            (configurações)
-   └── docs/              (docs detalhadas)
-   ```
-
 ---
 
 ### 4️⃣ Auto-Documentação de Novos Recursos (OBRIGATÓRIO)
 
-**Gatilho:** Quando criar nova ferramenta/template/funcionalidade
+**Após criar o recurso, SEMPRE executar:**
 
-**Após criar o recurso, SEMPRE executar 4 passos:**
-
-#### ✅ Passo 1: Documentar no README da Categoria
-
-```bash
-# Exemplo: Criou template WhatsApp
-scripts/whatsapp/README.md
-  ↳ Adicionar na seção apropriada
-  ↳ Incluir exemplo de uso
-  ↳ Parâmetros principais
-```
-
-#### ✅ Passo 2: Registrar no CLAUDE.md
-
-**Localização neste arquivo:**
-- **Templates (scripts/)** → Adicionar em `📍 MAPA DE AÇÕES` (1 linha)
-- **Ferramentas (tools/)** → Adicionar em `🛠️ FERRAMENTAS DISPONÍVEIS` (1 linha)
-- **Novos projetos** → Adicionar em `📁 ESTRUTURA DO WORKSPACE` (1 linha)
-
-**Formato de registro:**
-```markdown
-| **[NOVA AÇÃO]** | `scripts/[categoria]/[nome].py` | `scripts/[categoria]/README.md` |
-```
-
-#### ✅ Passo 3: Manter Organização
-
-**Princípios:**
-1. Não quebrar estrutura existente
-2. Atualizar contadores (X templates) → (X+1 templates)
-3. Manter ordem alfabética (quando aplicável)
-4. Formato consistente com entradas existentes
-5. Não duplicar (verificar antes)
-
-#### ✅ Passo 4: Resumo Final ao Usuário
-
-**SEMPRE mostrar:**
-```
-✅ Recurso criado e documentado:
-
-📂 Arquivos:
-  • scripts/[categoria]/[arquivo].py (novo template)
-  • scripts/[categoria]/README.md (atualizado)
-  • CLAUDE.md (registrado no MAPA DE AÇÕES)
-
-🎯 Como usar:
-  python3 scripts/[categoria]/[arquivo].py [exemplo]
-```
+1. ✅ Documentar no README da categoria
+2. ✅ Registrar no índice apropriado (`docs/MAPA_ACOES.md`, `.claude/skills/INDEX.md`, etc)
+3. ✅ Manter organização consistente
+4. ✅ Resumo final ao usuário
 
 ---
 
@@ -240,7 +149,6 @@ scripts/whatsapp/README.md
 **WORKFLOW:** Transcrever (Whisper) → Analisar (Claude) → Salvar em `📺 Vídeos/` (obsidian-organizer)
 
 **Custo:** ~$0.006/vídeo | **Tempo:** ~3min | **Regras:** ❌ Sem confirmação
-**Skill:** `.claude/skills/estudar-video/SKILL.md` | **Formato:** Minimalista (obsidian-organizer)
 
 ---
 
@@ -257,8 +165,6 @@ scripts/whatsapp/README.md
 - ❌ Arquivos locais não funcionam
 - ❌ Base64 não funciona
 
-**Workflow correto:** Gerar mídia → Pegar URL da resposta → `send_media.py --url [URL]`
-
 ---
 
 ### 8️⃣ Auto-Correção de Scripts (OBRIGATÓRIO)
@@ -266,17 +172,12 @@ scripts/whatsapp/README.md
 **GATILHO:** Script executado retorna erro → Corrijo o erro → Script funciona
 
 **SEMPRE após corrigir erro:**
-1. ✅ **Atualizar o script** para prevenir o erro no futuro
-2. ✅ **Melhorar validação** (adicionar checks, avisos)
-3. ✅ **Remover informações confusas** (código obsoleto, docs enganosas, exemplos errados)
-4. ✅ **Atualizar documentação** (README, docstrings, comentários)
+1. ✅ Atualizar o script para prevenir o erro no futuro
+2. ✅ Melhorar validação (adicionar checks, avisos)
+3. ✅ Remover informações confusas (código obsoleto, docs enganosas)
+4. ✅ Atualizar documentação (README, docstrings, comentários)
 
 **Objetivo:** Erro só acontece UMA vez. Scripts melhoram continuamente.
-
-**Exemplo send_media.py:**
-- ❌ Problema: Script tinha `--file` mas Evolution API rejeita arquivos locais
-- ✅ Fix: Removi `--file` do código + removi exemplos de `--file` do README + atualizei docstring
-- 🎯 Resultado: IA nunca mais tenta usar `--file`
 
 ---
 
@@ -297,8 +198,6 @@ scripts/whatsapp/README.md
 - Usuário pede: "design de UI" ou "tela de login" → `product-designer`
 - Usuário pede: "copy de marketing" ou "landing page" → `marketing-writer`
 
-**Por quê:** `adaptive-mentor` é skill de **primeiro contato** que se adapta dinamicamente. Se necessário, ela delega para outras skills especializadas.
-
 ---
 
 ### 🔟 Verificação Obrigatória Antes de Responder
@@ -306,14 +205,12 @@ scripts/whatsapp/README.md
 **GATILHO:** Qualquer solicitação do usuário (início de conversa ou durante)
 
 **ANTES de responder, executar checklist:**
-1. ✅ Existe Claude Skill? → Ver tabela `🧠 CLAUDE SKILLS`
-2. ✅ Existe template/script? → Ver `📍 MAPA DE AÇÕES`
-3. ✅ Onde se encaixa? → Ver `📁 ESTRUTURA DO WORKSPACE`
+1. ✅ Existe Claude Skill? → Ver `.claude/skills/INDEX.md`
+2. ✅ Existe template/script? → Ver `docs/MAPA_ACOES.md`
+3. ✅ Existe regra de decisão? → Ver `docs/REGRAS_DECISAO.md`
 4. ✅ Só então responder com base no que existe
 
 **Exceções:** Perguntas conceituais, leitura de arquivos, comandos informativos.
-
-**Por quê:** Evita retrabalho, garante uso de recursos existentes, e impede criação de código quando já existe solução pronta.
 
 ---
 
@@ -326,17 +223,10 @@ scripts/whatsapp/README.md
 python3 scripts/extraction/transcribe_video.py "URL_DO_YOUTUBE"
 ```
 
-**Aplicar em:**
-- URLs `youtube.com/watch?v=`
-- URLs `youtu.be/`
-- Qualquer menção a vídeo do YouTube
-
 **NUNCA:**
 - ❌ Tentar WebFetch em links YouTube (não funciona)
 - ❌ Pedir ao usuário para descrever o conteúdo
 - ❌ Ignorar o link
-
-**Por quê:** Transcrição dá contexto completo do vídeo. Essencial para workflows (youtube-educator, estudar-video).
 
 ---
 
@@ -356,8 +246,6 @@ python3 scripts/extraction/transcribe_video.py "URL_DO_YOUTUBE"
 - ❌ Criar arquivos diretamente com Write tool sem invocar skill
 - ❌ Usar estrutura antiga "00 - Inbox", "09 - YouTube Knowledge"
 
-**Por quê:** Skill garante formato minimalista, data/hora BR, local correto, transcrição colapsável.
-
 ---
 
 ### 1️⃣3️⃣ Orquestração Inteligente: builder-orchestrator
@@ -371,14 +259,7 @@ python3 scripts/extraction/transcribe_video.py "URL_DO_YOUTUBE"
 - "Implementar [funcionalidade]..."
 - "Fazer uma campanha de..."
 
-**Comportamento da skill:**
-1. ✅ **Analisa recursos disponíveis** (14 skills + 67+ templates + ferramentas)
-2. ✅ **Identifica paralelização** (tarefas independentes vs dependentes)
-3. ✅ **Apresenta plano otimizado** (tempo estimado + ganho vs sequencial)
-4. ✅ **Delega para subagentes** quando possível (Task tool)
-5. ✅ **Cria novas skills** via `skill-creator` (Progressive Disclosure)
-
-**Por quê:** Maximiza velocidade (paralelização), usa recursos existentes (zero retrabalho), e padroniza criação (skill-creator).
+**Comportamento:** Analisa recursos → Identifica paralelização → Apresenta plano → Delega subagentes → Cria skills se necessário
 
 ---
 
@@ -391,7 +272,6 @@ python3 scripts/extraction/transcribe_video.py "URL_DO_YOUTUBE"
 **SEMPRE:**
 - ✅ Executar `python3 scripts/nextcloud/upload_rapido.py --from-local`
 - ✅ Pasta local: `~/Pictures/upload/`
-- ✅ Upload para: `imagens/upload/` (Nextcloud)
 - ✅ Links permanentes (sem expiração)
 - ✅ Auto-delete dos arquivos locais após upload
 
@@ -399,15 +279,6 @@ python3 scripts/extraction/transcribe_video.py "URL_DO_YOUTUBE"
 - ❌ Pedir caminho do arquivo
 - ❌ Usar upload_to_nextcloud.py ou upload_from_downloads.py
 - ❌ Perguntar "qual arquivo?"
-
-**Workflow:**
-1. Usuário joga imagens em `~/Pictures/upload/`
-2. Usuário diz "suba as imagens" ou "upload rápido"
-3. Claude executa `upload_rapido.py --from-local`
-4. Links permanentes retornados
-5. Arquivos locais deletados automaticamente
-
-**Por quê:** Workflow padrão para imagens de criativos/anúncios. Pasta fixa, sem perguntas, máxima velocidade.
 
 ---
 
@@ -423,23 +294,11 @@ Etapa 1 → Etapa 2 → Etapa 3 → Resultado
 [breve]   [breve]   [breve]
 ```
 
-**SEMPRE:**
-- ✅ Mostrar fluxo visual ANTES da explicação detalhada
-- ✅ Usar setas (→ ↓ ↑ ←) para indicar direção
-- ✅ Máximo 5-7 palavras por etapa
-- ✅ Numerar quando sequencial (1. 2. 3.)
-
-**Exemplo aplicado:**
+**Exemplo:**
 ```
 📺 URL YouTube → 🎤 Whisper → 🤖 Claude → 📝 Obsidian
                  (transcrição)  (análise)   (📺 Vídeos/)
 ```
-
-**Exceções:**
-- ❌ Resposta única sem etapas
-- ❌ Usuário pede só código sem explicação
-
-**Por quê:** Compreensão visual rápida antes dos detalhes. Facilita entendimento de processos complexos.
 
 ---
 
@@ -452,18 +311,6 @@ Etapa 1 → Etapa 2 → Etapa 3 → Resultado
 2. Usuário coloca fotos em `~/Pictures/upload/`
 3. Claude executa: upload Nextcloud → cria estrutura (base.txt, faq.txt, etc) → links.json
 4. Bot reconhece automaticamente (reiniciar ou `/reload`)
-
-**ESTRUTURA IMÓVEL:**
-```
-imoveis/
-└── nome-imovel-001/
-    ├── base.txt           (info básica - sempre carrega)
-    ├── detalhes.txt       (metragem, acabamentos)
-    ├── faq.txt            (perguntas frequentes)
-    ├── legal.txt          (documentação)
-    ├── financiamento.txt  (opções pagamento)
-    └── links.json         (URLs fotos Nextcloud)
-```
 
 **CRIAR NOVO CHATBOT (3 opções):**
 - **Opção A:** Mesma conta Chatwoot, nova inbox (2-3 clientes)
@@ -479,13 +326,6 @@ imoveis/
 **EMPRESA:** Automaia - Agência de Carros Seminovos
 **LOCALIZAÇÃO:** `whatsapp-chatbot-carros/`
 
-**SETUP INICIAL (UMA vez):**
-```bash
-cd whatsapp-chatbot-carros
-python3 setup_chatwoot.py           # Criar inbox + config
-python3 configurar_filtro_numero.py # Números permitidos (opcional)
-```
-
 **INICIAR/PARAR:**
 ```bash
 cd whatsapp-chatbot-carros
@@ -493,235 +333,24 @@ cd whatsapp-chatbot-carros
 ./PARAR_BOT_AUTOMAIA.sh && pkill -f ngrok  # Parar
 ```
 
-**⚠️  SEMPRE usar `INICIAR_COM_NGROK.sh`** - Configura webhooks automaticamente com URL pública
+**⚠️ SEMPRE usar `INICIAR_COM_NGROK.sh`** - Configura webhooks automaticamente
 
-**ADICIONAR CARRO:**
-1. Organizar fotos: `~/Desktop/fotos de carros/[id-carro]/`
-2. Upload: `python3 upload_fotos_carros.py`
-3. Preencher: `carros/[id-carro]/*.txt` (base, detalhes, faq, historico, financiamento)
-
-**ESTRUTURA CARRO:**
-```
-carros/
-└── [id-carro]/
-    ├── base.txt           (marca, modelo, ano, km, preço)
-    ├── detalhes.txt       (motor, opcionais, consumo)
-    ├── faq.txt            (garantia, troca, financiamento)
-    ├── historico.txt      (proprietários, acidentes, revisões)
-    ├── financiamento.txt  (planos de pagamento)
-    └── links.json         (URLs fotos Nextcloud)
-```
-
-**PORTAS:**
-- Bot: 5003
-- Middleware: 5004
-
-**LOGS:**
-- `logs/chatbot_automaia.log`
-- `logs/middleware_automaia.log`
-
+**PORTAS:** Bot: 5003 | Middleware: 5004
 **DOCS:** `whatsapp-chatbot-carros/README.md`
 
 ---
 
-## 📍 MAPA DE AÇÕES (Índice Rápido)
+## 📚 RECURSOS DISPONÍVEIS (Índices)
 
-| Quando usuário pedir... | Use isto | Doc completa |
-|---------------------------|----------|--------------|
-| **Enviar WhatsApp** | `scripts/whatsapp/send_message.py` | `scripts/whatsapp/README.md` |
-| **Mídia WhatsApp** | `scripts/whatsapp/send_media.py` | `scripts/whatsapp/README.md` |
-| **Criar grupo WhatsApp** | `scripts/whatsapp/create_group.py` | `scripts/whatsapp/README.md` |
-| **Agendar WhatsApp** | `scheduling-system/schedule_whatsapp.py` | `scheduling-system/README.md` |
-| **Publicar Instagram** | `scripts/instagram/publish_post.py` | `scripts/instagram/README.md` |
-| **Carrossel Instagram** | `scripts/instagram/publish_carousel.py` | `scripts/instagram/README.md` |
-| **Reel Instagram** | `scripts/instagram/publish_reel.py` | `scripts/instagram/README.md` |
-| **Story Instagram** | `scripts/instagram/publish_story.py` | `scripts/instagram/README.md` |
-| **Scrape Instagram** | `scripts/instagram-scraper/scrape_*.py` | `scripts/instagram-scraper/README.md` |
-| **Campanha Meta Ads** | `scripts/meta-ads/create_campaign.py` | `scripts/meta-ads/README.md` |
-| **Anúncio Meta Ads** | `scripts/meta-ads/create_ad.py` | `scripts/meta-ads/README.md` |
-| **Upload Nextcloud** | `scripts/nextcloud/upload_from_downloads.py` | `scripts/nextcloud/README.md` |
-| **Upload imagem criativo** | `scripts/nextcloud/upload_rapido.py` | `scripts/nextcloud/README.md` |
-| **1 imagem** | `scripts/image-generation/generate_nanobanana.py` | `scripts/image-generation/README.md` |
-| **2+ imagens** | `scripts/image-generation/batch_generate.py --api nanobanana` | `scripts/image-generation/README.md` |
-| **Editar imagem** | `scripts/image-generation/edit_nanobanana.py` | `scripts/image-generation/README.md` |
-| **Carrossel Meta Ads** | SKILL `carrossel-meta-ads` (automática) | `.claude/skills/carrossel-meta-ads/SKILL.md` |
-| **1 vídeo** | `scripts/video-generation/generate_sora.py` | `scripts/video-generation/README.md` |
-| **2+ vídeos** | `scripts/video-generation/batch_generate.py` | `scripts/video-generation/README.md` |
-| **Editar vídeo via JSON** | `scripts/video-generation/edit_json2video.py` | `.claude/skills/json2video/SKILL.md` |
-| **1 áudio** | `scripts/audio-generation/generate_elevenlabs.py` | `scripts/audio-generation/README.md` |
-| **2+ áudios** | `scripts/audio-generation/batch_generate.py` | `scripts/audio-generation/README.md` |
-| **Transcrever vídeo** | `scripts/extraction/transcribe_video.py` | `scripts/extraction/README.md` |
-| **Web scraping** | `scripts/extraction/scrape_website.py` | `scripts/extraction/README.md` |
-| **Buscar web** | `scripts/search/xai_web.py` (Python 3.11) | `scripts/search/README.md` |
-| **Buscar Twitter/X** | `scripts/search/xai_twitter.py` (Python 3.11) | `scripts/search/README.md` |
-| **Buscar notícias** | `scripts/search/xai_news.py` (Python 3.11) | `scripts/search/README.md` |
-| **Scrape Twitter/X** | `scripts/twitter/search_twitter.py` | `scripts/twitter/README.md` |
-| **Scrape TikTok** | `scripts/tiktok/*.py` | `scripts/tiktok/README.md` |
-| **Scrape Google Maps** | `scripts/scraping/google_maps_*.py` | `scripts/scraping/README.md` |
-| **Clonar design de site** | `scripts/design-cloning/extract_styles.py` + SKILL `website-cloner` | `.claude/skills/website-cloner/SKILL.md` |
-| **Anotar/Salvar no Obsidian** | SKILL `obsidian-organizer` (automática) | `.claude/skills/obsidian-organizer/SKILL.md` |
-| **Estudar vídeo YouTube** | WORKFLOW AUTOMÁTICO (ver seção 6️⃣) | `.claude/skills/estudar-video/SKILL.md` |
-| **AI News diário** | `scripts/scheduling/daily_ai_news.py` (Python 3.11) | `scripts/scheduling/README.md` |
-| **Canva via MCP** | Claude.ai web (OAuth) | `scripts/canva/README.md` |
-| **Gerar design/imagem** | `scripts/orshot/generate_image.py` | `scripts/orshot/README.md` |
-| **Designs em lote** | `scripts/orshot/batch_generate.py` | `scripts/orshot/README.md` |
-| **Apresentação visual** | `scripts/visual-explainer/generate.py` | `scripts/visual-explainer/README.md` |
-| **Thumbnails YouTube profissionais** | `scripts/thumbnail-creation/generate_youtube_thumbnails.py` | `.claude/skills/youtube-thumbnailv2/SKILL.md` |
-| **Apresentação proposta/orçamento** | `templates/proposta-orcamento/template_proposta_interativa.html` | `templates/proposta-orcamento/README.md` |
-| **Adicionar imóvel ao chatbot** | Workflow automático (fotos + dados) | `whatsapp-chatbot/FRAMEWORK_COMPLETO_README.md` |
-| **Criar chatbot para outra empresa** | 3 opções (inbox/conta/multi-tenant) | `whatsapp-chatbot/INTEGRACAO_FRAMEWORK.md` |
-| **Ativar Framework Híbrido** | Orquestrador (RAG+Score+Follow-ups+Escalação+Relatórios) | `whatsapp-chatbot/INTEGRACAO_FRAMEWORK.md` |
+**⚠️ SEMPRE consultar índices antes de criar código novo:**
 
----
-
-## 🔍 REGRAS DE DECISÃO (Fluxogramas)
-
-### Imagens
-```
-Usuário pede quantas imagens?
-├─ 1 imagem → generate_nanobanana.py
-└─ 2+ imagens → batch_generate.py --api nanobanana (OBRIGATÓRIO)
-```
-
-### Vídeos
-```
-Usuário pede quantos vídeos?
-├─ 1 vídeo → generate_sora.py
-└─ 2+ vídeos → batch_generate.py (OBRIGATÓRIO)
-```
-
-### Áudio
-```
-Usuário pede quantos áudios?
-├─ 1 áudio → generate_elevenlabs.py
-└─ 2+ áudios → batch_generate.py (OBRIGATÓRIO)
-```
-
-### Instagram
-```
-Usuário quer publicar ou extrair?
-├─ Publicar → scripts/instagram/publish_*.py
-└─ Extrair/Scrape → scripts/instagram-scraper/scrape_*.py
-```
-
-### Google Maps
-```
-Quantas buscas?
-├─ 1 busca simples → google_maps_basic.py
-├─ 1 busca com filtros → google_maps_advanced.py
-└─ 2+ buscas → google_maps_batch.py (OBRIGATÓRIO)
-```
-
-### Busca (xAI Search)
-```
-Buscar onde?
-├─ Web/Documentação → xai_web.py (Python 3.11)
-├─ Twitter/X → xai_twitter.py (Python 3.11)
-└─ Notícias → xai_news.py (Python 3.11)
-```
-
-### Obsidian (Salvar/Anotar)
-```
-Usuário quer salvar algo no Obsidian?
-└─ SEMPRE → Skill obsidian-organizer (automática)
-   ├─ É tarefa/ação? → 📋 Tarefas/
-   ├─ É vídeo YouTube? → 📺 Vídeos/
-   └─ É ideia/nota? → 💡 Anotações/
-```
-
----
-
-## 🧠 CLAUDE SKILLS (Model-Invoked AI Capabilities)
-
-**Localização:** `.claude/skills/` | **Doc oficial:** https://docs.claude.com/en/docs/claude-code/skills.md
-
-Skills são capacidades modulares model-invoked (Claude decide quando usar automaticamente).
-
-**⚠️ PRIORIDADE:** `adaptive-mentor` é skill de **primeiro contato** para frases genéricas. Ver regra 9️⃣ acima.
-
-### Skills Disponíveis (24 Skills)
-
-| Skill | Quando Usar | Descrição |
-|-------|-------------|-----------|
-| **100m-leads** | Consultar metodologias $100M Leads | Busca frameworks de geração de leads (Core Four, Lead Getters, Hook-Retain-Reward, Headlines, Curiosidade). Consulta KB do livro Alex Hormozi. |
-| **idea-validator** | Validar ideias antes de construir | Analisa saturação de mercado, viabilidade, demanda real, monetização. Dá feedback brutalmente honesto. |
-| **launch-planner** | Planejar lançamento de MVP | Transforma ideias validadas em PRDs completos com roadmap, schema de DB, e escopo MVP (2-4 semanas). |
-| **product-designer** | Design de UI/UX | Elimina o "visual de IA" (gradientes azul/roxo). Cria interfaces profissionais com Tailwind + shadcn/ui. |
-| **website-cloner** | Clonar design de qualquer site | Extração automática CSS via Playwright + co-criação → 100% fidelidade (não 60-70%). Gera style guide detalhado reutilizável. Baseado em metodologia comprovada. |
-| **marketing-writer** | Criar conteúdo de marketing | Escreve landing pages, tweets, Product Hunt, emails de lançamento. Tom claro e focado em benefícios. |
-| **hormozi-leads** | Criar hooks/headlines/copy + gerar leads | AUTO-INVOCA quando pedir: hook, headline, CTA, ângulo, body, legenda IG/YT, descrição. Metodologia Hormozi: Core Four + Lead Getters. |
-| **roadmap-builder** | Priorizar features | Atua como PM: decide o que construir (e o que NÃO construir). Previne feature creep. |
-| **adaptive-mentor** | Qualquer ideia/dúvida/implementação | Mentor que ativa PRIMEIRO e se adapta depois. Pergunta detalhes se necessário. Explica ELI5 + analogias + diagramas. Cria plano executável. |
-| **estudar-video** | Estudar vídeos do YouTube | Workflow automático: transcreve (Whisper) → analisa com IA → salva em `📺 Vídeos/` (formato minimalista obsidian-organizer). |
-| **visual-explainer** | Criar apresentações para vídeos | Gera apresentações HTML dark mode interativas (3 templates: Notion, Mapa Mental, Tech Futurista). Para gravação de vídeos educativos. |
-| **youtube-educator** | Criar vídeos educativos YouTube | Workflow completo: extrai conteúdo → roteiro → apresentação → headlines (hormozi) → thumbnails → nota Obsidian. FASE 1 (Pré-gravação). |
-| **youtube-thumbnailv2** | Gerar thumbnails YouTube profissionais | Gera 5 variações de thumbnails (estilo único: dourado/azul-ciano). Layout fixo, split lighting, ~90s. Integra com hormozi-leads para headlines. |
-| **orshot-design** | Gerar designs/imagens | Automação de designs profissionais usando Orshot API. Posts sociais, certificados, OG images. $0.01/render. |
-| **obsidian-organizer** | Anotar/salvar/organizar no Obsidian | Entende sistema minimalista (Tarefas/Anotações/Vídeos). Cria automaticamente no formato e local corretos. Data/hora BR. Transcrição colapsável. |
-| **skill-creator** | Criar novas Skills | Meta-skill que cria outras Skills automaticamente. Gera estrutura multi-arquivo Progressive Disclosure. |
-| **builder-orchestrator** | Criar ferramentas/skills/workflows | Orquestra criação otimizada usando paralelização máxima e recursos existentes. Conhece todo workspace. Delega para skill-creator quando necessário. |
-| **carrossel-meta-ads** | Criar carrosséis Meta Ads (imóveis) | Workflow completo: coleta dados → subagente gera copy (3 opções) → subagente gera prompts → imagens paralelas. Copy Hormozi + visual artesanal. |
-| **prompt-templates** | Pesquisar templates de prompt engineering | Consulta biblioteca aitmpl.com (100+ templates). Busca por categoria (Agents, Commands, Skills, MCPs, Hooks, Settings). WebFetch sob demanda. |
-| **army-of-agents** | Criar conteúdo de alta qualidade com múltiplas perspectivas | Sistema multi-agente: Orquestrador define roles (Pesquisador, Copywriter, Crítico Hormozi, Diretor) → execução paralela/sequencial → feedback mútuo → iteração até aprovação. |
-| **orcamento-profissional** | Criar orçamentos/propostas para clientes | Analisa recursos disponíveis (scripts/skills), calcula preço baseado em VALOR (não tempo), gera apresentação HTML profissional, aplica ancoragem realista (Hormozi), mostra ROI matemático (3 cenários). Para videochamadas de proposta. |
-| **vibecode-premium-builder** | Criar apps iOS premium via VibeCode | Gera prompts VibeCode (Large Headers, Liquid Glass, Haptics, Context Menus, Bottom Sheets) + plano backend. Cenário A: criar do zero. Cenário B: replicar app (4 métodos: screenshot, App Store, YouTube, site via website-cloner). |
-| **rag-novo** | Criar knowledge bases de documentos grandes | Gera KB skills semanticamente estruturadas de PDFs/Markdown/TXT. Processo 2 fases (análise semântica → geração). Quebra em chunks <5k tokens preservando hierarquia lógica. Line number precision + auto token estimation. |
-| **json2video** | Criar/editar vídeos via JSON | Gera vídeos programaticamente (JSON2Video API). Suporta: texto/imagem/vídeo/áudio, legendas automáticas, audiogramas, voice-over (ElevenLabs), variáveis, templates. Renderização cloud ~1-5min. |
-
-### Estrutura de uma Skill (Progressive Disclosure)
-
-```
-.claude/skills/nome-da-skill/
-├── SKILL.md               # Instruções principais (30-60 linhas, máx 80)
-├── REFERENCE.md           # Documentação técnica detalhada
-├── EXAMPLES.md            # Casos de uso reais (mínimo 2)
-└── TROUBLESHOOTING.md     # Guia de erros comuns (mínimo 2)
-```
-
-**Criar nova Skill:** "Crie uma skill para [propósito]" ou `python3 scripts/claude-skills/create_skill.py nome-da-skill`
-**Doc:** `scripts/claude-skills/README.md` | **Exemplos:** Ver `.claude/skills/*/EXAMPLES.md`
-
----
-
-## 📚 KNOWLEDGE BASES (Consulta de Livros/Docs)
-
-**Geradas por:** `rag-novo` skill → **Viram Skills automaticamente**
-
-Após geração com `rag-novo`, livros/documentos viram **Claude Skills consultáveis**:
-- **Localização física:** `livros/kb/[nome-kb]/` (armazenamento)
-- **Skill auto-descoberta:** `.claude/skills/books/[nome-kb]/` (symlink automático)
-- **Consulta:** Sempre via `.claude/skills/books/` (como skill)
-
-KBs são livros/documentos quebrados em chunks semânticos (<5k tokens) para consulta eficiente.
-
-### KBs Disponíveis (2 KBs)
-
-| KB | Fonte | Chunks | Tipo | Skill Path |
-|----|-------|--------|------|------------|
-| **100m-offers** | $100M Offers Complete (Alex Hormozi) | 25 chunks | business_book | `.claude/skills/books/100m-offers/` |
-| **100m-leads** | $100M Leads (Alex Hormozi) | 24 chunks | business_book | `.claude/skills/books/100m-leads/` |
-
-**100m-offers:** 21 capítulos + front/back matter. Inclui Lost Chapter (Cap. 17-21: Your First Avatar - Vista Equity methodology).
-**100m-leads:** 5 seções (Start Here, Get Understanding, Get Leads, Get Lead Getters, Get Started). Core Four + Lead Getters methodology.
-
-### Como Consultar KB (via Skill)
-
-**Buscar keyword:**
-```bash
-Grep pattern="keyword" path=".claude/skills/books/[nome-kb]/chunks"
-```
-
-**Ler índice:**
-```bash
-Read file_path=".claude/skills/books/[nome-kb]/index.md"
-```
-
-**Ler chunk específico:**
-```bash
-Read file_path=".claude/skills/books/[nome-kb]/chunks/section_XXX.md"
-```
-
-**Ativação:** Automática (symlink criado na geração). KB fica disponível como skill imediatamente após `rag-novo` finalizar.
+| Recurso | Índice | Total |
+|---------|--------|-------|
+| **Skills** | `.claude/skills/INDEX.md` | 26 skills |
+| **Templates & Workflows** | `docs/MAPA_ACOES.md` | 71+ templates |
+| **Ferramentas** | `docs/tools/INDEX.md` | 65+ ferramentas |
+| **Knowledge Bases** | `docs/KNOWLEDGE_BASES.md` | 3 KBs |
+| **Regras de Decisão** | `docs/REGRAS_DECISAO.md` | 10+ fluxogramas |
 
 ---
 
@@ -732,23 +361,14 @@ Read file_path=".claude/skills/books/[nome-kb]/chunks/section_XXX.md"
 bot         # Iniciar Bot V4 + Framework Híbrido
 botstop     # Parar
 # Logs: whatsapp-chatbot/logs/chatbot_v4.log
-# Docs: whatsapp-chatbot/FRAMEWORK_COMPLETO_README.md
 ```
-
-**Adicionar imóvel:** Workflow automático (ver regra 1️⃣6️⃣ abaixo)
-**Novo chatbot:** 3 opções - mesma conta/conta separada/multi-tenant
 
 ### Chatbot Automaia (Carros)
 ```bash
 cd whatsapp-chatbot-carros
-./INICIAR_COM_NGROK.sh      # Iniciar (ngrok + portas 5003/5004) ✅ USAR ESTE
-./PARAR_BOT_AUTOMAIA.sh && pkill -f ngrok  # Parar tudo
-# Logs: whatsapp-chatbot-carros/logs/chatbot_automaia.log
-# Docs: whatsapp-chatbot-carros/README.md
+./INICIAR_COM_NGROK.sh      # Iniciar (ngrok + portas 5003/5004) ✅
+./PARAR_BOT_AUTOMAIA.sh && pkill -f ngrok  # Parar
 ```
-
-**Setup inicial:** `python3 setup_chatwoot.py` + `python3 configurar_filtro_numero.py`
-**Adicionar carro:** Upload fotos + preencher .txt (ver regra 1️⃣7️⃣)
 
 ### Backup Git
 ```bash
@@ -756,20 +376,19 @@ cd whatsapp-chatbot-carros
 /cbk        # Listar e restaurar backups
 ```
 **Repo:** https://github.com/dipaulavs/ClaudeCode-Workspace-2025 (PRIVADO)
-**Doc completa:** `.claude/commands/bk.md` e `.claude/commands/cbk.md`
 
 ### Geração de Conteúdo
 ```bash
-# Imagem (Nano Banana)
+# 1 imagem (Nano Banana)
 python3 scripts/image-generation/generate_nanobanana.py "prompt"
 
-# Múltiplas imagens (BATCH obrigatório)
+# 2+ imagens (BATCH obrigatório)
 python3 scripts/image-generation/batch_generate.py --api nanobanana "prompt1" "prompt2"
 
-# Vídeo (Sora portrait)
+# 1 vídeo (Sora portrait)
 python3 scripts/video-generation/generate_sora.py "prompt"
 
-# Áudio (ElevenLabs voz Michele)
+# 1 áudio (ElevenLabs voz Michele)
 python3 scripts/audio-generation/generate_elevenlabs.py "texto"
 ```
 
@@ -784,46 +403,21 @@ python3 scripts/instagram/publish_post.py --image "foto.jpg" --caption "Legenda"
 
 ---
 
-## 🛠️ FERRAMENTAS DISPONÍVEIS
-
-**📚 Índice completo:** `docs/tools/INDEX.md` | **Total:** 65+ templates | 40+ ferramentas
-
-| Categoria | Ferramentas | Docs |
-|-----------|-------------|------|
-| **Geração Imagem** | GPT-4o, Nano Banana, Batch, Edição (URLs públicas) | `scripts/image-generation/README.md` |
-| **Geração Vídeo** | Sora 2 (único, batch), 3 proporções | `scripts/video-generation/README.md` |
-| **Geração Áudio** | ElevenLabs TTS (único, batch), Vozes clonadas | `scripts/audio-generation/README.md` |
-| **Instagram API** | Post, Carrossel, Reel, Story, Insights, Comments | `scripts/instagram/README.md` |
-| **Instagram Scraper** | Posts, Hashtags, Comentários, Perfis (Apify) | `scripts/instagram-scraper/README.md` |
-| **WhatsApp** | 22 templates (mensagens, grupos, mídia, etc) | `scripts/whatsapp/README.md` |
-| **Meta Ads** | Campanhas, Ad Sets, Anúncios, Insights | `scripts/meta-ads/README.md` |
-| **Extração** | Transcrição vídeos, IG posts, Web scraping | `scripts/extraction/README.md` |
-| **Busca xAI** | Web, Twitter/X, Notícias (tempo real) | `scripts/search/README.md` |
-| **Twitter Scraper** | Tweets, Perfis, Replies (Apify) | `scripts/twitter/README.md` |
-| **TikTok Scraper** | Usuários, Vídeos, Trending, Hashtags | `scripts/tiktok/README.md` |
-| **Google Maps** | Locais, Reviews, Dados de negócios (Apify) | `scripts/scraping/README.md` |
-| **Nextcloud** | Upload manual, Upload rápido Downloads | `scripts/nextcloud/README.md` |
-| **Obsidian PKM** | Notes, Ideas, Daily, Projects, Search | `docs/tools/obsidian_integration.md` |
-| **Agendamento** | Sistema WhatsApp (único/recorrente) | `scheduling-system/README.md` |
-
----
-
 ## 📁 ESTRUTURA DO WORKSPACE
 
 ```
 ClaudeCode-Workspace/
 ├── 📄 CLAUDE.md                 # Config auto-load (este arquivo)
 ├── 📄 README.md                 # Índice geral
-├── 📄 requirements.txt          # Dependências Python
 │
 ├── 📁 .claude/
 │   ├── commands/                # /bk, /cbk
-│   └── skills/                  # 9 Claude Skills (model-invoked)
+│   └── skills/                  # 26 Claude Skills + INDEX.md
 │
-├── 📁 scripts/                  # 65+ Templates prontos
+├── 📁 scripts/                  # 71+ Templates prontos
 │   ├── whatsapp/                # 22 templates
 │   ├── instagram/               # 6 templates
-│   ├── image-generation/        # 5 templates
+│   ├── image-generation/        # 6 templates
 │   ├── video-generation/        # 2 templates
 │   ├── audio-generation/        # 2 templates
 │   └── [outras categorias]/
@@ -831,10 +425,13 @@ ClaudeCode-Workspace/
 ├── 📁 tools/                    # 40+ Ferramentas low-level
 ├── 📁 config/                   # Configurações APIs
 ├── 📁 docs/                     # Documentação organizada
-├── 📁 whatsapp-chatbot/         # Bot V4 + Framework Híbrido completo
-│   ├── componentes/             # RAG, Score, Follow-ups, Escalonamento, Relatórios
-│   ├── imoveis/                 # Banco de dados (1 pasta por imóvel)
-│   └── docs/                    # FRAMEWORK_COMPLETO_README.md, INTEGRACAO_FRAMEWORK.md
+│   ├── MAPA_ACOES.md            # Índice completo de templates
+│   ├── REGRAS_DECISAO.md        # Fluxogramas de decisão
+│   ├── KNOWLEDGE_BASES.md       # Índice de KBs
+│   └── tools/INDEX.md           # Índice de ferramentas
+│
+├── 📁 whatsapp-chatbot/         # Bot V4 + Framework Híbrido
+├── 📁 whatsapp-chatbot-carros/  # Bot Automaia (Carros)
 ├── 📁 scheduling-system/        # Agendamento WhatsApp
 └── [outros projetos]/
 ```
@@ -848,6 +445,8 @@ ClaudeCode-Workspace/
 - Imagens: `batch_generate.py --api nanobanana`
 - Vídeos: `batch_generate.py`
 - Áudios: `batch_generate.py`
+
+**Ver:** `docs/REGRAS_DECISAO.md`
 
 ### Modelos Padrão
 - **Imagens:** Nano Banana (Gemini 2.5 Flash)
@@ -867,8 +466,11 @@ ClaudeCode-Workspace/
 | Recurso | Localização |
 |---------|-------------|
 | **README Principal** | `README.md` |
-| **Ferramentas (40+)** | `docs/tools/INDEX.md` |
-| **Templates (65+)** | Ver README em `scripts/[categoria]/` |
+| **Skills (26)** | `.claude/skills/INDEX.md` |
+| **Templates (71+)** | `docs/MAPA_ACOES.md` |
+| **Ferramentas (65+)** | `docs/tools/INDEX.md` |
+| **Knowledge Bases (3)** | `docs/KNOWLEDGE_BASES.md` |
+| **Regras Decisão** | `docs/REGRAS_DECISAO.md` |
 | **Obsidian** | `docs/tools/obsidian_integration.md` |
 | **Chatbot WhatsApp** | `whatsapp-chatbot/README.md` |
 | **Meta Ads API** | `docs/meta-ads-api/META_ADS_API_DOCUMENTATION.md` |
@@ -894,5 +496,5 @@ ClaudeCode-Workspace/
 
 ---
 
-**Última atualização:** 2025-11-05 (+ Skill 100m-leads)
-**Versão:** 5.8 (24 Skills | 71 templates | 17 regras | 2 chatbots | Framework Híbrido)
+**Última atualização:** 2025-11-05
+**Versão:** 6.0 (26 Skills | 71+ templates | 17 regras | 2 chatbots | Modular)

@@ -1,0 +1,234 @@
+[
+  {
+    "id": "section_001",
+    "title": "Front Matter",
+    "path": "Front Matter",
+    "type": "front_matter",
+    "tokens": 1245,
+    "file": "chunks/section_001.md"
+  },
+  {
+    "id": "section_002",
+    "title": "Contents",
+    "path": "Contents",
+    "type": "table_of_contents",
+    "tokens": 630,
+    "file": "chunks/section_002.md"
+  },
+  {
+    "id": "section_003",
+    "title": "Start Here",
+    "path": "Start Here",
+    "type": "introduction",
+    "tokens": 1110,
+    "file": "chunks/section_003.md"
+  },
+  {
+    "id": "section_004_001",
+    "title": "Chapter 1: How We Got Here",
+    "path": "Section I: How We Got Here/Chapter 1: How We Got Here",
+    "type": "chapter",
+    "tokens": 2865,
+    "file": "chunks/section_004_001.md"
+  },
+  {
+    "id": "section_004_002",
+    "title": "Chapter 2: Grand Slam Offers",
+    "path": "Section I: How We Got Here/Chapter 2: Grand Slam Offers",
+    "type": "chapter",
+    "tokens": 3555,
+    "file": "chunks/section_004_002.md"
+  },
+  {
+    "id": "section_005_001",
+    "title": "Chapter 3: Pricing: The Commodity Problem",
+    "path": "Section II: Pricing/Chapter 3: Pricing: The Commodity Problem",
+    "type": "chapter",
+    "tokens": 3870,
+    "file": "chunks/section_005_001.md"
+  },
+  {
+    "id": "section_005_002_001",
+    "title": "A Starving Crowd & Market Selection",
+    "path": "Section II: Pricing/Chapter 4: Pricing: Finding The Right Market - A Starving Crowd/A Starving Crowd & Market Selection",
+    "type": "subsection",
+    "tokens": 2880,
+    "file": "chunks/section_005_002_001.md"
+  },
+  {
+    "id": "section_005_002_002",
+    "title": "Commit to the Niche & Riches in Niches",
+    "path": "Section II: Pricing/Chapter 4: Pricing: Finding The Right Market - A Starving Crowd/Commit to the Niche & Riches in Niches",
+    "type": "subsection",
+    "tokens": 2175,
+    "file": "chunks/section_005_002_002.md"
+  },
+  {
+    "id": "section_005_003_001",
+    "title": "Price to Value Discrepancy",
+    "path": "Section II: Pricing/Chapter 5: Pricing: Charge What It's Worth/Price to Value Discrepancy",
+    "type": "subsection",
+    "tokens": 2385,
+    "file": "chunks/section_005_003_001.md"
+  },
+  {
+    "id": "section_005_003_002",
+    "title": "Virtuous Cycle of Price & Premium Price Experience",
+    "path": "Section II: Pricing/Chapter 5: Pricing: Charge What It's Worth/Virtuous Cycle of Price & Premium Price Experience",
+    "type": "subsection",
+    "tokens": 2640,
+    "file": "chunks/section_005_003_002.md"
+  },
+  {
+    "id": "section_006_001_001",
+    "title": "Introduction & The Value Equation Framework",
+    "path": "Section III: Value - Create Your Offer/Chapter 6: Value Offer: The Value Equation/Introduction & The Value Equation Framework",
+    "type": "subsection",
+    "tokens": 2640,
+    "file": "chunks/section_006_001_001.md"
+  },
+  {
+    "id": "section_006_001_002",
+    "title": "Dream Outcome & Perceived Likelihood of Achievement",
+    "path": "Section III: Value - Create Your Offer/Chapter 6: Value Offer: The Value Equation/Dream Outcome & Perceived Likelihood of Achievement",
+    "type": "subsection",
+    "tokens": 1365,
+    "file": "chunks/section_006_001_002.md"
+  },
+  {
+    "id": "section_006_001_003",
+    "title": "Time Delay & Effort and Sacrifice",
+    "path": "Section III: Value - Create Your Offer/Chapter 6: Value Offer: The Value Equation/Time Delay & Effort and Sacrifice",
+    "type": "subsection",
+    "tokens": 1860,
+    "file": "chunks/section_006_001_003.md"
+  },
+  {
+    "id": "section_006_002",
+    "title": "Chapter 7: Free Goodwill",
+    "path": "Section III: Value - Create Your Offer/Chapter 7: Free Goodwill",
+    "type": "chapter",
+    "tokens": 735,
+    "file": "chunks/section_006_002.md"
+  },
+  {
+    "id": "section_006_003",
+    "title": "Chapter 8: Value Offer: The Thought Process",
+    "path": "Section III: Value - Create Your Offer/Chapter 8: Value Offer: The Thought Process",
+    "type": "chapter",
+    "tokens": 1575,
+    "file": "chunks/section_006_003.md"
+  },
+  {
+    "id": "section_006_004",
+    "title": "Chapter 9: Value Offer: Creating Your Grand Slam Offer Part I - Problems & Solutions",
+    "path": "Section III: Value - Create Your Offer/Chapter 9: Value Offer: Creating Your Grand Slam Offer Part I - Problems & Solutions",
+    "type": "chapter",
+    "tokens": 3315,
+    "file": "chunks/section_006_004.md"
+  },
+  {
+    "id": "section_006_005_001",
+    "title": "Introduction & Sales to Fulfillment Continuum",
+    "path": "Section III: Value - Create Your Offer/Chapter 10: Value Offer: Creating Your Grand Slam Offer Part II - Trim & Stack/Introduction & Sales to Fulfillment Continuum",
+    "type": "subsection",
+    "tokens": 1095,
+    "file": "chunks/section_006_005_001.md"
+  },
+  {
+    "id": "section_006_005_002",
+    "title": "Step 4: Create Your Solutions Delivery Vehicles",
+    "path": "Section III: Value - Create Your Offer/Chapter 10: Value Offer: Creating Your Grand Slam Offer Part II - Trim & Stack/Step 4: Create Your Solutions Delivery Vehicles",
+    "type": "subsection",
+    "tokens": 2835,
+    "file": "chunks/section_006_005_002.md"
+  },
+  {
+    "id": "section_006_005_003",
+    "title": "Step 5: Trim and Stack",
+    "path": "Section III: Value - Create Your Offer/Chapter 10: Value Offer: Creating Your Grand Slam Offer Part II - Trim & Stack/Step 5: Trim and Stack",
+    "type": "subsection",
+    "tokens": 3660,
+    "file": "chunks/section_006_005_003.md"
+  },
+  {
+    "id": "section_007_001",
+    "title": "Chapter 11: Enhancing The Offer: Scarcity, Urgency, Bonuses, Guarantees, and Naming",
+    "path": "Section IV: Enhancing Your Offer/Chapter 11: Enhancing The Offer: Scarcity, Urgency, Bonuses, Guarantees, and Naming",
+    "type": "chapter",
+    "tokens": 3135,
+    "file": "chunks/section_007_001.md"
+  },
+  {
+    "id": "section_007_002",
+    "title": "Chapter 12: Enhancing The Offer: Scarcity",
+    "path": "Section IV: Enhancing Your Offer/Chapter 12: Enhancing The Offer: Scarcity",
+    "type": "chapter",
+    "tokens": 3660,
+    "file": "chunks/section_007_002.md"
+  },
+  {
+    "id": "section_007_003",
+    "title": "Chapter 13: Enhancing The Offer: Urgency",
+    "path": "Section IV: Enhancing Your Offer/Chapter 13: Enhancing The Offer: Urgency",
+    "type": "chapter",
+    "tokens": 2145,
+    "file": "chunks/section_007_003.md"
+  },
+  {
+    "id": "section_007_004",
+    "title": "Chapter 14: Enhancing The Offer: Bonuses",
+    "path": "Section IV: Enhancing Your Offer/Chapter 14: Enhancing The Offer: Bonuses",
+    "type": "chapter",
+    "tokens": 3105,
+    "file": "chunks/section_007_004.md"
+  },
+  {
+    "id": "section_007_005_001",
+    "title": "Introduction & Types of Guarantees",
+    "path": "Section IV: Enhancing Your Offer/Chapter 15: Enhancing The Offer: Guarantees/Introduction & Types of Guarantees",
+    "type": "subsection",
+    "tokens": 1710,
+    "file": "chunks/section_007_005_001.md"
+  },
+  {
+    "id": "section_007_005_002",
+    "title": "Unconditional & Conditional Guarantees (Part 1)",
+    "path": "Section IV: Enhancing Your Offer/Chapter 15: Enhancing The Offer: Guarantees/Unconditional & Conditional Guarantees (Part 1)",
+    "type": "subsection",
+    "tokens": 2490,
+    "file": "chunks/section_007_005_002.md"
+  },
+  {
+    "id": "section_007_005_003",
+    "title": "Conditional Guarantees (Part 2) & Anti-Guarantees",
+    "path": "Section IV: Enhancing Your Offer/Chapter 15: Enhancing The Offer: Guarantees/Conditional Guarantees (Part 2) & Anti-Guarantees",
+    "type": "subsection",
+    "tokens": 3090,
+    "file": "chunks/section_007_005_003.md"
+  },
+  {
+    "id": "section_007_006",
+    "title": "Chapter 16: Enhancing The Offer: Naming",
+    "path": "Section IV: Enhancing Your Offer/Chapter 16: Enhancing The Offer: Naming",
+    "type": "chapter",
+    "tokens": 4005,
+    "file": "chunks/section_007_006.md"
+  },
+  {
+    "id": "section_008_001",
+    "title": "Your First $100,000",
+    "path": "Section V: Execution/Your First $100,000",
+    "type": "chapter",
+    "tokens": 1635,
+    "file": "chunks/section_008_001.md"
+  },
+  {
+    "id": "section_008_002",
+    "title": "Final Thoughts",
+    "path": "Section V: Execution/Final Thoughts",
+    "type": "conclusion",
+    "tokens": 1335,
+    "file": "chunks/section_008_002.md"
+  }
+]

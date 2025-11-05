@@ -1,0 +1,218 @@
+[
+  {
+    "id": "section_001",
+    "title": "Front Matter",
+    "path": "Front Matter",
+    "type": "front_matter",
+    "tokens": 2385,
+    "file": "chunks/section_001.md"
+  },
+  {
+    "id": "section_002",
+    "title": "START HERE - Introduction",
+    "path": "START HERE - Introduction",
+    "type": "introduction",
+    "tokens": 2923,
+    "file": "chunks/section_002.md"
+  },
+  {
+    "id": "section_003",
+    "title": "Section I: What's a Money Model?",
+    "path": "Section I: What's a Money Model?",
+    "type": "chapter",
+    "tokens": 4399,
+    "file": "chunks/section_003.md"
+  },
+  {
+    "id": "section_004_001",
+    "title": "Win Your Money Back",
+    "path": "Section II: Attraction Offers/Win Your Money Back",
+    "type": "section",
+    "tokens": 3392,
+    "file": "chunks/section_004_001.md"
+  },
+  {
+    "id": "section_004_002",
+    "title": "Giveaways",
+    "path": "Section II: Attraction Offers/Giveaways",
+    "type": "section",
+    "tokens": 3350,
+    "file": "chunks/section_004_002.md"
+  },
+  {
+    "id": "section_004_003",
+    "title": "Decoy Offer",
+    "path": "Section II: Attraction Offers/Decoy Offer",
+    "type": "section",
+    "tokens": 2744,
+    "file": "chunks/section_004_003.md"
+  },
+  {
+    "id": "section_004_004",
+    "title": "Buy X Get Y Free",
+    "path": "Section II: Attraction Offers/Buy X Get Y Free",
+    "type": "section",
+    "tokens": 2289,
+    "file": "chunks/section_004_004.md"
+  },
+  {
+    "id": "section_004_005",
+    "title": "Pay Less Now or Pay More Later",
+    "path": "Section II: Attraction Offers/Pay Less Now or Pay More Later",
+    "type": "section",
+    "tokens": 2054,
+    "file": "chunks/section_004_005.md"
+  },
+  {
+    "id": "section_004_006",
+    "title": "Free Goodwill Offer",
+    "path": "Section II: Attraction Offers/Free Goodwill Offer",
+    "type": "section",
+    "tokens": 992,
+    "file": "chunks/section_004_006.md"
+  },
+  {
+    "id": "section_004_007",
+    "title": "Attraction Offers Conclusion",
+    "path": "Section II: Attraction Offers/Attraction Offers Conclusion",
+    "type": "conclusion",
+    "tokens": 896,
+    "file": "chunks/section_004_007.md"
+  },
+  {
+    "id": "section_005_001",
+    "title": "The Classic Upsell",
+    "path": "Section III: Upsell Offers/The Classic Upsell",
+    "type": "section",
+    "tokens": 2951,
+    "file": "chunks/section_005_001.md"
+  },
+  {
+    "id": "section_005_002",
+    "title": "Menu Upsell",
+    "path": "Section III: Upsell Offers/Menu Upsell",
+    "type": "section",
+    "tokens": 3350,
+    "file": "chunks/section_005_002.md"
+  },
+  {
+    "id": "section_005_003",
+    "title": "Anchor Upsell",
+    "path": "Section III: Upsell Offers/Anchor Upsell",
+    "type": "section",
+    "tokens": 2151,
+    "file": "chunks/section_005_003.md"
+  },
+  {
+    "id": "section_005_004",
+    "title": "Rollover Upsell",
+    "path": "Section III: Upsell Offers/Rollover Upsell",
+    "type": "section",
+    "tokens": 2468,
+    "file": "chunks/section_005_004.md"
+  },
+  {
+    "id": "section_005_005",
+    "title": "Upsell Offers Conclusion",
+    "path": "Section III: Upsell Offers/Upsell Offers Conclusion",
+    "type": "conclusion",
+    "tokens": 1185,
+    "file": "chunks/section_005_005.md"
+  },
+  {
+    "id": "section_006_001",
+    "title": "Payment Plan Downsells",
+    "path": "Section IV: Downsell Offers/Payment Plan Downsells",
+    "type": "section",
+    "tokens": 3433,
+    "file": "chunks/section_006_001.md"
+  },
+  {
+    "id": "section_006_002",
+    "title": "Trial With Penalty",
+    "path": "Section IV: Downsell Offers/Trial With Penalty",
+    "type": "section",
+    "tokens": 3240,
+    "file": "chunks/section_006_002.md"
+  },
+  {
+    "id": "section_006_003",
+    "title": "Feature Downsells",
+    "path": "Section IV: Downsell Offers/Feature Downsells",
+    "type": "section",
+    "tokens": 3419,
+    "file": "chunks/section_006_003.md"
+  },
+  {
+    "id": "section_006_004",
+    "title": "Downsell Offers Conclusion",
+    "path": "Section IV: Downsell Offers/Downsell Offers Conclusion",
+    "type": "conclusion",
+    "tokens": 868,
+    "file": "chunks/section_006_004.md"
+  },
+  {
+    "id": "section_007_001",
+    "title": "Continuity Bonus Offers",
+    "path": "Section V: Continuity Offers/Continuity Bonus Offers",
+    "type": "section",
+    "tokens": 3516,
+    "file": "chunks/section_007_001.md"
+  },
+  {
+    "id": "section_007_002",
+    "title": "Continuity Discount Offers",
+    "path": "Section V: Continuity Offers/Continuity Discount Offers",
+    "type": "section",
+    "tokens": 2882,
+    "file": "chunks/section_007_002.md"
+  },
+  {
+    "id": "section_007_003",
+    "title": "Waived Fee Offer",
+    "path": "Section V: Continuity Offers/Waived Fee Offer",
+    "type": "section",
+    "tokens": 1627,
+    "file": "chunks/section_007_003.md"
+  },
+  {
+    "id": "section_007_004",
+    "title": "Continuity Offers Conclusion",
+    "path": "Section V: Continuity Offers/Continuity Offers Conclusion",
+    "type": "conclusion",
+    "tokens": 441,
+    "file": "chunks/section_007_004.md"
+  },
+  {
+    "id": "section_008",
+    "title": "Section VI: Make Your Money Model",
+    "path": "Section VI: Make Your Money Model",
+    "type": "chapter",
+    "tokens": 3695,
+    "file": "chunks/section_008.md"
+  },
+  {
+    "id": "section_009",
+    "title": "Ten Years In Ten Minutes",
+    "path": "Ten Years In Ten Minutes",
+    "type": "section",
+    "tokens": 1461,
+    "file": "chunks/section_009.md"
+  },
+  {
+    "id": "section_010",
+    "title": "Final Thoughts",
+    "path": "Final Thoughts",
+    "type": "conclusion",
+    "tokens": 648,
+    "file": "chunks/section_010.md"
+  },
+  {
+    "id": "section_011",
+    "title": "Free Goodies",
+    "path": "Free Goodies",
+    "type": "appendix",
+    "tokens": 661,
+    "file": "chunks/section_011.md"
+  }
+]
