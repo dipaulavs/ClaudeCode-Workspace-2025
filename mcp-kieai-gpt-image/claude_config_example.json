@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "kie-gpt-image": {
+      "command": "/opt/homebrew/bin/python3.11",
+      "args": [
+        "/Users/felipemdepaula/Desktop/ClaudeCode-Workspace/mcp-kieai-gpt-image/server.py"
+      ],
+      "env": {
+        "KIEAI_API_KEY": "fa32b7ea4ff0e9b5acce83abe09d2b06"
+      }
+    }
+  }
+}
