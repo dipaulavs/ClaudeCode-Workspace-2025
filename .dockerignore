@@ -1,0 +1,79 @@
+# Claude Code Workspace - Docker Ignore
+# Excluir arquivos sensíveis e desnecessários
+
+# Credenciais e chaves
+*.key
+*.pem
+*.env
+.env.*
+**/credentials.json
+**/service_account.json
+config/google_service_account.json
+🔐 Credenciais/
+
+# Git
+.git/
+.gitignore
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+*.egg-info/
+dist/
+build/
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Arquivos temporários
+*.tmp
+*.log
+*.cache
+.pytest_cache/
+.mypy_cache/
+
+# Backups e bagunceira
+BAGUNÇA/
+*.backup
+*.bak
+*.old
+
+# Arquivos grandes de mídia (exceto necessários)
+*.mp4
+*.mov
+*.avi
+*.mkv
+*.zip
+*.tar.gz
+*.rar
+
+# Obsidian vault (dados pessoais)
+**/Obsidian Vault/
+
+# Deploy local configs
+docker-compose.override.yml
+.dockerignore
+Dockerfile.local
+
+# Sistema operacional
+Thumbs.db
+.DS_Store
+*.swp
