@@ -105,3 +105,6 @@ temp/
 
 # Arquivos temporários
 archive/
+
+# Credenciais (nunca commitar)
+config/CREDENCIAIS.env
