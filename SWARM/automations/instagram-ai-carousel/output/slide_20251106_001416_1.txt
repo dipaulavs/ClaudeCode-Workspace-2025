@@ -1,0 +1,6 @@
+SLIDE 1
+Título: O Futuro Chegou: GPT-4 Turbo 🤖
+Conteúdo: Imagine uma IA que analisa imagens em TEMPO REAL e entende contextos complexos como um especialista humano
+
+Prompt para imagem:
+Robô futurista segurando uma lupa digital analisando imagens complexas

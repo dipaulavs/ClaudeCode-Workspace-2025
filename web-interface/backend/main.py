@@ -75,48 +75,48 @@ async def health():
 
 @app.post("/api/generate/image")
 async def generate_image(request: ImageGenerateRequest):
-    """Gera imagem usando Nano Banana ou GPT-4o"""
+    """Gera imagem usando Google Gemini (Nanobanana) - FAST & CHEAP"""
     try:
-        if request.tool == "nanobanana":
-            cmd = [
-                "python3",
-                str(TOOLS_DIR / "generate_image_nanobanana.py"),
-                request.prompt,
-                "--format", request.format
-            ]
-        else:  # gpt
-            cmd = [
-                "python3",
-                str(TOOLS_DIR / "generate_image.py"),
-                request.prompt,
-                "--variants", str(request.variants)
-            ]
-            if request.enhance:
-                cmd.append("--enhance")
+        backend_dir = Path(__file__).parent
+        venv_python = backend_dir / "venv" / "bin" / "python3"
+        script_path = backend_dir / "generate_gemini.py"
+
+        cmd = [
+            str(venv_python),
+            str(script_path),
+            request.prompt,
+            "--format", request.format.lower(),
+            "--output", str(DOWNLOADS_DIR)
+        ]
 
         result = subprocess.run(
             cmd,
             capture_output=True,
             text=True,
-            cwd=WORKSPACE_ROOT
+            cwd=backend_dir
         )
 
         if result.returncode != 0:
             raise HTTPException(status_code=500, detail=result.stderr)
 
-        # Extrair caminho do arquivo gerado
+        # Extrair nome do arquivo do output
         output = result.stdout
         file_path = None
+        filename = None
+
         for line in output.split('\n'):
-            if 'salva em:' in line or 'Imagem salva:' in line:
-                file_path = line.split(':', 1)[1].strip()
-                break
+            if '.png' in line or '.jpg' in line or '.jpeg' in line or '.webp' in line:
+                parts = line.split(': ')
+                if len(parts) >= 2:
+                    filename = parts[-1].strip()
+                    file_path = str(DOWNLOADS_DIR / filename)
+                    break
 
         return {
             "success": True,
-            "output": output,
+            "output": f"✅ Imagem gerada!\n\n{output}",
             "file_path": file_path,
-            "tool": request.tool
+            "tool": "google-gemini-2.5-flash-image"
         }
 
     except Exception as e:

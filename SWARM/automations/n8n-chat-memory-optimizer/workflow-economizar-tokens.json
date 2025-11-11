@@ -1,0 +1,191 @@
+{
+  "name": "Chat Memory Optimizer - Economiza 70% Tokens",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "trigger",
+      "name": "When chat message received",
+      "type": "n8n-nodes-base.webhook",
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "key": "=msg_count_{{ $json.sessionId }}"
+      },
+      "id": "count_msgs",
+      "name": "Get Message Count",
+      "type": "n8n-nodes-base.redis",
+      "position": [450, 300]
+    },
+    {
+      "parameters": {
+        "operation": "increment",
+        "key": "=msg_count_{{ $json.sessionId }}"
+      },
+      "id": "increment",
+      "name": "Increment Counter",
+      "type": "n8n-nodes-base.redis",
+      "position": [650, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "number": [
+            {
+              "value1": "={{ $('Get Message Count').item.json.value || 0 }}",
+              "operation": "largerEqual",
+              "value2": 10
+            }
+          ]
+        }
+      },
+      "id": "check_10",
+      "name": "10+ mensagens?",
+      "type": "n8n-nodes-base.if",
+      "position": [850, 300]
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $json.sessionId }}",
+        "contextWindowLength": 10
+      },
+      "id": "get_history",
+      "name": "Get Full History",
+      "type": "@n8n/n8n-nodes-langchain.memoryRedisChat",
+      "position": [1050, 200]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Você é um assistente que resume conversas.\n\nRESUMA a conversa abaixo em 3-4 frases, mantendo:\n✓ Assunto principal\n✓ Informações críticas mencionadas\n✓ Decisões ou acordos\n✓ Status atual\n\nELIMINE:\n✗ Saudações\n✗ Mensagens repetidas\n✗ Informações irrelevantes\n\n---\nCONVERSA:\n{{ $json.history }}\n---\n\nRESUMO:"
+      },
+      "id": "summarize",
+      "name": "AI Summarizer",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "position": [1250, 200],
+      "credentials": {
+        "openAiApi": {
+          "id": "1",
+          "name": "OpenAI Account"
+        }
+      },
+      "typeVersion": 1,
+      "parameters": {
+        "model": "gpt-4o-mini",
+        "options": {
+          "temperature": 0.3,
+          "maxTokens": 150
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "set",
+        "key": "=summary_{{ $json.sessionId }}",
+        "value": "={{ $json.output }}",
+        "ttl": 86400
+      },
+      "id": "save_summary",
+      "name": "Save Summary",
+      "type": "n8n-nodes-base.redis",
+      "position": [1450, 200]
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "key": "=*{{ $json.sessionId }}*"
+      },
+      "id": "clear_history",
+      "name": "Clear Old History",
+      "type": "n8n-nodes-base.redis",
+      "position": [1650, 200]
+    },
+    {
+      "parameters": {
+        "operation": "set",
+        "key": "=msg_count_{{ $json.sessionId }}",
+        "value": "0"
+      },
+      "id": "reset_counter",
+      "name": "Reset Counter",
+      "type": "n8n-nodes-base.redis",
+      "position": [1850, 200]
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "key": "=summary_{{ $json.sessionId }}"
+      },
+      "id": "get_summary",
+      "name": "Get Saved Summary",
+      "type": "n8n-nodes-base.redis",
+      "position": [1050, 400]
+    },
+    {
+      "parameters": {
+        "agent": "conversationalAgent",
+        "promptType": "define",
+        "text": "=CONTEXTO ANTERIOR:\n{{ $('Get Saved Summary').item.json.value || 'Primeira conversa' }}\n\n---\nUSUÁRIO: {{ $json.message }}",
+        "hasOutputParser": false
+      },
+      "id": "ai_agent",
+      "name": "AI Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "position": [1250, 400],
+      "credentials": {
+        "openAiApi": {
+          "id": "1",
+          "name": "OpenAI Account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $json.sessionId }}",
+        "contextWindowLength": 5
+      },
+      "id": "redis_memory",
+      "name": "Redis Chat Memory (5 msgs)",
+      "type": "@n8n/n8n-nodes-langchain.memoryRedisChat",
+      "position": [1250, 500]
+    }
+  ],
+  "connections": {
+    "When chat message received": {
+      "main": [[{"node": "Get Message Count"}]]
+    },
+    "Get Message Count": {
+      "main": [[{"node": "Increment Counter"}]]
+    },
+    "Increment Counter": {
+      "main": [[{"node": "10+ mensagens?"}]]
+    },
+    "10+ mensagens?": {
+      "main": [
+        [{"node": "Get Full History"}],
+        [{"node": "Get Saved Summary"}]
+      ]
+    },
+    "Get Full History": {
+      "main": [[{"node": "AI Summarizer"}]]
+    },
+    "AI Summarizer": {
+      "main": [[{"node": "Save Summary"}]]
+    },
+    "Save Summary": {
+      "main": [[{"node": "Clear Old History"}]]
+    },
+    "Clear Old History": {
+      "main": [[{"node": "Reset Counter"}]]
+    },
+    "Reset Counter": {
+      "main": [[{"node": "Get Saved Summary"}]]
+    },
+    "Get Saved Summary": {
+      "main": [[{"node": "AI Agent"}]]
+    }
+  }
+}

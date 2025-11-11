@@ -95,7 +95,7 @@ Ver specs completas dos templates em [REFERENCE.md](REFERENCE.md).
 - ✅ Standalone (funciona offline)
 
 5. **Salvar HTML:** Usar `Write` tool para salvar em:
-   - **Vault Obsidian:** `/Users/felipemdepaula/Library/Mobile Documents/iCloud~md~obsidian/Documents/Claude-code-ios/📺 Vídeos/Apresentações/apresentacao_[assunto].html`
+   - **Vault Obsidian:** `/Users/felipemdepaula/Documents/Obsidian/Claude-code-ios/📺 Vídeos/Apresentações/apresentacao_[assunto].html`
    - **Workspace:** `/Users/felipemdepaula/Desktop/ClaudeCode-Workspace/apresentacao_[assunto].html`
 6. Abrir automaticamente no navegador (via `Bash` tool: `open [caminho]`)
 
@@ -191,7 +191,7 @@ Pronto para gravar! 🚀
 - Nunca usar REST API ou scripts externos
 
 ### Write Tool
-- Salvar HTML em: `/Users/felipemdepaula/Library/Mobile Documents/iCloud~md~obsidian/Documents/Claude-code-ios/📺 Vídeos/Apresentações/`
+- Salvar HTML em: `/Users/felipemdepaula/Documents/Obsidian/Claude-code-ios/📺 Vídeos/Apresentações/`
 - Backup workspace: `/Users/felipemdepaula/Desktop/ClaudeCode-Workspace/`
 - **Obsidian NÃO precisa estar aberto**
 

@@ -1,179 +1,236 @@
-# Hormozi Leads Skill
+---
+name: hormozi-leads
+description: Apply complete Alex Hormozi methodology to generate scalable, predictable leads. Auto-invokes when user requests content creation (hooks, headlines, CTAs, copy) or lead generation strategies (lead magnets, outreach, ads, referrals). Uses Core Four methods + Lead Getters amplification from $100M Leads framework.
+---
 
-## Objetivo
-Aplicar a metodologia completa de Alex Hormozi para gerar leads escaláveis e previsíveis, transformando estranhos em compradores usando os 4 métodos principais (Core Four) e estratégias de amplificação através de lead-getters.
+# Hormozi Leads - $100M Leads Framework
 
-## Quando Usar Esta Skill (Model-Invoked Automático)
+Apply Alex Hormozi's complete methodology to transform strangers into buyers using the Core Four methods and Lead Getters amplification.
 
-**GATILHOS AUTOMÁTICOS:** Esta skill é ativada quando o usuário pedir qualquer um destes elementos:
+## When This Skill Auto-Invokes
 
-**Criação de Conteúdo:**
-- Hook, gancho, chamada de atenção
-- Headline, título, manchete
-- CTA (call to action), chamada para ação
-- Ângulo, angle, abordagem
-- Body copy, corpo do texto, texto principal
-- Descrição SEO, meta description
-- Legenda Instagram, caption Instagram
-- Legenda YouTube, descrição YouTube
-- Copy, texto de venda, sales copy
+**Content Creation Requests:**
+- Hooks, headlines, CTAs, angles, body copy
+- Social media captions (Instagram, YouTube, LinkedIn)
+- Ad copy, landing pages, sales pages
+- SEO descriptions, meta descriptions
 
-**Estratégia de Leads:**
-- Gerar leads, aquisição de clientes
-- Lead magnet, isca digital
-- Estratégia de outreach (warm/cold)
-- Campanha de conteúdo orgânico
-- Estrutura de anúncios
-- Sistema de referral
+**Lead Generation Strategy:**
+- Lead magnets, outreach campaigns (warm/cold)
+- Paid ads structure, organic content strategy
+- Referral systems, affiliate programs
 
-**IMPORTANTE:** Mesmo que o usuário peça apenas "crie uma headline" sem contexto adicional, ativar esta skill e pedir detalhes do produto/oferta antes de gerar.
+**IMPORTANT:** Even for simple requests like "create a headline," auto-invoke this skill and gather context before generating.
 
-## Workflow Resumido
+## Core Workflow
 
-### Fase 0: Criação de Conteúdo (Quando pedir headlines/hooks/copy)
+### Part 1: Content Creation (Hooks, Headlines, Copy)
 
-**OBRIGATÓRIO quando usuário pedir elementos específicos de conteúdo:**
+When user requests any content element, follow this workflow:
 
-**1. Coletar Contexto:**
-- Produto/serviço/oferta
-- Avatar (público-alvo)
-- Problema que resolve
-- Resultado/transformação prometida
-- Plataforma destino (YouTube, Instagram, Ads, etc)
+#### Step 1: Gather Context
 
-**2. Gerar Hooks Magnéticos - SEMPRE APLICAR 2-3 DOS 7 ELEMENTOS:**
+Collect before generating anything:
+- Product/service/offer being promoted
+- Target avatar (ideal customer)
+- Problem being solved
+- Result/transformation promised
+- Destination platform (YouTube, Instagram, Ads, etc)
 
-**7 Elementos de Hook** (ver [hooks-biblioteca.md](hooks-biblioteca.md) para 50+ hooks validados):
-1. **RECENCY** - "Ontem descobri...", "Acabei de testar..."
-2. **RELEVANCY** - "Se você [persona específica]...", "Para quem [situação]..."
-3. **CELEBRITY** - "Como [autoridade] conseguiu...", "Roubei isso de [expert]..."
-4. **PROXIMITY** - "No seu negócio...", "Na sua cidade..."
-5. **CONFLICT** - "Por que [crença comum] está errada", "[A] vs [B]"
-6. **UNUSUAL** - "Eu não faço [ação esperada]...", "Parece loucura mas..."
-7. **ONGOING** - "Estou testando isso agora...", "Dia 7 de 30 fazendo..."
+#### Step 2: Generate Magnetic Hooks
 
-**Combinar 2-3 elementos** para máximo impacto (ex: Recency + Unusual + Relevancy)
+Apply 2-3 of the 7 Hook Elements for maximum impact:
 
-**3. Gerar Headlines - ESCOLHER ENTRE 30 FRAMEWORKS:**
+1. **RECENCY** - "Yesterday I discovered...", "Just tested..."
+2. **RELEVANCY** - "If you're [specific persona]...", "For those who [situation]..."
+3. **CELEBRITY** - "How [authority] achieved...", "Stolen from [expert]..."
+4. **PROXIMITY** - "In your business...", "In your city..."
+5. **CONFLICT** - "Why [common belief] is wrong", "[A] vs [B]"
+6. **UNUSUAL** - "I don't [expected action]...", "Sounds crazy but..."
+7. **ONGOING** - "Testing this now...", "Day 7 of 30 doing..."
 
-Ver [headlines-frameworks.md](headlines-frameworks.md) para frameworks completos organizados em 13 categorias:
-- Transformação (Antes→Depois, Número+Resultado, Tempo Específico)
-- Revelação/Segredo (Segredo Escondido, Insight Contrário, Roubo Autorizado)
-- Erros/Avisos (Erro Custoso, Múltiplos Erros, Alerta Urgente)
-- Método/Sistema (Sistema Nomeado, Passo a Passo, Blueprint)
-- E mais 9 categorias...
+**Reference:** See [references/hooks-biblioteca.md](references/hooks-biblioteca.md) for 50+ validated hooks.
 
-**Fórmula Master:**
-[Número] [Forma/Método] para [Avatar Específico] conseguir [Resultado Desejado] em [Prazo] sem [Dor/Esforço]
+**Combination Strategy:** Recency + Unusual + Relevancy = maximum attention capture.
 
-**Total:** Gerar 10-15 headlines usando frameworks variados para usuário escolher
+#### Step 3: Create Headlines Using 30 Frameworks
 
-**4. Estruturar Conteúdo - Escolher Mecanismo de Retenção:**
+Select from 30 headline frameworks organized in 13 categories:
+- Transformation (Before→After, Number+Result, Specific Timeline)
+- Revelation/Secret (Hidden Secret, Contrary Insight, Authorized Theft)
+- Errors/Warnings (Costly Mistake, Multiple Errors, Urgent Alert)
+- Method/System (Named System, Step-by-Step, Blueprint)
+- Plus 9 more categories...
 
-Ver [retain-formulas.md](retain-formulas.md) para estruturas completas:
-- **Listas** - "X formas de...", "X erros que..."
-- **Steps** - "Passo a passo", "O guia completo"
-- **Stories** - Jornada, transformação, caso real
+**Master Formula:**
+[Number] [Form/Method] for [Specific Avatar] to achieve [Desired Result] in [Timeline] without [Pain/Effort]
 
-**5. Aplicar Equação de Valor em Cada Elemento:**
+**Reference:** See [references/headlines-frameworks.md](references/headlines-frameworks.md) for complete framework library.
 
-Ver [equacao-valor.md](equacao-valor.md) para framework completo:
+**Output:** Generate 10-15 headlines using varied frameworks for user selection.
+
+#### Step 4: Structure Content with Retention Mechanisms
+
+Choose retention mechanism based on content type:
+- **Lists** - "X ways to...", "X mistakes that..."
+- **Steps** - "Step-by-step", "Complete guide"
+- **Stories** - Journey, transformation, real case
+
+**Reference:** See [references/retain-formulas.md](references/retain-formulas.md) for complete structures.
+
+#### Step 5: Apply Value Equation to Every Element
+
+Maximize perceived value using the 4-element formula:
 
 ```
-Valor = (Dream Outcome × Perceived Likelihood)
+Value = (Dream Outcome × Perceived Likelihood)
         ÷ (Time Delay × Effort & Sacrifice)
 ```
 
-**AUMENTAR:** Dream Outcome (melhor resultado) + Perceived Likelihood (prova que funciona)
-**DIMINUIR:** Time Delay (resultado rápido) + Effort & Sacrifice (sem dor)
+**Increase:** Dream Outcome (better result) + Perceived Likelihood (proof it works)
+**Decrease:** Time Delay (fast results) + Effort & Sacrifice (no pain)
 
-**6. Criar CTA Persuasivo:**
+**Reference:** See [references/equacao-valor.md](references/equacao-valor.md) for framework details.
 
-Ver [ctas-persuasivos.md](ctas-persuasivos.md) para 30 templates organizados em 5 níveis:
-- Nível 1: Soft (Save, Follow, Share)
-- Nível 2: Engajamento (Comment, Tag, DM palavra)
-- Nível 3: Lead Magnet (Link na bio, Baixe grátis)
-- Nível 4: Qualificação (Preencha form, Agende call)
-- Nível 5: Venda Direta (Compre agora, Vagas limitadas)
+#### Step 6: Create Persuasive CTAs
 
-**7. FORMATO ESPECIAL - Carrossel Instagram (6-10 slides):**
+Select CTA level matching value provided (Give:Ask ratio):
+- **Level 1:** Soft (Save, Follow, Share)
+- **Level 2:** Engagement (Comment, Tag, DM keyword)
+- **Level 3:** Lead Magnet (Link in bio, Free download)
+- **Level 4:** Qualification (Fill form, Book call)
+- **Level 5:** Direct Sale (Buy now, Limited spots)
 
-Ver [carrosseis-instagram.md](carrosseis-instagram.md) para estrutura completa:
-- Slide 1: Hook (2-3 elementos + headline framework)
-- Slides 2-8: Retain & Reward (lista/steps/story)
-- Slide 9: Recap + Transição
-- Slide 10: CTA persuasivo
+**Reference:** See [references/ctas-persuasivos.md](references/ctas-persuasivos.md) for 30 CTA templates.
 
-**8. Gerar Pacote Completo:**
-- Headlines (10-15 opções com frameworks variados)
-- Descrição plataforma (YouTube: Headline + Timestamps + Links + CTA + Hashtags)
+#### Step 7: Special Format - Instagram Carousels (6-10 slides)
+
+Structure:
+- **Slide 1:** Hook (2-3 elements + headline framework)
+- **Slides 2-8:** Retain & Reward (list/steps/story)
+- **Slide 9:** Recap + Transition
+- **Slide 10:** Persuasive CTA
+
+**Reference:** See [references/carrosseis-instagram.md](references/carrosseis-instagram.md) for complete structure.
+
+#### Step 8: Deliver Complete Package
+
+Generate:
+- Headlines (10-15 options with varied frameworks)
+- Platform-specific descriptions (YouTube: Headline + Timestamps + Links + CTA + Hashtags)
 - Body copy (Hook → Retain → Reward)
-- CTAs (Ask proporcional ao Give)
-- Hashtags estratégicas
+- CTAs (Ask proportional to Give)
+- Strategic hashtags
 
-### Fase 1: Fundação (Leads Engaged)
-1. Criar oferta irresistível (Grand Slam Offer) que serve como base
-2. Desenvolver lead magnet usando framework dos 4 passos
-3. Definir métricas: CAC (Custo de Aquisição), LTGP (Lifetime Gross Profit), LTGP:CAC ratio
+### Part 2: Lead Generation Strategy (Core Four + Lead Getters)
 
-### Fase 2: Core Four - Métodos de Geração
-**Execute os 4 métodos em paralelo:**
+When user requests lead generation strategy, follow this roadmap:
 
-1. **Warm Outreach** (100 contatos/dia)
-   - Extrair lista completa de contatos (phone, email, social media)
-   - Personalizar mensagens usando framework ACA (Acknowledge, Compliment, Ask)
-   - Follow-up 3x antes de desistir
+#### Phase 1: Foundation (Engaged Leads)
 
-2. **Post Free Content** (1+ post/dia)
-   - Hook: Capturar atenção (Headlines + Topics: Far Past, Recent Past, Present, Trending, Manufactured)
-   - Retain: Manter atenção (storytelling, value delivery)
-   - Reward: Satisfazer razão de consumo
-   - Give:Ask Ratio apropriado para cada plataforma
+1. Create irresistible offer (Grand Slam Offer) as base
+2. Develop lead magnet using 4-step framework
+3. Define metrics: CAC (Customer Acquisition Cost), LTGP (Lifetime Gross Profit), LTGP:CAC ratio
 
-3. **Cold Outreach** (Volume máximo automatizado)
-   - Construir listas (scraping + compra + manual)
-   - Personalizar + Big Fast Value
-   - Automatizar delivery e distribution
-   - Follow-up estratégico (múltiplos canais)
+#### Phase 2: Core Four Methods (Execute in Parallel)
 
-4. **Run Paid Ads**
-   - Estrutura: Call Out → Retain → Reward → CTA
-   - Testar: Headlines, Images, Audiences
-   - Escalar: More, Better, New
+**1. Warm Outreach** (100 contacts/day)
+- Extract complete contact list (phone, email, social media)
+- Personalize messages using ACA framework (Acknowledge, Compliment, Ask)
+- Follow-up 3x before stopping
 
-### Fase 3: Lead Getters - Amplificação Exponencial
-1. **Customer Referrals**: 6 Ways to Give Value + 7 Ways to Ask
-2. **Employees**: Contratar e treinar para executar Core Four
-3. **Agencies**: Terceirizar execução mantendo estratégia
-4. **Affiliates/Partners**: Criar programas win-win escaláveis
+**2. Post Free Content** (1+ post/day)
+- Hook: Capture attention (Headlines + Topics: Far Past, Recent Past, Present, Trending, Manufactured)
+- Retain: Keep attention (storytelling, value delivery)
+- Reward: Satisfy consumption reason
+- Give:Ask Ratio appropriate for each platform
 
-## Framework de Decisão Rápido
+**3. Cold Outreach** (Maximum automated volume)
+- Build lists (scraping + purchase + manual)
+- Personalize + Big Fast Value
+- Automate delivery and distribution
+- Strategic follow-up (multiple channels)
+
+**4. Run Paid Ads**
+- Structure: Call Out → Retain → Reward → CTA
+- Test: Headlines, Images, Audiences
+- Scale: More, Better, New
+
+#### Phase 3: Lead Getters (Exponential Amplification)
+
+1. **Customer Referrals:** 6 Ways to Give Value + 7 Ways to Ask
+2. **Employees:** Hire and train to execute Core Four
+3. **Agencies:** Outsource execution while maintaining strategy
+4. **Affiliates/Partners:** Create scalable win-win programs
+
+**Reference:** See [references/REFERENCE.md](references/REFERENCE.md) for complete methodology.
+
+## Quick Decision Framework
+
 ```
-Se não tem leads → Warm Outreach (AGORA)
-Se tem <1000 leads → Warm Outreach + Content
-Se tem >1000 leads → Add Cold Outreach
-Se tem budget → Add Paid Ads
-Se tem tração → Implement Lead Getters
+No leads → Warm Outreach (NOW)
+<1000 leads → Warm Outreach + Content
+>1000 leads → Add Cold Outreach
+Has budget → Add Paid Ads
+Has traction → Implement Lead Getters
 ```
 
-## Próximos Passos
+## Success Metrics
 
-### Documentação Estratégica:
-- **Metodologia completa**: Ver [REFERENCE.md](REFERENCE.md)
-- **Casos práticos**: Ver [EXAMPLES.md](EXAMPLES.md)
-- **Problemas comuns**: Ver [TROUBLESHOOTING.md](TROUBLESHOOTING.md)
+Track these KPIs:
+- Decreasing CAC
+- LTGP:CAC ratio >3:1 (ideally >4:1)
+- Referrals > Churn (organic growth)
+- Growing engaged leads volume
+- Stable or increasing conversion rate
 
-### Recursos de Criação de Conteúdo (Progressive Disclosure):
-- **Hooks magnéticos**: Ver [hooks-biblioteca.md](hooks-biblioteca.md) - 7 elementos + 50 hooks validados
-- **Headlines frameworks**: Ver [headlines-frameworks.md](headlines-frameworks.md) - 30 frameworks em 13 categorias
-- **Estruturas de retenção**: Ver [retain-formulas.md](retain-formulas.md) - Listas, Steps, Stories
-- **CTAs persuasivos**: Ver [ctas-persuasivos.md](ctas-persuasivos.md) - 30 templates em 5 níveis
-- **Equação de valor**: Ver [equacao-valor.md](equacao-valor.md) - 4 elementos de valor
-- **Carrosséis Instagram**: Ver [carrosseis-instagram.md](carrosseis-instagram.md) - Formato 6-10 slides
+## Auto-Correction System
 
-## Métricas de Sucesso
-- CAC decrescente
-- LTGP:CAC ratio >3:1 (idealmente >4:1)
-- Referrals > Churn (crescimento orgânico)
-- Volume de leads engaged crescente
-- Taxa de conversão estável ou crescente
+This skill includes automatic error correction to learn from mistakes and prevent recurrence.
+
+### When Errors Occur
+
+```
+Error detected
+↓
+1. Fix SKILL.md: python3 scripts/update_skill.py <old_text> <new_text>
+2. Log learning: python3 scripts/log_learning.py <error> <fix> [line]
+3. Error prevented in future executions
+```
+
+### Example Workflow
+
+```bash
+# 1. Fix error in SKILL.md
+python3 scripts/update_skill.py \
+    'old incorrect instruction' \
+    'new correct instruction'
+
+# 2. Log the learning
+python3 scripts/log_learning.py \
+    "Description of what went wrong" \
+    "Description of fix applied" \
+    "SKILL.md:123"
+```
+
+**Result:** SKILL.md updated automatically + entry added to LEARNINGS.md with timestamp.
+
+## Progressive Disclosure Resources
+
+Load these references as needed for deeper guidance:
+
+**Content Creation:**
+- [references/hooks-biblioteca.md](references/hooks-biblioteca.md) - 7 elements + 50 validated hooks
+- [references/headlines-frameworks.md](references/headlines-frameworks.md) - 30 frameworks in 13 categories
+- [references/retain-formulas.md](references/retain-formulas.md) - Lists, Steps, Stories structures
+- [references/ctas-persuasivos.md](references/ctas-persuasivos.md) - 30 templates in 5 levels
+- [references/equacao-valor.md](references/equacao-valor.md) - 4-element value framework
+- [references/carrosseis-instagram.md](references/carrosseis-instagram.md) - 6-10 slide format
+
+**Strategy & Implementation:**
+- [references/REFERENCE.md](references/REFERENCE.md) - Complete $100M Leads methodology
+- [references/EXAMPLES.md](references/EXAMPLES.md) - Practical case studies
+- [references/TROUBLESHOOTING.md](references/TROUBLESHOOTING.md) - Common problems & solutions
+
+**Learning History:**
+- [LEARNINGS.md](LEARNINGS.md) - All corrections and improvements logged

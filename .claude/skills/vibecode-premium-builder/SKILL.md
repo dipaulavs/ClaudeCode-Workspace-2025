@@ -1,137 +1,165 @@
-# 📱 VibeCode Premium Builder
-
-## Quando Usar
-
-Automaticamente quando usuário pedir:
-- **Criar app iOS:** "Quero criar app de [ideia]" ou "Preciso de um app para [propósito]"
-- **Replicar app existente:** "Quero clonar/replicar [app X]" ou "Crie algo parecido com [app Y]"
-
-**IMPORTANTE:** Skill gera prompts VibeCode + plano de backend. Sempre aplica features premium iOS.
-
+---
+name: vibecode-premium-builder
+description: Generate complete VibeCode prompts and backend plans for iOS apps. Auto-invokes when user requests creating iOS apps, replicating existing apps, or needs native iOS UI components (Large Headers, Context Menus, Bottom Sheets, Date Pickers, Switches, Haptics). Always consults official VibeCode docs first, then produces sequential prompts + backend architecture.
 ---
 
-## Workflow Automático
+# VibeCode Premium Builder
 
-### ⚠️ PASSO 0: Consultar Documentação Oficial (OBRIGATÓRIO)
+## Purpose
 
-**ANTES de gerar qualquer prompt, SEMPRE fazer:**
+Generate production-ready iOS app plans with VibeCode prompts and backend architecture. This skill transforms app ideas into structured implementation plans using native iOS components and modern patterns.
+
+## When to Use
+
+Auto-invoke when user requests:
+- Creating iOS apps from ideas
+- Replicating existing apps
+- Adding native iOS components to projects
+
+## Core Workflow
+
+### Step 0: Fetch Official Documentation (MANDATORY)
+
+ALWAYS start by consulting current VibeCode documentation:
 
 ```
 WebFetch(https://vibecodeapp.com/docs/prompting/native-ui-components)
 ↓
-Extrair prompts EXATOS para:
-  - Large Headers
-  - Context Menus
-  - Bottom Tab Bar
-  - Bottom Sheets
-  - Date/Time Pickers
-  - Switches
+Extract EXACT prompts for components needed
 ↓
-❌ NUNCA inventar prompts
-✅ SEMPRE usar texto exato da documentação
-✅ APENAS adaptar contexto (nome de tela, variáveis)
+Adapt ONLY context-specific variables (screen names, items, etc.)
+❌ NEVER invent prompt structure
+✅ ALWAYS use official documentation text
 ```
 
-**Por quê:** Docs podem ter atualizações. Prompts precisos = funcionamento garantido.
+**Rationale:** Documentation updates frequently. Exact prompts ensure reliability.
 
----
-
-### Detectar Cenário
+### Step 1: Detect Scenario
 
 ```
-Usuário menciona "criar app" ou "replicar app"?
-├─ CRIAR NOVO → Cenário A
-└─ REPLICAR → Cenário B (perguntar método)
+User mentions creating OR replicating app?
+├─ CREATE NEW → Scenario A
+└─ REPLICATE → Scenario B (ask method)
 ```
 
-### **Cenário A: Criar App do Zero**
+### Scenario A: Create from Scratch
 
-1. **Consultar docs** (Passo 0 obrigatório - WebFetch)
-2. **Analisar ideia** (propósito, features principais)
-3. **Gerar prompts VibeCode sequenciais** (usando prompts EXATOS da doc):
-   - Prompt 1: Estrutura base + tabs (se multi-tela) - [criar manualmente]
-   - Prompt 2: Large Headers - [copiar EXATO da doc + adaptar nome da tela]
-   - Prompt 3: Context Menus - [copiar EXATO da doc + adaptar itens do menu]
-   - Prompt 4: Bottom Sheets - [copiar EXATO da doc + adaptar snap points]
-   - Prompt 5: Date/Time Pickers - [copiar EXATO da doc + adaptar mode]
-   - Prompt 6: Liquid Glass Switches - [copiar EXATO da doc]
-   - Prompt 7: Haptics - [instruções manuais, não é prompt]
-4. **Planejar backend:** API endpoints, DB schema, autenticação
-5. **Apresentar plano completo** ao usuário
+1. Fetch documentation (Step 0)
+2. Analyze idea (purpose, main features)
+3. Generate sequential VibeCode prompts using exact docs:
+   - Base structure + tabs (if multi-screen)
+   - Large Headers (copy exact prompt + adapt screen name)
+   - Context Menus (copy exact + adapt menu items)
+   - Bottom Sheets (copy exact + adapt snap points)
+   - Date/Time Pickers (copy exact + adapt mode)
+   - Switches (copy exact)
+   - Haptics (manual instructions, not prompt)
+4. Plan backend: endpoints, schema, auth
+5. Present complete plan
 
-### **Cenário B: Replicar App Existente**
+### Scenario B: Replicate Existing App
 
-1. **Consultar docs** (Passo 0 obrigatório - WebFetch)
-2. **Perguntar método de análise:**
-   ```
-   Qual método prefere para análise?
-   1. 📸 Screenshot (arraste imagens aqui)
-   2. 🔗 Link App Store
-   3. 🎥 Vídeo YouTube (demo do app)
-   4. 🌐 Site/Landing Page
-   ```
+1. Fetch documentation (Step 0)
+2. Ask analysis method:
+   - 📸 Screenshot
+   - 🔗 App Store link
+   - 🎥 YouTube demo
+   - 🌐 Website/Landing page
 
-3. **Processar conforme método:**
-   - **Método 1 (Screenshot):** Analisar layout, cores, componentes
-   - **Método 2 (App Store):** WebFetch screenshots oficiais
-   - **Método 3 (YouTube):** Transcrever vídeo demo
-   - **Método 4 (Site):** 🚨 **CHAMAR `website-cloner` skill**
-     ```
-     Skill("website-cloner") → Retorna style guide
-     ↓
-     Adaptar: Web design → iOS nativo
-     ```
+3. Process based on method:
+   - Screenshots: analyze layout, colors, components
+   - App Store: WebFetch official screenshots
+   - YouTube: transcribe demo video
+   - Website: invoke `website-cloner` skill → extract design system → adapt web to iOS
 
-4. **Gerar prompts VibeCode** (usando prompts EXATOS da doc consultada) + adaptar design
-5. **Planejar backend** (igual Cenário A)
+4. Generate VibeCode prompts (exact docs + design adaptation)
+5. Plan backend (same as Scenario A)
 
----
+For detailed analysis methods, consult `references/analysis-methods.md`.
 
-## Features Premium (Sempre Incluir)
+## Premium Features to Include
 
-✅ **Large Headers** (animação scroll)
-✅ **Context Menus** (long-press)
-✅ **Bottom Tab Bar** (se multi-tela)
-✅ **Bottom Sheets** (modals deslizantes)
-✅ **Date/Time Pickers** (se datas/horários)
-✅ **Liquid Glass Switches** (toggles nativos)
-✅ **Haptics** (feedback tátil estratégico)
+Always apply all 7 iOS premium elements:
 
----
+1. Large Headers (scroll animation)
+2. Context Menus (long-press)
+3. Bottom Tab Bar (multi-screen apps)
+4. Bottom Sheets (sliding modals)
+5. Date/Time Pickers (when handling dates)
+6. Liquid Glass Switches (native toggles)
+7. Haptics (tactical feedback)
 
-## Output Final
+## Output Format
+
+Deliver structured plan with:
 
 ```
-✅ Plano VibeCode Premium completo!
+✅ [APP NAME] VibeCode Premium Plan
 
 📱 FRONTEND (VibeCode):
-  → Prompt 1: [estrutura base]
-  → Prompt 2: [large headers]
-  → Prompt 3: [context menus]
-  → Prompt 4: [bottom sheets]
-  → Prompt 5: [switches + haptics]
+  Prompt 1: [base structure]
+  Prompt 2: [large headers]
+  Prompt 3: [context menus]
+  Prompt 4: [bottom sheets]
+  Prompt 5: [switches + haptics]
 
 🔧 BACKEND (Claude Code):
-  → Endpoints: [lista]
-  → Database: [schema]
-  → Auth: [método]
+  Endpoints: [list]
+  Database: [schema]
+  Auth: [method]
 
-🎯 Próximos passos:
-  1. Cole os prompts no VibeCode (順序!)
-  2. Aguarde frontend ficar pronto
-  3. Confirme para eu construir backend
+🎯 Next Steps:
+  1. Paste prompts in VibeCode (sequential order!)
+  2. Wait for frontend completion
+  3. Confirm to build backend
 ```
 
----
+## Using Bundled Resources
 
-## Docs Adicionais
+### References
 
-- **Prompts detalhados + técnicas:** Ver [REFERENCE.md](REFERENCE.md)
-- **Exemplos completos:** Ver [EXAMPLES.md](EXAMPLES.md)
-- **Problemas comuns:** Ver [TROUBLESHOOTING.md](TROUBLESHOOTING.md)
+- `references/prompts-library.md` - Complete prompt templates with latest updates
+- `references/backend-framework.md` - Standard backend architecture patterns
+- `references/analysis-methods.md` - Detailed app analysis techniques
+- `references/troubleshooting.md` - Common issues and solutions
 
----
+Load references when:
+- Generating specific component prompts → read `prompts-library.md`
+- Planning backend → read `backend-framework.md`
+- Analyzing existing apps → read `analysis-methods.md`
+- Debugging issues → read `troubleshooting.md`
 
-**Skill Type:** Model-invoked
-**Integrações:** `website-cloner` (método 4)
-**Docs VibeCode:** https://vibecodeapp.com/docs/prompting/native-ui-components
+### Scripts
+
+Execute auto-correction scripts when errors occur:
+
+```bash
+# Update SKILL.md with corrections
+python3 scripts/update_skill.py "old_text" "new_text"
+
+# Log learning to prevent recurrence
+python3 scripts/log_learning.py "error" "fix" "location"
+```
+
+## Auto-Correction System
+
+When VibeCode prompts fail or produce unexpected results:
+
+1. Identify what went wrong
+2. Update SKILL.md: `python3 scripts/update_skill.py <old> <new>`
+3. Log learning: `python3 scripts/log_learning.py <error> <fix> [line]`
+4. Error prevented in future executions
+
+All corrections are logged in `LEARNINGS.md` for continuous improvement.
+
+## Integration
+
+- **website-cloner skill**: Auto-invoke when user provides website URL (Scenario B, Method 4)
+- **VibeCode docs**: https://vibecodeapp.com/docs/prompting/native-ui-components
+
+## Notes
+
+- Prompts must be applied in sequential order
+- Haptics are configured manually in VibeCode UI (not via prompt)
+- Backend planning uses standard REST patterns (see `references/backend-framework.md`)
+- Always check documentation for latest prompt syntax

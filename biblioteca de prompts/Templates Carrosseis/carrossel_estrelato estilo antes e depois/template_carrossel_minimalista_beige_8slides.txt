@@ -1,0 +1,339 @@
+═══════════════════════════════════════════════════════════════════════════════
+📸 TEMPLATE CARROSSEL MINIMALISTA BEIGE - 8 SLIDES
+═══════════════════════════════════════════════════════════════════════════════
+
+🎨 ESTILO: Minimalista educacional clean | Tons beige/off-white
+📐 FORMATO: Instagram 1080x1350px (Portrait/Carousel)
+🎯 NICHO: Adaptável para qualquer negócio/produto/serviço
+
+═══════════════════════════════════════════════════════════════════════════════
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SLIDE 1 - CAPA PRINCIPAL (HOOK)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Instagram carousel post with minimalist design on light beige background (#F5F3F0).
+
+TOP LEFT CORNER:
+- Small uppercase text "@LFIMOVEIS +" in sans-serif font (size ~24px)
+- Thin horizontal black line directly underneath the text (width ~280px, 2px thick)
+
+CENTER (vertically and horizontally centered):
+- Large bold serif font displaying "[TEXTO EDITÁVEL AQUI - TÍTULO PRINCIPAL IMPACTANTE]" in pure black (#000000)
+- Text should be 3-4 lines maximum, very prominent (font size ~120-140px)
+- Below main title: smaller regular sans-serif font "[texto editável aqui - subtítulo complementar]" in black (font size ~36px)
+- Generous line spacing between all text elements
+
+BOTTOM RIGHT CORNER:
+- Rounded pill-shaped button with thin black border (2px)
+- Inside button: "PRÓXIMA FOLHA" text in black with arrow symbol (→)
+- Button size: ~200px width x 50px height
+- Position: 80px from right edge, 80px from bottom
+
+LAYOUT SPECS:
+- Background color: #F5F3F0 (warm light beige)
+- Text color: #000000 (pure black)
+- Accent color in "+": #FFD700 (gold/yellow)
+- Top margin: 80px
+- Side margins: 120px
+- Maximum negative space for clean, breathable design
+- Font family: Serif for titles (Playfair Display/Libre Baskerville), Sans-serif for body (Inter/Helvetica)
+
+OVERALL AESTHETIC:
+Clean, professional, editorial magazine style, high-end minimalist, Instagram 1080x1350px format.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SLIDE 2 - INTRODUÇÃO/CONTEXTO
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Instagram post with identical beige background (#F5F3F0).
+
+TOP LEFT CORNER:
+- Same "@LFIMOVEIS +" header with underline (identical to slide 1)
+
+CENTER CONTENT:
+- Regular sans-serif font paragraph (font size ~42-48px)
+- Text: "[Texto editável aqui - parágrafo introdutório explicando o contexto ou problema. Uma palavra específica pode estar em **bold** para ênfase.]"
+- Text should be 3-5 lines, centered or left-aligned
+- Use bold for ONE key word/phrase to create visual hierarchy
+- Line height: 1.4-1.6 for readability
+
+BOTTOM RIGHT:
+- Same "PRÓXIMA FOLHA" button (identical styling to slide 1)
+
+LAYOUT:
+- Same margins and spacing as slide 1
+- Maximum breathing room around text
+- Educational, informative tone through typography
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SLIDE 3 - COMPARAÇÃO COM IMAGENS (ANTES/DEPOIS)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Split-screen Instagram post with same beige background.
+
+TOP SECTION:
+- Same "@LFIMOVEIS +" header with underline
+
+TITLE (below header):
+- Large serif font: "Troque isso:    Por isso:" (two columns alignment)
+- Font size ~64px, bold serif
+
+LEFT COLUMN (50% width):
+- Subtitle: "Troque isso:" in regular sans-serif (~32px)
+- Below: "[Texto editável aqui - descrição do método ERRADO]"
+- Rounded rectangle image container (16:9 aspect ratio, ~450px width)
+- Inside: [IMAGEM/SÍMBOLO CORRESPONDENTE AO INPUT AQUI - exemplo de conteúdo ruim/básico]
+- Optional: Simple white text overlays on image with basic information
+
+RIGHT COLUMN (50% width):
+- Subtitle: "Por isso:" in regular sans-serif (~32px)
+- Below: "[Texto editável aqui - descrição do método CORRETO]"
+- Rounded rectangle image container (same size as left)
+- Inside: [IMAGEM/SÍMBOLO CORRESPONDENTE AO INPUT AQUI - exemplo de conteúdo bom/estratégico]
+- Optional: Instagram story-style interactive overlays (polls, questions, checkboxes)
+
+IMAGE STYLING:
+- Both images should be identical or very similar base photos
+- Difference shown through overlay text/graphics
+- Rounded corners: 24px radius
+- Subtle shadow: 0px 4px 12px rgba(0,0,0,0.08)
+
+BOTTOM RIGHT:
+- Same "PRÓXIMA FOLHA" button
+
+PURPOSE: Visual before/after comparison demonstrating strategy difference
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SLIDE 4 - COMPARAÇÃO COM IMAGENS (VARIAÇÃO 2)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Same split-screen layout as Slide 3.
+
+DIFFERENCES:
+- Use different example images relevant to your niche
+- LEFT: [IMAGEM/SÍMBOLO CORRESPONDENTE AO INPUT AQUI - exemplo de conteúdo genérico/sem propósito]
+- RIGHT: [IMAGEM/SÍMBOLO CORRESPONDENTE AO INPUT AQUI - mesmo conteúdo mas com contexto/storytelling]
+
+TEXT OVERLAYS:
+- Keep text minimal and legible
+- Use Instagram story aesthetic (white boxes, sans-serif font)
+- Show contrast between lazy content vs. strategic content
+
+CONSISTENCY:
+- Maintain exact same layout structure as Slide 3
+- Same fonts, sizes, spacing
+- Only images and overlay text change
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SLIDE 5 - COMPARAÇÃO COM IMAGENS (VARIAÇÃO 3)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Same split-screen layout structure.
+
+FOCUS: Mindset/approach comparison
+
+LEFT SIDE:
+- "[Texto editável aqui - abordagem negativa/reclamação]"
+- Image showing: [IMAGEM/SÍMBOLO CORRESPONDENTE AO INPUT AQUI - exemplo de conteúdo focado em problema/negatividade]
+- Example overlay: Complaint, tiredness, generic "end of day" content
+
+RIGHT SIDE:
+- "[Texto editável aqui - abordagem positiva/produtiva]"
+- Image showing: [IMAGEM/SÍMBOLO CORRESPONDENTE AO INPUT AQUI - mesmo contexto mas mostrando resultados/conquistas]
+- Example overlay: Checklist with checkmarks (✅), accomplishments, value delivered
+- Instagram story white text boxes with structured information
+
+DEMONSTRATE: How to transform mundane updates into valuable content
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SLIDE 6 - COMPARAÇÃO COM IMAGENS (VARIAÇÃO 4)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Final comparison slide with same structure.
+
+LEFT SIDE:
+- "[Texto editável aqui - tipo de conteúdo aleatório/sem estratégia]"
+- Image: [IMAGEM/SÍMBOLO CORRESPONDENTE AO INPUT AQUI - foto aleatória/silly/sem propósito]
+- Shows what NOT to do
+
+RIGHT SIDE:
+- "[Texto editável aqui - tipo de conteúdo estratégico/com intenção]"
+- Image: [IMAGEM/SÍMBOLO CORRESPONDENTE AO INPUT AQUI - conteúdo profissional falando sobre algo relevante]
+- Include Instagram story recording interface elements (pause button, record button, camera flip)
+- Text overlay showing valuable tip/information
+- May include decorative text in cursive/elegant font
+
+DEMONSTRATE: Random filler content vs. intentional valuable content
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SLIDE 7 - PITCH/CTA SUAVE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Clean beige background with maximum negative space.
+
+TOP LEFT:
+- Same "@LFIMOVEIS +" header with underline
+
+CENTER CONTENT (vertically centered):
+- Mixed typography paragraph (font size ~44-52px)
+- Text structure:
+  "[Texto editável aqui - introdução do benefício]" (regular sans-serif)
+  "'[texto editável aqui - nome do produto/método]'" (italic serif, in quotation marks)
+  "[Texto editável aqui - continuação]" (regular sans-serif)
+  "[Texto editável aqui - call-to-action forte], **clique no link da Bio!**" (bold sans-serif)
+
+- Strategic use of:
+  * Regular weight for normal text
+  * Italic serif for product/method name (adds elegance)
+  * Bold for final CTA
+  * Quotation marks around product name
+- Text should be 4-6 lines total
+- Left-aligned or centered based on preference
+
+BOTTOM RIGHT:
+- Same "PRÓXIMA FOLHA" button
+
+TONE: Soft sell, educational pitch, invitation rather than aggressive sales
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SLIDE 8 - ENCERRAMENTO VIRAL/COMPARTILHAMENTO
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Final slide with MAXIMUM negative space.
+
+TOP LEFT:
+- Same "@LFIMOVEIS +" header with underline
+
+CENTER (perfectly centered):
+- Large serif font (font size ~80-100px)
+- Text: "[Texto editável aqui - chamada para compartilhamento viral].✨✨"
+- Include sparkle emojis (✨) or relevant emoji at the end
+- Examples:
+  * "Mostre esse conteúdo para outra ela.✨✨"
+  * "Marque alguém que precisa ver isso.✨"
+  * "Salve este post para não esquecer.💡"
+- Should be short (1-2 lines maximum)
+- Encouraging, friendly tone
+
+BOTTOM RIGHT:
+- Same "PRÓXIMA FOLHA" button (or can be omitted on final slide)
+
+PURPOSE: Encourage saves, shares, tags - boost algorithmic reach
+
+═══════════════════════════════════════════════════════════════════════════════
+📐 ESPECIFICAÇÕES TÉCNICAS UNIVERSAIS
+═══════════════════════════════════════════════════════════════════════════════
+
+PALETA DE CORES:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+• Background principal: #F5F3F0 (warm light beige/off-white)
+• Texto principal: #000000 (pure black)
+• Detalhe/acento: #FFD700 (gold/yellow no símbolo "+")
+• Overlays de imagem: #FFFFFF (white) com 95% opacity
+• Sombras: rgba(0,0,0,0.08) para profundidade sutil
+
+TIPOGRAFIA:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+• TÍTULOS GRANDES: Serif bold (Playfair Display, Libre Baskerville, Lora, Crimson Text)
+  - Font size: 100-140px
+  - Weight: 700 (Bold)
+  - Line height: 1.2
+
+• CORPO DE TEXTO: Sans-serif regular (Inter, Helvetica Neue, Roboto, DM Sans)
+  - Font size: 36-52px
+  - Weight: 400 (Regular) ou 600 (Semi-bold for emphasis)
+  - Line height: 1.5
+
+• HEADER "@LFIMOVEIS +": Sans-serif uppercase
+  - Font size: 22-26px
+  - Weight: 500 (Medium)
+  - Letter spacing: 0.5px
+  - O "+" deve ter cor de acento (#FFD700)
+
+• BOTÃO "PRÓXIMA FOLHA": Sans-serif
+  - Font size: 18-20px
+  - Weight: 500 (Medium)
+  - All caps or sentence case
+
+LAYOUT E ESPAÇAMENTO:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+• Formato: 1080px (width) x 1350px (height) - Instagram Portrait/Carousel
+• Margem superior: 80px
+• Margens laterais: 100-120px
+• Margem inferior: 80px (espaço para botão)
+• Header underline: 2px thickness, black, ~280px width
+• Espaçamento entre header e conteúdo: 120-160px
+
+ELEMENTOS RECORRENTES:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+• Header "@LFIMOVEIS +" aparece em TODOS os 8 slides
+• Linha horizontal preta sob o header (sempre presente)
+• Botão "PRÓXIMA FOLHA →" no canto inferior direito de todos os slides
+  - Estilo: pill shape (rounded corners 25px)
+  - Border: 2px solid black
+  - Background: transparent ou #F5F3F0
+  - Padding: 12px 28px
+  - Posicionamento: 80px da direita, 80px de baixo
+
+IMAGENS INSERIDAS (Slides 3-6):
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+• Container: Rounded corners (24px radius)
+• Tamanho: ~450px width (para split-screen 50/50)
+• Aspect ratio: Flexível (vertical para fotos de produtos/pessoas)
+• Shadow: 0px 4px 12px rgba(0,0,0,0.08)
+• Posicionamento: Centralizado em cada coluna
+• Overlays de texto: Usar estilo Instagram story
+  - Background branco semi-transparente para legibilidade
+  - Fonte sans-serif
+  - Padding interno: 12px 18px
+  - Rounded corners: 12px
+
+FILOSOFIA DE DESIGN:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+✓ Minimalista - máximo espaço negativo (respiração visual)
+✓ Editorial - parecer revista de alta qualidade
+✓ Profissional - transmitir autoridade e expertise
+✓ Educacional - foco em ensinar, não só vender
+✓ Elegante - tipografia refinada, sem poluição visual
+✓ Consistente - mesma estrutura em todos os slides
+✓ Acessível - alto contraste preto/beige para legibilidade
+✓ Instagram-native - usar elementos familiares (story overlays, botões)
+
+═══════════════════════════════════════════════════════════════════════════════
+🎯 INSTRUÇÕES DE ADAPTAÇÃO PARA QUALQUER NICHO
+═══════════════════════════════════════════════════════════════════════════════
+
+1. SUBSTITUA "@LFIMOVEIS" pelo nome do seu negócio/marca
+2. MANTENHA o "+" dourado como elemento visual de destaque
+3. PERSONALIZE os textos mantendo estrutura e tamanho similar
+4. ESCOLHA imagens relevantes ao seu nicho nos slides de comparação
+5. MANTENHA a paleta beige/preto (ou adapte para sua identidade mantendo alto contraste)
+6. PRESERVE a estrutura de 8 slides (pode remover 1-2 se necessário)
+7. USE fonte serif para títulos e sans-serif para corpo sempre
+8. MANTENHA espaçamento generoso - é o que traz sofisticação
+
+═══════════════════════════════════════════════════════════════════════════════
+
+EXEMPLOS DE ADAPTAÇÃO POR NICHO:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🏠 IMÓVEIS: Comparar fotos genéricas vs tours estratégicos
+👗 MODA: Comparar fotos planas vs styling contextualizado
+🍰 ALIMENTAÇÃO: Comparar só produto vs storytelling da receita
+💼 CONSULTORIA: Comparar teorias vs casos reais
+🏋️ FITNESS: Comparar poses genéricas vs transformações com contexto
+💄 BELEZA: Comparar antes/depois vs processo completo
+📚 EDUCAÇÃO: Comparar conteúdo raso vs insights profundos
+
+═══════════════════════════════════════════════════════════════════════════════
+✅ TEMPLATE PRONTO PARA USO
+═══════════════════════════════════════════════════════════════════════════════
+
+Este template foi criado a partir da análise do carrossel:
+https://www.instagram.com/p/DQK0YspjTux/
+
+Criado por: Claude Code
+Data: 2025-11-10
+Formato: Carrossel Minimalista Beige - 8 Slides
+Arquivos de referência: ~/Downloads/carrossel_estrelato/slide_1.jpg até slide_8.jpg

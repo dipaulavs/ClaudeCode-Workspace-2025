@@ -1,6 +1,6 @@
 # 🧠 Claude Skills - Índice Completo
 
-**Total:** 27 Skills | **Localização:** `.claude/skills/` | **Doc oficial:** https://docs.claude.com/en/docs/claude-code/skills.md
+**Total:** 34 Skills | **Localização:** `.claude/skills/` | **Doc oficial:** https://docs.claude.com/en/docs/claude-code/skills.md
 
 Skills são capacidades modulares model-invoked (Claude decide quando usar automaticamente).
 
@@ -32,8 +32,15 @@ Skills são capacidades modulares model-invoked (Claude decide quando usar autom
 | Skill | Quando Usar | Descrição |
 |-------|-------------|-----------|
 | **marketing-writer** | Criar conteúdo de marketing | Escreve landing pages, tweets, Product Hunt, emails de lançamento. Tom claro e focado em benefícios. |
+| **ads-titulo-curto** | Criar copy completa Meta Ads (4 campos) | Gera Texto Principal, Título Curto, Descrição e CTA para anúncios Meta usando metodologia Hormozi. Suporta imagem estática, carrossel, reels. CTA adaptável (comentário, WhatsApp, DM). AUTO-INVOCA: "copy Meta Ads", "Facebook/Instagram ad". |
 | **hormozi-leads** | Criar hooks/headlines/copy + gerar leads | AUTO-INVOCA quando pedir: hook, headline, CTA, ângulo, body, legenda IG/YT, descrição. Metodologia Hormozi: Core Four + Lead Getters. |
+| **hormozi-copywriter** | Escrever copy Hormozi-style | Clone de Alex Hormozi. Escreve headlines, hooks, body copy, scripts de vídeo, email sequences, ads. Frameworks $100M Leads/Offers/Money Models. |
+| **exercito-hormozi-ads** | Top 3 copys Meta Ads milhão de dólares | Orquestra 3-6 subagentes hormozi-copywriter em hierarquia (Comandante, Especialistas, Revisor). Suporta carrossel, anúncio único, reels. AUTO-INVOCA: "copy Meta Ads", "army of Hormozi". |
+| **hormozi-exercito-viral** | Carrosséis educativos ultra-virais | Orquestra 3-6 subagentes Hormozi para criar conteúdo educativo de alto valor projetado para máximo engajamento via comentários com palavra-chave. Combina educação + Hormozi + estratégia viral. AUTO-INVOCA: "carrossel viral", "conteúdo educativo". |
+| **cria-carrossel** | Criar carrosséis/reels completos | Automatiza criação de carrosséis virais e reels: copy Hormozi → imagens batch → legenda + hashtags. Templates validados (Colagem Artesanal, ABSM, Adesivo, Antes/Depois). AUTO-INVOCA: "cria carrossel", "post Instagram", "reels". |
 | **carrossel-meta-ads** | Criar carrosséis Meta Ads (imóveis) | Workflow completo: coleta dados → subagente gera copy (3 opções) → subagente gera prompts → imagens paralelas. Copy Hormozi + visual artesanal. |
+| **pega-carrossel** | Download automático carrosséis Instagram | Baixa todos os slides do carrossel, organiza com nomes descritivos (Hook, Tipo1, CTA), e gera prompts IA detalhados (versão original + template adaptável para qualquer nicho). AUTO-INVOCA: "pega/baixa esse carrossel". |
+| **analitic-ads** | Análise completa Meta Ads | Busca métricas de campanhas ativas, analisa com framework Hormozi, e gera dashboard HTML visual (estilo MotherDuck) salvo em Downloads com nome do produto + data BR. AUTO-INVOCA: "puxar/analisar métricas", "dashboard de anúncios". |
 
 ### 🎥 Conteúdo YouTube
 
@@ -57,6 +64,7 @@ Skills são capacidades modulares model-invoked (Claude decide quando usar autom
 
 | Skill | Quando Usar | Descrição |
 |-------|-------------|-----------|
+| **login-google** | Implementar login com Google OAuth 2.0 | Workflow completo: Google Console (OAuth Client) → Authlib → rotas Flask → proteção de páginas → UI login. Previne redirect_uri_mismatch. AUTO-INVOCA quando pedir "login com Google" ou OAuth. |
 | **builder-orchestrator** | Criar ferramentas/skills/workflows | Orquestra criação otimizada usando paralelização máxima e recursos existentes. Conhece todo workspace. Delega para skill-creator quando necessário. |
 | **skill-creator** | Criar novas Skills | Meta-skill que cria outras Skills automaticamente. Gera estrutura multi-arquivo Progressive Disclosure. |
 | **vibecode-premium-builder** | Criar apps iOS premium via VibeCode | Gera prompts VibeCode (Large Headers, Liquid Glass, Haptics, Context Menus, Bottom Sheets) + plano backend. Cenário A: criar do zero. Cenário B: replicar app (4 métodos). |
@@ -81,10 +89,10 @@ Skills são capacidades modulares model-invoked (Claude decide quando usar autom
 
 ## 📊 Estatísticas
 
-- **Total Skills:** 27
+- **Total Skills:** 33
 - **Model-Invoked:** Todas (Claude decide automaticamente)
 - **Skills com KB:** 3 (100m-leads, 100m-offers, 100m-money-models)
-- **Skills multi-agente:** 4 (army-of-agents, carrossel-meta-ads, youtube-educator, builder-orchestrator)
+- **Skills multi-agente:** 6 (army-of-agents, exercito-hormozi-ads, hormozi-exercito-viral, carrossel-meta-ads, youtube-educator, builder-orchestrator)
 - **Skills de automação:** 5 (json2video, orshot-design, visual-explainer, estudar-video, orcamento-profissional)
 - **Skills de produtividade:** 2 (obsidian-quick-capture, obsidian-organizer)
 
@@ -109,4 +117,4 @@ Skills são capacidades modulares model-invoked (Claude decide quando usar autom
 
 ---
 
-**Última atualização:** 2025-11-05
+**Última atualização:** 2025-11-10

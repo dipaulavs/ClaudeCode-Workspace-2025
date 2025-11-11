@@ -20,13 +20,13 @@ Permissões do sistema podem bloquear abertura automática de arquivos.
 **Skill usa `Bash` tool para abrir:**
 ```bash
 # macOS (skill executa automaticamente)
-open "/Users/felipemdepaula/Library/Mobile Documents/iCloud~md~obsidian/Documents/Claude-code-ios/📺 Vídeos/Apresentações/apresentacao_tema.html"
+open "/Users/felipemdepaula/Documents/Obsidian/Claude-code-ios/📺 Vídeos/Apresentações/apresentacao_tema.html"
 ```
 
 **Se falhar, abrir manualmente:**
 ```bash
 # Vault Obsidian
-open "/Users/felipemdepaula/Library/Mobile Documents/iCloud~md~obsidian/Documents/Claude-code-ios/📺 Vídeos/Apresentações/apresentacao_tema.html"
+open "/Users/felipemdepaula/Documents/Obsidian/Claude-code-ios/📺 Vídeos/Apresentações/apresentacao_tema.html"
 
 # Workspace
 open "/Users/felipemdepaula/Desktop/ClaudeCode-Workspace/apresentacao_tema.html"

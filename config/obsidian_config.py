@@ -9,7 +9,7 @@ from pathlib import Path
 # ============================================
 
 # Caminho do vault (acesso direto ao filesystem)
-OBSIDIAN_VAULT_PATH = Path("/Users/felipemdepaula/Library/Mobile Documents/iCloud~md~obsidian/Documents/Claude-code-ios")
+OBSIDIAN_VAULT_PATH = Path("/Users/felipemdepaula/Documents/Obsidian/Claude-code-ios")
 
 # ============================================
 # ESTRUTURA DE PASTAS
@@ -26,7 +26,11 @@ FOLDERS = {
     "resources": "07 - Recursos",
     "youtube": "09 - YouTube Knowledge",
     "youtube_videos": "09 - YouTube Knowledge/Videos",
-    "youtube_transcricoes": "09 - YouTube Knowledge/Transcricoes"
+    "youtube_transcricoes": "09 - YouTube Knowledge/Transcricoes",
+    # Nova estrutura organizada para vídeos
+    "videos": "📺 Vídeos",
+    "videos_canvas": "📺 Vídeos/.canvas",
+    "videos_assets": "📺 Vídeos/.assets"
 }
 
 # Estrutura de tipos de vídeos (classificação automática por IA)

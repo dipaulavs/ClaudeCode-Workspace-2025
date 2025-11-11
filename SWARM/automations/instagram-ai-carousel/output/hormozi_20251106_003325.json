@@ -1,0 +1,39 @@
+{
+  "hook": "📢 Google Gemini Pro: A IA que vai REVOLUCIONAR seu trabalho em 2024!",
+  "slides": [
+    {
+      "numero": 1,
+      "titulo": "O Que É o Gemini Pro?",
+      "conteudo": "Novo modelo de IA do Google que processa texto, imagens e código simultaneamente. É como ter um SUPERCÉREBRO digital na sua mão!",
+      "prompt_imagem": "Ilustração futurista de um cérebro digital brilhante com ícones de texto, imagem e código girando ao redor"
+    },
+    {
+      "numero": 2,
+      "titulo": "Resultado Antes x Depois",
+      "conteudo": "ANTES: Tarefas lentas e manual\nAGORA: Produtividade 10x MAIS RÁPIDA com processamento multimodal do Gemini Pro",
+      "prompt_imagem": "Split screen mostrando um lado trabalhando manualmente e outro com IA processando rapidamente"
+    },
+    {
+      "numero": 3,
+      "titulo": "Probabilidade de Sucesso",
+      "conteudo": "✅ 95% de precisão em tarefas complexas\n✅ Redução de 80% no tempo de desenvolvimento\n✅ Suporte em múltiplas linguagens",
+      "prompt_imagem": "Gráfico de barras com porcentagens e ícones de sucesso"
+    },
+    {
+      "numero": 4,
+      "titulo": "Tempo & Esforço",
+      "conteudo": "Economia REAL:\n⏱️ -90% do tempo gasto\n💪 Esforço mínimo\n💻 Integração instantânea",
+      "prompt_imagem": "Relógio com engrenagens de IA mostrando aceleração e simplificação"
+    },
+    {
+      "numero": 5,
+      "titulo": "Transformação Garantida",
+      "conteudo": "Não é só tecnologia, é REVOLUÇÃO na sua produtividade. Preparado para dominar 2024?",
+      "prompt_imagem": "Pessoa com expressão motivada e futurista, rodeada por hologramas de tecnologia"
+    }
+  ],
+  "cta": "COMENTA 'GEMINI' E RECEBA GUIA COMPLETO DE IMPLEMENTAÇÃO!",
+  "legenda": "A revolução da IA chegou! 🚀 Descubra como o Google Gemini Pro vai transformar sua produtividade em 2024. #IAGenerativa #TechInnovation #ProdutividadeDigital",
+  "palavra_gatilho": "GEMINI",
+  "oferta": "Guia Completo: 10 Estratégias para Implementar Gemini Pro no Seu Trabalho"
+}

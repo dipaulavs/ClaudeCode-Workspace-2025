@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proposta Profissional - [CLIENTE]</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #F5F1E8;
+            color: #2D3748;
+            overflow: hidden;
+        }
+
+        .slides-container {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+        }
+
+        .slide {
+            width: 100vw;
+            height: 100vh;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 4rem;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .slide.active {
+            display: flex;
+        }
+
+        .slide h1 {
+            font-size: 4rem;
+            color: #1A202C;
+            margin-bottom: 2rem;
+        }
+
+        .slide h2 {
+            font-size: 3rem;
+            color: #2D3748;
+            margin-bottom: 2rem;
+        }
+
+        .slide h3 {
+            font-size: 2rem;
+            color: #4A5568;
+            margin-bottom: 1.5rem;
+        }
+
+        .slide p {
+            font-size: 1.5rem;
+            line-height: 1.8;
+            max-width: 800px;
+            text-align: center;
+        }
+
+        .slide ul, .slide ol {
+            font-size: 1.5rem;
+            line-height: 2;
+            max-width: 800px;
+            list-style-position: inside;
+        }
+
+        .price-box {
+            background: #FCD34D;
+            padding: 3rem 5rem;
+            border-radius: 16px;
+            margin: 2rem 0;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .price-box .price {
+            font-size: 5rem;
+            font-weight: bold;
+            color: #1A202C;
+        }
+
+        .comparison-list {
+            text-align: left;
+            margin-top: 2rem;
+        }
+
+        .comparison-list li {
+            margin: 1rem 0;
+            font-size: 1.3rem;
+        }
+
+        .scenarios {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .scenario {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .scenario h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .scenario p {
+            text-align: left;
+            font-size: 1.2rem;
+            margin: 0.5rem 0;
+        }
+
+        .progress {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: #2D3748;
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            font-size: 1.2rem;
+        }
+
+        .hint {
+            position: fixed;
+            bottom: 2rem;
+            left: 2rem;
+            color: #718096;
+            font-size: 1rem;
+        }
+
+        .reveal-item {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.4s ease;
+        }
+
+        .reveal-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            .slide h1 { font-size: 2.5rem; }
+            .slide h2 { font-size: 2rem; }
+            .scenarios { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="slides-container">
+        <!-- Slide 1: Capa -->
+        <div class="slide active">
+            <h1>Proposta: [NOME DO PROJETO]</h1>
+            <h2>Para: [NOME DO CLIENTE]</h2>
+            <p style="margin-top: 3rem; color: #718096;">Por: [SEU NOME/EMPRESA]</p>
+            <p style="color: #718096;">[DATA]</p>
+        </div>
+
+        <!-- Slide 2: Problema -->
+        <div class="slide">
+            <h2>Situação Atual</h2>
+            <ul>
+                <li class="reveal-item">❌ [Dor específica 1]</li>
+                <li class="reveal-item">❌ [Dor específica 2]</li>
+                <li class="reveal-item">❌ [Dor específica 3]</li>
+                <li class="reveal-item">❌ [Dor específica 4]</li>
+            </ul>
+            <p class="reveal-item" style="margin-top: 3rem; font-weight: bold;">
+                💸 Custo dessa situação: R$ [VALOR]/mês
+            </p>
+        </div>
+
+        <!-- Slide 3: Solução -->
+        <div class="slide">
+            <h2>Solução Proposta</h2>
+            <p style="margin-bottom: 3rem;">[Descrição breve da solução em 2-3 linhas]</p>
+            <ul>
+                <li class="reveal-item">✅ [Benefício 1]</li>
+                <li class="reveal-item">✅ [Benefício 2]</li>
+                <li class="reveal-item">✅ [Benefício 3]</li>
+                <li class="reveal-item">✅ [Benefício 4]</li>
+                <li class="reveal-item">✅ [Benefício 5]</li>
+                <li class="reveal-item">✅ [Benefício 6]</li>
+            </ul>
+        </div>
+
+        <!-- Slide 4: Como Funciona -->
+        <div class="slide">
+            <h2>Como Funciona</h2>
+            <p style="font-size: 2rem; line-height: 3; margin-top: 2rem;">
+                1️⃣ [Etapa 1] → <br>
+                2️⃣ [Etapa 2] → <br>
+                3️⃣ [Etapa 3] → <br>
+                ✅ [Resultado Final]
+            </p>
+        </div>
+
+        <!-- Slide 5: Recursos -->
+        <div class="slide">
+            <h2>Recursos Utilizados</h2>
+            <div style="margin-top: 3rem; text-align: center;">
+                <div class="reveal-item" style="color: #059669; font-size: 2rem; margin: 1.5rem 0;">
+                    ✅ [X]% Reutilizável (templates prontos)
+                </div>
+                <div class="reveal-item" style="color: #D97706; font-size: 2rem; margin: 1.5rem 0;">
+                    🟡 [Y]% Adaptações (customizações)
+                </div>
+                <div class="reveal-item" style="color: #DC2626; font-size: 2rem; margin: 1.5rem 0;">
+                    🔴 [Z]% Desenvolvimento novo
+                </div>
+            </div>
+            <p class="reveal-item" style="margin-top: 3rem; font-weight: bold;">
+                ⚡ Vantagem: Velocidade e confiabilidade comprovadas
+            </p>
+        </div>
+
+        <!-- Slide 6: Timeline -->
+        <div class="slide">
+            <h2>Cronograma</h2>
+            <ol style="text-align: left; font-size: 1.8rem; line-height: 2.5;">
+                <li class="reveal-item">📅 Semana 1-2: [Fase 1]</li>
+                <li class="reveal-item">📅 Semana 3-4: [Fase 2]</li>
+                <li class="reveal-item">📅 Semana 5-6: [Fase 3]</li>
+                <li class="reveal-item">📅 Semana 7: Testes e ajustes</li>
+                <li class="reveal-item">📅 Semana 8: Entrega final</li>
+            </ol>
+            <p class="reveal-item" style="margin-top: 3rem; font-weight: bold; font-size: 2rem;">
+                ⏱️ Prazo total: [X] semanas
+            </p>
+        </div>
+
+        <!-- Slide 7: Investimento -->
+        <div class="slide">
+            <h2 class="reveal-item">Investimento</h2>
+            <div class="price-box reveal-item">
+                <div class="price">R$ [VALOR]</div>
+            </div>
+            <div class="comparison-list">
+                <p class="reveal-item" style="font-size: 1.8rem; margin-bottom: 1.5rem; font-weight: bold;">Comparações Realistas:</p>
+                <ul>
+                    <li class="reveal-item">📊 Vs Contratar CLT: Economia de R$ [X]/ano</li>
+                    <li class="reveal-item">⏰ Vs Fazer manual: Libera [Y]h/ano</li>
+                    <li class="reveal-item">💸 Vs Não fazer: Evita perder R$ [Z]/ano</li>
+                </ul>
+                <p class="reveal-item" style="margin-top: 3rem; font-weight: bold; font-size: 2rem;">
+                    🚀 Retorno do investimento: Em [N] dias
+                </p>
+            </div>
+        </div>
+
+        <!-- Slide 8: ROI -->
+        <div class="slide">
+            <h2>Projeção de Resultados (Ano 1)</h2>
+            <div class="scenarios">
+                <div class="scenario reveal-item">
+                    <h3>🟢 Conservador</h3>
+                    <p><strong>Investimento:</strong> R$ [VALOR]</p>
+                    <p><strong>Retorno:</strong> R$ [VALOR]</p>
+                    <p><strong>Lucro:</strong> R$ [VALOR]</p>
+                    <p style="font-size: 1.5rem; margin-top: 1rem;"><strong>ROI: [X]x</strong></p>
+                </div>
+                <div class="scenario reveal-item">
+                    <h3>🟡 Realista ⭐</h3>
+                    <p><strong>Investimento:</strong> R$ [VALOR]</p>
+                    <p><strong>Retorno:</strong> R$ [VALOR]</p>
+                    <p><strong>Lucro:</strong> R$ [VALOR]</p>
+                    <p style="font-size: 1.5rem; margin-top: 1rem;"><strong>ROI: [X]x</strong></p>
+                </div>
+                <div class="scenario reveal-item">
+                    <h3>🔵 Otimista</h3>
+                    <p><strong>Investimento:</strong> R$ [VALOR]</p>
+                    <p><strong>Retorno:</strong> R$ [VALOR]</p>
+                    <p><strong>Lucro:</strong> R$ [VALOR]</p>
+                    <p style="font-size: 1.5rem; margin-top: 1rem;"><strong>ROI: [X]x</strong></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9: O Que Está Incluso -->
+        <div class="slide">
+            <h2>O Que Está Incluso</h2>
+            <ul>
+                <li class="reveal-item">✅ [Entregável 1]</li>
+                <li class="reveal-item">✅ [Entregável 2]</li>
+                <li class="reveal-item">✅ [Entregável 3]</li>
+                <li class="reveal-item">✅ Suporte de [X] dias</li>
+                <li class="reveal-item">✅ Documentação completa</li>
+                <li class="reveal-item">✅ Treinamento da equipe</li>
+            </ul>
+        </div>
+
+        <!-- Slide 10: Próximos Passos -->
+        <div class="slide">
+            <h2>Próximos Passos</h2>
+            <ol style="font-size: 2rem; line-height: 2.5; text-align: left;">
+                <li class="reveal-item">✅ Você aprova a proposta</li>
+                <li class="reveal-item">📝 Assinamos contrato</li>
+                <li class="reveal-item">💳 Pagamento: [forma de pagamento]</li>
+                <li class="reveal-item">🚀 Início em [data]</li>
+                <li class="reveal-item">🎯 Entrega em [data]</li>
+            </ol>
+            <p class="reveal-item" style="margin-top: 3rem; font-size: 1.5rem;">
+                <strong>Dúvidas?</strong> [email/telefone]
+            </p>
+        </div>
+    </div>
+
+    <div class="progress">
+        <span id="current-slide">1</span> / <span id="total-slides">10</span>
+    </div>
+
+    <div class="hint">
+        Pressione → ou clique para avançar | F para tela cheia
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        let revealIndex = 0;
+
+        document.getElementById('total-slides').textContent = totalSlides;
+
+        function updateSlide() {
+            slides.forEach((slide, index) => {
+                slide.classList.toggle('active', index === currentSlide);
+            });
+            document.getElementById('current-slide').textContent = currentSlide + 1;
+            revealIndex = 0;
+            hideAllReveals();
+        }
+
+        function hideAllReveals() {
+            const currentSlideEl = slides[currentSlide];
+            const reveals = currentSlideEl.querySelectorAll('.reveal-item');
+            reveals.forEach(item => item.classList.remove('visible'));
+        }
+
+        function revealNext() {
+            const currentSlideEl = slides[currentSlide];
+            const reveals = currentSlideEl.querySelectorAll('.reveal-item');
+
+            if (revealIndex < reveals.length) {
+                reveals[revealIndex].classList.add('visible');
+                revealIndex++;
+                return true;
+            }
+            return false;
+        }
+
+        function nextSlide() {
+            if (!revealNext()) {
+                if (currentSlide < totalSlides - 1) {
+                    currentSlide++;
+                    updateSlide();
+                }
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                updateSlide();
+            }
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                e.preventDefault();
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                prevSlide();
+            } else if (e.key === 'f' || e.key === 'F') {
+                if (!document.fullscreenElement) {
+                    document.documentElement.requestFullscreen();
+                } else {
+                    document.exitFullscreen();
+                }
+            }
+        });
+
+        document.addEventListener('click', (e) => {
+            if (e.target.closest('.slide')) {
+                nextSlide();
+            }
+        });
+
+        // Initial reveal
+        updateSlide();
+    </script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+# 🌐 Config: Casa Nova Imóveis
+# Site: casanova.com.br
+
+# Domínio do site (sem http/https)
+dominio: casanova.com.br
+
+# Adicionar www? (true/false)
+www: true
+
+# Pasta do projeto (código-fonte React/Next/Vue)
+projeto: ~/projetos/casanova-site
+
+# Comando para fazer build
+build: npm run build
+
+# Pasta gerada pelo build (build/, out/, dist/)
+pasta_build: build/

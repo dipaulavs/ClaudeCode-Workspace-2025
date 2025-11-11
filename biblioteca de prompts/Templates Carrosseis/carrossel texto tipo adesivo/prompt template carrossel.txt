@@ -1,0 +1,80 @@
+📸 PROMPTS ADAPTÁVEIS PARA QUALQUER NICHO
+
+Imagem 1 - Capa (VERSÃO FINAL)
+Design editorial moderno de carrossel Instagram para paleta de cores. Fundo: [IMAGENS E SÍMBOLOS CORRESPONDENTE AO INPUT AQUI - foto real do ambiente/estabelecimento/produto do nicho]. 
+
+Layout: título centralizado vertical ocupando 60% da altura com EFEITO STICKER/ADESIVO em 3 camadas:
+
+TIPOGRAFIA COM EFEITO STICKER:
+- Fonte: Display serif vintage estilo Cooper Black/Souvenir Bold com swash ornamentais
+- Peso: Extra Bold com alto contraste entre hastes
+- Largura: Extended/Wide (caracteres largos)
+
+CAMADAS DO EFEITO (de dentro para fora):
+1. FILL/PREENCHIMENTO: Creme claro (#F5EFE0 ou #FFF8E7)
+2. STROKE INTERNO: Preto (#1A1A1A) com 2-3px de espessura
+3. STROKE EXTERNO BRANCO: Branco puro (#FFFFFF) com 8-12px de espessura (efeito adesivo)
+
+- Efeito final: Aparência de adesivo/sticker recortado colado sobre a foto
+- Kerning: Tight/apertado entre letras
+- Serifas: Bracketed arredondadas estilo vintage anos 70
+- "R" inicial com floreio/swash dramático curvilíneo
+- Alinhamento: Centralizado vertical
+
+TEXTO: "[TEXTO EDITÁVEL AQUI]" (ex: "ROUBE MINHAS PALETAS DE CORES")
+
+Abaixo do título: texto "[TEXTO EDITÁVEL AQUI]" em script cursivo manuscrito fino (#2D2D2D), sem efeito sticker, tamanho pequeno.
+
+Rodapé inferior: "@lfimoveis" em fonte serifada branca simples, sem efeito sticker, centralizado.
+
+Composição balanceada, hierarquia visual forte, estética clean profissional com destaque tipo revista/editorial.
+🎨 ESPECIFICAÇÕES TÉCNICAS DO EFEITO STICKER
+Camada	Cor	Espessura	Ordem
+Fill (centro)	#F5EFE0 (creme)	-	1ª
+Stroke interno	#1A1A1A (preto)	2-3px	2ª
+Stroke externo	#FFFFFF (branco)	8-12px	3ª
+Como implementar:
+No Photoshop/Illustrator:
+Texto com fill creme
+Stroke 1: preto 2-3px
+Stroke 2: branco 8-12px (adicionar segundo stroke)
+No Canva/Figma:
+Duplicar texto 3 vezes
+Camada inferior: branco, stroke 12px
+Camada média: preto, stroke 3px
+Camada superior: fill creme
+Prompt para IA:
+"vintage display serif typography with triple-layer sticker effect: cream fill, thin black outline, thick white outer border giving cutout sticker appearance"
+
+Imagem 2 - Paleta 01
+Layout de paleta de cores profissional com fundo bege claro (#F5F2ED) texturizado sutil. Título superior esquerdo: "[TEXTO EDITÁVEL AQUI]" em tipografia serifada preta elegante. Número "01" em fonte display gigante (#2D2D2D) no canto superior direito. Distribuição assimétrica de 4 cartões de cor com bordas arredondadas (20px): ESQUERDA VERTICAL: "[TEXTO EDITÁVEL AQUI]" (#E9DAC7) topo, "[TEXTO EDITÁVEL AQUI]" (#C6A385) meio. DIREITA VERTICAL: "[TEXTO EDITÁVEL AQUI]" (#374051) topo maior, "[TEXTO EDITÁVEL AQUI]" (#713535) base maior. Cada cartão contém: nome da cor em tipografia serifada branca (tamanho grande), código hexadecimal em sans-serif branca menor abaixo separado por linha fina. Espaçamento generoso entre elementos, sombras sutis nos cartões, composição equilibrada tipo Bento Box.
+Imagem 3 - Paleta 02
+Layout de paleta de cores profissional com fundo bege claro (#F5F2ED) texturizado sutil. Título superior esquerdo: "[TEXTO EDITÁVEL AQUI]" em tipografia serifada preta elegante (3 linhas). Número "02" em fonte display gigante (#2D2D2D) no canto inferior direito. Distribuição assimétrica de 5 cartões de cor com bordas arredondadas (20px): ESQUERDA: "[TEXTO EDITÁVEL AQUI]" (#F2E1D1) com código #F2E1D1, "[TEXTO EDITÁVEL AQUI]" (#CA9633) dourado com código #CA9633. DIREITA SUPERIOR: "[TEXTO EDITÁVEL AQUI]" (#B0B39E) verde sálvia grande com código #B0B39E. DIREITA INFERIOR: "[TEXTO EDITÁVEL AQUI]" (#6A442D) marrom chocolate grande com código #6A442D. Cada cartão: nome em serifada branca, código em sans-serif branca. Hierarquia visual balanceada, espaçamento generoso.
+Imagem 4 - Paleta 03
+Layout de paleta de cores profissional com fundo bege claro (#F5F2ED) texturizado sutil. Título superior esquerdo: "[TEXTO EDITÁVEL AQUI]" em tipografia serifada preta elegante (3 linhas). Número "03" em fonte display gigante (#2D2D2D) no canto superior direito. Distribuição assimétrica de 4 cartões de cor com bordas arredondadas (20px): ESQUERDA VERTICAL: "[TEXTO EDITÁVEL AQUI]" (#DCCFBF) bege claro topo, "[TEXTO EDITÁVEL AQUI]" (#671F2B) vinho escuro base. DIREITA: "[TEXTO EDITÁVEL AQUI]" (#F2AAC3) rosa suave médio com código #F2AAC3, "[TEXTO EDITÁVEL AQUI]" (#EA6536) laranja vibrante base com código #EA6536. Cada cartão: nome em serifada branca grande, código hexadecimal em sans-serif branca menor. Composição tipo Bento Box, harmonia de tons quentes.
+Imagem 5 - Paleta 04
+Layout de paleta de cores profissional com fundo bege claro (#F5F2ED) texturizado sutil. Título superior esquerdo: "[TEXTO EDITÁVEL AQUI]" em tipografia serifada preta elegante (3 linhas). Número "04" em fonte display gigante (#2D2D2D) no canto inferior direito. Distribuição assimétrica de 5 cartões de cor com bordas arredondadas (20px): ESQUERDA: "[TEXTO EDITÁVEL AQUI]" (#E1C1BE) bege dourado, "[TEXTO EDITÁVEL AQUI]" (#A79567) taupe esverdeado. DIREITA SUPERIOR: "[TEXTO EDITÁVEL AQUI]" (#8E5F27) marrom dourado grande com código #8E5F27. DIREITA INFERIOR: "[TEXTO EDITÁVEL AQUI]" (#833811) marrom tijolo grande com código #833811. Cada cartão: nome em serifada branca, código em sans-serif branca. Harmonia de tons terrosos, hierarquia visual clara.
+Imagem 6 - Paleta 05
+Layout de paleta de cores profissional com fundo bege claro (#F5F2ED) texturizado sutil. Título superior esquerdo: "[TEXTO EDITÁVEL AQUI]" em tipografia serifada preta elegante (3 linhas). Número "05" em fonte display gigante (#2D2D2D) no canto superior direito. Distribuição assimétrica de 4 cartões de cor com bordas arredondadas (20px): ESQUERDA: "[TEXTO EDITÁVEL AQUI]" (#F2E9CC) champagne claro topo, "[TEXTO EDITÁVEL AQUI]" (#D3B59D) bege rosado meio. DIREITA: "[TEXTO EDITÁVEL AQUI]" (#656E5D) verde oliva grande com código #656E5D topo, "[TEXTO EDITÁVEL AQUI]" (#375059) azul petróleo escuro grande com código #375059 base. Cada cartão: nome em serifada branca, código em sans-serif branca. Composição equilibrada, contraste de tons claros e escuros.
+Imagem 7 - CTA Final (Save for Later)
+Design de call-to-action estilo revista lifestyle. Fundo: [IMAGENS E SÍMBOLOS CORRESPONDENTE AO INPUT AQUI - fotografia real relacionada ao nicho]. Overlay sutil granulado/texturizado. Tipografia centralizada: "[TEXTO EDITÁVEL AQUI]" em fonte serifada elegante creme (#F2E9CC) ocupando terço superior, subtítulo "[TEXTO EDITÁVEL AQUI]" em sans-serif bold branca abaixo. Rodapé inferior: "@lfimoveis" em fonte serifada branca. Composição vertical, atmosfera sofisticada, estética editorial clean, convite à ação sutil mas impactante.
+📋 INSTRUÇÕES DE USO DO TEMPLATE
+Para adaptar ao seu nicho:
+1. Imagem 1 (Capa):
+[IMAGENS E SÍMBOLOS]: Foto do seu estabelecimento/produto/ambiente
+[TEXTO EDITÁVEL]: Título principal (ex: "ROUBE MINHAS PALETAS DE CORES")
+[TEXTO EDITÁVEL]: Subtítulo cursivo (ex: "hello", "bem-vindo", etc)
+2. Imagens 2-6 (Paletas):
+[TEXTO EDITÁVEL]: Nome/tema da paleta (ex: "Elegância Moderna", "Tropical Vibrante")
+[TEXTO EDITÁVEL]: Nomes das cores (podem ser criativos relacionados ao nicho)
+Códigos hex: Mantenha os existentes ou substitua pelas cores da sua marca
+3. Imagem 7 (CTA):
+[IMAGENS E SÍMBOLOS]: Foto relacionada ao nicho (praia, cidade, natureza, produto)
+[TEXTO EDITÁVEL]: CTA principal (ex: "SALVE PARA USAR MAIS TARDE")
+[TEXTO EDITÁVEL]: Subtítulo (ex: "SAVE FOR LATER", "CLIQUE NO ❤️")
+Mantém fixo:
+Layout Bento Box assimétrico
+Tipografia serifada + sans-serif
+Fundo bege #F5F2ED
+Bordas arredondadas 20px
+Rodapé: @lfimoveis

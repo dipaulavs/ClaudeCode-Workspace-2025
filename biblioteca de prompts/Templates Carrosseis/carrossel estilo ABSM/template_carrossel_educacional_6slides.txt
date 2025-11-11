@@ -1,0 +1,446 @@
+═══════════════════════════════════════════════════════════════════
+📊 TEMPLATE: CARROSSEL EDUCACIONAL TIPOS/ESTILOS
+═══════════════════════════════════════════════════════════════════
+
+🎯 ESTRUTURA: 6 slides
+📐 FORMATO: 1080x1350px (4:5 Instagram)
+🎨 ESTILO: Minimalista educacional com mockups e exemplos práticos
+🏢 APLICAÇÃO: Qualquer nicho (imóveis, produtos, serviços, etc.)
+
+═══════════════════════════════════════════════════════════════════
+
+📸 SLIDE 1 - CAPA ATRATIVA (HOOK VISUAL)
+═══════════════════════════════════════════════════════════════════
+
+PROMPT:
+Fotografia top-down (visão de cima) de uma mesa com iluminação natural difusa e suave. [IMAGENS E SÍMBOLOS CORRESPONDENTES AO INPUT AQUI - exemplo: para imóveis = plantas de apartamento, chaves, maquete; para café = croissant dourado polvilhado com açúcar de confeiteiro e 3 xícaras de café latte com arte de leite em espuma (padrão folha/coração); para fitness = tênis de corrida, garrafa d'água, smartwatch]. 
+
+Composição: arranjo simétrico dos objetos, fundo de mesa de madeira escura ou superfície texturizada, profundidade de campo rasa (f/2.8-f/4), tons quentes (temperatura de cor 4500K-5500K) ou frios conforme identidade visual do nicho.
+
+Sobreposição de elementos gráficos centralizados:
+
+CABEÇALHO (topo, centralizado):
+"@lfimoveis | 99" 
+- Fonte: Serifada fina (ex: Freight Display Light, Playfair Display Regular)
+- Cor: Marrom escuro (#4A3428) ou cor primária da marca
+- Tamanho: 28-32px
+- Kerning/tracking: +80 (letras bem espaçadas)
+- Posição: 120px do topo
+
+BADGE CENTRAL (sticker/adesivo com efeito ondulado):
+Formato: Shape irregular orgânico com bordas onduladas (estilo sticker de papel rasgado ou etiqueta vintage). NÃO é retângulo! Bordas devem ter curvas irregulares suaves como um adesivo colado.
+
+Características do badge:
+- Cor de fundo: Branco puro (#FFFFFF)
+- Borda/stroke: Nenhuma ou sutil (1-2px) em cinza muito claro (#F0F0F0)
+- Efeito de profundidade: Sombra suave (drop shadow): 
+  * Offset Y: 8-12px
+  * Blur: 20-30px
+  * Opacidade: 15-20%
+  * Cor: Preto (#000000)
+- Bordas onduladas: Curvas irregulares naturais (como adesivo de papel ou post-it ondulado)
+- Padding interno: 40-50px (horizontal) x 30-40px (vertical)
+
+Texto DENTRO do badge (3 linhas, centralizado):
+
+Linha 1: "[TEXTO EDITÁVEL AQUI - palavra-chave principal]"
+- Fonte: Serifada elegante (ex: Freight Display Medium, Playfair Display SemiBold)
+- Cor: Marrom médio/terracota (#8B5A3C) ou cor primária da marca
+- Tamanho: 56-64px
+- Peso: Medium/SemiBold (500-600)
+- Line height: 1.1
+
+Linha 2: "[TEXTO EDITÁVEL AQUI - complemento]"
+- Fonte: Sans-serif moderna (ex: Inter Regular, DM Sans Regular, Helvetica Neue)
+- Cor: Preto (#000000)
+- Tamanho: 52-60px
+- Peso: Regular (400)
+- Line height: 1.2
+
+Linha 3: "[TEXTO EDITÁVEL AQUI - complemento final]"
+- Fonte: Sans-serif moderna (mesma da linha 2)
+- Cor: Preto (#000000)
+- Tamanho: 52-60px
+- Peso: Regular (400)
+- Line height: 1.2
+
+EXEMPLO ORIGINAL:
+- Cabeçalho: "ABSM | 99"
+- Badge linha 1: "Carrosséis" (serifada marrom)
+- Badge linha 2: "virais para" (sans-serif preta)
+- Badge linha 3: "você testar" (sans-serif preta)
+
+EXEMPLO IMÓVEIS:
+- Cabeçalho: "@lfimoveis | 99"
+- Badge linha 1: "Estratégias" (serifada terracota)
+- Badge linha 2: "que vendem" (sans-serif preta)
+- Badge linha 3: "imóveis mais rápido" (sans-serif preta)
+
+ESPECIFICAÇÕES FOTOGRÁFICAS:
+- Estilo: Fotografia lifestyle autêntica (estilo iPhone 11/12)
+- Iluminação: Natural suave, luz difusa de janela (golden hour ou luz indireta)
+- Composição: Simétrica ou regra dos terços
+- Saturação: Levemente aumentada (+10-15%)
+- Contraste: Médio-alto para destacar objetos
+- Temperatura: Quente (tons bege/dourado/âmbar) ou frio conforme nicho
+- Textura: Mesa visível, grãos de madeira ou superfície com detalhes
+
+VARIÁVEIS PARA PERSONALIZAÇÃO:
+- [IMAGENS E SÍMBOLOS]: 3-4 objetos icônicos do nicho (dispostos simetricamente)
+- [TEXTO LINHA 1]: Palavra-chave principal (1-2 palavras, fonte serifada, cor marca)
+- [TEXTO LINHA 2]: Complemento 1 (2-4 palavras, sans-serif preta)
+- [TEXTO LINHA 3]: Complemento 2 (2-5 palavras, sans-serif preta)
+
+DETALHES CRUCIAIS DO BADGE:
+⚠️ O badge NÃO é retangular! Deve ter formato irregular com bordas onduladas suaves (como sticker de papel rasgado à mão ou etiqueta vintage com corte imperfeito). Use path/vetores com curvas Bezier suaves para criar bordas orgânicas naturais.
+
+═══════════════════════════════════════════════════════════════════
+
+📸 SLIDE 2 - TIPO/ESTRATÉGIA #1
+═══════════════════════════════════════════════════════════════════
+
+PROMPT:
+Design de slide educacional minimalista, fundo bege claro (#EAE3D8) ou cor secundária da marca.
+
+Cabeçalho: "@lfimoveis" (fonte serifada pequena, cor escura, letras espaçadas, centralizado no topo)
+
+Texto principal (centralizado, tipografia preta):
+"[TEXTO EDITÁVEL AQUI - descrição do tipo/estratégia]"
+
+Abaixo: Screenshot mockup do Instagram mostrando post com [IMAGENS E SÍMBOLOS CORRESPONDENTES AO INPUT AQUI]. Interface Instagram com header preto, indicadores de carrossel, ícones de interação (curtir, comentar, compartilhar, salvar).
+
+Texto sobre a imagem mockup: "[TEXTO EDITÁVEL AQUI - CTA ou instrução]" (fonte bold preta) com seta apontando para baixo (opcional).
+
+EXEMPLO ORIGINAL:
+- Texto principal: "Carrossel criativo que usa do recurso de "arrastar os pontos" - revelando, aos poucos, a imagem principal:"
+- Mockup: Burger King com hambúrguer visto por baixo
+- Texto CTA: "SEGURE AS BOLINHAS E PASSE PRA VER O NOVO LANÇAMENTO"
+
+EXEMPLO IMÓVEIS:
+- Texto principal: "Carrossel que revela cada cômodo do imóvel progressivamente - criando curiosidade e aumentando o tempo de visualização:"
+- Mockup: Tour virtual de apartamento
+- Texto CTA: "ARRASTE PARA CONHECER CADA AMBIENTE"
+
+Layout limpo, espaçamento generoso, hierarquia tipográfica clara.
+
+VARIÁVEIS:
+- [TEXTO DESCRIÇÃO]: Explicação do tipo/estratégia (1-2 linhas)
+- [IMAGENS MOCKUP]: Screenshot ou exemplo visual do nicho
+- [TEXTO CTA]: Call-to-action sobre a imagem
+
+═══════════════════════════════════════════════════════════════════
+
+📸 SLIDE 3 - TIPO/ESTRATÉGIA #2
+═══════════════════════════════════════════════════════════════════
+
+PROMPT:
+Design de slide educacional, fundo marrom médio (#8B7355) ou cor terciária da marca.
+
+Cabeçalho: "@lfimoveis" (fonte serifada pequena, branca, letras espaçadas, centralizado no topo)
+
+Texto principal (centralizado, tipografia branca):
+"[TEXTO EDITÁVEL AQUI - descrição do tipo/estratégia]"
+
+Abaixo: Screenshot mockup do Instagram mostrando post com [IMAGENS E SÍMBOLOS CORRESPONDENTES AO INPUT AQUI]. Interface Instagram com header preto, métricas visíveis (curtidas, comentários).
+
+EXEMPLO ORIGINAL:
+- Texto: "Também usando o recurso de "arrastar os pontos", forma uma história com a sequência de fotos do carrossel:"
+- Mockup: Pepsi em banco de parque
+
+EXEMPLO IMÓVEIS:
+- Texto: "Crie uma narrativa visual mostrando a jornada do cliente - desde a busca até a chave na mão:"
+- Mockup: Sequência de fotos (busca → visita → contrato → entrega de chaves)
+
+Composição outdoor/indoor conforme nicho, profundidade de campo rasa, cores vibrantes ou neutras.
+
+VARIÁVEIS:
+- [TEXTO DESCRIÇÃO]: Explicação do tipo/estratégia (1-2 linhas)
+- [IMAGENS MOCKUP]: Screenshot ou exemplo visual do nicho
+
+═══════════════════════════════════════════════════════════════════
+
+📸 SLIDE 4 - TIPO/ESTRATÉGIA #3
+═══════════════════════════════════════════════════════════════════
+
+PROMPT:
+Design de slide educacional, fundo marrom escuro (#6B5444) ou cor quaternária da marca.
+
+Cabeçalho: "@lfimoveis" (fonte serifada pequena, branca, letras espaçadas, centralizado no topo)
+
+Texto principal (centralizado, tipografia branca):
+"[TEXTO EDITÁVEL AQUI - descrição do tipo/estratégia]"
+
+Abaixo: Mockup de foto relacionada ao nicho com overlay de interface iOS nativa. [IMAGENS E SÍMBOLOS CORRESPONDENTES AO INPUT AQUI]. Acima da foto, menu contextual iOS branco com opções "Copy | Select All | Look Up >".
+
+Sobreposição de texto sobre a foto (centralizado, branco, sombra suave):
+"[TEXTO EDITÁVEL AQUI - título/tema do post]"
+
+Rodapé da imagem: "@lfimoveis" (esquerda) e "[MÊS/DATA]" (direita).
+
+EXEMPLO ORIGINAL:
+- Texto: "Use elementos do iOS (sistema operacional da Apple) para ilustrar seus carrosséis:"
+- Foto: Mulher atravessando rua
+- Texto sobre foto: "Estilos de fotos que você deveria testar nos seus carrosséis"
+
+EXEMPLO IMÓVEIS:
+- Texto: "Use elementos nativos do smartphone para dar autenticidade aos seus posts:"
+- Foto: Vista de varanda de apartamento
+- Texto sobre foto: "Melhores horários para fotografar seu imóvel"
+
+Estilo: screenshot iOS autêntico, interface nativa Apple, tipografia SF Pro.
+
+VARIÁVEIS:
+- [TEXTO DESCRIÇÃO]: Explicação do tipo/estratégia (1-2 linhas)
+- [IMAGENS FOTO]: Foto relacionada ao nicho
+- [TEXTO OVERLAY]: Título/tema do conteúdo
+- [DATA]: Mês ou data de referência
+
+═══════════════════════════════════════════════════════════════════
+
+📸 SLIDE 5 - TIPO/ESTRATÉGIA #4
+═══════════════════════════════════════════════════════════════════
+
+PROMPT:
+Design de slide educacional, fundo bege muito claro (#F5F1EB) ou cor clara da marca.
+
+Cabeçalho: "@lfimoveis" (fonte serifada pequena, cor escura, letras espaçadas, centralizado no topo)
+
+Texto principal (centralizado):
+"[TEXTO EDITÁVEL AQUI - descrição do tipo/estratégia]"
+"[TEXTO EDITÁVEL AQUI - fórmula/estrutura]"
+(uma palavra em destaque - cor marca para ênfase)
+
+Abaixo: Foto relacionada ao nicho com [IMAGENS E SÍMBOLOS CORRESPONDENTES AO INPUT AQUI]. Composição sofisticada, tons pastel ou cores do nicho.
+
+Texto sobre a imagem (estilo elegante):
+"[TEXTO EDITÁVEL AQUI - frase em inglês ou português]"
+
+À esquerda: Seta curva preta apontando para baixo com texto:
+"tradução:
+[TEXTO EDITÁVEL AQUI - tradução ou explicação]"
+
+EXEMPLO ORIGINAL:
+- Texto: "Crie carrosséis com indicações variadas, seguindo essa estrutura:"
+- Fórmula: "[coisas que consumi] + [quebra de objeção ou desejo da audiência]"
+- Foto: Obra de Monet em museu
+- Texto em inglês: "media I consumed that kept me curious this week"
+- Tradução: "Mídias que consumi que me mantiveram curiosa essa semana"
+
+EXEMPLO IMÓVEIS:
+- Texto: "Crie carrosséis com listas de referências seguindo essa estrutura:"
+- Fórmula: "[bairros visitados] + [critérios de escolha da audiência]"
+- Foto: Vista aérea de bairro nobre
+- Texto: "neighborhoods I explored that matched my client's dreams this month"
+- Tradução: "Bairros que explorei que combinam com o sonho dos meus clientes este mês"
+
+Composição sofisticada, tons pastel, estética minimalista clean.
+
+VARIÁVEIS:
+- [TEXTO DESCRIÇÃO]: Explicação do tipo/estratégia
+- [TEXTO FÓRMULA]: Estrutura/formato sugerido
+- [PALAVRA DESTAQUE]: Palavra enfatizada (cor marca)
+- [IMAGENS FOTO]: Foto relacionada ao nicho
+- [TEXTO OVERLAY]: Frase principal (inglês/português)
+- [TRADUÇÃO]: Explicação em português
+
+═══════════════════════════════════════════════════════════════════
+
+📸 SLIDE 6 - CTA FINAL
+═══════════════════════════════════════════════════════════════════
+
+PROMPT:
+Design de slide CTA (call-to-action), fundo bege claro sólido (#E8E3D8) ou cor neutra da marca.
+
+Cabeçalho: "@lfimoveis | 99" (fonte serifada cor marca, letras espaçadas, pequeno, centralizado no topo)
+
+Texto principal (centralizado, tipografia grande):
+"[TEXTO EDITÁVEL AQUI - mensagem principal com palavras-chave destacadas]"
+
+Hierarquia tipográfica:
+- Palavras-chave em cor marca/terracota (#8B5A3C)
+- Restante do texto em preto
+
+Abaixo (espaçamento generoso):
+"[TEXTO EDITÁVEL AQUI - CTA + emoji]"
+
+EXEMPLO ORIGINAL:
+- Texto: "E para aprender a criar carrosséis que geram resultados para seus clientes, aproveite a oferta de Black Friday do Espetacular Curso de Carrossel!"
+- Destaques: "que geram resultados" e "Black Friday"
+- CTA: "Comente ECC e veja seu direct 🎠"
+
+EXEMPLO IMÓVEIS:
+- Texto: "E para receber nossa lista exclusiva de imóveis que se valorizam mais rápido, aproveite nossa consultoria gratuita este mês!"
+- Destaques: "que se valorizam mais rápido" e "consultoria gratuita"
+- CTA: "Comente LISTA e receba no direct 🏡"
+
+Layout: amplo espaço em branco, tipografia limpa e legível, hierarquia clara por cor e tamanho, alinhamento centralizado, composição equilibrada.
+
+VARIÁVEIS:
+- [TEXTO PRINCIPAL]: Mensagem de valor + oferta
+- [PALAVRAS DESTAQUE]: 2-3 palavras em cor marca
+- [CTA]: Instrução + emoji temático
+
+═══════════════════════════════════════════════════════════════════
+
+📋 CHECKLIST DE ADAPTAÇÃO PARA QUALQUER NICHO
+═══════════════════════════════════════════════════════════════════
+
+✅ IDENTIDADE VISUAL:
+   □ Substituir "@lfimoveis" por nome do cliente/marca
+   □ Definir paleta de cores (primária, secundária, terciária)
+   □ Escolher fonte serifada e sans-serif da marca
+
+✅ CONTEÚDO VISUAL:
+   □ Slide 1: Objetos/símbolos do nicho (3-4 itens) + badge sticker ondulado
+   □ Slides 2-3: Screenshots mockup Instagram do nicho
+   □ Slide 4: Foto autêntica do nicho com overlay iOS
+   □ Slide 5: Foto sofisticada relacionada ao tema
+
+✅ TEXTOS:
+   □ Adaptar descrições para linguagem do nicho
+   □ Criar CTAs específicos da audiência
+   □ Traduzir exemplos para contexto do cliente
+   □ Definir palavras-chave para destaque (2-3 por slide)
+
+✅ EMOJIS:
+   □ Escolher emoji temático para CTA final
+   □ Manter uso mínimo e estratégico
+
+✅ BADGE STICKER (SLIDE 1):
+   □ Criar shape com bordas onduladas irregulares (NÃO retangular!)
+   □ Aplicar sombra suave para efeito de profundidade
+   □ Garantir contraste entre texto serifado (cor marca) e sans-serif (preto)
+
+═══════════════════════════════════════════════════════════════════
+
+🎨 PALETA DE CORES SUGERIDA (TEMPLATE ORIGINAL)
+═══════════════════════════════════════════════════════════════════
+
+Slide 1: Fundo escuro natural (foto) + Badge branco (#FFFFFF) com bordas onduladas
+Slide 2: #EAE3D8 (bege claro)
+Slide 3: #8B7355 (marrom médio)
+Slide 4: #6B5444 (marrom escuro)
+Slide 5: #F5F1EB (bege muito claro)
+Slide 6: #E8E3D8 (bege claro)
+
+Cor destaque: #8B5A3C (terracota/marrom)
+Cor cabeçalho: #4A3428 (marrom escuro)
+
+═══════════════════════════════════════════════════════════════════
+
+📐 ESPECIFICAÇÕES TÉCNICAS
+═══════════════════════════════════════════════════════════════════
+
+Dimensões: 1080x1350px (4:5)
+Resolução: 72-300 DPI
+Formato exportação: JPG (qualidade 90%) ou PNG
+Fontes sugeridas: 
+- Serifada: Freight Display, Playfair Display, Cormorant Garamond
+- Sans-serif: Inter, DM Sans, Helvetica Neue
+
+Hierarquia tipográfica:
+- Cabeçalho: 24-32px
+- Título principal (badge serifado): 56-64px
+- Título principal (badge sans-serif): 52-60px
+- Corpo/descrição: 36-48px
+- Legendas: 28-36px
+
+Espaçamento: Mínimo 40px entre elementos
+Margens: 80px laterais, 100px superior/inferior
+
+Badge sticker (Slide 1):
+- Padding interno: 40-50px (horizontal) x 30-40px (vertical)
+- Drop shadow: Y offset 8-12px, blur 20-30px, opacidade 15-20%
+- Bordas: Curvas irregulares suaves (path vetorial com Bezier)
+
+═══════════════════════════════════════════════════════════════════
+
+💡 DICAS DE PERSONALIZAÇÃO POR NICHO
+═══════════════════════════════════════════════════════════════════
+
+🏠 IMÓVEIS (@lfimoveis):
+- Slide 1: Chaves, plantas arquitetônicas, maquete, café
+- Mockups: Tour virtual, fotos de ambientes
+- CTAs: "LISTA", "VISITA", "CONSULTORIA"
+- Emojis: 🏡 🔑 🏢 📍
+
+🍔 GASTRONOMIA:
+- Slide 1: Pratos gourmet, talheres elegantes, ingredientes frescos
+- Mockups: Fotos de pratos, menu digital
+- CTAs: "CARDÁPIO", "RESERVA", "DELIVERY"
+- Emojis: 🍕 🍔 ☕ 🍰
+
+💪 FITNESS:
+- Slide 1: Tênis de corrida, garrafa d'água, halteres, smartwatch
+- Mockups: Treinos, antes/depois
+- CTAs: "TREINO", "DIETA", "CONSULTORIA"
+- Emojis: 💪 🏋️ 🥗 ⏱️
+
+👗 MODA:
+- Slide 1: Roupas dobradas, acessórios, tecidos, café
+- Mockups: Looks, combinações
+- CTAs: "LOOKS", "CATÁLOGO", "PROMO"
+- Emojis: 👗 👠 💄 ✨
+
+🎓 EDUCAÇÃO:
+- Slide 1: Livros abertos, notebook, café, óculos de leitura
+- Mockups: Aulas, certificados, depoimentos
+- CTAs: "AULA", "MATERIAL", "INSCRIÇÃO"
+- Emojis: 📚 🎓 💡 🚀
+
+═══════════════════════════════════════════════════════════════════
+
+🔄 VARIAÇÕES DO TEMPLATE
+═══════════════════════════════════════════════════════════════════
+
+Este template pode ser usado para:
+✓ Tipos/estilos de produtos
+✓ Estratégias/táticas
+✓ Erros/acertos
+✓ Antes/depois
+✓ Ferramentas/recursos
+✓ Dicas/hacks
+✓ Inspirações/referências
+✓ Tendências/novidades
+
+Estrutura sempre:
+1. Capa hook (foto lifestyle + badge sticker)
+2-5. Tipos/exemplos práticos (mockups + descrições)
+6. CTA oferta/ação (texto destacado)
+
+═══════════════════════════════════════════════════════════════════
+
+🎯 TUTORIAL: COMO CRIAR O BADGE STICKER ONDULADO (SLIDE 1)
+═══════════════════════════════════════════════════════════════════
+
+OPÇÃO 1 - FIGMA/SKETCH:
+1. Criar retângulo branco base (400x300px)
+2. Usar plugin "Blob Maker" ou desenhar path manual
+3. Adicionar pontos de âncora extras nas bordas
+4. Curvar bordas usando handles Bezier (criar ondulação sutil)
+5. Aplicar drop shadow: Y=10px, Blur=25px, Opacity=18%
+
+OPÇÃO 2 - PHOTOSHOP:
+1. Criar shape retangular com Rounded Rectangle Tool
+2. Converter para Smart Object
+3. Edit > Transform > Warp > Custom
+4. Adicionar ondulações sutis nas bordas (arrastar grid)
+5. Layer Style > Drop Shadow (distance 10px, size 25px, opacity 18%)
+
+OPÇÃO 3 - CANVA:
+1. Procurar elemento "sticker" ou "label" nos elementos
+2. Filtrar por "wavy" ou "irregular"
+3. Escolher formato próximo a retângulo ondulado
+4. Ajustar cor para branco (#FFFFFF)
+5. Adicionar sombra em configurações (intensidade baixa)
+
+REFERÊNCIA VISUAL:
+O badge deve parecer um adesivo de papel colado sobre a foto, com:
+- Bordas levemente irregulares (não perfeitas)
+- Cantos arredondados mas ondulados
+- Sombra que dá sensação de "flutuar" sobre a imagem
+- Aparência orgânica e artesanal (não geométrico)
+
+═══════════════════════════════════════════════════════════════════
+FIM DO TEMPLATE
+═══════════════════════════════════════════════════════════════════

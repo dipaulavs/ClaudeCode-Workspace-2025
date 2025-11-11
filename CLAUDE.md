@@ -1,5 +1,5 @@
-# 🤖 Claude Code Configuration v7.5
-**Auto-load:** Sobrescreve comportamentos padrão | **Limite:** 150 linhas | **Última atualização:** 2025-11-05 19:30
+# 🤖 Claude Code Configuration v7.7
+**Auto-load:** Sobrescreve comportamentos padrão | **Limite:** 150 linhas | **Última atualização:** 2025-11-10 21:30
 
 ---
 
@@ -85,6 +85,50 @@ Instruções do comando
 **Princípio:** Reusar MCP tools > Criar código novo
 **Onde verificar:** Lista de `mcp__*` tools disponíveis no contexto
 
+### 1️⃣1️⃣ Organização É Tudo (ABSOLUTO)
+**REGRA ABSOLUTA:** NUNCA criar arquivos soltos ou em pastas aleatórias
+**Princípio:** Pastas → Subpastas → INDEX.md com endereço/função resumida
+**Fluxo obrigatório:**
+```
+App/Site/HTML?  ────> APPS E SITES/categoria/ + INDEX.md
+Script Python?  ────> SCRIPTS/categoria/ + INDEX.md
+Script Bash?    ────> SCRIPTS/categoria/ + INDEX.md
+Skill nova?     ────> .claude/skills/nome/ + atualizar INDEX.md
+Documentação?   ────> docs/categoria/ + INDEX.md
+Template?       ────> templates/categoria/ + INDEX.md
+Config?         ────> config/
+Outro?          ────> Perguntar ao usuário
+```
+**OBRIGATÓRIO em cada pasta:**
+- `INDEX.md` listando arquivos com endereço e função resumida
+- Estrutura hierárquica clara (categoria/subcategoria)
+- Nunca misturar tipos diferentes na mesma pasta
+
+**Proibido:** Criar `.py`, `.sh`, `.md`, `.json`, `.html` diretamente em `/` ou pasta genérica
+**Exceções:** `CLAUDE.md`, `README.md`, `.gitignore`, `package.json` (raiz apenas)
+**Antes de criar:** Identificar categoria → Criar estrutura de pastas → Criar INDEX.md → Criar arquivo
+
+### 1️⃣2️⃣ Deploy Padrão com SWARM + GitHub (OBRIGATÓRIO)
+**Quando:** Criar servidor | Subir site | API webhook | Automação 24/7
+**Fluxo SEMPRE (via GitHub):**
+```
+1. cd SWARM/automations/<nome> → desenvolver
+2. git add . && git commit -m "feat: ..."
+3. git push origin main
+4. SSH VPS: git pull && docker stack deploy
+5. https://<subdominio>.loop9.com.br ✅
+```
+**Setup inicial:**
+```
+cd SWARM && ./new.sh <nome> webhook-api <subdominio>
+cd automations/<nome> && git init && git remote add origin <repo>
+```
+**PROIBIDO:** Deploy direto sem Git | `./deploy.sh` local→VPS | Copiar arquivos via SCP
+**OBRIGATÓRIO:** Todo código versionado no GitHub primeiro
+**Padrões:** Naming kebab-case | SSL automático | Rede loop9Net
+**Gerenciar:** SSH VPS → `docker stack` commands
+**Logs:** SSH VPS → `docker service logs`
+
 ---
 
 ## 🔑 CREDENCIAIS PRÉ-CONFIGURADAS
@@ -96,7 +140,7 @@ Instruções do comando
 - **APIs ativas:** Sheets, Drive, Gmail, Docs
 - **Uso:** Qualquer ferramenta Google (sheets, calendar, drive, etc)
 
-**Cofre Completo:** `~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Claude-code-ios/🔐 Credenciais/🔑 Cofre de APIs.md`
+**Cofre Completo:** `~/Documents/Obsidian/Claude-code-ios/🔐 Credenciais/🔑 Cofre de APIs.md`
 **Regra:** SEMPRE consultar Cofre ANTES de criar ferramenta nova
 
 ---
@@ -106,7 +150,7 @@ Instruções do comando
 | Situação | Ação | Detalhes |
 |----------|------|----------|
 | **"To com uma ideia..."** | `adaptive-mentor` skill | Mentoria contextual |
-| **URL YouTube** | `estudar-video` skill OU `transcribe_video.py` | Auto transcrição |
+| **"Estuda esse vídeo pra mim"** | `estudar-video` skill | Somente pedido explícito |
 | **"Valida essa ideia"** | `idea-validator` skill | Validação mercado |
 | **"Cria PRD/MVP"** | `launch-planner` skill | Planejamento produto |
 | **"Upload rápido"** | `upload_rapido.py --from-local` | ~/Pictures/upload/ |
@@ -119,6 +163,8 @@ Instruções do comando
 | **Script com erro** | Corrigir → Atualizar script → Docs | Auto-melhoria |
 | **"Criar ferramenta..."** | 1° Consultar Cofre APIs | Reusar credenciais existentes |
 | **Nova API implementada** | Registrar no Cofre de APIs | Obsidian: `🔐 Credenciais/🔑 Cofre de APIs.md` |
+| **"Sobe servidor/site"** | SWARM: `./new.sh` → deploy | SSL automático .loop9.com.br |
+| **"Criar API/webhook"** | SWARM template webhook-api | Flask + Traefik + SSL |
 
 ---
 
@@ -141,6 +187,14 @@ Instruções do comando
 python3 criar_chatbot_cliente.py       # 🚀 CRIAR NOVO CHATBOT (framework universal)
 cd whatsapp-chatbot-carros && ./INICIAR_COM_NGROK.sh  # Exemplo funcional (Automaia)
 
+# Deploy (SWARM)
+cd SWARM
+./new.sh <nome> webhook-api <subdom>   # Criar estrutura
+cd automations/<nome>                  # Desenvolver
+cd ../.. && ./deploy.sh <nome>         # Deploy VPS
+./manage.sh list                       # Listar
+./logs.sh <nome>                       # Logs
+
 # Backup
 /bk                     # Git backup automático
 /cbk                    # Listar/restaurar backups
@@ -159,6 +213,7 @@ python3 scripts/image-generation/batch_generate.py --api nanobanana "p1" "p2"
 ```
 ClaudeCode-Workspace/
 ├── .claude/skills/      → 26 Skills com INDEX.md
+├── SWARM/               → 🐳 Deploy profissional VPS (82.25.68.132)
 ├── scripts/             → 71+ Templates organizados
 ├── tools/               → 65+ Ferramentas low-level
 ├── docs/                → Toda documentação detalhada
@@ -185,8 +240,9 @@ ClaudeCode-Workspace/
 - **Configurações APIs:** `docs/CONFIG.md`
 - **🔑 Cofre de APIs (Obsidian):** `🔐 Credenciais/🔑 Cofre de APIs.md`
 - **🚀 Framework Chatbot Universal:** `FRAMEWORK_CHATBOT.md`
+- **🐳 Deploy SWARM:** `SWARM/README.md`
 - **Exemplo Automaia (carros):** `whatsapp-chatbot-carros/README.md`
 
 ---
 
-**v7.5** | **MCP-First** | **Auto-melhoria contínua** | **Google Service Account** | **Cofre APIs**
+**v7.7** | **SWARM padrão** | **Deploy profissional** | **SSL automático** | **loop9.com.br**

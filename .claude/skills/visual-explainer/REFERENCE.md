@@ -132,7 +132,7 @@ Baseado em MotherDuck Style (light mode, beige + yellow + dark gray)
 
 **Salvamento (MCP Filesystem):**
 - Usar `Write` tool (NUNCA REST API)
-- Vault path: `/Users/felipemdepaula/Library/Mobile Documents/iCloud~md~obsidian/Documents/Claude-code-ios/📺 Vídeos/Apresentações/`
+- Vault path: `/Users/felipemdepaula/Documents/Obsidian/Claude-code-ios/📺 Vídeos/Apresentações/`
 - Workspace path: `/Users/felipemdepaula/Desktop/ClaudeCode-Workspace/`
 - Obsidian NÃO precisa estar aberto (MCP filesystem-based)
 
@@ -595,12 +595,12 @@ Clonado de https://motherduck.com (2025-11-04)
 
 3. **Salvar apresentação:** Usar `Write` tool
    ```
-   Write: /Users/felipemdepaula/Library/Mobile Documents/iCloud~md~obsidian/Documents/Claude-code-ios/📺 Vídeos/Apresentações/apresentacao_[assunto].html
+   Write: /Users/felipemdepaula/Documents/Obsidian/Claude-code-ios/📺 Vídeos/Apresentações/apresentacao_[assunto].html
    ```
 
 4. **Abrir navegador:** Usar `Bash` tool
    ```bash
-   open "/Users/felipemdepaula/Library/Mobile Documents/iCloud~md~obsidian/Documents/Claude-code-ios/📺 Vídeos/Apresentações/apresentacao_[assunto].html"
+   open "/Users/felipemdepaula/Documents/Obsidian/Claude-code-ios/📺 Vídeos/Apresentações/apresentacao_[assunto].html"
    ```
 
 **IMPORTANTE:**

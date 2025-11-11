@@ -1,0 +1,62 @@
+{
+  "metadata": {
+    "name": "example-kb",
+    "description": "Description of the knowledge base",
+    "document_type": "technical_documentation|legal_document|book|article|manual|guide",
+    "language": "en|pt|es|fr|de",
+    "created": "2025-01-07T10:30:00",
+    "tokens_per_line": 12.5
+  },
+  "sections": [
+    {
+      "id": "001",
+      "title": "First Major Section",
+      "type": "chapter|section|article|part",
+      "start_line": 0,
+      "end_line": 150,
+      "start_marker": "# Optional human-readable marker",
+      "notes": "Optional notes about this section"
+    },
+    {
+      "id": "002",
+      "title": "Section with Subsections",
+      "type": "chapter",
+      "start_line": 150,
+      "end_line": 2000,
+      "start_marker": "# Chapter 2",
+      "children": [
+        {
+          "id": "002_001",
+          "title": "First Subsection",
+          "type": "section|subsection|procedure",
+          "start_line": 150,
+          "end_line": 800,
+          "start_marker": "## Subsection Title"
+        },
+        {
+          "id": "002_002",
+          "title": "Second Subsection",
+          "type": "section",
+          "start_line": 800,
+          "end_line": 1400,
+          "children": [
+            {
+              "id": "002_002_001",
+              "title": "Nested Subsection",
+              "type": "subsection|paragraph",
+              "start_line": 800,
+              "end_line": 1000
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "analyzer_notes": {
+    "atomic_sections": [
+      "002_002_001 cannot be subdivided further - atomic unit"
+    ],
+    "oversized_accepted": [],
+    "special_handling": []
+  }
+}

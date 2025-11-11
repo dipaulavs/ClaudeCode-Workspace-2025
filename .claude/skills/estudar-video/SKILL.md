@@ -1,78 +1,102 @@
 ---
 name: estudar-video
-description: Automatiza o estudo completo de vídeos do YouTube - transcreve com Whisper, analisa conteúdo com IA, extrai insights, classifica por tipo, e salva no Obsidian Knowledge Base. Use quando usuário pedir para estudar/analisar/resumir vídeo do YouTube.
+description: Automatiza o estudo completo de vídeos do YouTube - transcreve com Whisper, analisa conteúdo com IA, extrai insights, classifica por tipo, e salva no Obsidian Knowledge Base. Use APENAS quando usuário pedir explicitamente para estudar vídeo (ex "estuda esse vídeo pra mim").
 allowed-tools: Bash, Read, Write, Edit
 ---
 
-# 📹 Skill: Estudar Vídeo YouTube
+# Estudar Vídeo YouTube
 
-## Quando Usar
+## Purpose
 
-Use esta skill automaticamente quando o usuário:
-- Pedir para **estudar vídeo**: "Estuda esse vídeo: [URL]"
-- Pedir para **analisar vídeo**: "Analisa esse vídeo do YouTube"
-- Pedir para **resumir vídeo**: "Faz um resumo desse vídeo"
-- Fornecer URL do YouTube e mencionar aprendizado/estudo
-- Pedir para **adicionar vídeo no Obsidian**
+Automate complete YouTube video analysis workflow: transcribe audio with Whisper, analyze content with AI, extract insights, classify by type, and save structured notes in Obsidian vault using MCP filesystem.
 
-**IMPORTANTE:** Esta skill é **totalmente automática** - NÃO pedir confirmação ao usuário. Executar imediatamente.
+Transform any YouTube video into a searchable, organized knowledge base entry with minimal user effort.
 
-**INTEGRAÇÃO MCP:** Usa Write tool (MCP filesystem) para salvar direto no vault - pasta `📺 Vídeos/`, formato limpo, data/hora BR.
+## When to Use
 
----
+Use this skill **ONLY** when the user **explicitly requests** video study using phrases like:
+- "Estuda esse vídeo pra mim"
+- "Preciso que você estude esse vídeo"
+- "Analisa esse vídeo completamente e salva no Obsidian"
 
-## Workflow Automático (2 Etapas)
+**DO NOT auto-invoke** when user:
+- Simply shares a YouTube URL without requesting study
+- Mentions YouTube video in casual conversation
+- Only wants transcription (use transcribe_video.py directly)
 
-### Etapa 1: Transcrever Vídeo 🎙️
+**IMPORTANT:** Execute automatically without confirmation once user explicitly requests video study.
 
-**Ferramenta:** `scripts/extraction/transcribe_video.py`
+## How to Use the Skill
 
-**Comando:**
+### Complete Workflow (3 Steps)
+
+#### Step 1: Transcribe Video
+
+Use the transcription script to extract audio and convert to text:
+
 ```bash
-python3 scripts/extraction/transcribe_video.py "URL_DO_VIDEO"
+python3 scripts/extraction/transcribe_video.py "YOUTUBE_URL"
 ```
 
-**O que faz:**
-- Usa Whisper para transcrever áudio
-- Salva em `/Users/felipemdepaula/Downloads/transcription_youtube_[TIMESTAMP]/`
-- Retorna caminho do arquivo `transcription.txt`
+**Script location:** `/Users/felipemdepaula/Desktop/ClaudeCode-Workspace/SCRIPTS/extraction/transcribe_video.py`
 
-**Custo:** ~$0.006/vídeo | **Tempo:** ~2-3min
+**What it does:**
+- Downloads audio from YouTube using yt-dlp
+- Transcribes using OpenAI Whisper API
+- Saves transcription to `~/Downloads/transcription_youtube_[TIMESTAMP]/`
+- Returns path to `transcription.txt` file
 
----
+**Cost:** ~$0.006/minute | **Time:** ~2-3min for 60min video
 
-### Etapa 2: Análise e Salvamento no Obsidian 🤖💾
+#### Step 2: Analyze Content
 
-**Você (Claude) deve fazer:**
+After transcription completes:
 
-1. **Ler a transcrição completa** do arquivo gerado
-2. **Analisar o conteúdo** e extrair:
-   - **Título descritivo** (extraído do contexto)
-   - **Categoria** (tutorial, notícia, curso, aula, review)
-   - **Resumo breve** (2-3 linhas)
-   - **Principais aprendizados** (3-5 pontos práticos)
-   - **Tags relevantes** (baseadas no conteúdo)
+1. **Read transcription file** using Read tool
+2. **Analyze content** and extract:
+   - Descriptive title (from context)
+   - Category (tutorial|noticia|curso|aula|review)
+   - Brief summary (2-3 lines)
+   - Main learnings (3-5 practical points)
+   - Relevant tags (based on content)
 
-3. **Criar arquivo no Obsidian** usando Write tool (MCP filesystem)
+#### Step 3: Save to Obsidian with Visual Canvas
 
-**Local (caminho absoluto):**
-```
-/Users/felipemdepaula/Library/Mobile Documents/iCloud~md~obsidian/Documents/Claude-code-ios/📺 Vídeos/[TITULO_DESCRITIVO].md
-```
+**ALWAYS use obsidian-organizer skill** to save the analyzed video.
 
-**Template (formato obsidian-organizer):**
-```yaml
+**Why:** obsidian-organizer automatically:
+- Creates formatted markdown note in `📺 Vídeos/`
+- Generates interactive Canvas visual diagram
+- Links Canvas in the note
+- Uses correct Brazilian date format
+- Applies minimalist template
+
+**How to call:**
+
+After analyzing transcription, invoke obsidian-organizer skill with the extracted data:
+- YouTube URL
+- Title
+- Category
+- Summary
+- Learnings list
+- Transcription text
+
+**DO NOT manually create files.** Let obsidian-organizer handle file creation and Canvas generation.
+
+**Legacy template (for reference only):**
+
+```markdown
 ---
 assistido: DD/MM/YYYY HH:mm
 categoria: [tutorial|noticia|curso|aula|review]
-link: [URL_DO_VIDEO]
+link: [YOUTUBE_URL]
 tags:
   - youtube
   - [tag1]
   - [tag2]
 ---
 
-# [Título Descritivo]
+# [Descriptive Title]
 
 ## 🎬 Informações
 
@@ -84,175 +108,188 @@ tags:
 
 ## 📝 Resumo
 
-[Resumo breve de 2-3 linhas]
+[Brief 2-3 line summary]
 
 ---
 
 ## 💡 Principais Aprendizados
 
-- [Aprendizado 1]
-- [Aprendizado 2]
-- [Aprendizado 3]
+- [Learning 1]
+- [Learning 2]
+- [Learning 3]
 
 ---
 
 > [!note]- 📄 Transcrição Completa (clique para expandir)
-> [Conteúdo completo da transcrição aqui]
+> [Full transcription content here]
 ```
 
-**Regras do template:**
-- **Data/hora:** Formato brasileiro DD/MM/YYYY HH:mm (usar hora atual)
-- **Categoria:** OBRIGATÓRIA (escolher a mais adequada)
-- **Resumo:** Conciso e direto (2-3 linhas máximo)
-- **Aprendizados:** Práticos e acionáveis (3-5 itens)
-- **Transcrição:** SEMPRE usar callout colapsável `> [!note]-`
-- **Tags:** Relevantes ao conteúdo (além de youtube)
+### Template Rules
 
----
+**Required fields:**
+- `assistido`: Brazilian date format DD/MM/YYYY HH:mm (current datetime)
+- `categoria`: Choose most appropriate (tutorial|noticia|curso|aula|review)
+- `link`: Original YouTube URL
+- `tags`: Relevant content tags (always include `youtube`)
 
-## Fluxo Completo (Executar Automaticamente)
+**Content guidelines:**
+- Summary: Concise and direct (2-3 lines maximum)
+- Learnings: Practical and actionable (3-5 items)
+- Transcription: ALWAYS use collapsible callout `> [!note]-`
+- Title: Descriptive, based on video content
 
-```
-1. Usuário: "Estuda esse vídeo: https://youtube.com/watch?v=ABC123"
+### Category Definitions
 
-2. VOCÊ (automaticamente):
-   a) Transcrever com Whisper (Bash + transcribe_video.py)
-   b) Ler transcrição completa (Read tool)
-   c) Analisar conteúdo e classificar categoria
-   d) Extrair resumo e aprendizados práticos
-   e) Criar arquivo markdown no vault (Write tool com caminho absoluto)
-   f) Confirmar criação ao usuário
+Choose the most appropriate category:
 
-3. Informar ao usuário (formato minimalista):
-   "✅ Vídeo estudado e salvo!"
-```
+- **tutorial** - Step-by-step practical instructions
+- **noticia** - News, launches, technology updates
+- **curso** - Course lesson/educational training
+- **aula** - Single educational lecture/class
+- **review** - Critical analysis of tool/product
 
----
+For detailed category criteria and analysis templates, see [references/REFERENCE.md](references/REFERENCE.md).
 
-## Output Final para o Usuário
+### Output Format for User
 
-**Formato minimalista** (seguir obsidian-organizer):
+After completing the workflow, inform the user with this minimalist format:
 
 ```
-✅ Vídeo estudado e salvo!
+✅ Vídeo estudado e salvo com Canvas visual!
 
-📺 [Título do Vídeo]
-📍 Salvo em: 📺 Vídeos/
+📺 [Video Title]
+📍 Salvo em: 📺 Vídeos/[filename].md
+📊 Canvas: 📺 Vídeos/Canvas/[filename].canvas
 ⏰ Assistido: DD/MM/YYYY HH:mm
 🏷️ Categoria: [categoria]
 
-💡 Principais aprendizados: [resumo de 1 linha]
-
-Ver em: [[📺 Vídeos]] ou [[Título do Vídeo]]
+💡 Principais aprendizados: [one-line summary]
 ```
 
-**NÃO usar:**
-- ❌ Emojis excessivos
-- ❌ Textos longos explicativos
-- ❌ Dashboard/Rating (não existe mais)
-- ❌ Estrutura complexa
+## Important Rules
 
----
+### DO:
+- Execute immediately without confirmation
+- Analyze the complete transcription
+- Classify category (required: tutorial|noticia|curso|aula|review)
+- Extract practical learnings (3-5 items)
+- **ALWAYS call obsidian-organizer skill** to save the video
+- **ALWAYS generate Canvas visual** (automatic via obsidian-organizer)
+- Provide minimalist response to user
 
-## Regras Importantes
+### DON'T:
+- **DON'T** ask for user confirmation
+- **DON'T** skip transcription (always use Whisper)
+- **DON'T** manually create markdown files (use obsidian-organizer)
+- **DON'T** skip Canvas generation (automatic via obsidian-organizer)
+- **DON'T** use old structure (09 - YouTube Knowledge/)
+- **DON'T** forget required category
+- **DON'T** create subfolders by type
 
-### ✅ FAZER:
-- Executar **imediatamente sem confirmação**
-- Analisar a transcrição **completa**
-- Classificar **categoria** (obrigatória: tutorial|noticia|curso|aula|review)
-- Extrair **aprendizados práticos** (3-5 itens)
-- Criar em **📺 Vídeos/** (pasta raiz, sem subpastas)
-- Usar **data/hora brasileira** (DD/MM/YYYY HH:mm)
-- Transcrição **sempre colapsável** (`> [!note]-`)
-- Resposta **minimalista** ao usuário
+## Configuration
 
-### ❌ NÃO FAZER:
-- **NÃO** pedir confirmação ao usuário
-- **NÃO** pular a transcrição (sempre usar Whisper)
-- **NÃO** usar estrutura antiga (09 - YouTube Knowledge/)
-- **NÃO** esquecer categoria obrigatória
-- **NÃO** criar subpastas por tipo
-- **NÃO** usar formato de data americano
-- **NÃO** deixar transcrição visível (sempre callout colapsável)
-
----
-
-## Configurações
-
-**Vault Obsidian:**
+**Obsidian Vault:**
 ```
-/Users/felipemdepaula/Library/Mobile Documents/iCloud~md~obsidian/Documents/Claude-code-ios/
+/Users/felipemdepaula/Documents/Obsidian/Claude-code-ios/
 ```
 
-**Pasta destino:**
+**Destination folder:**
 ```
 📺 Vídeos/
 ```
 
-**Transcrições temporárias:**
+**Temporary transcriptions:**
 ```
 /Users/felipemdepaula/Downloads/transcription_youtube_[TIMESTAMP]/
 ```
 
-**Python:** `python3` (padrão do sistema)
+**Python:** `python3` (system default)
 
----
+## Bundled Resources
 
-## Categorias Válidas
+### Scripts
 
-Escolher a mais adequada (obrigatória):
-- `tutorial` - Passo a passo prático
-- `noticia` - Novidades, lançamentos, updates
-- `curso` - Aula de curso/formação
-- `aula` - Conteúdo educacional único
-- `review` - Análise de ferramenta/produto
+**Transcription script:**
+- Location: `/Users/felipemdepaula/Desktop/ClaudeCode-Workspace/SCRIPTS/extraction/transcribe_video.py`
+- Purpose: Download YouTube audio and transcribe with Whisper
+- Usage: `python3 scripts/extraction/transcribe_video.py "URL"`
 
----
+**Auto-correction scripts:**
+- `scripts/update_skill.py` - Update SKILL.md programmatically
+- `scripts/log_learning.py` - Log fixes in LEARNINGS.md
+
+### References
+
+**Detailed documentation (load as needed):**
+- `references/REFERENCE.md` - System architecture, technical details, category analysis templates
+- `references/EXAMPLES.md` - Example analyses for different video types
+- `references/INTEGRATION.md` - **Integration with obsidian-organizer skill** (Canvas generation)
+- `references/TROUBLESHOOTING.md` - Common issues and solutions
+
+Load references when:
+- Need detailed category classification criteria
+- Want to see example analyses
+- Understanding obsidian-organizer integration
+- Troubleshooting errors
+
+## Auto-Correction System
+
+When errors occur during skill execution:
+
+```
+Error detected
+↓
+1. Identify what went wrong
+2. Fix SKILL.md: python3 scripts/update_skill.py <old> <new>
+3. Log learning: python3 scripts/log_learning.py <error> <fix> [line]
+4. Error prevented in future executions
+```
+
+**Example workflow:**
+
+```bash
+# 1. Fix the error in SKILL.md
+python3 scripts/update_skill.py \
+    'python3 script.py --flag "text"' \
+    'python3 script.py "text"'
+
+# 2. Log the learning
+python3 scripts/log_learning.py \
+    "Flag --flag not recognized" \
+    "Removed --flag, using positional argument" \
+    "SKILL.md:97"
+```
+
+**Benefits:**
+- Zero repeat errors - Same mistake never happens twice
+- Automatic documentation - All fixes logged in LEARNINGS.md
+- Skill evolution - Skills improve over time automatically
+- Debugging history - Full record of what was fixed and when
 
 ## Troubleshooting
 
-**Erro: Write tool falhou (Permission denied)**
-- Verificar caminho absoluto do vault: `/Users/felipemdepaula/Library/Mobile Documents/iCloud~md~obsidian/Documents/Claude-code-ios/`
-- Garantir que pasta `📺 Vídeos/` existe no vault
-- MCP filesystem não requer Obsidian aberto
+**Error: Write tool failed (Permission denied)**
+- Verify absolute vault path exists
+- Ensure `📺 Vídeos/` folder exists in vault
+- MCP filesystem doesn't require Obsidian to be open
 
-**Erro: Transcrição falhou**
-- Verificar URL do vídeo
-- Verificar conexão com API Whisper (OpenAI)
-- Checar saldo da API OpenAI
+**Error: Transcription failed**
+- Verify YouTube URL is valid
+- Check Whisper API connection (OpenAI)
+- Verify OpenAI API balance
 
-**Erro: Categoria não definida**
-- SEMPRE escolher uma das 5 categorias válidas
-- Não criar categorias customizadas
+**Error: Category not defined**
+- ALWAYS choose one of 5 valid categories
+- Don't create custom categories
 
-**Erro: Formato de data errado**
-- SEMPRE usar DD/MM/YYYY HH:mm (brasileiro)
-- Não usar MM/DD/YYYY (americano)
+**Error: Wrong date format**
+- ALWAYS use DD/MM/YYYY HH:mm (Brazilian)
+- Don't use MM/DD/YYYY (American)
 
----
-
-## Histórico de Iterações
-
-**v3.0 (2025-11-05):** MCP filesystem puro
-- Removidas dependências de REST APIs
-- Write tool direto no vault (caminho absoluto)
-- Não requer Obsidian aberto
-- Totalmente baseado em MCP filesystem
-
-**v2.0 (2025-11-03):** Integração com obsidian-organizer
-- Migrado para sistema minimalista
-- Pasta única `📺 Vídeos/` (sem subpastas por tipo)
-- Template simplificado e limpo
-- Data/hora brasileira obrigatória
-- Transcrição colapsável com callout
-
-**v1.0 (2025-11-02):** Skill inicial
-- Workflow de 3 etapas
-- Estrutura complexa (09 - YouTube Knowledge/)
-- Análise profunda com múltiplos campos
+For detailed troubleshooting, see [references/TROUBLESHOOTING.md](references/TROUBLESHOOTING.md).
 
 ---
 
-**Criado em:** 02/11/2025
-**Atualizado em:** 05/11/2025
-**Status:** ✅ Ativo | 100% MCP filesystem
+**Created:** 02/11/2025
+**Updated:** 08/11/2025
+**Status:** ✅ Active | MCP filesystem | Auto-correction enabled | Canvas visual integration

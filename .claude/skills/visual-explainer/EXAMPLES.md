@@ -43,7 +43,7 @@ de uma vez, em vez de palavra por palavra
 ### Output Gerado (MCP Filesystem)
 ```
 ✅ Apresentação criada e salva em:
-   📂 Vault: /Users/felipemdepaula/Library/Mobile Documents/iCloud~md~obsidian/Documents/Claude-code-ios/📺 Vídeos/Apresentações/apresentacao_transformers.html
+   📂 Vault: /Users/felipemdepaula/Documents/Obsidian/Claude-code-ios/📺 Vídeos/Apresentações/apresentacao_transformers.html
    📂 Workspace: /Users/felipemdepaula/Desktop/ClaudeCode-Workspace/apresentacao_transformers.html
 
 📊 Template: Notion Style

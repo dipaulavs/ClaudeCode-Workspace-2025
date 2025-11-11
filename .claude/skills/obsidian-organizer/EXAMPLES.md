@@ -1,393 +1,448 @@
-# Obsidian Organizer - Exemplos Práticos
+# Obsidian Organizer - Usage Examples
 
-## 📋 Exemplo 1: Criar Tarefa
+Real-world examples demonstrating intelligent type detection and minimalist note creation with Nextcloud media integration.
 
-**Usuário diz:**
+---
+
+## Example 0: Saving Audio with Nextcloud Upload
+
+**User Input:**
+> "Salva pra mim esse áudio gerado lá no meu Obsidian, onde foi feito o resumo desse vídeo"
+
+**Context:**
+- Audio file: `~/Downloads/evolution_api_v3_resumo.mp3`
+- Related note: `📺 Vídeos/Evolution API V3 - Novidades e Melhorias.md`
+
+**Detection Logic:**
+- Media detected: `.mp3` audio file
+- Type: Update existing video note with audio link
+- Action: Upload to Nextcloud + add link to existing note
+
+**Workflow:**
+1. Upload audio to Nextcloud:
+   ```bash
+   python3 SCRIPTS/nextcloud/upload_rapido.py ~/Downloads/evolution_api_v3_resumo.mp3
+   ```
+2. Get public link: `https://media.loop9.com.br/s/abc123/download/evolution_api_v3_resumo.mp3`
+3. Update note adding audio link
+
+**Updated Note:**
+```markdown
+## 🎬 Informações
+
+**Link:** https://www.youtube.com/watch?v=xgXJP8uCq2c
+**Categoria:** noticia
+**Assistido em:** 08/11/2025 09:21
+**🎙️ Áudio resumo:** [evolution_api_v3_resumo.mp3](https://media.loop9.com.br/s/abc123/download/evolution_api_v3_resumo.mp3)
+```
+
+**Response:**
+```
+✅ Áudio enviado ao Nextcloud e link adicionado!
+📍 Nota: 📺 Vídeos/Evolution API V3 - Novidades e Melhorias.md
+🔗 Link público: https://media.loop9.com.br/s/abc123/download/evolution_api_v3_resumo.mp3
+```
+
+---
+
+## Example 1: Simple Task Creation
+
+**User Input:**
 > "Preciso lembrar de ligar pro cliente amanhã"
 
-**Skill identifica:** Tarefa (palavra-chave: "preciso")
+**Detection Logic:**
+- Keyword: "preciso lembrar"
+- Type: Task (📋 Tarefas)
 
-**Ação:**
-Criar arquivo em `📋 Tarefas/Ligar pro cliente.md`
+**Generated File:** `📋 Tarefas/ligar-pro-cliente.md`
 
-```yaml
+```markdown
 ---
-criada: 03/11/2025 14:30
+criada: 07/11/2025 17:45
 status: aberta
 ---
 
 # Ligar pro cliente
 
 ## 📝 Detalhes
-
-Ligar para o cliente amanhã para acompanhamento.
+Ligar para o cliente amanhã para acompanhamento
 
 ## ✅ Checklist
 - [ ] Preparar pontos da conversa
 - [ ] Fazer a ligação
 ```
 
-**Resposta:**
+**Response:**
 ```
-✅ Tarefa criada!
-
-📋 Ligar pro cliente
-📍 Salva em: 📋 Tarefas/
-⏰ Criada: 03/11/2025 14:30
-
-Ver em: [[📊 Tarefas]] ou [[📋 Tarefas/📊 Kanban|Kanban]]
+✅ Tarefa criada: 📋 Tarefas/ligar-pro-cliente.md
 ```
 
 ---
 
-## 💡 Exemplo 2: Anotação Rápida
+## Example 2: Quick Idea Capture
 
-**Usuário diz:**
-> "Vi um artigo interessante sobre IA: https://exemplo.com - fala sobre modelos multimodais"
+**User Input:**
+> "Anota rapidamente: criar app de rastreamento de hábitos com gamificação"
 
-**Skill identifica:** Anotação (palavra-chave: "vi", tem link)
+**Detection Logic:**
+- Keyword: "anota rapidamente"
+- Type: Quick Note (💡 Anotações)
 
-**Ação:**
-Criar arquivo em `💡 Anotações/Artigo sobre modelos multimodais.md`
+**Generated File:** `💡 Anotações/app-rastreamento-habitos-gamificacao.md`
 
-```yaml
+```markdown
 ---
-criada: 03/11/2025 14:32
+criada: 07/11/2025 18:12
 tags:
   - anotacao
-  - ia
 ---
 
-# Artigo sobre modelos multimodais
+# App de rastreamento de hábitos com gamificação
 
-https://exemplo.com
-
-Artigo interessante sobre IA que fala sobre modelos multimodais.
+Criar aplicativo para tracking de hábitos diários com elementos de gamificação (pontos, badges, streaks).
 ```
 
-**Resposta:**
+**Response:**
 ```
-✅ Anotação salva!
-
-💡 Artigo sobre modelos multimodais
-📍 Salva em: 💡 Anotações/
-⏰ 03/11/2025 14:32
-
-Ver em: [[📝 Anotações]]
+✅ Anotação criada: 💡 Anotações/app-rastreamento-habitos-gamificacao.md
 ```
 
 ---
 
-## 📺 Exemplo 3: Vídeo YouTube
+## Example 3: YouTube Tutorial (with Visual Canvas)
 
-**Usuário diz:**
-> "Assisti um tutorial no YouTube sobre Claude Code: https://youtube.com/watch?v=abc123
+**User Input:**
+> "Assisti esse tutorial sobre async Python: https://youtube.com/watch?v=abc123
 >
-> Ensina como usar skills customizadas. Principais pontos:
-> - Skills são automáticas
-> - Progressive disclosure
-> - Estrutura com 4 arquivos"
+> Explica asyncio, async/await e event loops de forma clara."
 
-**Skill identifica:** Vídeo (URL YouTube, palavra-chave: "tutorial")
+**Detection Logic:**
+- YouTube URL detected
+- Keyword: "tutorial"
+- Category: tutorial (from context)
+- Type: Video (📺 Vídeos)
+- **Auto-generate:** Visual Canvas diagram
 
-**Ação:**
-Criar arquivo em `📺 Vídeos/Tutorial Claude Code Skills.md`
+**Generated Files:**
+1. `📺 Vídeos/tutorial-async-python-asyncio.md` (markdown note)
+2. `📺 Vídeos/tutorial-async-python-asyncio.canvas` (visual diagram)
 
-```yaml
+**Markdown Note:**
+```markdown
 ---
-assistido: 03/11/2025 14:35
+assistido: 07/11/2025 19:30
 categoria: tutorial
 link: https://youtube.com/watch?v=abc123
+canvas: "[[tutorial-async-python-asyncio.canvas]]"
 tags:
   - youtube
-  - claude-code
 ---
 
-# Tutorial Claude Code Skills
+# Tutorial Async Python - AsyncIO e Event Loops
+
+## 🎨 Resumo Visual
+
+📊 **[Abrir Canvas Interativo](tutorial-async-python-asyncio.canvas)** - Explicação visual interativa
 
 ## 🎬 Informações
-
 **Link:** https://youtube.com/watch?v=abc123
 **Categoria:** tutorial
-**Assistido em:** 03/11/2025 14:35
-
----
+**Assistido em:** 07/11/2025 19:30
 
 ## 📝 Resumo
-
-Tutorial completo sobre como criar e usar skills customizadas no Claude Code.
-
----
+Tutorial completo sobre programação assíncrona em Python, cobrindo asyncio, async/await e event loops.
 
 ## 💡 Principais Aprendizados
-
-- Skills são ativadas automaticamente (model-invoked)
-- Progressive disclosure organiza informação
-- Estrutura recomendada: SKILL.md + REFERENCE.md + EXAMPLES.md + TROUBLESHOOTING.md
-- Skills melhoram muito a produtividade
-
----
+- AsyncIO permite execução concorrente em Python
+- async/await simplifica sintaxe assíncrona
+- Event loops gerenciam tarefas assíncronas
+- Ideal para I/O-bound operations
 
 > [!note]- 📄 Transcrição Completa (clique para expandir)
-> [Cole aqui a transcrição quando disponível]
+> [Transcript would be added here if available via estudar-video skill]
 ```
 
-**Resposta:**
+**Canvas Visual (Automatic):**
 ```
-✅ Vídeo registrado!
+    🎬 Tutorial Async Python
+              ↓
+         📝 RESUMO
+         [Tutorial completo...]
+              ↓
+    ┌──────────┬──────────┐
+    │ 💡 #1    │ 💡 #2    │
+    │ AsyncIO  │ async/   │
+    │ concor.  │ await    │
+    ├──────────┼──────────┤
+    │ 💡 #3    │ 💡 #4    │
+    │ Event    │ I/O      │
+    │ loops    │ bound    │
+    └──────────┴──────────┘
+```
 
-📺 Tutorial Claude Code Skills
-📍 Salva em: 📺 Vídeos/
-⏰ Assistido: 03/11/2025 14:35
-🏷️ Categoria: tutorial
-
-Ver em: [[📺 Vídeos]]
+**Response:**
+```
+✅ Vídeo salvo com Canvas visual: 📺 Vídeos/tutorial-async-python-asyncio.md
+📊 Canvas interativo criado automaticamente
 ```
 
 ---
 
-## 📺 Exemplo 4: Vídeo com Transcrição
+## Example 4: Video with Full Transcript
 
-**Usuário diz:**
+**User Input:**
 > "Salva esse vídeo que assisti sobre GPT-4o:
 > Link: https://youtube.com/watch?v=xyz789
 > Categoria: notícia
 >
-> Resumo: Lançamento do GPT-4o com novas features
->
-> Transcrição:
-> [transcrição longa de 1000+ palavras aqui]"
+> [Long transcript content provided...]"
 
-**Ação:**
-```yaml
+**Detection Logic:**
+- YouTube URL + explicit category
+- Long transcript detected → use collapsible callout
+- Type: Video (📺 Vídeos)
+
+**Generated File:** `📺 Vídeos/gpt4o-lancamento-novidades.md`
+
+```markdown
 ---
-assistido: 03/11/2025 14:40
+assistido: 07/11/2025 20:00
 categoria: noticia
 link: https://youtube.com/watch?v=xyz789
 tags:
   - youtube
   - ia
-  - gpt4
 ---
 
-# GPT-4o - Novidades
+# GPT-4o - Lançamento e Novidades
 
 ## 🎬 Informações
-
 **Link:** https://youtube.com/watch?v=xyz789
 **Categoria:** noticia
-**Assistido em:** 03/11/2025 14:40
-
----
+**Assistido em:** 07/11/2025 20:00
 
 ## 📝 Resumo
-
-Lançamento do GPT-4o com novas features multimodais.
-
----
+Lançamento do GPT-4o com novas capacidades multimodais e melhorias de performance.
 
 ## 💡 Principais Aprendizados
-
-- [Extraídos do contexto ou perguntados ao usuário]
-
----
+- Modelo multimodal nativo (texto, áudio, imagem)
+- Melhor performance em raciocínio
+- Latência reduzida
 
 > [!note]- 📄 Transcrição Completa (clique para expandir)
-> [Transcrição longa de 1000+ palavras aqui]
-> [Começa oculta, expande ao clicar]
+> [Full 1000+ word transcript hidden in collapsible section]
 ```
 
-**Resposta:**
+**Response:**
 ```
-✅ Vídeo com transcrição salvo!
-
-📺 GPT-4o - Novidades
-📍 Salva em: 📺 Vídeos/
-⏰ Assistido: 03/11/2025 14:40
-🏷️ Categoria: notícia
-📄 Transcrição: Incluída (oculta)
-
-Ver em: [[📺 Vídeos]]
+✅ Vídeo com transcrição salvo: 📺 Vídeos/gpt4o-lancamento-novidades.md
 ```
 
 ---
 
-## 🔄 Exemplo 5: Múltiplos Itens
+## Example 5: Link/Article Reference
 
-**Usuário diz:**
+**User Input:**
+> "Salva esse artigo interessante: https://example.com/article sobre arquitetura de microserviços"
+
+**Detection Logic:**
+- Non-YouTube URL
+- Keyword: "salva", "artigo"
+- Type: Quick Note (💡 Anotações)
+
+**Generated File:** `💡 Anotações/artigo-arquitetura-microservicos.md`
+
+```markdown
+---
+criada: 07/11/2025 20:15
+tags:
+  - anotacao
+  - arquitetura
+---
+
+# Artigo - Arquitetura de Microserviços
+
+**Link:** https://example.com/article
+
+Artigo interessante sobre arquitetura de microserviços.
+```
+
+**Response:**
+```
+✅ Anotação criada: 💡 Anotações/artigo-arquitetura-microservicos.md
+```
+
+---
+
+## Example 6: Task with Detailed Checklist
+
+**User Input:**
+> "Cria tarefa: Setup projeto novo - instalar dependências, configurar ESLint, setup Tailwind, criar estrutura de pastas"
+
+**Detection Logic:**
+- Explicit task keyword
+- Multiple action items → checklist
+- Type: Task (📋 Tarefas)
+
+**Generated File:** `📋 Tarefas/setup-projeto-novo.md`
+
+```markdown
+---
+criada: 07/11/2025 21:00
+status: aberta
+---
+
+# Setup projeto novo
+
+## 📝 Detalhes
+Configuração inicial completa do novo projeto
+
+## ✅ Checklist
+- [ ] Instalar dependências
+- [ ] Configurar ESLint
+- [ ] Setup Tailwind CSS
+- [ ] Criar estrutura de pastas
+```
+
+**Response:**
+```
+✅ Tarefa criada: 📋 Tarefas/setup-projeto-novo.md
+```
+
+---
+
+## Example 7: Ambiguous Input Handling
+
+**User Input:**
+> "Salva: Machine Learning"
+
+**Detection Logic:**
+- Too vague → needs clarification
+- Could be task or note
+
+**Response:**
+```
+"Machine Learning" - é:
+1. 📋 Tarefa (algo a fazer)
+2. 💡 Anotação (referência/ideia)
+```
+
+**User Clarifies:**
+> "Quero estudar depois"
+
+**Result:**
+- Keyword "estudar" → Task
+- Generated: `📋 Tarefas/estudar-machine-learning.md`
+
+---
+
+## Example 8: Multiple Mixed Items
+
+**User Input:**
 > "Preciso anotar 3 coisas:
 > 1. Tarefa: comprar café
 > 2. Ideia: app de gestão de tempo
 > 3. Vídeo que vi sobre React hooks"
 
-**Skill identifica:** 3 tipos diferentes
+**Detection Logic:**
+- Multiple types detected
+- Split into separate notes
 
-**Ação:** Criar 3 arquivos
+**Generated Files:**
+1. `📋 Tarefas/comprar-cafe.md` (task)
+2. `💡 Anotações/app-gestao-tempo.md` (note)
+3. Ask for React hooks video URL
 
-1. `📋 Tarefas/Comprar café.md` (tarefa)
-2. `💡 Anotações/App de gestão de tempo.md` (anotação)
-3. `📺 Vídeos/React Hooks.md` (vídeo - pedir link)
-
-**Resposta:**
+**Response:**
 ```
-✅ 3 itens criados!
+✅ 3 itens criados:
+- 📋 Tarefas/comprar-cafe.md
+- 💡 Anotações/app-gestao-tempo.md
 
-📋 Comprar café (Tarefa)
-💡 App de gestão de tempo (Anotação)
-📺 React Hooks (Vídeo)
-
-Dashboards atualizados:
-- [[📊 Tarefas]]
-- [[📝 Anotações]]
-- [[📺 Vídeos]]
+Precisa do link do vídeo de React hooks?
 ```
 
 ---
 
-## 🎯 Exemplo 6: Ambiguidade
+## Example 9: Minimalist Response Style
 
-**Usuário diz:**
-> "Salva isso: aprender Python"
-
-**Ambíguo:** Pode ser tarefa OU anotação
-
-**Skill pergunta:**
-```
-"Aprender Python" - é uma:
-1. 📋 Tarefa (algo para fazer)
-2. 💡 Anotação (ideia/referência)
-
-Qual prefere?
-```
-
-**Usuário:** "Tarefa"
-
-**Ação:** Criar como tarefa
-
----
-
-## 🔄 Exemplo 7: Adicionar ao Kanban
-
-**Usuário diz:**
-> "Cria tarefa 'Revisar documentação' e já coloca no Kanban em andamento"
-
-**Ação:**
-1. Criar arquivo em `📋 Tarefas/Revisar documentação.md`
-2. Adicionar ao Kanban em "🔨 Em Andamento"
-
-**Kanban atualizado:**
-```markdown
-## 🔨 Em Andamento
-
-- [ ] [[Revisar documentação]]
-```
-
-**Resposta:**
-```
-✅ Tarefa criada e adicionada ao Kanban!
-
-📋 Revisar documentação
-📍 Kanban: 🔨 Em Andamento
-⏰ Criada: 03/11/2025 14:45
-
-Ver: [[📋 Tarefas/📊 Kanban|Kanban Board]]
-```
-
----
-
-## 🎨 Exemplo 8: Estilo Minimalista
-
-**Usuário diz:**
+**User Input:**
 > "Anota que preciso estudar DataView do Obsidian"
 
-**❌ Resposta excessiva (evitar):**
+**❌ Wrong (too verbose):**
 ```
 🎉 Ótimo! Vou criar uma anotação incrível para você sobre DataView!
 É uma ferramenta super poderosa do Obsidian que vai revolucionar...
-[3 parágrafos desnecessários]
+[Unnecessary 3 paragraphs...]
 ```
 
-**✅ Resposta minimalista (correto):**
+**✅ Correct (minimalist):**
 ```
-✅ Anotação criada!
-
-💡 Estudar DataView do Obsidian
-📍 Salva em: 💡 Anotações/
-⏰ 03/11/2025 14:50
+✅ Anotação criada: 💡 Anotações/estudar-dataview-obsidian.md
 ```
 
 ---
 
-## 📊 Exemplo 9: Verificar Última Criação
+## Pattern Recognition Summary
 
-**Usuário diz:**
-> "Qual foi a última coisa que anotei?"
+| User Pattern | Detected Type | Key Indicators |
+|-------------|---------------|----------------|
+| "Preciso fazer X" | Task | preciso, fazer, implementar |
+| "Anota rapidamente X" | Quick Note | anota, ideia, salva |
+| "Assisti vídeo [URL]" | Video | YouTube URL + context |
+| "Salva esse link" | Quick Note | URL (non-YouTube) |
+| "Organiza: X, Y, Z" | Multiple | Split by type |
+| Multiple actions | Task + Checklist | List format |
 
-**Skill verifica:** Dashboards (última criação de qualquer tipo)
+---
 
-**Resposta:**
+## Edge Cases
+
+### No content provided
+**Input:** "Anota isso"
+**Behavior:** Ask "O que deseja anotar?"
+
+### Invalid YouTube URL
+**Input:** "Assisti vídeo: youtube/broken"
+**Behavior:** Ask "Link completo do YouTube?"
+
+### Mixed types in single request
+**Input:** "Fazer X e assisti vídeo Y"
+**Behavior:** Create separate notes for each
+
+### Empty task details
+**Input:** "Cria tarefa X"
+**Behavior:** Create minimal template, user adds details later
+
+---
+
+## Communication Guidelines
+
+**Always:**
+- Ultra-concise responses (1-2 lines max)
+- Show filename + location
+- Use Brazilian datetime format
+
+**Never:**
+- Repeat user's request
+- Explain the obvious
+- Add unnecessary emojis
+- Ask too many clarifying questions (only when truly ambiguous)
+
+**Example Good Response:**
 ```
-Última anotação:
+✅ Tarefa criada: 📋 Tarefas/implementar-login.md
+```
 
-📺 Tutorial Claude Code Skills
-📍 📺 Vídeos/
-⏰ 03/11/2025 14:35
-🏷️ tutorial
-
-Outros recentes:
-- 💡 Artigo sobre modelos multimodais (14:32)
-- 📋 Ligar pro cliente (14:30)
+**Example Bad Response:**
+```
+🎉 Perfeito! Entendi que você quer criar uma tarefa super importante sobre implementação de login! Vou criar um arquivo lindo no Obsidian com todos os detalhes organizados...
 ```
 
 ---
 
-## 🔍 Exemplo 10: Buscar por Categoria
-
-**Usuário diz:**
-> "Mostra os vídeos de tutorial que salvei"
-
-**Skill usa:** DataView query ou lista manualmente
-
-**Resposta:**
-```
-📺 Vídeos - Categoria: tutorial
-
-1. Tutorial Claude Code Skills (03/11/2025 14:35)
-2. [outros tutoriais salvos]
-
-Ver todos em: [[📺 Vídeos]]
-```
-
----
-
-## 💡 Dicas de Implementação
-
-### Tom de Comunicação
-- **Conciso:** 2-3 linhas máximo
-- **Direto:** Sem enrolação
-- **Minimalista:** Sem emojis excessivos
-- **Confirmação clara:** O que foi feito + onde está
-
-### Erros Comuns a Evitar
-1. ❌ Perguntar demais antes de criar
-2. ❌ Respostas longas e cheias de explicação
-3. ❌ Criar em local errado
-4. ❌ Esquecer data/hora brasileira
-5. ❌ Poluir com formatação excessiva
-6. ❌ Vídeos sem categoria
-7. ❌ Transcrição não colapsável
-
-### Checklist Pré-Criação
-- [ ] Tipo identificado corretamente?
-- [ ] Local correto determinado?
-- [ ] Data/hora no formato brasileiro?
-- [ ] Template apropriado aplicado?
-- [ ] Todos os campos obrigatórios preenchidos?
-- [ ] Estilo minimalista mantido?
-
----
-
-**Referências:**
-- [[SKILL.md]] - Instruções principais
-- [[REFERENCE.md]] - Detalhes técnicos
-- [[TROUBLESHOOTING.md]] - Problemas comuns
+**Related Documentation:**
+- [[SKILL.md]] - Main instructions
+- [[REFERENCE.md]] - Technical details
+- [[TROUBLESHOOTING.md]] - Common issues
+- [[references/templates.md]] - All templates

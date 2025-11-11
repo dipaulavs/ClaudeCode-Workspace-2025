@@ -1,0 +1,17 @@
+# Configuração do Site Teste2
+# Deploy: ./deploy-site.sh teste2
+
+# Domínio do site
+dominio: teste2.loop9.com.br
+
+# Adicionar www?
+www: false
+
+# Pasta do projeto (HTML estático)
+projeto: ~/meus-sites/projetos/teste2
+
+# Sem build necessário (HTML puro)
+build: echo "Site estático - sem build necessário"
+
+# Pasta de build (raiz do projeto)
+pasta_build: ./

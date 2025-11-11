@@ -1,64 +1,88 @@
+---
+name: army-of-agents
+description: Orchestrate multiple specialized AI agents to produce high-quality creative content through iterative feedback. Auto-invokes when user requests content requiring multiple perspectives, high quality output, or mentions "multiple agents", "army of agents", or creative tasks like hooks, headlines, landing pages, email sequences, or video scripts.
+---
+
 # Army of Agents
 
-**Tipo:** Model-invoked (ativa automaticamente)
-**Custo:** Variável (~$0.03-0.15 por tarefa, dependendo de roles e iterações)
-**Tempo:** 2-8 minutos
+## Purpose
 
-## Quando Usar
+Orchestrate multiple specialized AI agents (Researcher, Copywriter, Critic, Director, etc.) to produce creative content through multi-perspective iteration and feedback. Each agent contributes their expertise, critiques others' work, and refines output until high-quality results are achieved.
 
-AUTO-INVOCA quando usuário pede:
-- "Criar [conteúdo] com múltiplas perspectivas"
-- "Quero um resultado de alta qualidade em [tarefa criativa]"
-- "Use vários agentes para [tarefa]"
-- "Exército de agentes para [tarefa]"
+## When to Use
 
-Ideal para:
-- Copy crítica (hooks, headlines, CTAs)
-- Landing pages
-- Email sequences
-- Roteiros de vídeo
-- Propostas comerciais
+Auto-invoke when user requests:
+- Content requiring multiple perspectives or high quality
+- Mentions "army of agents", "multiple agents", or "several perspectives"
+- Creative tasks: hooks, headlines, CTAs, landing pages, email sequences, video scripts, proposals
 
-## Como Funciona
+Do NOT use for:
+- Simple/trivial tasks
+- First drafts only
+- Internal copy (non-sales)
+- Tight deadlines (<5min)
 
-### Fase 1: Análise + Definição de Roles (30s)
+## How to Use
 
-1. Analisa tarefa do usuário
-2. Define 3-5 roles necessários (ver REFERENCE.md)
-3. Monta ordem de execução (paralelo quando possível)
+### 1. Analyze Task
 
-Roles comuns:
-- **Pesquisador:** Analisa público, dores, desejos
-- **Copywriter:** Cria conteúdo inicial
-- **Crítico Hormozi:** Avalia com metodologia Core Four + Lead Getters
-- **Diretor Criativo:** Decisões finais, ajustes estratégicos
-- **Revisor:** Gramática, clareza, tom
+Determine:
+- Objective (hook, landing page, email, etc.)
+- Required knowledge (market research, frameworks, data)
+- Number of perspectives needed (3-5 roles)
+- Execution order (parallel vs sequential)
 
-### Fase 2: Execução Multi-Agente (1-3min)
+### 2. Select Roles
 
-1. Lança subagentes com Task tool (paralelo quando possível)
-2. Cada subagente trabalha em sua função específica
-3. Output de um alimenta próximo (sequencial quando necessário)
+Choose 3-5 roles from library in `references/roles.md`:
+- Researcher, Copywriter, Critic Hormozi, Director, Revisor, Strategist, Content Designer
 
-### Fase 3: Feedback Mútuo + Iteração (1-4min)
+### 3. Execute Multi-Agent Flow
 
-1. **Round 1:** Crítico avalia output do Copywriter (nota 1-10 + feedback brutal)
-2. **Round 2:** Copywriter refina com base no feedback
-3. **Round 3:** Diretor escolhe melhor versão + ajuste final (se necessário)
-4. **Aprovação:** Retorna resultado validado por múltiplas perspectivas
+Launch agents using Task tool with `subagent_type: "general-purpose"`:
 
-**Limite:** Máximo 3 rounds de iteração (previne loops infinitos)
+```
+Round 1: Initial execution (parallel when possible)
+Round 2: Feedback + refinement
+Round 3: Final approval (if needed)
+```
 
-## Output
+**Limit:** Maximum 3 rounds (prevents infinite loops)
 
-Mostra SEMPRE ao usuário:
-1. **Roles ativados:** Quais agentes trabalharam
-2. **Processo:** Resumo do que cada agente fez
-3. **Iterações:** Feedback dado e mudanças aplicadas
-4. **Resultado final:** Conteúdo aprovado
+### 4. Show Process to User
 
-## Progressive Disclosure
+Always display:
+- Roles activated
+- Process summary (what each agent did)
+- Iterations (feedback + changes)
+- Final result
 
-- **Dúvidas técnicas?** → `REFERENCE.md`
-- **Ver exemplos completos?** → `EXAMPLES.md`
-- **Erros?** → `TROUBLESHOOTING.md`
+## Bundled Resources
+
+- **references/roles.md** - Role library with prompts (Researcher, Copywriter, Critic, etc.)
+- **references/flows.md** - Recommended workflows for common tasks
+- **references/examples.md** - Complete examples with inputs/outputs/timings
+- **assets/role_prompts/** - Pre-built prompt templates for each role
+
+## Cost & Time
+
+| Task | Roles | Iterations | Cost | Time |
+|------|-------|------------|------|------|
+| Hook | 3 | 1 | ~$0.03 | 2min |
+| Landing page | 5 | 2 | ~$0.10 | 5min |
+| Email sequence | 4 | 2 | ~$0.08 | 4min |
+| Video script | 6 | 3 | ~$0.15 | 8min |
+
+## Auto-Correction
+
+When errors occur in this skill:
+
+```bash
+# 1. Fix SKILL.md
+python3 scripts/update_skill.py "<old-text>" "<new-text>"
+
+# 2. Log learning
+python3 scripts/log_learning.py "<error>" "<fix>" "[line]"
+```
+
+See `LEARNINGS.md` for fix history.

@@ -246,7 +246,7 @@ Path do vault mudou ou está incorreto.
 
 **Path correto (MCP Filesystem):**
 ```
-/Users/felipemdepaula/Library/Mobile Documents/iCloud~md~obsidian/Documents/Claude-code-ios/
+/Users/felipemdepaula/Documents/Obsidian/Claude-code-ios/
 ```
 
 **Método de acesso:**
@@ -262,7 +262,7 @@ Path do vault mudou ou está incorreto.
 
 **Teste:**
 ```bash
-ls "/Users/felipemdepaula/Library/Mobile Documents/iCloud~md~obsidian/Documents/Claude-code-ios/"
+ls "/Users/felipemdepaula/Documents/Obsidian/Claude-code-ios/"
 ```
 
 ---
@@ -329,7 +329,7 @@ Antes de criar qualquer arquivo, verificar:
 **Formato data:** `03/11/2025 14:30`
 **Categorias vídeo:** notícia, tutorial, curso, aula, review, documentário, palestra
 **Transcrição:** `> [!note]- 📄 Transcrição Completa (clique para expandir)`
-**Vault path:** `/Users/felipemdepaula/Library/Mobile Documents/iCloud~md~obsidian/Documents/Claude-code-ios/`
+**Vault path:** `/Users/felipemdepaula/Documents/Obsidian/Claude-code-ios/`
 
 ---
 

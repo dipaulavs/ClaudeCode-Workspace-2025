@@ -42,6 +42,7 @@ sleep 2
 # 1. Iniciar Backend API
 echo -e "${BLUE}🔌 [1/4] Iniciando Backend API (porta 8000)...${NC}"
 cd "$DIR/backend"
+source venv/bin/activate
 python3 main.py > /tmp/backend.log 2>&1 &
 sleep 3
 

@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  app:
+    image: {{IMAGE}}
+    working_dir: /app
+    command: {{COMMAND}}
+    volumes:
+      - ./:/app
+    environment:
+      {{ENVIRONMENT}}
+    networks:
+      - loop9Net
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: any
+        delay: 5s
+        max_attempts: 3
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.{{SERVICE_NAME}}.rule=Host(`{{SUBDOMAIN}}.loop9.com.br`)"
+        - "traefik.http.routers.{{SERVICE_NAME}}.entrypoints=websecure"
+        - "traefik.http.routers.{{SERVICE_NAME}}.tls.certresolver=letsencryptresolver"
+        - "traefik.http.routers.{{SERVICE_NAME}}.service={{SERVICE_NAME}}"
+        - "traefik.http.services.{{SERVICE_NAME}}.loadbalancer.server.port={{PORT}}"
+
+networks:
+  loop9Net:
+    external: true

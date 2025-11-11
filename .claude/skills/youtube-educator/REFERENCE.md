@@ -70,7 +70,7 @@ INPUT: "Cria vídeo sobre [tema]" ou URL YouTube
 
 **Salvamento duplo:**
 1. `~/Downloads/apresentacao_[tema].html` (backup rápido)
-2. `~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Claude-code-ios/📺 Vídeos/Apresentações/apresentacao_[tema].html` (permanente)
+2. `~/Documents/Obsidian/Claude-code-ios/📺 Vídeos/Apresentações/apresentacao_[tema].html` (permanente)
 
 **Uso:** Abrir em navegador → Fullscreen (F) → Gravar tela + áudio
 
@@ -354,7 +354,7 @@ Para aprofundar cada elemento:
 
 **Salvamento:**
 - `~/Downloads/apresentacao_[tema].html`
-- `~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Claude-code-ios/📺 Vídeos/Apresentações/apresentacao_[tema].html`
+- `~/Documents/Obsidian/Claude-code-ios/📺 Vídeos/Apresentações/apresentacao_[tema].html`
 
 **Doc:** `.claude/skills/visual-explainer/SKILL.md`
 
@@ -391,7 +391,7 @@ Para aprofundar cada elemento:
 
 **Método:** MCP filesystem direto (Write tool)
 - **Sem REST API:** Obsidian não precisa estar aberto
-- **Vault path:** `/Users/felipemdepaula/Library/Mobile Documents/iCloud~md~obsidian/Documents/Claude-code-ios`
+- **Vault path:** `/Users/felipemdepaula/Documents/Obsidian/Claude-code-ios`
 - **Write direto:** Cria arquivo `.md` diretamente no vault
 
 **Estrutura:**
@@ -465,7 +465,7 @@ ClaudeCode-Workspace/
 │   ├── thumbnail_[tema]_var4.png
 │   └── thumbnail_[tema]_var5.png
 │
-└── ~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Claude-code-ios/
+└── ~/Documents/Obsidian/Claude-code-ios/
     │
     ├── 📺 Vídeos/
     │   ├── Vídeo YouTube - [Tema] - [DATA].md  # Nota (Agent 4 via MCP)

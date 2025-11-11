@@ -1,6 +1,8 @@
-# Obsidian Organizer - Referência Técnica
+# Obsidian Organizer - Technical Reference
 
-## 📂 Estrutura do Vault
+Complete technical documentation for vault structure, tools, metadata, and implementation details.
+
+## 📂 Vault Structure
 
 ```
 Claude-code-ios/
@@ -27,37 +29,37 @@ Claude-code-ios/
 
 ---
 
-## 🛠️ Tools Necessários (MCP Filesystem)
+## 🛠️ Required Tools (MCP Filesystem)
 
-**IMPORTANTE:** Esta skill é 100% MCP filesystem-based. NÃO usa REST API.
+**IMPORTANT:** This skill is 100% MCP filesystem-based. Does NOT use REST API.
 
-### Write Tool (Principal)
-Usado para criar arquivos diretamente no sistema de arquivos:
+### Write Tool (Primary)
+Create files directly in the filesystem:
 ```python
-file_path = "/Users/felipemdepaula/Library/Mobile Documents/iCloud~md~obsidian/Documents/Claude-code-ios/[pasta]/[arquivo].md"
+file_path = "/Users/felipemdepaula/Documents/Obsidian/Claude-code-ios/[pasta]/[arquivo].md"
 ```
 
-**Vantagens:**
-- ✅ Funciona com Obsidian fechado
-- ✅ Não requer configuração de API
-- ✅ Acesso direto ao vault via iCloud
-- ✅ Sincronização automática via iCloud
+**Advantages:**
+- ✅ Works with Obsidian closed
+- ✅ No API configuration required
+- ✅ Direct vault access via iCloud
+- ✅ Automatic iCloud sync
 
-### Read Tool (Verificação)
-Usado para ler arquivos existentes ou verificar estrutura:
+### Read Tool (Verification)
+Read existing files or verify structure:
 ```python
-file_path = "/Users/felipemdepaula/Library/Mobile Documents/iCloud~md~obsidian/Documents/Claude-code-ios/[arquivo].md"
+file_path = "/Users/felipemdepaula/Documents/Obsidian/Claude-code-ios/[arquivo].md"
 ```
 
-### Bash Tool (Opcional)
-Para obter data/hora atual:
+### Bash Tool (Optional)
+Get current date/time in Brazilian format:
 ```bash
 date "+%d/%m/%Y %H:%M"
 ```
 
 ---
 
-## 📋 Metadados (Frontmatter)
+## 📋 Metadata (Frontmatter)
 
 ### Tarefa
 ```yaml

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<evaluation>
+  <qa_pair>
+    <question>Generate a single image of a cute baby sea otter floating on its back. What is the model name used and how many tokens were consumed?</question>
+    <answer>gemini-2.5-flash-image, 1290 tokens</answer>
+  </qa_pair>
+
+  <qa_pair>
+    <question>Create 3 images with these prompts: "A sunset over mountains", "A futuristic city at night", "A serene lake with reflections". How many images were successfully generated and what is the total token count?</question>
+    <answer>3 images, 3870 tokens</answer>
+  </qa_pair>
+
+  <qa_pair>
+    <question>Generate a widescreen (16:9) image of a panoramic landscape. What are the dimensions of the output image?</question>
+    <answer>1344x768</answer>
+  </qa_pair>
+
+  <qa_pair>
+    <question>Create an Instagram feed post (4:5 aspect ratio) of a modern office space. What are the dimensions and what is the default output format?</question>
+    <answer>1080x1350, png</answer>
+  </qa_pair>
+
+  <qa_pair>
+    <question>Generate a square (1:1) logo with transparent background. Which output format supports transparency and what are the dimensions?</question>
+    <answer>png, 1024x1024</answer>
+  </qa_pair>
+
+  <qa_pair>
+    <question>Create 5 variations of abstract geometric patterns using batch generation. If each image uses 1290 tokens, what is the total cost at $30 per 1M tokens?</question>
+    <answer>$0.195 (6450 tokens × $30/1M)</answer>
+  </qa_pair>
+
+  <qa_pair>
+    <question>Generate a portrait-oriented (9:16) Instagram Story image. What are the dimensions and what tool should be used for a single image?</question>
+    <answer>768x1344, generate_image</answer>
+  </qa_pair>
+
+  <qa_pair>
+    <question>Create a batch of 10 logo variations with aspect ratio 1:1 in WebP format. What is the maximum number of concurrent images supported and which tool handles batch generation?</question>
+    <answer>10 images, generate_batch_images</answer>
+  </qa_pair>
+
+  <qa_pair>
+    <question>Generate a JPEG image of a photograph scene. Why is JPEG format converted to RGB mode and what quality setting is used?</question>
+    <answer>JPEG doesn't support transparency, quality 95</answer>
+  </qa_pair>
+
+  <qa_pair>
+    <question>Create 3 marketing assets in 16:9 format and compare the cost per image to OpenAI GPT-4 Image high quality. How much cheaper is Gemini per image?</question>
+    <answer>~$0.003-0.013 cheaper (~3.5x cheaper than GPT-4 high quality at $0.036-0.052)</answer>
+  </qa_pair>
+</evaluation>

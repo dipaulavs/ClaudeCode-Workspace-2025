@@ -1,0 +1,33 @@
+{
+  "description": "Custom hooks: notifications, auto-backup, auto-test, and file logging",
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/felipemdepaula/Desktop/ClaudeCode-Workspace/.claude/notify.sh"
+          },
+          {
+            "type": "command",
+            "command": "/Users/felipemdepaula/Desktop/ClaudeCode-Workspace/.claude/hooks/file-logger.sh"
+          }
+        ]
+      },
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/felipemdepaula/Desktop/ClaudeCode-Workspace/.claude/hooks/auto-backup.sh"
+          },
+          {
+            "type": "command",
+            "command": "/Users/felipemdepaula/Desktop/ClaudeCode-Workspace/.claude/hooks/auto-test.sh"
+          }
+        ]
+      }
+    ]
+  }
+}

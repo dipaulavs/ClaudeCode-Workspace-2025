@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  web:
+    image: nginx:alpine
+    volumes:
+      - ./dist:/usr/share/nginx/html:ro
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    networks:
+      - loop9Net
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.teste2-http.rule=Host(`teste2.loop9.com.br`)"
+        - "traefik.http.routers.teste2-http.entrypoints=web"
+        - "traefik.http.routers.teste2-http.middlewares=redirect-to-https"
+        - "traefik.http.routers.teste2.rule=Host(`teste2.loop9.com.br`)"
+        - "traefik.http.routers.teste2.entrypoints=websecure"
+        - "traefik.http.routers.teste2.tls.certresolver=letsencrypt"
+        - "traefik.http.services.teste2.loadbalancer.server.port=80"
+        - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
+        - "traefik.http.middlewares.redirect-to-https.redirectscheme.permanent=true"
+
+networks:
+  loop9Net:
+    external: true

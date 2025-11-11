@@ -146,11 +146,11 @@ Pasta `📺 Vídeos/` não existe no vault Obsidian.
 ### Solução (MCP Filesystem)
 ```bash
 # Verificar caminho do vault Obsidian
-# Vault path: ~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Claude-code-ios
+# Vault path: ~/Documents/Obsidian/Claude-code-ios
 
 # Criar pasta manualmente se não existir
-mkdir -p ~/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/Claude-code-ios/📺\ Vídeos/
-mkdir -p ~/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/Claude-code-ios/📺\ Vídeos/Apresentações/
+mkdir -p ~/Documents/Obsidian/Claude-code-ios/📺\ Vídeos/
+mkdir -p ~/Documents/Obsidian/Claude-code-ios/📺\ Vídeos/Apresentações/
 ```
 
 ### Notas Importantes
@@ -265,14 +265,14 @@ ls scripts/thumbnail-creation/templates/fotos/
 ### Verificar Obsidian (MCP Filesystem)
 ```bash
 # Vault existe
-ls ~/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/Claude-code-ios/
+ls ~/Documents/Obsidian/Claude-code-ios/
 
 # Pastas necessárias existem
-ls ~/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/Claude-code-ios/📺\ Vídeos/
-ls ~/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/Claude-code-ios/📺\ Vídeos/Apresentações/
+ls ~/Documents/Obsidian/Claude-code-ios/📺\ Vídeos/
+ls ~/Documents/Obsidian/Claude-code-ios/📺\ Vídeos/Apresentações/
 
 # Notas criadas recentemente
-ls -lt ~/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/Claude-code-ios/📺\ Vídeos/*.md | head -5
+ls -lt ~/Documents/Obsidian/Claude-code-ios/📺\ Vídeos/*.md | head -5
 ```
 
 ---

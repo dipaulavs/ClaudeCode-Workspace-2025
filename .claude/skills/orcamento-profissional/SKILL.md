@@ -1,208 +1,183 @@
-# 💼 Orçamento Profissional - Propostas com Valor e Apresentação
-
-## Quando Usar
-
-Automaticamente quando usuário:
-- "Preciso fazer um orçamento para cliente"
-- "Quanto cobrar por [projeto]?"
-- "Cria proposta/apresentação para [serviço]"
-- "Precificar projeto de [automação/sistema/etc]"
-
-**Objetivo:** Gerar orçamentos baseados em VALOR (não tempo), com análise de recursos e apresentação profissional.
-
+---
+name: orcamento-profissional
+description: Generate professional budget proposals with value-based pricing, ROI calculations, and persuasive HTML presentations. Auto-invokes when user asks to create budgets, price projects, or needs pricing strategy for client work.
 ---
 
-## Workflow Automático (5 Etapas)
+# Orçamento Profissional
 
-### Etapa 1: Coletar Dados do Projeto 📋
+Generate professional budget proposals using value-based pricing (not time-based) with ROI calculations, psychological pricing, and persuasive HTML presentations.
 
-Perguntar ao usuário:
-1. **Projeto/Serviço:** O que será entregue?
-2. **Cliente:** Segmento/nicho (contexto)
-3. **Problema atual:** O que cliente sofre hoje?
-4. **Resultado esperado:** Qual transformação/ganho?
-5. **Processos necessários:** Quais etapas técnicas?
+## When to Use
 
-### Etapa 2: Mapear Recursos Disponíveis 🔍
+Auto-invoke when user:
+- "Preciso fazer orçamento para [cliente/projeto]"
+- "Quanto cobrar por [serviço]?"
+- "Criar proposta para [projeto]"
+- "Precificar [automação/sistema/etc]"
 
-Análise automática:
-1. **Buscar scripts reutilizáveis** → `scripts/` (67+ templates)
-2. **Buscar skills aplicáveis** → `.claude/skills/` (19 skills)
-3. **Identificar ferramentas** → `tools/` (40+ ferramentas)
-4. **Calcular esforço:**
-   - ✅ Verde: 100% reutilizável (configuração apenas)
-   - 🟡 Amarelo: 50-80% reutilizável (ajustes necessários)
-   - 🔴 Vermelho: <50% reutilizável (desenvolvimento novo)
+## Workflow (5 Steps)
 
-Apresentar ao usuário:
-```
-📦 Recursos Mapeados:
+### Step 1: Collect Project Data
 
-Reutilizáveis (✅):
-  • scripts/whatsapp/send_message.py
-  • skills/hormozi-leads
+Ask user to provide:
+1. **Project scope:** What will be delivered?
+2. **Client context:** Industry, size, current situation
+3. **Current problem:** What pain does client have today?
+4. **Expected result:** What transformation/value will be generated?
+5. **Required processes:** What technical steps are needed?
 
-Ajustes (🟡):
-  • scripts/meta-ads/create_campaign.py (adaptar para produto)
+### Step 2: Map Available Resources
 
-Criar (🔴):
-  • Integração customizada API X
-```
+Analyze codebase automatically to identify reusable assets:
 
-### Etapa 3: Calcular Preço Baseado em Valor 💰
+```bash
+# Search for relevant scripts
+grep -r "keyword" scripts/*/README.md
 
-Usar metodologia de precificação por resultado (ver [REFERENCE.md](REFERENCE.md)):
+# List applicable skills
+ls .claude/skills/ | grep "keyword"
 
-**Fórmula Master:**
-```
-Preço Justo = 2-10% do Valor Gerado no Primeiro Ano
+# Find low-level tools
+ls tools/ | grep "keyword"
 ```
 
-**Perguntas estratégicas:**
-1. Quanto cliente GANHA com isso? (receita, economia, tempo)
-2. Quanto cliente PERDE sem isso? (oportunidade, risco)
-3. Qual ROI esperado? (conservador: 3x, realista: 5x, otimista: 10x)
+Categorize effort:
+- ✅ **Green (0-20%):** Ready to use, only config needed
+- 🟡 **Yellow (20-50%):** Exists but needs adaptation
+- 🔴 **Red (50-100%):** Build from scratch
 
-**SEMPRE aplicar Valores Quebrados + Ancoragem:**
+Present mapping to user showing what's reusable vs what needs building.
 
-**Técnica de Preços Psicológicos:**
-1. **Calcular preço base** (ex: R$ 6.000)
-2. **Criar ancoragem alta** → Tabela +30-40% (ex: R$ 8.391)
-3. **Aplicar descontos nomeados** → Parceria + Combo
-4. **Valor final quebrado** → Terminar em 7 ou 9 (ex: R$ 5.997)
+### Step 3: Calculate Value-Based Price
 
-**Output para usuário:**
-```
-💰 Precificação Sugerida (com Ancoragem):
+Use pricing calculator script:
 
-TABELA EMPRESAS PADRÃO: R$ 8.391
-├─ Desconto parceria: -R$ 1.200
-├─ Desconto combo: -R$ 1.194
-└─ INVESTIMENTO CLIENTE: R$ 5.997/mês ⭐
-
-Economia: 28% (R$ 2.394)
-ROI Cliente: 20x
-
-Valores quebrados aplicados:
-• Tabela:  R$ 8.391 (ancoragem alta)
-• Final:   R$ 5.997 (parece "R$ 5 mil")
-• Setup:   R$ 1.497 (consistência)
+```bash
+python3 scripts/calcular_precificacao.py
 ```
 
-### Etapa 4: Gerar Apresentação HTML 📊
+The script guides through:
+1. Monthly revenue generated for client
+2. Monthly cost savings
+3. Time saved (hours × client's hourly value)
+4. Opportunity cost avoided
 
-Usar template interativo padrão: `templates/proposta-orcamento/template_proposta_interativa.html`
-
-**Estrutura padrão (9 slides com animações progressivas):**
-1. **Capa** → Título + cliente
-2. **Situação Atual** → 4 problemas (revelam progressivamente)
-3. **Solução Proposta** → 6 serviços (revelam progressivamente)
-4. **Como Funciona** → Fluxo + Diferenciais
-5. **Timeline** → Prazo realista (10 dias úteis padrão)
-6. **Investimento Detalhado** → Tabela progressiva (10 steps!)
-7. **Comparação Mercado** → Economia vs concorrentes
-8. **O Que Está Incluso** → Detalhamento
-9. **Próximos Passos** → CTA
-
-**Features do template:**
-- ✅ Animações progressivas (itens aparecem ao clicar)
-- ✅ Design MotherDuck (beige + yellow + dark gray)
-- ✅ Navegação teclado (→, F fullscreen)
-- ✅ Indicador de progresso "(3/6)"
-- ✅ Hints dinâmicos ("Clique para revelar")
-- ✅ Slide Investimento em 10 steps (quadrado amarelo por último!)
-- ✅ 100% responsivo e standalone
-
-**Documentação completa:** `templates/proposta-orcamento/README.md`
-
-### Etapa 5: Ancoragem Realista 🎯
-
-Aplicar frameworks `hormozi-leads` (Equação de Valor):
-
-**Slide "Investimento" deve incluir:**
+**Pricing formula:**
 ```
-💰 Investimento: R$ 6.000
+Fair Price = 2-10% of Year 1 Value Generated
 
-Comparações Realistas:
-├─ Vs Contratar CLT (R$ 3.500/mês): Economia de R$ 36.000/ano
-├─ Vs Fazer manual (80h/mês): Libera 960h/ano = R$ 48.000
-└─ Vs Perder oportunidade: Deixa de ganhar R$ 80.000/ano
-
-Retorno: Paga em 27 dias 📈
+Where:
+- 2% = Commoditized, low complexity
+- 5% = Custom, medium complexity (DEFAULT)
+- 10% = Strategic, high complexity
 ```
 
-**Slide "ROI Matemático":**
+Apply **psychological pricing** (broken values):
+- Always end in 7 or 9 (R$ 5.997, not R$ 6.000)
+- Create high anchor (+37%) with named discounts
+- See `references/metodologia.md` for full technique
+
+### Step 4: Generate HTML Presentation
+
+Use template from `assets/template-proposta.html` with 10 slides:
+
+1. **Cover** → Project title + client name
+2. **Current Situation** → 4 specific pain points
+3. **Proposed Solution** → 6 benefits/deliverables
+4. **How It Works** → Process flow diagram
+5. **Resources** → Show reusable assets (builds trust)
+6. **Timeline** → Realistic delivery schedule
+7. **Investment** → Price with anchoring comparisons
+8. **ROI** → 3 scenarios (conservative/realistic/optimistic)
+9. **What's Included** → Guarantees, support, training
+10. **Next Steps** → Clear CTA
+
+Template features:
+- Progressive reveal animations (click to show items)
+- MotherDuck design (beige + yellow + dark gray)
+- Keyboard navigation (→ next, ← prev, F fullscreen)
+- Investment slide reveals price in 10 steps (yellow box last!)
+
+### Step 5: Create Realistic Anchoring
+
+Apply Hormozi's Value Equation frameworks from `hormozi-leads` skill:
+
+**Investment slide must include:**
 ```
-Cenários de Resultado (ano 1):
+💰 Investment: R$ 5.997
 
-🟢 Conservador (3x):
-   Investimento: R$ 6.000
-   Retorno: R$ 18.000
-   Lucro: R$ 12.000
+Realistic Comparisons:
+├─ Vs Hire employee: Save R$ 36k/year
+├─ Vs Manual work: Free 960h/year
+└─ Vs Miss opportunity: Avoid losing R$ 80k/year
 
-🟡 Realista (5x):
-   Investimento: R$ 6.000
-   Retorno: R$ 30.000
-   Lucro: R$ 24.000
-
-🔵 Otimista (10x):
-   Investimento: R$ 6.000
-   Retorno: R$ 60.000
-   Lucro: R$ 54.000
+Payback: 27 days 📈
 ```
 
-**NUNCA exagerar:** Usar dados reais, pesquisas, benchmarks do mercado.
-
----
-
-## Output Final para Usuário
-
+**ROI slide must show 3 scenarios:**
 ```
-✅ Orçamento Profissional Criado!
-
-📊 Apresentação: orcamento_[cliente]_[projeto].html
-💰 Preço sugerido: R$ 6.000 (ROI 20x)
-🎯 Ancoragem: Vs CLT, Vs Manual, Vs Oportunidade
-
-🎬 Próximos passos:
-  1. Abrir HTML no navegador (F = fullscreen)
-  2. Revisar slides (setas ← →)
-  3. Agendar videochamada com cliente
-  4. Apresentar com confiança!
-
-Boa sorte! 🚀
+🟢 Conservative (3x): R$ 5.997 → R$ 18k return
+🟡 Realistic (5x): R$ 5.997 → R$ 30k return
+🔵 Optimistic (10x): R$ 5.997 → R$ 60k return
 ```
 
----
+**NEVER exaggerate:** Use real data, research, market benchmarks.
 
-## Regras de Ouro
+## Output Format
 
-### ✅ SEMPRE:
-- Precificar por VALOR (não por tempo/hora)
-- Mapear recursos existentes ANTES de estimar
-- Calcular ROI realista (não exagerar)
-- Usar template MotherDuck (visual-explainer)
-- Criar ancoragens matemáticas (comparações)
-- Mostrar 3 cenários (conservador/realista/otimista)
+```
+✅ Professional Budget Created!
 
-### ❌ NUNCA:
-- Cobrar por hora (mentalidade CLT)
-- Ignorar scripts/skills disponíveis
-- Exagerar ROI (manter realismo)
-- Criar apresentação feia/genérica
-- Esquecer slide de garantias
-- Deixar preço sem contexto (sempre ancorar)
+📊 Presentation: orcamento_[client]_[project].html
+💰 Suggested price: R$ 5.997 (ROI 50x)
+🎯 Anchoring: Vs Employee, Vs Manual, Vs Opportunity
 
----
+🎬 Next steps:
+  1. Open HTML in browser (F = fullscreen)
+  2. Review slides (arrow keys ← →)
+  3. Schedule video call with client
+  4. Present with confidence!
 
-## Documentação Adicional
+Good luck! 🚀
+```
 
-- **Metodologia completa de precificação:** Ver [REFERENCE.md](REFERENCE.md)
-- **Exemplos de orçamentos reais:** Ver [EXAMPLES.md](EXAMPLES.md)
-- **Problemas comuns:** Ver [TROUBLESHOOTING.md](TROUBLESHOOTING.md)
+## Golden Rules
 
----
+### ✅ ALWAYS:
+- Price by VALUE (not by time/hour)
+- Map existing resources BEFORE estimating effort
+- Calculate realistic ROI (don't exaggerate)
+- Use MotherDuck template for visual consistency
+- Create mathematical anchors (comparisons)
+- Show 3 scenarios (conservative/realistic/optimistic)
+- Apply broken values (ending in 7 or 9)
 
-**Skill Type:** Model-invoked (ativação automática)
-**Output:** HTML standalone + resumo precificação
-**Versão:** 1.0
+### ❌ NEVER:
+- Charge by hour (employee mindset)
+- Ignore available scripts/skills when estimating
+- Exaggerate ROI (maintain credibility)
+- Create ugly/generic presentation
+- Forget guarantees slide
+- Leave price without context (always anchor)
+
+## Resources
+
+- **Full methodology:** `references/metodologia.md`
+- **Real examples:** `references/examples.md`
+- **Troubleshooting:** `references/troubleshooting.md`
+- **Pricing calculator:** `scripts/calcular_precificacao.py`
+- **HTML template:** `assets/template-proposta.html`
+
+## Auto-Correction System
+
+When errors occur in this skill:
+
+```bash
+# 1. Fix SKILL.md
+python3 scripts/update_skill.py /path/to/skill "old text" "new text"
+
+# 2. Log learning
+python3 scripts/log_learning.py /path/to/skill "error desc" "fix desc" "line"
+```
+
+See `assets/LEARNINGS_TEMPLATE.md` for format. This prevents repeating same mistakes.

@@ -1,0 +1,26 @@
+# 🌐 Template de Config para Novo Site
+# Copie e renomeie para: nome-do-site.yaml
+
+# Domínio do site (sem http/https)
+dominio: meusite.com.br
+
+# Adicionar www? (true/false)
+www: true
+
+# Pasta do projeto (código-fonte)
+# Use ~ para home: ~/projetos/meu-site
+projeto: ~/projetos/meu-site
+
+# Comando para fazer build
+# React: npm run build
+# Next.js: npm run build
+# Vue: npm run build
+# Angular: npm run build
+build: npm run build
+
+# Pasta gerada pelo build
+# React: build/
+# Next.js: out/
+# Vue: dist/
+# Angular: dist/
+pasta_build: build/

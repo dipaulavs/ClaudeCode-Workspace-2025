@@ -37,6 +37,46 @@ pip3 install requests urllib3
 
 ## 🚀 Scripts Disponíveis
 
+### ✅ Adicionar Tarefa - Sistema Rápido de Tarefas
+
+Adiciona tarefa com data/hora automática no Obsidian.
+
+```bash
+# Adicionar tarefa rápida
+python3 scripts/obsidian/adicionar_tarefa.py "Revisar código do chatbot"
+
+# Exemplos
+python3 scripts/obsidian/adicionar_tarefa.py "Fazer deploy na VPS"
+python3 scripts/obsidian/adicionar_tarefa.py "Testar skill nova"
+python3 scripts/obsidian/adicionar_tarefa.py "Criar campanha Meta Ads"
+```
+
+**O que faz:**
+- ✅ Cria arquivo individual para cada tarefa
+- 📅 Data/hora automática (formato: `10/11 19h`)
+- 🔗 Link clicável no índice `📊 Tarefas.md`
+- 📝 Abrir arquivo para escrever detalhes
+
+**Estrutura criada:**
+```markdown
+---
+criada: 10/11/2025 19:27
+status: aberta
+---
+
+# [Nome da Tarefa]
+
+## 📝 Detalhes
+[Escreva aqui]
+
+## ✅ Checklist
+- [ ]
+```
+
+**Local:** `📋 Tarefas/[timestamp]-[nome].md`
+
+---
+
 ### 📋 Manage Tasks - Gerenciar Sistema de Tarefas
 
 Gerencia o sistema completo de tarefas (Projetos, Áreas, Estudos, Workflows).
@@ -219,7 +259,7 @@ OBSIDIAN_API_URL = "https://127.0.0.1:27124"
 OBSIDIAN_API_KEY = os.getenv("OBSIDIAN_API_KEY", "")
 
 # Caminho do vault
-OBSIDIAN_VAULT_PATH = "/Users/felipemdepaula/Library/Mobile Documents/iCloud~md~obsidian/Documents/Claude-code-ios"
+OBSIDIAN_VAULT_PATH = "/Users/felipemdepaula/Documents/Obsidian/Claude-code-ios"
 ```
 
 ### Variáveis de Ambiente (.env)

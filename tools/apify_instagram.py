@@ -115,10 +115,10 @@ class InstagramScraper:
             "resultsType": results_type,
             "resultsLimit": results_limit,
             "searchLimit": search_limit,
-            **INSTAGRAM_DEFAULTS
+            **{k: v for k, v in INSTAGRAM_DEFAULTS.items() if k not in ["onlyPostsNewerThan", "onlyPostsOlderThan"]}
         }
 
-        # Adicionar filtros de data
+        # Adicionar filtros de data apenas se fornecidos
         if newer_than:
             run_input["onlyPostsNewerThan"] = newer_than
         if older_than:
@@ -185,7 +185,7 @@ class InstagramScraper:
                 os.makedirs(os.path.dirname(output_path), exist_ok=True)
 
                 with open(output_path, 'w', encoding='utf-8') as f:
-                    json.dump(result, f, indent=2, ensure_ascii=False)
+                    json.dump(result, f, indent=2, ensure_ascii=False, default=str)
 
                 print(f"\n✅ Resultados salvos em: {output_path}")
 

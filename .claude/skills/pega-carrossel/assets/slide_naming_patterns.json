@@ -1,0 +1,55 @@
+{
+  "patterns": {
+    "1_slide": [
+      "Slide 1 - Post Unico"
+    ],
+    "2_slides": [
+      "Slide 1 - Hook",
+      "Slide 2 - CTA"
+    ],
+    "3_slides": [
+      "Slide 1 - Hook",
+      "Slide 2 - Conteudo",
+      "Slide 3 - CTA"
+    ],
+    "4_slides": [
+      "Slide 1 - Hook",
+      "Slide 2 - Conteudo1",
+      "Slide 3 - Conteudo2",
+      "Slide 4 - CTA"
+    ],
+    "5_slides": [
+      "Slide 1 - Hook",
+      "Slide 2 - Tipo1",
+      "Slide 3 - Tipo2",
+      "Slide 4 - Tipo3",
+      "Slide 5 - CTA"
+    ],
+    "6_slides": [
+      "Slide 1 - Hook",
+      "Slide 2 - Tipo1",
+      "Slide 3 - Tipo2",
+      "Slide 4 - Tipo3",
+      "Slide 5 - Tipo4",
+      "Slide 6 - CTA"
+    ],
+    "7+_slides": [
+      "Slide 1 - Hook",
+      "Slide N - TipoN",
+      "Slide Final - CTA"
+    ]
+  },
+  "naming_rules": {
+    "first_slide": "Hook (capa atrativa)",
+    "middle_slides": "Tipo/Conteudo (numerado sequencialmente)",
+    "last_slide": "CTA (call-to-action final)"
+  },
+  "folder_naming": {
+    "format": "{tema}_{@username}",
+    "examples": [
+      "Carrosseis_virais_absm",
+      "Tipos_de_imoveis_lfimoveis",
+      "Receitas_faceis_chefemcasa"
+    ]
+  }
+}

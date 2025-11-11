@@ -40,7 +40,7 @@
   - Manter sistema data-step intacto
 - **Salvamento duplo:**
   - `~/Downloads/apresentacao_[tema].html` (backup rápido)
-  - `~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Claude-code-ios/📺 Vídeos/Apresentações/apresentacao_[tema].html` (permanente)
+  - `~/Documents/Obsidian/Claude-code-ios/📺 Vídeos/Apresentações/apresentacao_[tema].html` (permanente)
 - **Output:** Caminho do HTML gerado em Obsidian (pasta `📺 Vídeos/Apresentações/`)
 
 #### Agent 2: Headlines Hormozi
