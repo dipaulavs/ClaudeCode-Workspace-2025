@@ -1,0 +1,378 @@
+{
+  "versao": "1.0",
+  "atualizado_em": "2025-11-05",
+  "total_imoveis": 3,
+  "imoveis": [
+    {
+      "id": 1,
+      "slug": "chacara-itatiaiucu-001",
+      "tipo": "chacara",
+      "titulo": "Chácara 1000m² Itatiaiuçu - Poço Próprio",
+      "resumo_curto": "Chácara rural com poço artesiano, sem juros, sem fiador, sem SPC",
+      "cidade": "Itatiaiuçu",
+      "estado": "MG",
+      "regiao_metropolitana": "Belo Horizonte",
+      "bairro": "Zona Rural (Lavrinha aprox)",
+      "area_m2": 1000,
+      "preco_entrada_min": 10000,
+      "preco_total_min": 65000,
+      "preco_total_max": 70000,
+      "preco_a_vista": 45000,
+      "caracteristicas_chave": [
+        "poço artesiano próprio",
+        "1000m² (confirmado topografia)",
+        "sem juros",
+        "sem fiador",
+        "sem SPC",
+        "posse imediata",
+        "solo latossolo (fértil)",
+        "topografia mista",
+        "energia elétrica disponível",
+        "ônibus escolar diário",
+        "estrada municipal"
+      ],
+      "tags_busca": [
+        "chacara",
+        "itatiaiucu",
+        "belo_horizonte",
+        "bh",
+        "rural",
+        "poco_artesiano",
+        "financiamento_direto",
+        "sem_juros",
+        "minas_gerais",
+        "facilitado",
+        "agricultura",
+        "criacao",
+        "construcao"
+      ],
+      "localizacao": {
+        "latitude": -19.8550,
+        "longitude": -44.3200,
+        "altitude_m": 850,
+        "distancia_itatiaiucu_km": 20,
+        "distancia_bh_km": 70,
+        "acesso": "estrada municipal transitável",
+        "transporte_escolar": true
+      },
+      "infraestrutura": {
+        "agua": {
+          "tipo": "poço artesiano",
+          "qualidade": "boa (verificada)",
+          "vazao": "suficiente doméstico + criação"
+        },
+        "energia": {
+          "disponivel": true,
+          "fornecedor": "Cemig",
+          "prazo_implementacao_dias": 90,
+          "custo_primeiros_90_dias": "sem custo (vendedor)"
+        },
+        "internet": null,
+        "saneamento": "natural (fossa séptica)"
+      },
+      "solo": {
+        "tipo": "latossolo",
+        "cor": "vermelho/avermelhado",
+        "aptidao_agricola": "boa (grãos, frutas, verduras, pastagem)",
+        "profundidade": "profundo",
+        "drenagem": "natural adequada",
+        "recomendacao": "análise antes de plantar"
+      },
+      "possibilidades_uso": [
+        "construção residencial",
+        "agricultura (grãos, frutas, verduras)",
+        "criação animal (gado, cavalos, aves, pequenos)",
+        "agroturismo (sob aprovação)",
+        "reflorestamento"
+      ],
+      "planos_pagamento": [
+        {
+          "plano": 1,
+          "entrada": 10000,
+          "parcelas": {
+            "quantidade": 60,
+            "valor": 1000
+          },
+          "total": 70000,
+          "juros": false,
+          "fiador": false,
+          "spc": false
+        },
+        {
+          "plano": 2,
+          "entrada": 15000,
+          "parcelas": {
+            "quantidade": 48,
+            "valor": 1100
+          },
+          "total": 67800,
+          "juros": false,
+          "fiador": false,
+          "spc": false
+        },
+        {
+          "plano": 3,
+          "entrada": 20000,
+          "parcelas": {
+            "quantidade": 45,
+            "valor": 1000
+          },
+          "total": 65000,
+          "juros": false,
+          "fiador": false,
+          "spc": false,
+          "recomendado": true
+        },
+        {
+          "plano": 4,
+          "descricao": "à vista",
+          "valor_total": 45000,
+          "desconto": true,
+          "juros": false,
+          "fiador": false,
+          "spc": false
+        }
+      ],
+      "formas_pagamento": [
+        "PIX",
+        "boleto bancário",
+        "débito automático em conta"
+      ],
+      "frequencia_pagamento": "mensal (dia 1º preferencial)",
+      "documentacao_necessaria": [
+        "RG original",
+        "CPF",
+        "comprovante de renda",
+        "comprovante de endereço",
+        "referência pessoal/comercial"
+      ],
+      "documentacao_imovel": [
+        "CCIR atualizado",
+        "ITR aprovado",
+        "matrícula cartório regular",
+        "levantamento topográfico",
+        "comprovação confrontantes"
+      ],
+      "custos_anuais_estimados": {
+        "itr_anual": {
+          "min": 200,
+          "max": 400,
+          "moeda": "BRL",
+          "vencimento": "setembro"
+        },
+        "energia_mensal": {
+          "min": 50,
+          "max": 150,
+          "moeda": "BRL"
+        },
+        "manutencao_anual": {
+          "min": 1000,
+          "max": 3000,
+          "moeda": "BRL",
+          "itens": [
+            "cerca (~2000-5000 instalação)",
+            "porteira (~300-800)",
+            "limpeza/roçagem (~500-1500)",
+            "poço manutenção (~200-500)"
+          ]
+        },
+        "taxa_limpeza_publica_anual": 20,
+        "licenca_construcao": "300-1000 (conforme projeto)"
+      },
+      "processo_compra": {
+        "etapas": [
+          "agendamento visita",
+          "análise plano pagamento",
+          "assinatura contrato",
+          "pagamento 1ª parcela (gera posse)",
+          "quitação (gera escritura)"
+        ],
+        "cartorio": "Itatiaiuçu/região",
+        "despesas_cartorio": "500-800 (negociável)",
+        "direito_posse": "após 1ª parcela",
+        "direito_escritura": "após quitação"
+      },
+      "vantagens_diferenciais": [
+        "financiamento direto (sem banco)",
+        "sem juros (todos planos)",
+        "sem fiador obrigatório",
+        "sem consulta SPC",
+        "sem burocracia",
+        "posse imediata",
+        "antecipação sem penalidade",
+        "consultoria gratuita (prefeitura + implantação)",
+        "água própria (poço)",
+        "solo fértil para agricultura"
+      ],
+      "contato_info": {
+        "canal": "WhatsApp",
+        "disponibilidade": "24/7",
+        "agendamento": "direto pelo WhatsApp",
+        "proximos_passos": [
+          "conversa inicial WhatsApp",
+          "agendamento visita técnica",
+          "análise plano mais adequado",
+          "assinatura contrato",
+          "pagamento e posse"
+        ]
+      },
+      "status": "disponivel",
+      "prioridade": 1,
+      "data_criacao": "2025-11-05",
+      "ultima_atualizacao": "2025-11-05"
+    },
+    {
+      "id": 2,
+      "slug": "casa-betim-002",
+      "tipo": "casa",
+      "titulo": "Casa 120m² Betim - 3 Quartos com Garagem",
+      "resumo_curto": "Casa residencial em Betim com 3 quartos, garagem e acesso a FGTS",
+      "cidade": "Betim",
+      "estado": "MG",
+      "regiao_metropolitana": "Belo Horizonte",
+      "bairro": "Betim",
+      "area_m2": 120,
+      "area_lote_m2": 250,
+      "preco_entrada_min": 15000,
+      "preco_total_min": 180000,
+      "preco_total_max": 225000,
+      "caracteristicas_chave": [
+        "3 quartos",
+        "garagem",
+        "120m² construído",
+        "250m² lote",
+        "acesso FGTS",
+        "bom financiamento",
+        "sem juros"
+      ],
+      "tags_busca": [
+        "casa",
+        "betim",
+        "belo_horizonte",
+        "bh",
+        "3_quartos",
+        "garagem",
+        "fgts",
+        "minas_gerais",
+        "residencial"
+      ],
+      "localizacao": {
+        "latitude": -19.9550,
+        "longitude": -44.2200,
+        "distancia_betim_km": 5,
+        "distancia_bh_km": 30,
+        "acesso": "via urbana"
+      },
+      "infraestrutura": {
+        "agua": {
+          "tipo": "rede pública",
+          "disponivel": true
+        },
+        "energia": {
+          "disponivel": true,
+          "fornecedor": "Cemig"
+        },
+        "saneamento": "rede pública"
+      },
+      "planos_pagamento": [
+        {
+          "plano": 1,
+          "entrada": 15000,
+          "parcelas": {
+            "quantidade": 120,
+            "valor": 1700
+          },
+          "total": 219000,
+          "juros": false
+        }
+      ],
+      "formas_pagamento": [
+        "PIX",
+        "boleto bancário"
+      ],
+      "frequencia_pagamento": "mensal",
+      "status": "disponivel",
+      "prioridade": 2,
+      "data_criacao": "2025-11-05",
+      "ultima_atualizacao": "2025-11-05"
+    },
+    {
+      "id": 3,
+      "slug": "apartamento-contagem-003",
+      "tipo": "apartamento",
+      "titulo": "Apartamento 55m² Contagem - 2 Quartos com Condomínio",
+      "resumo_curto": "Apartamento compacto em Contagem com 2 quartos e condomínio estruturado",
+      "cidade": "Contagem",
+      "estado": "MG",
+      "regiao_metropolitana": "Belo Horizonte",
+      "bairro": "Contagem",
+      "area_m2": 55,
+      "preco_entrada_min": 12000,
+      "preco_total_min": 150000,
+      "preco_total_max": 195000,
+      "caracteristicas_chave": [
+        "2 quartos",
+        "55m² construído",
+        "condomínio",
+        "sem juros",
+        "acesso fácil"
+      ],
+      "tags_busca": [
+        "apartamento",
+        "contagem",
+        "belo_horizonte",
+        "bh",
+        "2_quartos",
+        "condominio",
+        "minas_gerais",
+        "residencial"
+      ],
+      "localizacao": {
+        "latitude": -19.9350,
+        "longitude": -44.0700,
+        "distancia_contagem_km": 5,
+        "distancia_bh_km": 25,
+        "acesso": "via urbana"
+      },
+      "infraestrutura": {
+        "agua": {
+          "tipo": "rede pública",
+          "disponivel": true
+        },
+        "energia": {
+          "disponivel": true,
+          "fornecedor": "Cemig"
+        },
+        "saneamento": "rede pública"
+      },
+      "planos_pagamento": [
+        {
+          "plano": 1,
+          "entrada": 12000,
+          "parcelas": {
+            "quantidade": 120,
+            "valor": 1450
+          },
+          "total": 186000,
+          "juros": false
+        }
+      ],
+      "formas_pagamento": [
+        "PIX",
+        "boleto bancário"
+      ],
+      "frequencia_pagamento": "mensal",
+      "status": "disponivel",
+      "prioridade": 3,
+      "data_criacao": "2025-11-05",
+      "ultima_atualizacao": "2025-11-05"
+    }
+  ],
+  "meta": {
+    "peso_json_bytes": 1250,
+    "imoveis_disponiveis": 3,
+    "imoveis_vendidos": 0,
+    "imoveis_suspensos": 0,
+    "proximo_id": 4
+  }
+}

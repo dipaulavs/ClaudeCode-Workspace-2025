@@ -1,0 +1,12 @@
+{
+  "fotos": [
+    "https://via.placeholder.com/800x600.png?text=Chacara+Itatiaiucu+Frente",
+    "https://via.placeholder.com/800x600.png?text=Terreno+1000m2",
+    "https://via.placeholder.com/800x600.png?text=Vista+Panoramica"
+  ],
+  "documentos": [
+    "https://docs.google.com/document/d/exemplo123/edit"
+  ],
+  "video_tour": "https://youtube.com/watch?v=exemplo",
+  "localizacao": "https://maps.google.com/?q=-20.258940,-44.529488"
+}

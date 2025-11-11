@@ -1,0 +1,23 @@
+{
+  "fotos": [
+    "https://via.placeholder.com/800x600.png?text=Casa+Betim+Fachada+Principal",
+    "https://via.placeholder.com/800x600.png?text=Sala+Estar+Integrada",
+    "https://via.placeholder.com/800x600.png?text=Cozinha+Separada",
+    "https://via.placeholder.com/800x600.png?text=Suite+Principal",
+    "https://via.placeholder.com/800x600.png?text=Quarto+2",
+    "https://via.placeholder.com/800x600.png?text=Banheiro+Suite",
+    "https://via.placeholder.com/800x600.png?text=Garagem+2+Vagas",
+    "https://via.placeholder.com/800x600.png?text=Patio+Fundos",
+    "https://via.placeholder.com/800x600.png?text=Lavanderia+Coberta"
+  ],
+  "documentos": [
+    "https://docs.google.com/document/d/exemplo-casa-betim-001/edit",
+    "https://docs.google.com/document/d/exemplo-contrato-betim/edit",
+    "https://docs.google.com/spreadsheet/d/exemplo-planilha-betim/edit"
+  ],
+  "video_tour": "https://youtube.com/watch?v=exemplo-casa-betim",
+  "localizacao": "https://maps.google.com/?q=-19.9645,-44.1877",
+  "planta_baixa": "https://docs.google.com/document/d/exemplo-planta-betim/edit",
+  "cronograma_visita": "https://calendly.com/lfimoveis/betim",
+  "formulario_interesse": "https://forms.gle/exemplo-betim-interesse"
+}

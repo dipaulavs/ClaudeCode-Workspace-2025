@@ -1,0 +1,27 @@
+{
+  "chatwoot": {
+    "url": "https://chatwoot.loop9.com.br",
+    "token": "xp1AcWvf6F2p2ZypabNWHfW6",
+    "account_id": "1",
+    "inbox_id": "42"
+  },
+  "evolution": {
+    "url": "https://evolution.loop9.com.br",
+    "api_key": "178e43e1c4f459527e7008e57e378e1c",
+    "instance": "lfimoveis"
+  },
+  "redis": {
+    "prefix": "imobiliaria",
+    "url": "https://legible-collie-9537.upstash.io",
+    "token": "ASVBAAImcDFiOTlmYTM1MTdkNzg0MWU3OTI5YmU4N2RmZmU5ZmJkZnAxOTUzNw"
+  },
+  "webhook": {
+    "url": "https://untwilled-unsymptomatical-bayleigh.ngrok-free.dev/webhook",
+    "secret": "lfimoveis_secret_2025",
+    "path": "/webhook/chatwoot"
+  },
+  "bot": {
+    "name": "LF Imóveis Bot",
+    "description": "Chatbot inteligente para atendimento imobiliário - LF Imóveis"
+  }
+}

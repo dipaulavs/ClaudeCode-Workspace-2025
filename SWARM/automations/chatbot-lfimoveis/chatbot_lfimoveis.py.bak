@@ -1,0 +1,555 @@
+#!/usr/bin/env python3
+"""
+🏠 CHATBOT LF IMÓVEIS V1 - FRAMEWORK HÍBRIDO COMPLETO
+
+✅ Features principais:
+  - Debounce inteligente (15s + 50s)
+  - Transcrição áudios (Whisper)
+  - Visão imagens (GPT-4o)
+  - Agente Principal + 4 Ferramentas
+  - Score automático (lead quente/morno/frio)
+  - Follow-ups anti-abandono (2h, 24h, 48h)
+  - Escalonamento inteligente (corretor humano)
+  - Agendamento de visitas (consulta agenda vendedor)
+  - Métricas e relatórios (dashboard diário)
+  - Orquestrador completo (pipeline único)
+
+📍 Adaptado de: chatbot_automaia_v4.py (carros → imóveis)
+"""
+
+from flask import Flask, request, jsonify
+import requests
+import json
+import time
+import re
+import threading
+from datetime import datetime
+from upstash_redis import Redis
+from pathlib import Path
+import tempfile
+import os
+import sys
+
+# Importa Orquestrador
+sys.path.append(str(Path(__file__).parent))
+from componentes.orquestrador_imoveis import OrquestradorImoveis
+
+app = Flask(__name__)
+
+# Configuração
+OPENROUTER_API_KEY = "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"
+OPENAI_API_KEY = "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"
+
+# Config Chatwoot/Evolution
+with open('chatwoot_config_lfimoveis.json', 'r') as f:
+    config = json.load(f)
+
+CHATWOOT_URL = config['chatwoot']['url']
+CHATWOOT_TOKEN = config['chatwoot']['token']
+ACCOUNT_ID = config['chatwoot']['account_id']
+EVOLUTION_URL = config['evolution']['url']
+EVOLUTION_API_KEY = config['evolution']['api_key']
+EVOLUTION_INSTANCE = config['evolution']['instance']
+
+# Redis (Upstash REST API - URL funcional)
+redis = Redis(
+    url="https://legible-collie-9537.upstash.io",
+    token="ASVBAAImcDFiOTlmYTM1MTdkNzg0MWU3OTI5YmU4N2RmZmU5ZmJkZnAxOTUzNw"
+)
+
+# Debounce
+DEBOUNCE_SEGUNDOS = 15
+DEBOUNCE_ESTENDIDO = 50
+CONTEXTO_TTL = 1209600  # 14 dias
+
+timers_ativos = {}
+lock = threading.Lock()
+
+# Paths
+IMOVEIS_DIR = Path(__file__).parent / "imoveis"
+
+# Orquestrador (inicializado no final)
+orquestrador = None
+
+
+def transcrever_audio(audio_url):
+    """Transcreve áudio usando Whisper"""
+    try:
+        print(f"🎤 Transcrevendo áudio...", flush=True)
+        response = requests.get(audio_url, timeout=30)
+        if response.status_code != 200:
+            return "[Erro ao baixar áudio]"
+
+        with tempfile.NamedTemporaryFile(delete=False, suffix='.ogg') as temp_file:
+            temp_file.write(response.content)
+            temp_path = temp_file.name
+
+        whisper_url = "https://api.openai.com/v1/audio/transcriptions"
+        headers = {"Authorization": f"Bearer {OPENAI_API_KEY}"}
+
+        with open(temp_path, 'rb') as audio_file:
+            files = {
+                'file': ('audio.ogg', audio_file, 'audio/ogg'),
+                'model': (None, 'whisper-1'),
+                'language': (None, 'pt'),
+                'response_format': (None, 'text')
+            }
+            whisper_response = requests.post(whisper_url, headers=headers, files=files, timeout=60)
+
+        os.unlink(temp_path)
+
+        if whisper_response.status_code != 200:
+            return "[Erro ao transcrever áudio]"
+
+        transcricao = whisper_response.text.strip()
+        print(f"✅ Transcrição: {transcricao[:100]}...", flush=True)
+        return transcricao
+    except Exception as e:
+        print(f"❌ Erro na transcrição: {e}", flush=True)
+        return "[Erro ao processar áudio]"
+
+
+def analisar_imagem(image_url):
+    """Analisa imagem usando GPT-4o Vision"""
+    try:
+        print(f"👁️ Analisando imagem...", flush=True)
+        vision_url = "https://api.openai.com/v1/chat/completions"
+        headers = {
+            "Authorization": f"Bearer {OPENAI_API_KEY}",
+            "Content-Type": "application/json"
+        }
+
+        payload = {
+            "model": "gpt-4o",
+            "messages": [{
+                "role": "user",
+                "content": [
+                    {"type": "text", "text": "Descreva esta imagem detalhadamente (2-3 frases). Se for um imóvel, mencione características."},
+                    {"type": "image_url", "image_url": {"url": image_url}}
+                ]
+            }],
+            "max_tokens": 300
+        }
+
+        vision_response = requests.post(vision_url, headers=headers, json=payload, timeout=60)
+        if vision_response.status_code != 200:
+            return "[Erro ao analisar imagem]"
+
+        resultado = vision_response.json()
+        descricao = resultado['choices'][0]['message']['content'].strip()
+        print(f"✅ Descrição: {descricao[:100]}...", flush=True)
+        return descricao
+    except Exception as e:
+        print(f"❌ Erro na análise: {e}", flush=True)
+        return "[Erro ao processar imagem]"
+
+
+def dividir_mensagem(texto):
+    """Divide mensagem em partes menores"""
+    texto = texto.strip()
+    partes = []
+
+    for linha in texto.split('\n'):
+        linha = linha.strip()
+        if not linha:
+            continue
+
+        if len(linha) <= 100:
+            partes.append(linha)
+        else:
+            frases = re.split(r'([.!?]+\s+)', linha)
+            frase_atual = ""
+
+            for i, frase in enumerate(frases):
+                frase_atual += frase
+                if re.match(r'[.!?]+\s+', frase):
+                    continue
+                if len(frase_atual) > 80 or i == len(frases) - 1:
+                    if frase_atual.strip():
+                        partes.append(frase_atual.strip())
+                    frase_atual = ""
+
+    return partes
+
+
+def enviar_resposta_whatsapp(phone, mensagem_completa):
+    """Envia resposta via Evolution"""
+    print(f"\n📤 Enviando resposta para {phone}...", flush=True)
+    partes = dividir_mensagem(mensagem_completa)
+    url = f"{EVOLUTION_URL}/message/sendText/{EVOLUTION_INSTANCE}"
+    headers = {"apikey": EVOLUTION_API_KEY, "Content-Type": "application/json"}
+
+    for i, parte in enumerate(partes, 1):
+        payload = {"number": phone, "text": parte}
+        try:
+            response = requests.post(url, headers=headers, json=payload, timeout=10)
+            if response.status_code == 200:
+                print(f"✅ Parte {i} enviada", flush=True)
+        except Exception as e:
+            print(f"❌ Erro parte {i}: {e}", flush=True)
+
+        if i < len(partes):
+            delay = 1.5 + (len(parte) * 0.01)
+            time.sleep(min(delay, 3))
+
+
+def enviar_imagem_whatsapp(phone, image_url, caption=""):
+    """Envia imagem via Evolution"""
+    from urllib.parse import quote, urlparse, urlunparse
+    parsed = urlparse(image_url)
+    encoded_path = quote(parsed.path, safe='/')
+    image_url_encoded = urlunparse((parsed.scheme, parsed.netloc, encoded_path, parsed.params, parsed.query, parsed.fragment))
+
+    print(f"\n📸 Enviando imagem para {phone}...", flush=True)
+    url = f"{EVOLUTION_URL}/message/sendMedia/{EVOLUTION_INSTANCE}"
+    headers = {"apikey": EVOLUTION_API_KEY, "Content-Type": "application/json"}
+
+    payload = {
+        "number": phone,
+        "mediatype": "image",
+        "media": image_url_encoded,
+        "caption": caption
+    }
+
+    try:
+        response = requests.post(url, headers=headers, json=payload, timeout=60)
+        if response.status_code in [200, 201]:
+            print(f"✅ Imagem enviada!", flush=True)
+            return True
+        else:
+            print(f"⚠️  Erro: {response.status_code}", flush=True)
+            return False
+    except Exception as e:
+        print(f"❌ Erro: {e}", flush=True)
+        return False
+
+
+def obter_contexto_historico(numero):
+    """Obtém histórico do Redis"""
+    try:
+        chave = f"contexto:imobiliaria:{numero}"
+        contexto = redis.get(chave)
+        return json.loads(contexto) if contexto else []
+    except:
+        return []
+
+
+def salvar_contexto(numero, mensagem, tipo="user"):
+    """Salva mensagem no contexto"""
+    try:
+        chave = f"contexto:imobiliaria:{numero}"
+        contexto = obter_contexto_historico(numero)
+
+        contexto.append({
+            "tipo": tipo,
+            "mensagem": mensagem,
+            "timestamp": datetime.now().isoformat()
+        })
+
+        if len(contexto) > 30:
+            contexto = contexto[-30:]
+
+        redis.setex(chave, CONTEXTO_TTL, json.dumps(contexto))
+    except Exception as e:
+        print(f"⚠️  Erro ao salvar contexto: {e}")
+
+
+def analisar_completude_mensagem(mensagens):
+    """Usa IA para analisar se mensagem está completa"""
+    if len(mensagens) == 1 and len(mensagens[0]) < 10:
+        return False
+
+    texto_completo = "\n".join(mensagens)
+    prompt = f"""Analise se esta mensagem está COMPLETA ou INCOMPLETA.
+
+MENSAGEM: "{texto_completo}"
+
+REGRAS:
+- "..." → INCOMPLETA
+- Muito curta ("oi") → INCOMPLETA
+- Vírgula no final → INCOMPLETA
+- Pergunta completa → COMPLETA
+
+Responda APENAS "COMPLETA" ou "INCOMPLETA"."""
+
+    try:
+        url = "https://openrouter.ai/api/v1/chat/completions"
+        headers = {
+            "Authorization": f"Bearer {OPENROUTER_API_KEY}",
+            "Content-Type": "application/json"
+        }
+
+        payload = {
+            "model": "anthropic/claude-haiku-4.5",
+            "messages": [{"role": "user", "content": prompt}],
+            "temperature": 0.3,
+            "max_tokens": 10
+        }
+
+        response = requests.post(url, headers=headers, json=payload, timeout=5)
+        response.raise_for_status()
+        resultado = response.json()
+        resposta_ia = resultado['choices'][0]['message']['content'].strip().upper()
+
+        print(f"🔍 Análise: {resposta_ia}", flush=True)
+        return resposta_ia.startswith("COMPLETA")
+    except:
+        return True
+
+
+def processar_mensagens_agrupadas(numero):
+    """Processa mensagens após debounce"""
+    try:
+        chave_fila = f"fila:imobiliaria:{numero}"
+        mensagens_json = redis.get(chave_fila)
+
+        if not mensagens_json:
+            return
+
+        mensagens = json.loads(mensagens_json)
+        if not mensagens:
+            return
+
+        print(f"\n🚀 Timer disparado! {len(mensagens)} mensagem(ns) de {numero}", flush=True)
+
+        # Análise completude
+        chave_aguardou = f"aguardou_extra:imobiliaria:{numero}"
+        ja_aguardou_extra = redis.get(chave_aguardou)
+
+        if not ja_aguardou_extra:
+            mensagem_completa = analisar_completude_mensagem(mensagens)
+
+            if not mensagem_completa:
+                print(f"⏳ INCOMPLETA. Aguardando +{DEBOUNCE_ESTENDIDO}s...", flush=True)
+                redis.setex(chave_aguardou, 90, "1")
+
+                with lock:
+                    if numero in timers_ativos:
+                        timers_ativos[numero].cancel()
+
+                    timer = threading.Timer(DEBOUNCE_ESTENDIDO, processar_mensagens_agrupadas, args=[numero])
+                    timer.daemon = True
+                    timer.start()
+                    timers_ativos[numero] = timer
+
+                return
+
+        # Limpa fila
+        redis.delete(chave_fila)
+        redis.delete(chave_aguardou)
+
+        with lock:
+            if numero in timers_ativos:
+                del timers_ativos[numero]
+
+        # Agrupa mensagens
+        contexto = "\n".join(mensagens) if len(mensagens) > 1 else mensagens[0]
+        contexto_historico = obter_contexto_historico(numero)
+
+        # Formata contexto para Orquestrador
+        contexto_formatado = []
+        for msg in contexto_historico[-6:]:
+            role = "assistant" if msg['tipo'] == "bot" else "user"
+            contexto_formatado.append({"role": role, "content": msg['mensagem']})
+
+        # Salva mensagens usuário
+        for msg in mensagens:
+            salvar_contexto(numero, msg, "user")
+
+        # 🚀 ORQUESTRADOR
+        print("🤖 Chamando Orquestrador...", flush=True)
+        eh_primeira_msg = len(contexto_historico) == 0
+
+        resultado = orquestrador.processar_mensagem(
+            numero,
+            contexto,
+            contexto_formatado,
+            eh_primeira_msg
+        )
+
+        resposta = resultado["resposta"]
+        fotos = resultado.get("fotos", [])
+        score = resultado.get("score", 0)
+        classificacao = resultado.get("classificacao", "FRIO")
+
+        print(f"✅ Score: {score} ({classificacao})", flush=True)
+        print(f"✅ Resposta: {resposta[:100]}...", flush=True)
+
+        # Salva resposta
+        salvar_contexto(numero, resposta, "bot")
+
+        # Envia resposta
+        enviar_resposta_whatsapp(numero, resposta)
+
+        # Callback: bot enviou mensagem (agenda follow-up)
+        orquestrador.on_bot_enviou_mensagem(numero, resposta)
+
+        # Envia fotos (se houver)
+        if fotos:
+            print(f"📸 Enviando {len(fotos)} foto(s)...", flush=True)
+            for foto in fotos:
+                enviar_imagem_whatsapp(numero, foto)
+                time.sleep(2)
+
+            # Callback: fotos enviadas (agenda follow-up pós-fotos)
+            imovel_id = resultado.get("imovel_ativo", "")
+            if imovel_id:
+                orquestrador.on_fotos_enviadas(numero, imovel_id, len(fotos))
+
+        print("✅ Processamento completo!", flush=True)
+
+    except Exception as e:
+        print(f"❌ Erro ao processar: {e}", flush=True)
+        import traceback
+        traceback.print_exc()
+
+
+def adicionar_mensagem_na_fila(numero, mensagem):
+    """Adiciona mensagem na fila com debounce"""
+    try:
+        chave_fila = f"fila:imobiliaria:{numero}"
+        mensagens_json = redis.get(chave_fila)
+        mensagens = json.loads(mensagens_json) if mensagens_json else []
+
+        mensagens.append(mensagem)
+        redis.setex(chave_fila, 90, json.dumps(mensagens))
+
+        chave_aguardou = f"aguardou_extra:imobiliaria:{numero}"
+        redis.delete(chave_aguardou)
+
+        with lock:
+            if numero in timers_ativos:
+                timers_ativos[numero].cancel()
+
+            timer = threading.Timer(DEBOUNCE_SEGUNDOS, processar_mensagens_agrupadas, args=[numero])
+            timer.daemon = True
+            timer.start()
+            timers_ativos[numero] = timer
+
+        print(f"⏳ TIMER: {len(mensagens)} msg, aguarda {DEBOUNCE_SEGUNDOS}s", flush=True)
+
+    except Exception as e:
+        print(f"❌ ERRO fila: {e}", flush=True)
+
+
+@app.route('/webhook/chatwoot', methods=['POST'])
+def webhook_chatwoot():
+    """Recebe webhook do Chatwoot"""
+    try:
+        data = request.json
+
+        print(f"\n{'='*80}", flush=True)
+        print(f"🔔 WEBHOOK CHATWOOT → BOT LF IMÓVEIS V1 - {datetime.now().strftime('%H:%M:%S')}", flush=True)
+        print(f"{'='*80}", flush=True)
+
+        content = data.get('content', '')
+        attachments = data.get('attachments', [])
+        sender = data.get('sender', {})
+        phone = sender.get('phone', '').replace('+', '')
+
+        print(f"📱 De: {sender.get('name', phone)} ({phone})", flush=True)
+        print(f"💬 Mensagem: {content[:100]}...", flush=True)
+
+        # Processa attachments
+        if attachments:
+            for att in attachments:
+                tipo = att.get('file_type')
+                url = att.get('data_url')
+
+                if tipo == 'audio':
+                    transcricao = transcrever_audio(url)
+                    if not transcricao.startswith('[Erro'):
+                        content += f"\n[Áudio]: {transcricao}"
+
+                elif tipo == 'image':
+                    descricao = analisar_imagem(url)
+                    if not descricao.startswith('[Erro'):
+                        content += f"\n[Imagem]: {descricao}"
+
+        if not content:
+            return jsonify({"status": "ignored"})
+
+        # Adiciona na fila
+        adicionar_mensagem_na_fila(phone, content)
+
+        return jsonify({"status": "queued"})
+
+    except Exception as e:
+        print(f"❌ Erro: {e}", flush=True)
+        import traceback
+        traceback.print_exc()
+        return jsonify({"status": "error", "message": str(e)}), 500
+
+
+@app.route('/health', methods=['GET'])
+def health():
+    """Health check"""
+    try:
+        redis.ping()
+        redis_status = "✅"
+    except:
+        redis_status = "❌"
+
+    with lock:
+        timers_count = len(timers_ativos)
+
+    status_componentes = orquestrador.get_status() if orquestrador else {}
+
+    return jsonify({
+        "status": "online",
+        "version": "1.0 - FRAMEWORK HÍBRIDO COMPLETO",
+        "model": "anthropic/claude-haiku-4.5",
+        "redis": redis_status,
+        "timers_ativos": timers_count,
+        "componentes": status_componentes,
+        "features": [
+            "✅ Agente Principal (personalidade editável)",
+            "✅ 4 Ferramentas (lista_imoveis, consulta_faq, tagueamento, agendar_visita)",
+            "✅ Score automático (lead quente/morno/frio)",
+            "✅ Follow-ups anti-abandono",
+            "✅ Escalonamento inteligente",
+            "✅ Agendamento de visitas (consulta agenda vendedor)",
+            "✅ Métricas e relatórios",
+            "✅ Debounce 15s + 50s",
+            "✅ Transcrição áudios (Whisper)",
+            "✅ Visão imagens (GPT-4o)",
+            "✅ Contexto Redis (14 dias)"
+        ]
+    })
+
+
+if __name__ == '__main__':
+    print("=" * 70)
+    print("🏠 CHATBOT LF IMÓVEIS V1 - FRAMEWORK HÍBRIDO COMPLETO!")
+    print("=" * 70)
+    print("✨ Componentes:")
+    print("   ✅ Agente Principal + 4 Ferramentas")
+    print("   ✅ Score (lead quente/morno/frio)")
+    print("   ✅ Follow-ups automáticos")
+    print("   ✅ Escalonamento inteligente")
+    print("   ✅ Agendamento de visitas")
+    print("   ✅ Métricas e relatórios")
+    print()
+    print(f"🌐 Webhook: http://localhost:5010/webhook/chatwoot")
+    print(f"💚 Health: http://localhost:5010/health")
+    print("=" * 70)
+
+    # Inicializa Orquestrador
+    print("\n🚀 Inicializando Orquestrador...")
+    orquestrador = OrquestradorImoveis(
+        IMOVEIS_DIR,
+        OPENAI_API_KEY,
+        OPENROUTER_API_KEY,
+        redis,
+        config
+    )
+
+    # Redis
+    try:
+        redis.ping()
+        print("✅ Redis conectado!")
+    except Exception as e:
+        print(f"❌ Erro Redis: {e}")
+
+    print("\n🚀 Servidor iniciando...\n")
+    app.run(host='0.0.0.0', port=5010, debug=False, use_reloader=False)

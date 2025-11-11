@@ -1,0 +1,168 @@
+═══════════════════════════════════════════════════════════════════
+📝 MENSAGENS DE FOLLOW-UP - LF IMÓVEIS
+═══════════════════════════════════════════════════════════════════
+
+INSTRUÇÕES:
+• Edite as mensagens abaixo conforme necessário
+• Mantenha as TAGS entre [] (ex: [INATIVIDADE_2H])
+• Mensagens curtas (1-2 linhas) funcionam melhor
+• Use emojis para dar tom amigável
+• Salve o arquivo após editar
+• Reinicie o bot para aplicar mudanças
+
+═══════════════════════════════════════════════════════════════════
+🕐 FOLLOW-UPS DE INATIVIDADE
+═══════════════════════════════════════════════════════════════════
+
+[INATIVIDADE_2H]
+E aí, ficou alguma dúvida? 😊
+
+[INATIVIDADE_24H]
+Oi! Ainda tá procurando imóvel? Posso ajudar!
+
+[INATIVIDADE_48H]
+Oi! Tudo certo? Posso te ajudar em algo?
+
+═══════════════════════════════════════════════════════════════════
+📸 FOLLOW-UPS PÓS-INTERAÇÃO
+═══════════════════════════════════════════════════════════════════
+
+[POS_FOTOS]
+Gostou das fotos? Quer agendar visita? 📅
+
+[POS_VISITA]
+E aí, gostou do imóvel? 😊
+
+[POS_PRECO]
+O preço ficou claro? Posso explicar melhor os planos! 💰
+
+═══════════════════════════════════════════════════════════════════
+⏰ LEMBRETES DE AGENDAMENTO
+═══════════════════════════════════════════════════════════════════
+
+[LEMBRETE_24H_ANTES]
+Oi! Lembrete: amanhã às {hora} é sua visita! Confirma? 📅
+
+[LEMBRETE_2H_ANTES]
+Oi! Daqui 2h é sua visita às {hora}! Tá a caminho? 🚗
+
+[LEMBRETE_DIA_DA_VISITA]
+Bom dia! Hoje às {hora} é sua visita! Nos vemos lá! 😊
+
+═══════════════════════════════════════════════════════════════════
+🎯 FOLLOW-UPS POR TIPO DE ABANDONO
+═══════════════════════════════════════════════════════════════════
+
+[CURIOSO]
+Oi! Ficou alguma dúvida? Estou aqui pra ajudar! 😊
+
+[PREGUICOSO]
+Opa! Te respondi, conseguiu ver? 👀
+
+[INDECISO]
+Oi! Tá comparando opções? Posso te ajudar a decidir! 💡
+
+[INTERESSADO]
+E aí! Quer agendar uma visita? Tenho horários disponíveis! 📅
+
+[NEGOCIADOR]
+Oi! Sobre o preço, consegui verificar condições especiais! 💰
+
+[SUMIU]
+Tudo bem? Se precisar de algo, tô por aqui! 😊
+
+═══════════════════════════════════════════════════════════════════
+💬 FOLLOW-UPS AVANÇADOS (Lead Quente)
+═══════════════════════════════════════════════════════════════════
+
+[LEAD_QUENTE_SEM_RESPOSTA]
+Oi! Vi que você tá bem interessado! Quer agendar visita hoje? 🔥
+
+[QUASE_FECHOU]
+E aí! Falta pouco pra fecharmos! Alguma dúvida? 😊
+
+[COMPARANDO_IMOVEIS]
+Oi! Tá comparando? Posso te ajudar a escolher o melhor! 💡
+
+═══════════════════════════════════════════════════════════════════
+🚫 FOLLOW-UPS DE RECUPERAÇÃO
+═══════════════════════════════════════════════════════════════════
+
+[ULTIMA_TENTATIVA_7_DIAS]
+Oi! Última mensagem: ainda procurando imóvel? 🏡
+
+[REENGAJAMENTO_15_DIAS]
+Oi! Ainda tá procurando? Temos novidades! 🆕
+
+[REATIVACAO_30_DIAS]
+Oi! Faz tempo! Ainda procurando imóvel? Posso ajudar! 😊
+
+═══════════════════════════════════════════════════════════════════
+📋 VARIÁVEIS DISPONÍVEIS
+═══════════════════════════════════════════════════════════════════
+
+Você pode usar essas variáveis nas mensagens:
+• {nome} - Nome do cliente
+• {imovel_nome} - Nome do imóvel ativo
+• {regiao} - Região do imóvel
+• {hora} - Horário agendado
+• {data} - Data agendada
+• {preco} - Preço do imóvel
+
+EXEMPLO:
+Antes: "Oi! Ainda procurando?"
+Depois: "Oi {nome}! Ainda procurando em {regiao}?"
+Vira: "Oi João! Ainda procurando em BH?"
+
+═══════════════════════════════════════════════════════════════════
+💡 DICAS PARA BOAS MENSAGENS
+═══════════════════════════════════════════════════════════════════
+
+✅ FAÇA:
+• Seja curto (1-2 linhas)
+• Use tom amigável e casual
+• Termine com pergunta ou emoji
+• Chame pra ação simples
+• Use "Oi", "E aí", "Opa" (natural)
+
+❌ NÃO FAÇA:
+• Mensagens longas (+ de 3 linhas)
+• Muito formal ("Prezado cliente...")
+• Muito vendedor ("Compre agora!")
+• Sem emoji ou muito sério
+• Mencionar que é bot/automático
+
+═══════════════════════════════════════════════════════════════════
+📝 EXEMPLOS DE BOAS MENSAGENS
+═══════════════════════════════════════════════════════════════════
+
+✅ BOM: "E aí, ficou dúvida? 😊"
+✅ BOM: "Opa! Conseguiu ver minha msg?"
+✅ BOM: "Oi! Posso te ajudar?"
+✅ BOM: "Tudo bem? Tô aqui se precisar!"
+
+❌ RUIM: "Caro cliente, gostaria de verificar se ainda..."
+❌ RUIM: "Olá! Este é um follow-up automático para..."
+❌ RUIM: "Prezado interessado, venho por meio desta..."
+
+═══════════════════════════════════════════════════════════════════
+🔄 COMO APLICAR SUAS MUDANÇAS
+═══════════════════════════════════════════════════════════════════
+
+1. Edite este arquivo (mensagens_followup.txt)
+2. Salve
+3. Reinicie o bot:
+   ./PARAR_BOT.sh
+   ./INICIAR_COM_NGROK.sh
+4. Mensagens atualizadas automaticamente!
+
+═══════════════════════════════════════════════════════════════════
+📊 ÚLTIMA ATUALIZAÇÃO
+═══════════════════════════════════════════════════════════════════
+
+Data: 2025-11-05
+Versão: 1.0
+Editado por: Sistema
+Próxima revisão: Quando necessário
+
+═══════════════════════════════════════════════════════════════════
